@@ -1,0 +1,4248 @@
+<?php
+
+
+
+function rollie_customizer_register( $wp_customize ) {
+	require get_template_directory() . '/include/rollie_customizer_control_classes.php';
+
+
+		$wp_customize->add_panel(
+			'rollie_navs_panel',
+			array(
+				'title'    => __( 'Rollie menus and navs ' ),
+				'priority' => 20,
+			)
+		);
+	$wp_customize->add_panel(
+		'rollie_color_design_panel',
+		array(
+			'title'    => __( 'Rollie color and design' ),
+			'priority' => 20,
+		)
+	);
+	$wp_customize->add_panel(
+		'rollie_color_gradient',
+		array(
+			'title'    => __( 'Rollie color and design' ),
+			'priority' => 20,
+			'panel' => "rollie_color_design_panel"
+		)
+	);
+		$wp_customize->add_panel(
+		'rollie_layout_panel',
+		array(
+			'title'    => __( 'Rollie theme layout ' ),
+			'priority' => 20,
+		)
+	);
+		require get_template_directory() . '/include/rollie_customizer_font_functions.php';
+		
+	$wp_customize->add_panel(
+		'rollie_misc_panel',
+		array(
+			'title'    => __( 'Rollie miscellaneous settings ' ),
+			'priority' => 20,
+		)
+	);
+		$wp_customize->add_panel(
+		'rollie_post_formats_panel',
+		array(
+			'title'    => __( 'Rollie post formats' ),
+			'priority' => 20,
+		)
+	);
+
+
+	$wp_customize->add_section(
+		'rollie_footer_section',
+		array(
+			'title'    => esc_html__( 'Footer settings', 'Rollie' ),
+			'priority' => 5,
+			'panel'    => 'rollie_misc_panel',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_footer_logo_desc_text',
+		array(
+			'default'           => '',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'wp_kses_post',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Skyrocket_TinyMCE_Custom_control(
+			$wp_customize,
+			'rollie_footer_logo_desc_text',
+			array(
+				'label'       => __( 'Footer logo description text' ),
+				'description' => __( 'Text will be displayed under or next to footer logo' ),
+				'section'     => 'rollie_footer_section',
+				'input_attrs' => array(
+					'toolbar1' => 'bold italic bullist numlist alignleft aligncenter alignright link',
+					'toolbar2' => 'formatselect outdent indent | blockquote charmap',
+				),
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_footer_caption_text',
+		array(
+			'default'           => '',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'wp_kses_post',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Skyrocket_TinyMCE_Custom_control(
+			$wp_customize,
+			'rollie_footer_caption_text',
+			array(
+				'label'       => __( 'Footer caption text' ),
+				'description' => __( 'Text will be below footer navigation' ),
+				'section'     => 'rollie_footer_section',
+				'input_attrs' => array(
+					'toolbar1' => 'bold italic bullist numlist alignleft aligncenter alignright link',
+					'toolbar2' => 'formatselect outdent indent | blockquote charmap',
+				),
+			)
+		)
+	);
+		$wp_customize->add_setting(
+			'rollie_footer_menu_logo',
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+
+			)
+		);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'rollie_footer_menu_logo',
+			array(
+				'label'   => __( 'Footer menu logo', 'rollie' ),
+				'section' => 'rollie_footer_section',
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_footer_logo_h',
+			array(
+				'default'           => 40,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'rollie_footer_logo_h',
+			array(
+				'label'       => esc_html__( 'Height of logo (px) ' ),
+				'section'     => 'rollie_footer_section',
+				'input_attrs' => array(
+					'min'  => 30,
+					'max'  => 400,
+					'step' => 10,
+				),
+			)
+		)
+	);
+
+
+
+
+
+				$wp_customize->add_section(
+					'rollie_menu_top_section',
+					array(
+						'title'    => esc_html__( 'Menu top settings', 'Rollie' ),
+						'priority' => 20,
+					)
+				);
+
+		$wp_customize->add_control(
+			new Rollie_Icon_Customize_Control(
+				$wp_customize,
+				'rollie_menu_top_item_align',
+				array(
+					'label'   => esc_html__( 'Menu items align', 'Rollie' ),
+					'section' => 'rollie_menu_top_section',
+					'type'    => 'radio',
+					'choices' => array(
+						1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
+						2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+						3 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
+					),
+				)
+			)
+		);
+
+					$wp_customize->add_setting(
+						'rollie_search_form_menu_top',
+						array(
+							'default'           => true,
+							'sanitize_callback' => 'rollie_sanitize_checkbox',
+						)
+					);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_search_form_menu_top',
+					array(
+						'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
+						'section' => 'rollie_menu_top_section',
+
+					)
+				)
+			);
+
+							$wp_customize->add_setting(
+								'rollie_search_form_menu_top_type',
+								array(
+									'default'           => true,
+									'sanitize_callback' => 'rollie_sanitize_checkbox',
+								)
+							);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_search_form_menu_top_type',
+					array(
+						'label'   => esc_html__( 'Display search icon only ', 'Rollie' ),
+						'section' => 'rollie_menu_top_section',
+
+					)
+				)
+			);
+
+	$wp_customize->add_section(
+		'rollie_pagination_section',
+		array(
+			'title'    => esc_html__( 'Pagination settings', 'Rollie' ),
+			'priority' => 10,
+			'panel'    => 'rollie_misc_panel',
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_pagination_enable',
+		array(
+			'default'           => true,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+		)
+	);
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_pagination_enable',
+			array(
+				'label'   => esc_html__( 'Enable pagination', 'Rollie' ),
+				'section' => 'rollie_pagination_section',
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_pagination_display_name',
+		array(
+			'default'           => true,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+		)
+	);
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_pagination_display_name',
+			array(
+				'label'   => esc_html__( 'Display next and previous post or page title', 'Rollie' ),
+				'section' => 'rollie_pagination_section',
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_pagination_page_enable',
+		array(
+			'default'           => true,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+		)
+	);
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_pagination_page_enable',
+			array(
+				'label'   => esc_html__( 'Enable pagination on single pages', 'Rollie' ),
+				'section' => 'rollie_pagination_section',
+			)
+		)
+	);
+
+	$wp_customize->add_section(
+		'rollie_posts_page_section',
+		array(
+			'title'    => esc_html__( 'Posts page settings', 'Rollie' ),
+			'panel'    => 'rollie_layout_panel',
+			'priority' => 20,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_posts_page_title_single_row',
+		array(
+			'default'           => true,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+		)
+	);
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_posts_page_title_single_row',
+			array(
+				'label'   => esc_html__( 'Display titles and excerpt in single row', 'Rollie' ),
+				'section' => 'rollie_posts_page_section',
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_php_0', // rollie_one_on_row_design_php_0
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_php_0', // rollie_one_on_row_design_php_0
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as one in one row', 'Rollie' ),
+				'section' => 'rollie_posts_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as two in one row', 'Rollie' ),
+				'section' => 'rollie_posts_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as three in one row', 'Rollie' ),
+				'section' => 'rollie_posts_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern ', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_raw_enable_php',
+							array(
+								'default'           => false,
+								'sanitize_callback' => 'rollie_sanitize_checkbox',
+							)
+						);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_raw_enable_php',
+				array(
+					'label'   => esc_html__( 'Enable raw style for all posts', 'rollie' ),
+					'section' => 'rollie_posts_page_section',
+
+				)
+			)
+		);
+
+								$wp_customize->add_setting(
+									'rollie_rest_style_for_paged_php',
+									array(
+										'default' => true,
+										'sanitize_callback' => 'rollie_sanitize_checkbox',
+									)
+								);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_rest_style_for_paged_php',
+				array(
+					'label'       => esc_html__( 'Set same style of display for next pages of posts', 'rollie' ),
+					'section'     => 'rollie_posts_page_section',
+					'description' => 'If is off the next page is styled by "display for rest of the posts style" value ',
+
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_one_on_row_panoramix1_php', // panoramix
+			array(
+				'sanitize_callback' => 'absint',
+				'default'           => 1,
+				'transport'         => 'refresh',
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_one_on_row_panoramix1_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as one on row ', 'Rollie' ),
+				'section' => 'rollie_posts_page_section',
+				'type'    => 'number',
+			)
+		);
+			$wp_customize->add_setting(
+				'rollie_two_on_row_surroundix2_php',
+				array(
+					'sanitize_callback' => 'absint',
+					'default'           => 2,
+					'transport'         => 'refresh',
+				)
+			);
+
+		$wp_customize->add_control(
+			'rollie_two_on_row_surroundix2_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as two on row ', 'Rollie' ),
+				'section' => 'rollie_posts_page_section',
+				'type'    => 'number',
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_style_display_for_rest_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_radio',
+			'default'           => 3,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			new Rollie_Icon_Customize_Control(
+				$wp_customize,
+				'rollie_style_display_for_rest_php',
+				array(
+					'label'   => esc_html__( 'What style of display you want to choose for rest of the posts', 'Rollie' ),
+					'section' => 'rollie_posts_page_section',
+					'type'    => 'radio',
+					'choices' => array(
+						1 => esc_html__( 'fa-bars split on row ', 'rollie' ),
+						2 => esc_html__( 'fa-th-large split two on row ', 'rollie' ),
+						3 => esc_html__( 'fa-th split three on row ', 'rollie' ),
+					),
+				)
+			)
+		);
+			$wp_customize->add_setting(
+				'rollie_alt_thumbnail_php',
+				array(
+					'sanitize_callback' => 'rollie_sanitize_file',
+					'transport'         => 'refresh',
+					'default'           => '',
+				)
+			);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_thumbnail_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_posts_page_section',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_post_margin_auto',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_post_margin_auto',
+				array(
+					'label'   => esc_html__( 'Center all posts', 'rollie' ),
+					'section' => 'rollie_posts_page_section',
+
+				)
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_aspect_ratio_clean',
+							array(
+								'default'           => false,
+								'sanitize_callback' => 'rollie_sanitize_checkbox',
+							)
+						);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_aspect_ratio_clean',
+			array(
+				'label'   => esc_html__( 'Clean display style: Save aspect ratio for thumbnails ', 'rollie' ),
+				'section' => 'rollie_posts_page_section',
+
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_display_date',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_date',
+				array(
+					'label'   => esc_html__( 'Display date', 'rollie' ),
+					'section' => 'rollie_posts_page_section',
+
+				)
+			)
+		);
+		$wp_customize->add_setting(
+			'rollie_display_author',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_author',
+				array(
+					'label'   => esc_html__( 'Display author', 'rollie' ),
+					'section' => 'rollie_posts_page_section',
+
+				)
+			)
+		);
+				$wp_customize->add_setting(
+					'rollie_display_cat',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_display_cat',
+			array(
+				'label'   => esc_html__( 'Display categories', 'rollie' ),
+				'section' => 'rollie_posts_page_section',
+
+			)
+		)
+	);
+
+	// CATEGORY TEMPLATE
+	$wp_customize->add_section(
+		'rollie_category_page_section',
+		array(
+			'title'    => esc_html__( 'Category page settings', 'Rollie' ),
+			'panel'    => 'rollie_layout_panel',
+			'priority' => 20,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_row_design_ct_php_0',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_select',
+			'default'           => 1,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			'rollie_row_design_ct_php_0',
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as one in one row', 'Rollie' ),
+				'section' => 'rollie_category_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_ct_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_ct_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as two in one row', 'Rollie' ),
+				'section' => 'rollie_category_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_ct_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_ct_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as three in one row', 'Rollie' ),
+				'section' => 'rollie_category_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern ', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+				$wp_customize->add_setting(
+					'rollie_raw_enable_ct_php',
+					array(
+						'default'           => false,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_raw_enable_ct_php',
+				array(
+					'label'   => esc_html__( 'Enable raw style for all posts', 'rollie' ),
+					'section' => 'rollie_category_page_section',
+
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_one_on_row_panoramix1_ct_php', // panoramix
+			array(
+				'sanitize_callback' => 'absint',
+				'default'           => 1,
+				'transport'         => 'refresh',
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_one_on_row_panoramix1_ct_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as one on row ', 'Rollie' ),
+				'section' => 'rollie_category_page_section',
+				'type'    => 'number',
+			)
+		);
+			$wp_customize->add_setting(
+				'rollie_two_on_row_surroundix2_ct_php', // panoramix
+				array(
+					'sanitize_callback' => 'absint',
+					'default'           => 2,
+					'transport'         => 'refresh',
+				)
+			);
+
+		$wp_customize->add_control(
+			'rollie_two_on_row_surroundix2_ct_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as two on row ', 'Rollie' ),
+				'section' => 'rollie_category_page_section',
+				'type'    => 'number',
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_style_display_for_rest_ct_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_radio',
+			'default'           => 3,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			new Rollie_Icon_Customize_Control(
+				$wp_customize,
+				'rollie_style_display_for_rest_ct_php',
+				array(
+					'label'   => esc_html__( 'What style of display you want to choose for rest of the posts', 'Rollie' ),
+					'section' => 'rollie_category_page_section',
+					'type'    => 'radio',
+					'choices' => array(
+						1 => esc_html__( 'fa-bars split on row ', 'rollie' ),
+						2 => esc_html__( 'fa-th-large split two on row ', 'rollie' ),
+						3 => esc_html__( 'fa-th split three on row ', 'rollie' ),
+					),
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_rest_style_for_paged_ct_php',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_rest_style_for_paged_ct_php',
+				array(
+					'label'       => esc_html__( 'Set same style of display for next pages of posts ', 'rollie' ),
+					'section'     => 'rollie_category_page_section',
+					'description' => 'If is off the next page is styled by "display for rest of the posts style" value ',
+				)
+			)
+		);
+
+			$wp_customize->add_setting(
+				'rollie_alt_thumbnail_ct_php',
+				array(
+					'sanitize_callback' => 'rollie_sanitize_file',
+					'transport'         => 'refresh',
+					'default'           => '',
+				)
+			);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_thumbnail_ct_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_category_page_section',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_post_margin_auto_ct',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_post_margin_auto_ct',
+				array(
+					'label'   => esc_html__( 'Center all posts', 'rollie' ),
+					'section' => 'rollie_category_page_section',
+
+				)
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_aspect_ratio_clean_ct',
+							array(
+								'default'           => false,
+								'sanitize_callback' => 'rollie_sanitize_checkbox',
+							)
+						);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_aspect_ratio_clean_ct',
+			array(
+				'label'   => esc_html__( 'Clean display style: Save aspect ratio for thumbnails ', 'rollie' ),
+				'section' => 'rollie_category_page_section',
+
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+					'rollie_display_date_ct',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_date_ct',
+				array(
+					'label'   => esc_html__( 'Display date', 'rollie' ),
+					'section' => 'rollie_category_page_section',
+
+				)
+			)
+		);
+		$wp_customize->add_setting(
+			'rollie_display_author_ct',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_author_ct',
+				array(
+					'label'   => esc_html__( 'Display author', 'rollie' ),
+					'section' => 'rollie_category_page_section',
+
+				)
+			)
+		);
+				$wp_customize->add_setting(
+					'rollie_display_cat_ct',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_display_cat_ct',
+			array(
+				'label'   => esc_html__( 'Display categories', 'rollie' ),
+				'section' => 'rollie_category_page_section',
+
+			)
+		)
+	);
+		// archive
+		$wp_customize->add_section(
+			'rollie_archive_page_section',
+			array(
+				'title'    => esc_html__( 'Archive page settings', 'Rollie' ),
+				'panel'    => 'rollie_layout_panel',
+				'priority' => 20,
+			)
+		);
+		$wp_customize->add_section(
+			'rollie_single_page_section',
+			array(
+				'title'    => esc_html__( 'Single page settings', 'Rollie' ),
+				'panel'    => 'rollie_layout_panel',
+				'priority' => 20,
+			)
+		);
+
+			$wp_customize->add_section(
+			'rollie_single_post_page_section',
+			array(
+				'title'    => esc_html__( 'Single post page settings', 'Rollie' ),
+				'panel'    => 'rollie_layout_panel',
+				'priority' => 20,
+			)
+		);
+		$wp_customize->add_setting(
+			'rollie_display_author_sp',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_author_sp',
+				array(
+					'label'   => esc_html__( 'Display author', 'rollie' ),
+					'section' => 'rollie_single_page_section',
+
+				)
+			)
+		);
+				$wp_customize->add_setting(
+					'rollie_display_date_sp',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_display_date_sp',
+			array(
+				'label'   => esc_html__( 'Display date', 'rollie' ),
+				'section' => 'rollie_single_page_section',
+
+			)
+		)
+	);
+	$wp_customize->add_setting(
+			'rollie_display_author_spp',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_author_spp',
+				array(
+					'label'   => esc_html__( 'Display author', 'rollie' ),
+					'section' => 'rollie_single_post_page_section',
+
+				)
+			)
+		);
+				$wp_customize->add_setting(
+					'rollie_display_date_spp',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_display_date_spp',
+			array(
+				'label'   => esc_html__( 'Display  date', 'rollie' ),
+				'section' => 'rollie_single_post_page_section',
+
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_row_design_ar_php_0',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_select',
+			'default'           => 1,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			'rollie_row_design_ar_php_0',
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as one in one row', 'Rollie' ),
+				'section' => 'rollie_archive_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_ar_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_ar_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as two in one row', 'Rollie' ),
+				'section' => 'rollie_archive_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_ar_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_ar_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as three in one row', 'Rollie' ),
+				'section' => 'rollie_archive_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern ', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+				$wp_customize->add_setting(
+					'rollie_raw_enable_ar_php',
+					array(
+						'default'           => false,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_raw_enable_ar_php',
+				array(
+					'label'   => esc_html__( 'Enable raw style for all posts', 'rollie' ),
+					'section' => 'rollie_archive_page_section',
+
+				)
+			)
+		);
+
+										$wp_customize->add_setting(
+											'rollie_rest_style_for_paged_ar_php',
+											array(
+												'default' => true,
+												'sanitize_callback' => 'rollie_sanitize_checkbox',
+											)
+										);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_rest_style_for_paged_ar_php',
+				array(
+					'label'       => esc_html__( 'Set same style of display for next pages of posts  ', 'rollie' ),
+					'section'     => 'rollie_archive_page_section',
+					'description' => 'If is off the next page is styled by "display for rest of the posts style" value ',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_one_on_row_panoramix1_ar_php', // panoramix
+			array(
+				'sanitize_callback' => 'absint',
+				'default'           => 1,
+				'transport'         => 'refresh',
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_one_on_row_panoramix1_ar_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as one on row ', 'Rollie' ),
+				'section' => 'rollie_archive_page_section',
+				'type'    => 'number',
+			)
+		);
+			$wp_customize->add_setting(
+				'rollie_two_on_row_surroundix2_ar_php', // panoramix
+				array(
+					'sanitize_callback' => 'absint',
+					'default'           => 2,
+					'transport'         => 'refresh',
+				)
+			);
+
+		$wp_customize->add_control(
+			'rollie_two_on_row_surroundix2_ar_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as two on row ', 'Rollie' ),
+				'section' => 'rollie_archive_page_section',
+				'type'    => 'number',
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_style_display_for_rest_ar_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_radio',
+			'default'           => 3,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			new Rollie_Icon_Customize_Control(
+				$wp_customize,
+				'rollie_style_display_for_rest_ar_php',
+				array(
+					'label'   => esc_html__( 'What style of display you want to choose for rest of the posts', 'Rollie' ),
+					'section' => 'rollie_archive_page_section',
+					'type'    => 'radio',
+					'choices' => array(
+						1 => esc_html__( 'fa-bars split on row ', 'rollie' ),
+						2 => esc_html__( 'fa-th-large split two on row ', 'rollie' ),
+						3 => esc_html__( 'fa-th split three on row ', 'rollie' ),
+					),
+				)
+			)
+		);
+
+			$wp_customize->add_setting(
+				'rollie_alt_thumbnail_ar_php',
+				array(
+					'sanitize_callback' => 'rollie_sanitize_file',
+					'transport'         => 'refresh',
+					'default'           => '',
+				)
+			);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_thumbnail_ar_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_archive_page_section',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_post_margin_auto_ar',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_post_margin_auto_ar',
+				array(
+					'label'   => esc_html__( 'Center all posts', 'rollie' ),
+					'section' => 'rollie_archive_page_section',
+
+				)
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_aspect_ratio_clean_ar',
+							array(
+								'default'           => false,
+								'sanitize_callback' => 'rollie_sanitize_checkbox',
+							)
+						);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_aspect_ratio_clean_ar',
+			array(
+				'label'   => esc_html__( 'Clean display style: Save aspect ratio for thumbnails ', 'rollie' ),
+				'section' => 'rollie_archive_page_section',
+
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+					'rollie_ar_translate_php',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_ar_translate_php',
+				array(
+					'label'   => esc_html__( 'Enable title translating for archives', 'rollie' ),
+					'section' => 'rollie_archive_page_section',
+
+				)
+			)
+		);
+
+				$wp_customize->add_setting(
+					'rollie_display_date_ar',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_date_ar',
+				array(
+					'label'   => esc_html__( 'Display date', 'rollie' ),
+					'section' => 'rollie_archive_page_section',
+
+				)
+			)
+		);
+		$wp_customize->add_setting(
+			'rollie_display_author_ar',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_author_ar',
+				array(
+					'label'   => esc_html__( 'Display author', 'rollie' ),
+					'section' => 'rollie_archive_page_section',
+
+				)
+			)
+		);
+				$wp_customize->add_setting(
+					'rollie_display_cat_ar',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_display_cat_ar',
+			array(
+				'label'   => esc_html__( 'Display categories', 'rollie' ),
+				'section' => 'rollie_archive_page_section',
+
+			)
+		)
+	);
+		// archive end
+		// search start
+		$wp_customize->add_section(
+			'rollie_search_page_section',
+			array(
+				'title'    => esc_html__( 'Search page settings', 'Rollie' ),
+				'panel'    => 'rollie_layout_panel',
+				'priority' => 20,
+			)
+		);
+
+	$wp_customize->add_setting(
+		'rollie_row_design_se_php_0',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_select',
+			'default'           => 1,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			'rollie_row_design_se_php_0',
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as one in one row', 'Rollie' ),
+				'section' => 'rollie_search_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_se_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_se_php_1', // rollie_two_on_row_design_php_1
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as two in one row', 'Rollie' ),
+				'section' => 'rollie_search_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_row_design_se_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_row_design_se_php_2', // rollie_three_on_row_design_php_2
+			array(
+				'label'   => esc_html__( 'Design of posts displayed as three in one row', 'Rollie' ),
+				'section' => 'rollie_search_page_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 => esc_html__( 'Classic', 'rollie' ),
+					2 => esc_html__( 'Modern ', 'rollie' ),
+					3 => esc_html__( 'Clean', 'rollie' ),
+
+				),
+			)
+		);
+
+				$wp_customize->add_setting(
+					'rollie_raw_enable_se_php',
+					array(
+						'default'           => false,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_raw_enable_se_php',
+				array(
+					'label'   => esc_html__( 'Enable raw style for all posts', 'rollie' ),
+					'section' => 'rollie_search_page_section',
+
+				)
+			)
+		);
+
+										$wp_customize->add_setting(
+											'rollie_rest_style_for_paged_se_php',
+											array(
+												'default' => true,
+												'sanitize_callback' => 'rollie_sanitize_checkbox',
+											)
+										);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_rest_style_for_paged_se_php',
+				array(
+					'label'       => esc_html__( 'Set same style of display for next pages of posts ', 'rollie' ),
+					'section'     => 'rollie_search_page_section',
+					'description' => 'If is off the next page is styled by "display for rest of the posts style" value ',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_one_on_row_panoramix1_se_php', // panoramix
+			array(
+				'sanitize_callback' => 'absint',
+				'default'           => 1,
+				'transport'         => 'refresh',
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_one_on_row_panoramix1_se_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as one on row ', 'Rollie' ),
+				'section' => 'rollie_search_page_section',
+				'type'    => 'number',
+			)
+		);
+			$wp_customize->add_setting(
+				'rollie_two_on_row_surroundix2_se_php', // panoramix
+				array(
+					'sanitize_callback' => 'absint',
+					'default'           => 2,
+					'transport'         => 'refresh',
+				)
+			);
+
+		$wp_customize->add_control(
+			'rollie_two_on_row_surroundix2_se_php',
+			array(
+				'label'   => esc_html__( 'How many posts you want to display as two on row ', 'Rollie' ),
+				'section' => 'rollie_search_page_section',
+				'type'    => 'number',
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_style_display_for_rest_se_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_radio',
+			'default'           => 3,
+
+		)
+	);
+
+		$wp_customize->add_control(
+			new Rollie_Icon_Customize_Control(
+				$wp_customize,
+				'rollie_style_display_for_rest_se_php',
+				array(
+					'label'   => esc_html__( 'What style of display you want to choose for rest of the posts', 'Rollie' ),
+					'section' => 'rollie_search_page_section',
+					'type'    => 'radio',
+					'choices' => array(
+						1 => esc_html__( 'fa-bars split on row ', 'rollie' ),
+						2 => esc_html__( 'fa-th-large split two on row ', 'rollie' ),
+						3 => esc_html__( 'fa-th split three on row ', 'rollie' ),
+					),
+				)
+			)
+		);
+
+			$wp_customize->add_setting(
+				'rollie_alt_thumbnail_se_php',
+				array(
+					'sanitize_callback' => 'rollie_sanitize_file',
+					'transport'         => 'refresh',
+					'default'           => '',
+				)
+			);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_thumbnail_se_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_search_page_section',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_post_margin_auto_se',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_post_margin_auto_se',
+				array(
+					'label'   => esc_html__( 'Center all posts', 'rollie' ),
+					'section' => 'rollie_search_page_section',
+
+				)
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_aspect_ratio_clean_se',
+							array(
+								'default'           => false,
+								'sanitize_callback' => 'rollie_sanitize_checkbox',
+							)
+						);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_aspect_ratio_clean_se',
+			array(
+				'label'   => esc_html__( 'Clean display style: Save aspect ratio for thumbnails ', 'rollie' ),
+				'section' => 'rollie_search_page_section',
+
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+					'rollie_display_date_se',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_date_se',
+				array(
+					'label'   => esc_html__( 'Display date', 'rollie' ),
+					'section' => 'rollie_search_page_section',
+
+				)
+			)
+		);
+		$wp_customize->add_setting(
+			'rollie_display_author_se',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_display_author_se',
+				array(
+					'label'   => esc_html__( 'Display author', 'rollie' ),
+					'section' => 'rollie_search_page_section',
+
+				)
+			)
+		);
+				$wp_customize->add_setting(
+					'rollie_display_cat_se',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_display_cat_se',
+			array(
+				'label'   => esc_html__( 'Display categories', 'rollie' ),
+				'section' => 'rollie_search_page_section',
+
+			)
+		)
+	);
+
+		// search end
+		// widget style customize
+
+
+
+		$wp_customize->add_setting(
+						'rollie_search_form_menu_top',
+						array(
+							'default'           => true,
+							'sanitize_callback' => 'rollie_sanitize_checkbox',
+						)
+					);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_search_form_menu_top',
+					array(
+						'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
+						'section' => 'rollie_menu_top_section',
+
+					)
+				)
+			);
+
+
+
+
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'rollie_main_theme_text_color',
+				array(
+					'label'             => __('Main Theme text color', 'Rollie' ),
+					'section'           => 'rollie_theme_colors_section',
+					'settings'          => 'rollie_main_theme_text_color_css',
+					'sanitize_callback' => 'rollie_sanitize_hex_color',
+				)
+			)
+		);
+
+	
+			$wp_customize->add_section(
+					'rollie_widget_section',
+					array(
+						'title'    => esc_html__( 'Widget style settings', 'Rollie' ),
+						'priority' => 20,
+						'panel'    => 'rollie_color_design_panel',
+					)
+				);
+
+					$wp_customize->add_setting(
+						'rollie_disable_sidebar_mobile',
+						array(
+							'default'           => true,
+							'sanitize_callback' => 'rollie_sanitize_checkbox',
+						)
+					);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_disable_sidebar_mobile',
+					array(
+						'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
+						'section' => 'rollie_widget_section',
+
+					)
+				)
+			);
+
+						$wp_customize->add_setting(
+							'rollie_sidebar_background',
+							array(
+								'default'   => '#ffffff',
+								'transport' => 'refresh',
+
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_sidebar_background',
+			array(
+				'label'             => esc_html__( 'Background color of sidebar', 'Rollie' ),
+				'section'           => 'rollie_widget_section',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_widget_background',
+			array(
+				'default'   => '#ffffff',
+				'transport' => 'refresh',
+
+			)
+		);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_widget_background',
+			array(
+				'label'             => esc_html__( 'Background color of widgets', 'Rollie' ),
+				'section'           => 'rollie_widget_section',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+					'rollie_widget_title_text_color',
+					array(
+						'default'   => '#212121',
+						'transport' => 'refresh',
+						'sanitize_callback' => 'rollie_sanitize_hex_color',
+					)
+				);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_widget_title_text_color',
+			array(
+				'label'             => esc_html__( 'Title text color of widgets', 'Rollie' ),
+				'section'           => 'rollie_widget_section',
+				
+			)			
+		)
+	);
+		$wp_customize->add_setting(
+			'rollie_widget_text_color',
+			array(
+				'default'   => '#212121',
+				'transport' => 'refresh',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_widget_text_color',
+			array(
+				'label'             => esc_html__( 'Text color of widgets', 'Rollie' ),
+				'section'           => 'rollie_widget_section',
+			
+			)
+		)
+	);
+				$wp_customize->add_setting(
+					'rollie_widget_shadow_color',
+					array(
+						'default'   => '#a37e2c',
+						'transport' => 'refresh',
+						'sanitize_callback' => 'rollie_sanitize_hex_color',
+					)
+				);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_widget_shadow_color',
+			array(
+				'label'             => esc_html__( 'Widget shadow color', 'Rollie' ),
+				'section'           => 'rollie_widget_section',
+		
+			)
+		)
+	);
+
+		// widget end
+	$wp_customize->add_section(
+		'rollie_theme_colors_section',
+		array(
+			'title'    => __( 'Theme Colors', 'Rollie' ),
+			'panel'    => 'rollie_color_design_panel',
+			'priority' => 30,
+		)
+	);
+	
+{
+
+		$wp_customize->add_setting(	'rollie_main_theme_color_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_main_theme_color_label',
+			array(
+				'label'   => esc_html__( 'Main Theme Text Color ', 'rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+				'input_attrs'=> array (
+								'rollie_collapse_elements_number'=> 9,
+							)
+			)
+		)
+	);
+
+
+		$wp_customize->add_setting(
+						'rollie_main_theme_color_gs',
+						array(
+							'default'           => 1,
+							'sanitize_callback' => 'rollie_sanitize_radio',
+						)
+					);
+
+			$wp_customize->add_control(
+				new Rollie_Multiple_Switch_Customizer_Control(
+					$wp_customize,
+					'rollie_main_theme_color_gs',
+					array(					
+						'section' => 'rollie_theme_colors_section',
+						'choices' => array(
+							1 => esc_html__( ' Simple Color ', 'rollie' ),
+						2 => esc_html__( ' Gradient ', 'rollie' ),
+				
+						
+					),
+					)
+				)
+			);
+
+
+
+
+	$wp_customize->add_setting(
+		'rollie_main_theme_color_gs_1',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_main_theme_color_gs_1',
+			array(
+				'label'         => __( 'Alpha Color Picker', 'rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+				'show_opacity'  => true, 
+			'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
+		
+			)
+		
+			)
+		)
+	);
+	
+			$wp_customize->add_setting(
+			'rollie_main_theme_color_stop_gs_1',
+			array(
+				'default'           => 40,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
+		
+			)
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'rollie_main_theme_color_stop_gs_1',
+			array(
+				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'section'     => 'rollie_theme_colors_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',	
+				),
+			)
+		)
+	);
+		
+
+	
+	$wp_customize->add_setting(
+		'rollie_main_theme_color_gs_2',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_main_theme_color_gs_2',
+			array(
+				'label'         => __( 'Alpha Color Picker', 'rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+				'show_opacity'  => true, 
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
+		
+			)
+		
+		
+			)
+		)
+	);
+
+
+				$wp_customize->add_setting(
+			'rollie_main_theme_color_stop_gs_2',
+			array(
+				'default'           => 40,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+		'rollie_main_theme_color_stop_gs_2',
+			array(
+				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'section'     => 'rollie_theme_colors_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',
+				),
+			)
+		)
+	);
+		$wp_customize->add_setting(
+		'rollie_main_theme_color_gs_3',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_main_theme_color_gs_3',
+			array(
+				'label'         => __( 'Alpha Color Picker', 'rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+				'show_opacity'  => true, 
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
+		
+			)
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+			'rollie_main_theme_color_stop_gs_3',
+			array(
+				'default'           => 0,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'rollie_main_theme_color_stop_gs_3',
+			array(
+				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'section'     => 'rollie_theme_colors_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',
+				),
+			)
+		)
+	);
+			$wp_customize->add_setting(
+			'alpha_color_angle',
+			array(
+				'default'           => 45,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'alpha_color_angle',
+			array(
+				'label'       => esc_html__( 'Gradient Angle','rollie' ),
+				'section'     => 'rollie_theme_colors_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 360,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',
+					
+				),
+			)
+		));
+
+
+		$wp_customize->add_setting(
+		'rollie_main_theme_color_css',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'refresh',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_main_theme_color',
+			array(
+				'label'             => __( 'Main Theme Color', 'Rollie' ),
+				'section'           => 'rollie_theme_colors_section',
+				'settings'          => 'rollie_main_theme_color_css',
+				'show_opacity'  => true, 
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-1'
+		
+			)
+			)
+		)
+	);
+
+
+		$wp_customize->add_setting(	'rollie_second_theme_color_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_second_theme_color_label',
+			array(
+				'label'             => __( 'Second Theme Color', 'Rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_second_theme_color_css',
+		array(
+			'default'   => '#212121',
+			'transport' => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_second_theme_color',
+			array(
+				'section'           => 'rollie_theme_colors_section',
+				'settings'          => 'rollie_second_theme_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+
+
+
+
+		$wp_customize->add_setting(	'rollie_third_theme_color_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_third_theme_color_label',
+			array(
+				'label'             => __( 'Third Theme Color', 'Rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_third_theme_color_css',
+		array(
+			'default'   => '#a37e2c',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_third_color',
+			array(
+				'section'           => 'rollie_theme_colors_section',
+				'settings'          => 'rollie_third_theme_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+
+
+
+
+
+		$wp_customize->add_setting(	'rollie_darker_main_theme_text_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_darker_main_theme_text_label',
+			array(
+				'label'             => __( 'Main Theme Darker Shade Color', 'Rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_darker_main_theme_text_color_css',
+		array(
+			'default'   => '#e3e6e8',
+			'transport' => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_darker_main_theme_text_color',
+			array(
+				'section'           => 'rollie_theme_colors_section',
+				'settings'          => 'rollie_darker_main_theme_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+
+
+
+
+		$wp_customize->add_setting(	'rollie_sidebar_background_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_sidebar_background_label',
+			array(
+				'label'             => __( 'Sidebar background color', 'Rollie' ),
+				'section'       => 'rollie_theme_colors_section',
+			)
+		)
+	);
+	$wp_customize->add_setting(
+			'rollie_sidebar_background',
+			array(
+				'default'   => '#e3e6e8',
+				'transport' => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'rollie_sidebar_background',
+				array(
+					'section'           => 'rollie_theme_colors_section',
+					'sanitize_callback' => 'rollie_sanitize_hex_color',
+				)
+			)
+		);
+}
+
+$wp_customize->add_section(
+		'rollie_theme_colors_text_section',
+		array(
+			'title'    => __( 'Theme Text Colors', 'Rollie' ),
+			'panel'    => 'rollie_color_design_panel',
+			'priority' => 30,
+		)
+	);
+
+
+	$wp_customize->add_setting(
+		'rollie_title_text_color_css',
+		array(
+			'default'   => '#212121',
+			'transport' => 'refresh',
+
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_title_text_color',
+			array(
+				'label'             => __( 'Text color for titles ', 'Rollie' ),
+				'section'           => 'rollie_theme_colors_text_section',
+				'settings'          => 'rollie_title_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+
+
+
+	$wp_customize->add_setting(
+		'rollie_main_theme_text_color_css',
+		array(
+			'default'   => '#212529',
+			'transport' => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_main_theme_text_color',
+			array(
+				'label'             => __( 'Main Theme Text Color', 'Rollie' ),
+				'section'           => 'rollie_theme_colors_text_section',
+				'settings'          => 'rollie_main_theme_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_second_text_color_css',
+		array(
+			'default'   => '#ffffff',
+			'transport' => 'refresh',
+
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_second_text_color',
+			array(
+				'label'             => __( 'Second text color  ', 'Rollie' ),
+				'description'       => __( ' Text color on second theme color as background ' ),
+				'section'           => 'rollie_theme_colors_text_section',
+				'settings'          => 'rollie_second_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+
+
+	$wp_customize->add_setting(
+		'rollie_subtitle_text_color_css',
+		array(
+			'default'   => '#818181',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_subtitle_text_color',
+			array(
+				'label'             => __( 'Third text color', 'Rollie' ),
+				'description'		=> __('Post and page excerpts, metainfo bars, footer subitems color '),
+				'section'           => 'rollie_theme_colors_text_section',
+				'settings'          => 'rollie_subtitle_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_fourth_text_color_css',
+		array(
+			'default'   => '#228050',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_fourth_text_color_css',
+			array(
+				'label'             => __( 'Fourth text color', 'Rollie' ),
+				'description'		=> __(' Links color on page content or article'),
+				'section'           => 'rollie_theme_colors_text_section',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_category_title_text_color_css',
+		array(
+			'default'   => '#a37e2c',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_category_title_text_color',
+			array(
+				'label'             => __( 'Fifth Text Color' , 'Rollie' ),
+				'description'		=> __('Category titles, links at hover,fancy line color'),		
+				'section'           => 'rollie_theme_colors_text_section',
+				'settings'          => 'rollie_category_title_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_posts_shadow_css',
+		array(
+			'default'   => '#a37e2c',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_posts_shadow',
+			array(
+				'label'             => __( 'Posts shadow color', 'Rollie' ),
+				'section'           => 'rollie_theme_colors_section',
+				'settings'          => 'rollie_posts_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	// navbars
+	$wp_customize->add_section(
+		'rollie_navbar_section',
+		array(
+			'title'    => __( 'Top Navbar settings and colors', 'Rollie' ),
+			'priority' => 9,
+			'panel'    => 'rollie_misc_panel',
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_menu_top_logo',
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+
+			)
+		);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'rollie_menu_top_logo',
+			array(
+				'label'   => __( 'Top menu logo', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_menu_top_logo_h',
+			array(
+				'default'           => 40,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'rollie_menu_top_logo_h',
+			array(
+				'label'       => esc_html__( 'Height of logo (px) ' ),
+				'section'     => 'rollie_navbar_section',
+				'input_attrs' => array(
+					'min'  => 30,
+					'max'  => 400,
+					'step' => 10,
+				),
+			)
+		)
+	);
+		$wp_customize->add_setting(
+			'rollie_menu_top_item_align',
+			array(
+				'sanitize_callback' => 'rollie_sanitize_radio',
+				'default'           => 2,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new Rollie_Icon_Customize_Control(
+				$wp_customize,
+				'rollie_menu_top_item_align',
+				array(
+					'label'   => esc_html__( 'Menu items align', 'Rollie' ),
+					'section' => 'rollie_navbar_section',
+					'type'    => 'radio',
+					'choices' => array(
+						1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
+						2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+						3 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
+					),
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'rollie_menu_design',
+			array(
+				'sanitize_callback' => 'rollie_sanitize_radio',
+				'default'           => 'full',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_menu_design',
+			array(
+				'label'   => esc_html__( 'Navbar menu design', 'Rollie' ),
+				'section' => 'rollie_navbar_section',
+				'type'    => 'radio',
+				'choices' => array(
+					'full' => esc_html__( 'Full width collapse', 'rollie' ),
+					'side' => esc_html__( 'Left side collapse', 'rollie' ),
+				),
+			)
+		);
+
+					$wp_customize->add_setting(
+						'rollie_menu_overlay',
+						array(
+							'default'           => true,
+							'sanitize_callback' => 'rollie_sanitize_checkbox',
+						)
+					);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_menu_overlay',
+					array(
+						'label'   => esc_html__( 'Enable overlay when menu drops', 'Rollie' ),
+						'section' => 'rollie_navbar_section',
+
+					)
+				)
+			);
+
+					$wp_customize->add_setting(
+						'rollie_search_form_menu_top',
+						array(
+							'default'           => true,
+							'sanitize_callback' => 'rollie_sanitize_checkbox',
+						)
+					);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_search_form_menu_top',
+					array(
+						'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
+						'section' => 'rollie_navbar_section',
+
+					)
+				)
+			);
+
+							$wp_customize->add_setting(
+								'rollie_search_form_menu_top_type',
+								array(
+									'default'           => true,
+									'sanitize_callback' => 'rollie_sanitize_checkbox',
+								)
+							);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_search_form_menu_top_type',
+					array(
+						'label'   => esc_html__( 'Display search icon only ', 'Rollie' ),
+						'section' => 'rollie_navbar_section',
+
+					)
+				)
+			);
+
+	$wp_customize->add_setting(
+		'rollie_navbar_color_css',
+		array(
+			'default'   => '#ffffff',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_navbar_color',
+			array(
+				'label'             => __( 'Navbar Color', 'Rollie' ),
+				'section'           => 'rollie_navbar_section',
+				'settings'          => 'rollie_navbar_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_navbar_text_color_css',
+		array(
+			'default'   => '#212121',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_navbar_text_color',
+			array(
+				'label'             => __( 'Navbar Text Color', 'Rollie' ),
+				'section'           => 'rollie_navbar_section',
+				'settings'          => 'rollie_navbar_text_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_navbar_text_hover_color_css',
+		array(
+			'default'   => '#a37e2c',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_navbar_text_hover_color',
+			array(
+				'label'             => __( 'Navbar Text Hover Color', 'Rollie' ),
+				'section'           => 'rollie_navbar_section',
+				'settings'          => 'rollie_navbar_text_hover_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+
+
+	$wp_customize->add_section(
+		'rollie_post_format_link',
+		array(
+			'title'    => __( 'Post format: link', 'Rollie' ),
+			'panel'    => 'rollie_post_formats_panel',
+			'priority' => 40,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_alt_link_thumbnail_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_file',
+			'transport'         => 'refresh',
+			'default'           => '',
+		)
+	);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_link_thumbnail_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_post_format_link',
+				)
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_link',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_link',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_link',
+
+					)
+				)
+			);
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_link',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_link',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_link',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-link', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_link_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_link_color',
+			array(
+				'label'             => __( 'Link icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_link',
+				'settings'          => 'rollie_icon_link_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_link_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_link_shadow',
+			array(
+				'label'             => __( 'Link icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_link',
+				'settings'          => 'rollie_icon_link_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_link_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_link_color_h',
+			array(
+				'label'             => __( 'Link icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_link',
+				'settings'          => 'rollie_icon_link_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+		/*===================================*/
+
+	$wp_customize->add_section(
+		'rollie_post_format_aside',
+		array(
+
+			'title'    => __( 'Post format: aside', 'Rollie' ),
+			'panel'    => 'rollie_post_formats_panel',
+			'priority' => 40,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_aside',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_aside',
+					array(
+						'label'   => esc_html__( 'Display post format aside', 'Rollie' ),
+						'section' => 'rollie_post_format_aside',
+
+					)
+				)
+			);
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_aside',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_aside',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format aside', 'Rollie' ),
+				'section'     => 'rollie_post_format_aside',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-link', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_aside_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_aside_color',
+			array(
+				'label'             => __( 'Aside icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_aside',
+				'settings'          => 'rollie_icon_aside_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_aside_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_aside_shadow',
+			array(
+				'label'             => __( 'Aside icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_aside',
+				'settings'          => 'rollie_icon_aside_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_aside_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_aside_color_h',
+			array(
+				'label'             => __( 'Aside icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_aside',
+				'settings'          => 'rollie_icon_aside_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+		/*===================================*/
+
+	$wp_customize->add_section(
+		'rollie_post_format_quote',
+		array(
+			'title'    => __( 'Post format: quote', 'Rollie' ),
+			'panel'    => 'rollie_post_formats_panel',
+			'priority' => 40,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_alt_quote_thumbnail_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_file',
+			'transport'         => 'refresh',
+			'default'           => '',
+		)
+	);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_quote_thumbnail_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_post_format_quote',
+				)
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_quote',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_quote',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_quote',
+
+					)
+				)
+			);
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_quote',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_quote',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_quote',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-quote-left ', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_quote_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_quote_color',
+			array(
+				'label'             => __( 'Aside icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_quote',
+				'settings'          => 'rollie_icon_quote_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_quote_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_quote_shadow',
+			array(
+				'label'             => __( 'Aside icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_quote',
+				'settings'          => 'rollie_icon_aside_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_quote_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_quote_color_h',
+			array(
+				'label'             => __( 'Aside icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_quote',
+				'settings'          => 'rollie_icon_aside_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+			/*===================================*/
+
+	$wp_customize->add_section(
+		'rollie_post_format_status',
+		array(
+			'title'    => __( 'Post format: status', 'Rollie' ),
+			'panel'    => 'rollie_post_formats_panel',
+			'priority' => 40,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_aspect_ratio_status',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_aspect_ratio_status',
+					array(
+						'label'   => esc_html__( 'Save aspect ratio for thumbnails', 'Rollie' ),
+						'section' => 'rollie_post_format_status',
+
+					)
+				)
+			);
+
+	$wp_customize->add_setting(
+		'rollie_alt_status_thumbnail_php',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_file',
+			'transport'         => 'refresh',
+			'default'           => '',
+		)
+	);
+
+		$wp_customize->add_control(
+			new WP_Customize_Upload_Control(
+				$wp_customize,
+				'rollie_alt_status_thumbnail_php',
+				array(
+					'label'   => __( 'Add alternate post thumbnail', 'Rollie' ),
+					'section' => 'rollie_post_format_status',
+				)
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_status',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_status',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_status',
+
+					)
+				)
+			);
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_status',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_status',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_status',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-status-left ', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_status_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_status_color',
+			array(
+				'label'             => __( 'status icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_status',
+				'settings'          => 'rollie_icon_status_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_status_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_status_shadow',
+			array(
+				'label'             => __( 'status icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_status',
+				'settings'          => 'rollie_icon_status_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_status_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_status_color_h',
+			array(
+				'label'             => __( 'status icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_status',
+				'settings'          => 'rollie_icon_status_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+		// =============================
+			$wp_customize->add_section(
+				'rollie_post_format_audio',
+				array(
+					'title'    => __( 'Post format: audio', 'Rollie' ),
+					'panel'    => 'rollie_post_formats_panel',
+					'priority' => 40,
+				)
+			);
+
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_audio',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_audio',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_audio',
+
+					)
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_audio',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_audio',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_audio',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-audio-left ', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_audio_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_audio_color',
+			array(
+				'label'             => __( 'audio icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_audio',
+				'settings'          => 'rollie_icon_audio_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_audio_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_audio_shadow',
+			array(
+				'label'             => __( 'audio icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_audio',
+				'settings'          => 'rollie_icon_audio_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_audio_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_audio_color_h',
+			array(
+				'label'             => __( 'audio icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_audio',
+				'settings'          => 'rollie_icon_audio_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+				// =============================
+			$wp_customize->add_section(
+				'rollie_post_format_video',
+				array(
+					'title'    => __( 'Post format: video', 'Rollie' ),
+					'panel'    => 'rollie_post_formats_panel',
+					'priority' => 40,
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_display_format_icon_video',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_video',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_video',
+
+					)
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_video',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_video',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_video',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-video-left ', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_video_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_video_color',
+			array(
+				'label'             => __( 'video icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_video',
+				'settings'          => 'rollie_icon_video_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_video_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_video_shadow',
+			array(
+				'label'             => __( 'video icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_video',
+				'settings'          => 'rollie_icon_video_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_video_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_video_color_h',
+			array(
+				'label'             => __( 'video icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_video',
+				'settings'          => 'rollie_icon_video_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+						// =============================
+			$wp_customize->add_section(
+				'rollie_post_format_image',
+				array(
+					'title'    => __( 'Post format: image', 'Rollie' ),
+					'panel'    => 'rollie_post_formats_panel',
+					'priority' => 40,
+				)
+			);
+
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_image',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_image',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_image',
+
+					)
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_image',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_image',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_image',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-image-left ', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_image_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_image_color',
+			array(
+				'label'             => __( 'image icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_image',
+				'settings'          => 'rollie_icon_image_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_image_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_image_shadow',
+			array(
+				'label'             => __( 'image icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_image',
+				'settings'          => 'rollie_icon_image_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_image_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_image_color_h',
+			array(
+				'label'             => __( 'image icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_image',
+				'settings'          => 'rollie_icon_image_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_aspect_ratio_image',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_aspect_ratio_image',
+					array(
+						'label'   => esc_html__( 'Save aspect ratio for thumbnails', 'Rollie' ),
+						'section' => 'rollie_post_format_image',
+
+					)
+				)
+			);
+							// =============================
+			$wp_customize->add_section(
+				'rollie_post_format_gallery',
+				array(
+					'title'    => __( 'Post format: gallery', 'Rollie' ),
+					'panel'    => 'rollie_post_formats_panel',
+					'priority' => 40,
+				)
+			);
+
+	$wp_customize->add_setting(
+		'rollie_display_format_icon_gallery',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_display_format_icon_gallery',
+					array(
+						'label'   => esc_html__( 'Display post format icon', 'Rollie' ),
+						'section' => 'rollie_post_format_gallery',
+
+					)
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_format_icon_class_gallery',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_format_icon_class_gallery',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for post format icon', 'Rollie' ),
+				'section'     => 'rollie_post_format_gallery',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-gallery-left ', 'Rollie' ),
+			)
+		);
+
+						$wp_customize->add_setting(
+							'rollie_icon_gallery_color_css',
+							array(
+								'default'   => '#212121',
+								'transport' => 'refresh',
+							)
+						);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_gallery_color',
+			array(
+				'label'             => __( 'gallery icon color', 'Rollie' ),
+				'section'           => 'rollie_post_format_gallery',
+				'settings'          => 'rollie_icon_gallery_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_gallery_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_gallery_shadow',
+			array(
+				'label'             => __( 'gallery icon shadow color', 'Rollie' ),
+				'section'           => 'rollie_post_format_gallery',
+				'settings'          => 'rollie_icon_gallery_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_gallery_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_gallery_color_h',
+			array(
+				'label'             => __( 'gallery icon color when hover', 'Rollie' ),
+				'section'           => 'rollie_post_format_gallery',
+				'settings'          => 'rollie_icon_gallery_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_aspect_ratio_gallery',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_aspect_ratio_gallery',
+					array(
+						'label'   => esc_html__( 'Save aspect ratio for thumbnails', 'Rollie' ),
+						'section' => 'rollie_post_format_gallery',
+
+					)
+				)
+			);
+
+	$wp_customize->add_section(
+		'rollie_tags',
+		array(
+			'title'    => __( 'Comment and tags bar', 'Rollie' ),
+			'priority' => 40,
+			'panel'    => 'rollie_misc_panel',
+
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_tags_display_icon',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_tags_display_icon',
+					array(
+						'label'   => esc_html__( 'Display tag icon', 'Rollie' ),
+						'section' => 'rollie_tags',
+
+					)
+				)
+			);
+		$wp_customize->add_setting(
+			'rollie_tags_display_post_format',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_tags_display_post_format',
+					array(
+						'label'   => esc_html__( 'Display post format as tag', 'Rollie' ),
+						'section' => 'rollie_tags',
+
+					)
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_tags_icon',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_tags_icon',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for tag icon ', 'Rollie' ),
+				'section'     => 'rollie_tags',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-tags', 'Rollie' ),
+			)
+		);
+		$wp_customize->add_setting(
+			'rollie_comments_icon',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_comments_icon',
+			array(
+				'label'       => esc_html__( ' Type different Font Awesome class for comments icon ', 'Rollie' ),
+				'section'     => 'rollie_tags',
+				'type'        => 'text',
+				'placeholder' => __( ' fa-comment', 'Rollie' ),
+			)
+		);
+	$wp_customize->add_setting(
+		'rollie_tags_alt_text',
+		array(
+			'default'           => false,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_tags_alt_text',
+					array(
+						'label'   => esc_html__( 'Display text instead tag (label) icon  ', 'Rollie' ),
+						'description'=>' Alternate text from defined string in language plugin settings',
+						'section' => 'rollie_tags',
+
+					)
+				)
+			);
+
+		$wp_customize->add_setting(
+			'rollie_tag_char',
+			array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_tag_char',
+			array(
+				'label'       => esc_html__( ' Type character which will be displaying  before every tag name ', 'Rollie' ),
+				'section'     => 'rollie_tags',
+				'type'        => 'text',
+				'placeholder' => __( '#', 'Rollie' ),
+			)
+		);
+
+	$wp_customize->add_section(
+		'rollie_comments_section',
+		array(
+			'title'    => esc_html__( 'Comments', 'Rollie' ),
+			'priority' => 20,
+			'panel'    => 'rollie_color_design_panel',
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_comment_section_shadow',
+				array(
+					'default'           => true,
+					'sanitize_callback' => 'rollie_sanitize_checkbox',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_comment_section_shadow',
+					array(
+						'label'   => esc_html__( 'Enable shadow comment section style instead solid', 'Rollie' ),
+						'section' => 'rollie_comments_section',
+
+					)
+				)
+			);
+
+									$wp_customize->add_setting(
+										'rollie_comment_s_s_color_css',
+										array(
+											'default'   => '#212121',
+											'transport' => 'refresh',
+										)
+									);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_comment_s_s_color',
+			array(
+				'label'             => __( 'Comment section border color', 'Rollie' ),
+				'section'           => 'rollie_comments_section',
+				'settings'          => 'rollie_comment_s_s_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+									$wp_customize->add_setting(
+										'rollie_comment_f_s_color_css',
+										array(
+											'default'   => '#212121',
+											'transport' => 'refresh',
+										)
+									);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_comment_f_s_color',
+			array(
+				'label'             => __( 'Comment form border color', 'Rollie' ),
+				'section'           => 'rollie_comments_section',
+				'settings'          => 'rollie_comment_f_s_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+									$wp_customize->add_setting(
+										'rollie_icon_comment_color_css',
+										array(
+											'default'   => '#818181;',
+											'transport' => 'refresh',
+										)
+									);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_comment_color',
+			array(
+				'label'             => __( 'Comment icons color', 'Rollie' ),
+				'section'           => 'rollie_comments_section',
+				'settings'          => 'rollie_icon_comment_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_comment_shadow_css',
+				array(
+					'default'   => '#ffffff',
+					'transport' => 'refresh',
+				)
+			);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_comment_shadow',
+			array(
+				'label'             => __( 'Comment icons shadow color', 'Rollie' ),
+				'section'           => 'rollie_comments_section',
+				'settings'          => 'rollie_icon_comment_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_icon_comment_color_h_css',
+			array(
+				'default'   => '#212121',
+				'transport' => 'refresh',
+			)
+		);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_comment_color_h',
+			array(
+				'label'             => __( 'Comment icons color when hover', 'Rollie' ),
+				'section'           => 'rollie_comments_section',
+				'settings'          => 'rollie_icon_comment_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_section(
+		'rollie_buttons_section',
+		array(
+			'title'    => esc_html__( 'Buttons', 'Rollie' ),
+			'priority' => 20,
+			'panel'    => 'rollie_color_design_panel',
+		)
+	);
+
+				$wp_customize->add_setting(
+					'rollie_button_rounded',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_button_rounded',
+					array(
+						'label'   => esc_html__( 'Rounded corners', 'Rollie' ),
+						'section' => 'rollie_buttons_section',
+
+					)
+				)
+			);
+
+											$wp_customize->add_setting(
+												'rollie_button_color_css',
+												array(
+													'default' => '#ffffff',
+													'transport' => 'refresh',
+												)
+											);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_button_color',
+			array(
+				'label'             => __( 'Button text color', 'Rollie' ),
+				'section'           => 'rollie_buttons_section',
+				'settings'          => 'rollie_button_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_button_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_button_shadow',
+			array(
+				'label'             => __( 'Button border color ', 'Rollie' ),
+				'section'           => 'rollie_buttons_section',
+				'settings'          => 'rollie_button_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_button_color_h_css',
+								array(
+									'default'   => '#a37e2c',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_button_color_h',
+			array(
+				'label'             => __( 'Button text when hover', 'Rollie' ),
+				'section'           => 'rollie_buttons_section',
+				'settings'          => 'rollie_button_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+											$wp_customize->add_setting(
+												'rollie_button_b_color_css',
+												array(
+													'default' => '#212121',
+													'transport' => 'refresh',
+												)
+											);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_button_b_color',
+			array(
+				'label'             => __( 'Button text color', 'Rollie' ),
+				'section'           => 'rollie_buttons_section',
+				'settings'          => 'rollie_button_b_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+												$wp_customize->add_setting(
+													'rollie_button_b_color_h_css',
+													array(
+														'default'       => '#ffffff',
+														'transport'     => 'refresh',
+													)
+												);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_button_b_color_h',
+			array(
+				'label'             => __( 'Button text color', 'Rollie' ),
+				'section'           => 'rollie_buttons_section',
+				'settings'          => 'rollie_button_b_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_button_shadow_on',
+				array(
+					'default'           => true,
+					'sanitize_callback' => 'rollie_sanitize_checkbox',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'rollie_button_shadow_on',
+					array(
+						'label'   => esc_html__( 'Enable shadow button border style instead solid', 'Rollie' ),
+						'section' => 'rollie_buttons_section',
+
+					)
+				)
+			);
+
+	$wp_customize->add_section(
+		'rollie_icons_section',
+		array(
+			'title'    => esc_html__( 'Icons', 'Rollie' ),
+			'priority' => 20,
+			'panel'    => 'rollie_color_design_panel',
+		)
+	);
+
+								$wp_customize->add_setting(
+									'rollie_icon_color_first_css',
+									array(
+										'default'   => '#212121',
+										'transport' => 'refresh',
+									)
+								);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_color_first',
+			array(
+				'label'             => __( 'Icon first color', 'Rollie' ),
+				'section'           => 'rollie_icons_section',
+				'settings'          => 'rollie_icon_color_first_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_icon_color_first_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_color_first_shadow',
+			array(
+				'label'             => __( 'Icon first shadow color', 'Rollie' ),
+				'section'           => 'rollie_icons_section',
+				'settings'          => 'rollie_icon_color_first_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+								$wp_customize->add_setting(
+									'rollie_icon_color_first_h_css',
+									array(
+										'default'   => '#ffffff',
+										'transport' => 'refresh',
+									)
+								);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_color_first_h',
+			array(
+				'label'             => __( 'Icon first color when hover', 'Rollie' ),
+				'section'           => 'rollie_icons_section',
+				'settings'          => 'rollie_icon_color_first_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+								$wp_customize->add_setting(
+									'rollie_icon_color_second_css',
+									array(
+										'default'   => '#212121',
+										'transport' => 'refresh',
+									)
+								);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_color_second',
+			array(
+				'label'             => __( 'Icon second color', 'Rollie' ),
+				'section'           => 'rollie_icons_section',
+				'settings'          => 'rollie_icon_color_second_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+					'rollie_icon_color_second_shadow_css',
+					array(
+						'default'   => '#a37e2c',
+						'transport' => 'refresh',
+					)
+				);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_color_second_shadow',
+			array(
+				'label'             => __( 'Icon second shadow color', 'Rollie' ),
+				'section'           => 'rollie_icons_section',
+				'settings'          => 'rollie_icon_color_second_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_icon_color_second_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_icon_color_second_h',
+			array(
+				'label'             => __( 'Icon second color when hover', 'Rollie' ),
+				'section'           => 'rollie_icons_section',
+				'settings'          => 'rollie_icon_color_second_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_section(
+		'rollie_search_form_section',
+		array(
+			'title'    => esc_html__( 'Search form ', 'Rollie' ),
+			'priority' => 20,
+			'panel'    => 'rollie_color_design_panel',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_search_form_color_backg_css',
+		array(
+			'default'   => '#ffffff',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_search_form_color_backg_css',
+			array(
+				'label'             => __( 'Search form color', 'Rollie' ),
+				'section'           => 'rollie_search_form_section',
+				'settings'          => 'rollie_search_form_color_backg_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_search_form_shadow_backg_css',
+		array(
+			'default'   => '#a37e2c',
+			'transport' => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_search_form_shadow_backg_css',
+			array(
+				'label'             => __( 'Posts shadow and border color', 'Rollie' ),
+				'section'           => 'rollie_search_form_section',
+				'settings'          => 'rollie_search_form_shadow_backg_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+								$wp_customize->add_setting(
+									'rollie_search_form_color_css',
+									array(
+										'default'   => '#212121',
+										'transport' => 'refresh',
+									)
+								);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_search_form_color',
+			array(
+				'label'             => __( 'Icon global color', 'Rollie' ),
+				'section'           => 'rollie_search_form_section',
+				'settings'          => 'rollie_search_form_color_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+			$wp_customize->add_setting(
+				'rollie_search_form_shadow_css',
+				array(
+					'default'   => '#a37e2c',
+					'transport' => 'refresh',
+				)
+			);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_search_form_shadow',
+			array(
+				'label'             => __( 'Icon global shadow color', 'Rollie' ),
+				'section'           => 'rollie_search_form_section',
+				'settings'          => 'rollie_search_form_shadow_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+
+							$wp_customize->add_setting(
+								'rollie_search_form_color_h_css',
+								array(
+									'default'   => '#ffffff',
+									'transport' => 'refresh',
+								)
+							);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_search_form_color_h',
+			array(
+				'label'             => __( 'Icon global color when hover', 'Rollie' ),
+				'section'           => 'rollie_search_form_section',
+				'settings'          => 'rollie_search_form_color_h_css',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+	if (class_exists('WooCommerce')){
+	require get_template_directory() . '/include/rollie_customizer_woo.php';
+	}
+}
+
+
+

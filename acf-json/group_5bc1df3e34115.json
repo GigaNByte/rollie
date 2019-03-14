@@ -1,0 +1,77 @@
+{
+    "key": "group_5bc1df3e34115",
+    "title": "Subtitles Options",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1550599418,
+    "fields": [
+        {
+            "key": "field_5b8a7ddcd3609",
+            "label": "Alternate Subtitle",
+            "name": "rollie_alternate_subtitle",
+            "type": "text",
+            "instructions": "If alternate subtitle field is empty theme will display site title from wordpress customizer bulitin field.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5c66ae1a6869b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5c66ae1a6869b",
+            "label": "Display subtitle",
+            "name": "rollie_display_subtitle",
+            "type": "true_false",
+            "instructions": "Subtitle defaults contains page  category ,parent page ,site title or other infos. \r\nType here alternate title to replace it for this page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ]
+}

@@ -1,0 +1,214 @@
+	/*
+	Woocomerce Rollie theme Stylesheet
+
+	_c -> means container
+	*/
+
+	/*
+Woo myaccout nav 
+	*/
+.woocommerce-MyAccount-navigation > ul {
+list-style:none;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+text-align:center;
+padding: 0;
+}
+	
+			
+.rollie_my_acc_nav_big_tiles_c > .woocommerce-MyAccount-navigation /*  COL-12*/
+	{
+		-ms-flex: 0 0 100%;
+		flex: 0 0 100%;
+		max-width: 100%
+		margin:auto;
+		position: relative;
+		width: 100%;
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	.rollie_my_acc_dashboard>nav>ul>.rollie_my_acc_nav_big_tiles  :before
+	{
+		font-size: 20vw !important;
+	
+	}
+
+
+
+
+.woocommerce-MyAccount-navigation > ul >.rollie_my_acc_nav_big_tiles :before{
+	display: block;
+	font-size:4rem;
+	font-family: "Font Awesome 5 Free","FontAwesome"; 
+	font-weight: bold;
+
+}
+.rollie_my_acc_nav_big_tiles > a{
+
+display: block;
+
+}
+.rollie_my_acc_nav_big_tiles_c > .woocommerce-MyAccount-navigation 
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+/*SIMPLE SIDE NAV*/
+
+
+.rollie_my_acc_nav_side :after{
+	display: inline;
+	padding-left:0.5rem;
+	padding-right:0.5rem;
+	font-size:2rem;
+	font-family: "Font Awesome 5 Free","FontAwesome"; 
+	font-weight: bold;
+	text-align:right;
+
+
+}
+@media screen and (min-width: 768px) /* AT BOOTSTRAP md*/
+{
+	.rollie_my_acc_nav_side :after{
+		float: right;
+	}
+}
+.rollie_my_acc_nav_side_c  > .woocommerce-MyAccount-navigation
+{
+-ms-flex: 0 0 100%;
+
+flex: 0 0 100%;
+
+max-width: 100%;
+position: relative;
+
+width: 100%;
+}
+
+.rollie_user_info
+{
+padding-right: 15px;
+padding-left: 15px;	
+margin: 0px;
+padding-bottom: 1rem;
+padding-top: 1rem;
+border-top-style:solid ;
+border-left-style:solid;  
+border-right-style:solid; 
+}
+.rollie_my_acc_nav_side > a
+{
+	text-align:left;
+	display: block;
+line-height:2rem;	
+	width: 100%;
+}
+.rollie_my_acc_nav_side
+{
+	padding: 0.5rem;
+border-style: solid;
+border-width: 1px;
+	border-left-width:2px;
+		border-right-width:2px;
+	width: 100%
+
+}
+
+.rollie_my_acc_nav_side_c > nav > ul :first-child 
+{
+	border-top-width:2px;
+}
+.rollie_my_acc_nav_side_c > nav > ul :last-child 
+{
+	border-bottom-width:2px;
+	clear: both
+}
+
+.rollie_my_acc_nav_side_c + .woocommerce-MyAccount-content
+{
+
+-ms-flex: 0 0 58.333333%;
+
+flex: 0 0 58.333333%;
+
+max-width: 58.333333%;
+position: relative;
+
+width: 100%;
+
+padding-right: 15px;
+
+padding-left: 15px;
+}
+.woocommerce
+{
+display: -ms-flexbox;
+
+display: flex;
+
+-ms-flex-wrap: wrap;
+
+flex-wrap: wrap;
+}
+
+
+
+
+@media screen and (min-width: 992px) /* AT BOOTSTRAP LG*/
+{
+		.rollie_my_acc_nav_side_c + .woocommerce-MyAccount-content
+	{
+	-ms-flex: 0 0 66.666667%;
+
+	flex: 0 0 66.666667%;
+
+	max-width: 66.666667%;
+	}
+	.rollie_my_acc_nav_big_tiles_c > .woocommerce-MyAccount-navigation /*  COL-LG-3*/
+	{
+		-ms-flex: 0 0 75%;
+		flex: 0 0 75%;
+		max-width: 75%;
+	}
+	.rollie_my_acc_nav_big_tiles_full  :before
+	{
+		font-size: 8vw !important;
+	
+	}
+}
+
+!!!!!!!inset 50px 0 15px -1px rgb(255, 255, 255) ,inset -50px 0 15px -1px rgb(255, 255, 255)
+
+	/*inset 0 19px 0px 0px rgba(0,0,0,0),inset 0 -9px 0px 0px rgba(0,0,0,0),inset 30px 0 15px -4px rgba(255, 255, 255, 1), inset -30px 0 15px -4px rgba(255, 255, 255, 1)
+Woo myaccout nav Avesome Icons 
+	*/
+.woocommerce-MyAccount-navigation-link--dashboard.rollie_my_acc_nav_big_tiles :before , .rollie_my_acc_nav_side.woocommerce-MyAccount-navigation-link--dashboard :after
+{
+	content: "\f0e4";
+}
+.woocommerce-MyAccount-navigation-link--orders.rollie_my_acc_nav_big_tiles :before, .rollie_my_acc_nav_side.woocommerce-MyAccount-navigation-link--orders :after
+{
+	content: "\f291";
+}
+.woocommerce-MyAccount-navigation-link--downloads.rollie_my_acc_nav_big_tiles :before, .rollie_my_acc_nav_side.woocommerce-MyAccount-navigation-link--downloads :after
+{	
+	
+	content: "\f56d";
+}
+.woocommerce-MyAccount-navigation-link--edit-address.rollie_my_acc_nav_big_tiles :before, .rollie_my_acc_nav_side.woocommerce-MyAccount-navigation-link--edit-address :after
+{	
+	
+	content: "\f2b9";
+}
+.woocommerce-MyAccount-navigation-link--edit-account.rollie_my_acc_nav_big_tiles :before, .rollie_my_acc_nav_side.woocommerce-MyAccount-navigation-link--edit-account :after
+{
+
+	content: "\f007";
+}
+.woocommerce-MyAccount-navigation-link--customer-logout.rollie_my_acc_nav_big_tiles :before, .rollie_my_acc_nav_side.woocommerce-MyAccount-navigation-link--customer-logout :after
+{	
+  content: "\f2f5";
+ 
+}

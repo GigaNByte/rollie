@@ -1,0 +1,57 @@
+{
+    "key": "group_5bc1df4076a1e",
+    "title": "Categories swap menu",
+    "location": [
+        [
+            {
+                "param": "nav_menu",
+                "operator": "==",
+                "value": "location\/rollie_cat_swap_menu"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1550599418,
+    "fields": [
+        {
+            "key": "field_5bd58e16d47a6",
+            "label": "Display swipe  categories  menu on specific page type",
+            "name": "rollie_swap_cat_on_page_type",
+            "type": "checkbox",
+            "instructions": "Choose what page types will display swipe categories menu",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "single_post": "Single posts",
+                "single_page": "Single pages",
+                "home_page": "Home page",
+                "multiple_posts": "Blog pages"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        }
+    ]
+}
