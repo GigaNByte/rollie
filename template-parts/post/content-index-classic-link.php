@@ -35,7 +35,7 @@ if ( empty( $rollie_post_link ) ) {
 			}
 
 			?>
-					<div class=" <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['second_div_col']; ?> rollie_first_post_title_c rollie_post_thumbnail_height_m_c m-0 p-0" >
+					<div class=" <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['second_div_col']; ?> rollie_first_post_title_c rollie_post_classic_title_bg_color rollie_post_thumbnail_height_m_c m-0 p-0" >
 						<div class=" p-1 rollie_d_contents_ch" >
 										
 						<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>

@@ -1,3 +1,4 @@
+
 function rgb2hex(rgb){
 	rgb = rgb.match( /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i );
 	return (rgb && rgb.length === 4) ? "#" +
@@ -18,14 +19,7 @@ function hexToRgbA(hex,a){
 	throw new Error( 'Bad Hex' );
 }
 
-function rollie_impresive_opacity_on_titles()
-{
-	jQuery(
-		function($){
-	var dsa = $('.rollie_title_container').css( "height" );
 
-	});
-}
 function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 {
 	jQuery(
@@ -250,13 +244,17 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 
 
 jQuery(
+
+
+
+
 	function($){
 		if( $('.rollie_parent_title').hasClass('rollie_below_js')){
 		$('.rollie_parent_title').insertAfter($('.rollie_parent_title').next());
 
 		}
 		
-		rollie_impresive_opacity_on_titles();
+
 		
 
  $( ".rollie_search_input" ).on(

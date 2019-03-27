@@ -18,7 +18,7 @@
  ?>
 
 	<div class="m-auto">
-		<div class="container-fluid rollie_title_container">
+		<div class="container-fluid rollie_title_container rollie_title_bg_color">
 			<div class="titles">
 
 			<?php
@@ -61,7 +61,7 @@
 		</div>
 
 
-	  <article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align rollie_main_color ">
+	  <article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align  rollie_main_color">
 	  
 		<?php
 				require locate_template('/template-parts/special/content-singlemeta.php');

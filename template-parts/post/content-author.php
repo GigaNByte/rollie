@@ -1,6 +1,6 @@
 <?php $rollie_author = get_user_by( 'slug', get_query_var( 'author_name' ) ); ?>
 
-		<header class="container-fluid rollie_title_container">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 
 					<div class="row m-0  ">
 						<div class="col-4 col-md-2 ">
@@ -25,7 +25,7 @@
 		</header>
 
 
-	  <div class="rollie_text_content_align rollie_main_color ">
+	  <div class="rollie_text_content_align  rollie_main_color">
 	  
 			
 		 <div class=" row m-0">

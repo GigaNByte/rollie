@@ -12,7 +12,7 @@ if ( ! $rollie_format_icon ) {
 					
 		
 				
-					<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0  rollie_posts_shadow rollie_first_post_title_c_raw  <?php echo 'rollie_main_color'; ?> ">
+					<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0  rollie_posts_shadow rollie_first_post_title_c_raw   ">
 						<?php
 						if ( get_theme_mod( 'rollie_display_format_icon_aside' ) ) {
 							?>
@@ -34,9 +34,9 @@ if ( ! $rollie_format_icon ) {
 						if ( ! empty( get_the_content() ) ) {
 							?>
 						
-									<div class="rollie_main_color rollie_min_h_modern w-100 ">	
+									<div class=" rollie_min_h_modern w-100 ">	
 					
-										<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  rollie_main_color <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>">
+										<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>">
 									   <?php
 
 

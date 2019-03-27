@@ -25,7 +25,7 @@ if ( ! has_post_thumbnail( get_the_ID() ) ) {
 					<div class="rollie_icon_first  rollie_icon_quote_custom_colors  p-1">	<i class=" fas fa-2x   <?php echo $rollie_format_icon; ?>"></i> </div>	
 			<?php	} ?>		
 		
-			<div class=" col-lg-8 col-12 col-md-10 rollie_first_post_title_c rollie_post_thumbnail_height_m_c m-0 p-0" >
+			<div class=" col-lg-8 col-12 col-md-10 rollie_first_post_title_c rollie_post_classic_title_bg_color rollie_post_thumbnail_height_m_c m-0 p-0" >
 						<div class=" p-1 " >
 										
 						<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>

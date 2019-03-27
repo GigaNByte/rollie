@@ -23,7 +23,12 @@ function rollie_style_start() {
 
 
 
-
+add_action( 'customize_preview_init', 'rollie_customize_script' );
+ 
+/* Customizer: Enqueue Script */
+function rollie_customize_script(){
+    wp_enqueue_script( 'rollie_customizer_preview', get_template_directory_uri() . '/js/rollie_customizer_preview.js', array( 'jquery', 'customize-preview' ), date("h:i:s"), true );
+}
 
 
 add_action( 'wp_enqueue_scripts', 'rollie_style_start' );

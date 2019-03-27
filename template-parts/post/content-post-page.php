@@ -2,7 +2,7 @@
 	<?php
 	$page_for_posts_id = get_option( 'page_for_posts' );
 	if ( $page_for_posts_id ) { ?>
-		<header class="container-fluid rollie_title_container">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 		
 		
 		<?php
@@ -85,10 +85,10 @@
 		</header>
 
 	<?php } else {?>
-			<header class="container-fluid rollie_title_container">
+			<header class="container-fluid rollie_title_container rollie_title_bg_color">
 			</header>
 	<?php }?>
-	  <div class="rollie_text_content_align rollie_main_color ">
+	  <div class="rollie_text_content_align  rollie_main_color ">
 		 <div class=" row m-0">
 		<?php
 

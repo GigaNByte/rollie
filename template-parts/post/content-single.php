@@ -3,7 +3,7 @@
 <main id="<?php echo 'page-' . get_the_ID(); ?>">
 
 			
-		<div class="container-fluid rollie_title_container">
+		<div class="container-fluid rollie_title_container rollie_title_bg_color">
 		<?php
 		
 		get_template_part( 'template-parts/special/content', 'swap_cat' );
@@ -67,7 +67,7 @@
 		</div>
 
 
-	  <article  id="<?php echo 'post-content-' . get_the_ID(); ?> " class="rollie_text_content_align rollie_main_color ">
+	  <article  id="<?php echo 'post-content-' . get_the_ID(); ?> " class="rollie_text_content_align  rollie_main_color ">
 	  
 
 	

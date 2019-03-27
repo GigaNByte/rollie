@@ -214,7 +214,7 @@ background-repeat:no-repeat;
 {
 z-index:1000;
 white-space:normal;
-background-color: rgba(21, 21, 21, 0.3);
+
 padding-top:0px;
 padding-bottom:0px;
 
@@ -1215,10 +1215,11 @@ font-family:'Rokkitt';
 	box-shadow: 0px 0px 8px 1px #a37e2c;
 	border-color:#a37e2c;
 }
-	.rollie_posts_shadow
+	/*.rollie_posts_shadow
 				{
 						box-shadow: 0px 0px 8px 1px #a37e2c;
 				}
+	*/
 						.rollie_d_root
 						{
 							display: flow-root;
@@ -1668,17 +1669,9 @@ border-bottom-right-radius: 0px !important ;
 		min-width: initial;
 	}
 
-	/*
-	.rollie_top_navbar_b_color_h
-	{
-		background:rgba(255,255,255,0.8);
-	}
-*/
 
-.rollie_navbar_color
-{
-			background:rgba(255,255,255,0.8);
-}
+
+
 .rollie_overlay
 {
 		 transition:  all .30s linear;

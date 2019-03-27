@@ -1,7 +1,7 @@
 	
 	
 
-		<header class="container-fluid rollie_title_container">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 
 					<div class="row m-0  ">
 						<div class=" offset-1 col-5   rollie_f_headings rollie_f_headings_h2 rollie_title_text_color rollie_flex_text_center">
@@ -22,7 +22,7 @@
 		</header>
 
 
-	  <div class="rollie_text_content_align rollie_main_color ">
+	  <div class="rollie_text_content_align  rollie_main_color ">
 		 <div class=" row m-0">
 		<?php
 

@@ -8,78 +8,132 @@ function rollie_customizer_css ()
 	
 				//Theme color section
 	
-	$rollie_main_color = get_theme_mod("rollie_main_theme_color_css","#ffffff");
-	$rollie_darker_main_color = get_theme_mod("rollie_darker_main_theme_text_color_css","#e3e6e8");
-	$rollie_second_color = get_theme_mod("rollie_second_theme_color_css","#212121");
-	$rollie_third_color = get_theme_mod("rollie_third_theme_color_css","#a37e2c");
-	$rollie_posts_shadow = get_theme_mod("rollie_posts_shadow_css","#a37e2c");
-	
-	$rollie_icon_link_color = get_theme_mod("rollie_icon_link_color_css","#212121");
-	$rollie_icon_link_color_h = get_theme_mod("rollie_icon_link_color_h_css","#ffffff");
-	$rollie_icon_link_shadow = get_theme_mod("rollie_icon_link_shadow_css","#a37e2c");
-	
-	$rollie_icon_aside_color = get_theme_mod("rollie_icon_aside_color_css","#212121");
-	$rollie_icon_aside_color_h = get_theme_mod("rollie_icon_aside_color_h_css","#ffffff");
-	$rollie_icon_aside_shadow = get_theme_mod("rollie_icon_aside_shadow_css","#a37e2c");
-	
-	$rollie_icon_quote_color = get_theme_mod("rollie_icon_quote_color_css","#212121");
-	$rollie_icon_quote_color_h = get_theme_mod("rollie_icon_quote_color_h_css","#ffffff");
-	$rollie_icon_quote_shadow = get_theme_mod("rollie_icon_quote_shadow_css","#a37e2c");
-	
-	$rollie_icon_audio_color = get_theme_mod("rollie_icon_audio_color_css","#212121");
-	$rollie_icon_audio_color_h = get_theme_mod("rollie_icon_audio_color_h_css","#ffffff");
-	$rollie_icon_audio_shadow = get_theme_mod("rollie_icon_audio_shadow_css","#a37e2c");
-	
-	$rollie_icon_video_color = get_theme_mod("rollie_icon_video_color_css","#212121");
-	$rollie_icon_video_color_h = get_theme_mod("rollie_icon_video_color_h_css","#ffffff");
-	$rollie_icon_video_shadow = get_theme_mod("rollie_icon_video_shadow_css","#a37e2c");
-	
-	$rollie_icon_status_color = get_theme_mod("rollie_icon_status_color_css","#212121");
-	$rollie_icon_status_color_h = get_theme_mod("rollie_icon_status_color_h_css","#ffffff");
-	$rollie_icon_status_shadow = get_theme_mod("rollie_icon_status_shadow_css","#a37e2c");
-	
-	$rollie_icon_gallery_color = get_theme_mod("rollie_icon_gallery_color_css","#212121");
-	$rollie_icon_gallery_color_h = get_theme_mod("rollie_icon_gallery_color_h_css","#ffffff");
-	$rollie_icon_gallery_shadow = get_theme_mod("rollie_icon_gallery_shadow_css","#a37e2c");
-	
-	$rollie_search_form_shadow_backg = get_theme_mod("rollie_search_form_shadow_backg_css","#a37e2c");
 
-	$rollie_search_form_color_backg = get_theme_mod("rollie_search_form_color_backg_css","#ffffff");
+ //wp_add_inline_style( 'rollie_customizer_css', $data ); 
+
+
+
+class Rollie_Gradient {
+    // constructor
+
+    public function __construct($theme_mod, $standard_color, $css_selector,$css_property,$css_before_value='' ) {
+        $this->theme_mod = $theme_mod;
+        $this->standard_color = $standard_color;
+        $this->css_selector = $css_selector;
+        $this->css_property = $css_property;
+        if ($css_before_value) {
+        		$this->css_before_value = $css_before_value;
+        }
+	else{
+	$this->css_before_value =''	;
+		}
+
+ 		$this->rgb_gr_1 = $this->ToRgb( get_theme_mod($theme_mod.'_gr_1'));
+
+      	$this->rgb_gr_2 = $this->ToRgb( get_theme_mod($theme_mod.'_gr_2'));
+        $this->rgb_gr_3 = $this->ToRgb( get_theme_mod($theme_mod.'_gr_3'));
+    }
+private function ToRgb ($color) {
+
+	if ($color[0] && $color[0] !='#')
+	{
+$color=(preg_split('/rgba?\(\s*|\s*,\s*|\s*\)/', $color, -1, PREG_SPLIT_NO_EMPTY));
+ return '#'.dechex($color[0]).dechex($color[1]).dechex($color[2]);
+}
+else
+{
+
+	return $color;
+}
+
+}
+
+
+    public function css_snippet() {
+
+if (get_theme_mod( $this->theme_mod.'_gs') == 2) { //means gradient active
+       return $this->css_selector.' { '. $this->css_property.":  linear-gradient( " . get_theme_mod($this->theme_mod.'_angle_gr',0) . "deg, " . get_theme_mod( $this->theme_mod.'_gr_1',$this->standard_color) . " " .       get_theme_mod( $this->theme_mod.'_stop_gr_1',100) . "% , " . get_theme_mod( $this->theme_mod.'_gr_2',$this->standard_color) . " " . get_theme_mod( $this->theme_mod.'_stop_gr_2',0) . "% , " . get_theme_mod( $this->theme_mod.'_gr_3',$this->standard_color) . " " . get_theme_mod( $this->theme_mod.'_stop_gr_3',0) . "% ); } ";
+    }
+    else
+    {
+   return   $this->css_selector.' { '.$this->css_property.': '.$this->css_before_value.' '.get_theme_mod($this->theme_mod,$this->standard_color)."; } ";
+    }
+
+}
+}
+
+
+
+
+
+
+
 	
-	$rollie_search_form_color = get_theme_mod("rollie_search_form_color_css","#212121");
-	$rollie_search_form_color_h = get_theme_mod("rollie_search_form_color_h_css","#ffffff");
-	$rollie_search_form_shadow = get_theme_mod("rollie_search_form_shadow_css","#a37e2c");
+	$rollie_icon_link_color = get_theme_mod("rollie_icon_link_color","#212121");
+	$rollie_icon_link_color_h = get_theme_mod("rollie_icon_link_color_h","#ffffff");
+	$rollie_icon_link_shadow = get_theme_mod("rollie_icon_link_shadow","#a37e2c");
 	
-	$rollie_comment_s_s_color = get_theme_mod("rollie_comment_s_s_color_css","#212121");
-	$rollie_comment_f_s_color = get_theme_mod("rollie_comment_f_s_color_css","#212121");
+	$rollie_icon_aside_color = get_theme_mod("rollie_icon_aside_color","#212121");
+	$rollie_icon_aside_color_h = get_theme_mod("rollie_icon_aside_color_h","#ffffff");
+	$rollie_icon_aside_shadow = get_theme_mod("rollie_icon_aside_shadow","#a37e2c");
 	
-	$rollie_icon_comment_shadow = get_theme_mod("rollie_icon_comment_shadow_css","#ffffff");
-	$rollie_icon_comment_color_h = get_theme_mod("rollie_icon_comment_color_h_css","#212121");
-	$rollie_icon_comment_color = get_theme_mod("rollie_icon_comment_color_css","#818181");
+	$rollie_icon_quote_color = get_theme_mod("rollie_icon_quote_color","#212121");
+	$rollie_icon_quote_color_h = get_theme_mod("rollie_icon_quote_color_h","#ffffff");
+	$rollie_icon_quote_shadow = get_theme_mod("rollie_icon_quote_shadow","#a37e2c");
+	
+	$rollie_icon_audio_color = get_theme_mod("rollie_icon_audio_color","#212121");
+	$rollie_icon_audio_color_h = get_theme_mod("rollie_icon_audio_color_h","#ffffff");
+	$rollie_icon_audio_shadow = get_theme_mod("rollie_icon_audio_shadow","#a37e2c");
+	
+	$rollie_icon_video_color = get_theme_mod("rollie_icon_video_color","#212121");
+	$rollie_icon_video_color_h = get_theme_mod("rollie_icon_video_color_h","#ffffff");
+	$rollie_icon_video_shadow = get_theme_mod("rollie_icon_video_shadow","#a37e2c");
+	
+	$rollie_icon_status_color = get_theme_mod("rollie_icon_status_color","#212121");
+	$rollie_icon_status_color_h = get_theme_mod("rollie_icon_status_color_h","#ffffff");
+	$rollie_icon_status_shadow = get_theme_mod("rollie_icon_status_shadow","#a37e2c");
+	
+	$rollie_icon_gallery_color = get_theme_mod("rollie_icon_gallery_color","#212121");
+	$rollie_icon_gallery_color_h = get_theme_mod("rollie_icon_gallery_color_h","#ffffff");
+	$rollie_icon_gallery_shadow = get_theme_mod("rollie_icon_gallery_shadow","#a37e2c");
+	
+	$rollie_search_form_shadow_backg = get_theme_mod("rollie_search_form_shadow_backg","#a37e2c");
+
+	$rollie_search_form_color_backg = get_theme_mod("rollie_search_form_color_backg","#ffffff");
+	
+	$rollie_search_form_color = get_theme_mod("rollie_search_form_color","#212121");
+	$rollie_search_form_color_h = get_theme_mod("rollie_search_form_color_h","#ffffff");
+	$rollie_search_form_shadow = get_theme_mod("rollie_search_form_shadow","#a37e2c");
+	
+	$rollie_comment_s_s_color = get_theme_mod("rollie_comment_s_s_color","#212121");
+	$rollie_comment_f_s_color = get_theme_mod("rollie_comment_f_s_color","#212121");
+	
+	$rollie_icon_comment_shadow = get_theme_mod("rollie_icon_comment_shadow","#ffffff");
+	$rollie_icon_comment_color_h = get_theme_mod("rollie_icon_comment_color_h","#212121");
+	$rollie_icon_comment_color = get_theme_mod("rollie_icon_comment_color","#818181");
 	
 
 	
 	
-	$rollie_button_color = get_theme_mod("rollie_button_color_css","#ffffff");
-	$rollie_button_shadow = get_theme_mod("rollie_button_shadow_css","#a37e2c");
-	$rollie_button_color_h = get_theme_mod("rollie_button_color_h_css","#a37e2c");
-	$rollie_button_b_color = get_theme_mod("rollie_button_b_color_css","#212121");
-	$rollie_button_b_color_h = get_theme_mod("rollie_button_b_color_h_css","#ffffff");
+	$rollie_button_color = get_theme_mod("rollie_button_color","#ffffff");
+	$rollie_button_shadow = get_theme_mod("rollie_button_shadow","#a37e2c");
+	$rollie_button_color_h = get_theme_mod("rollie_button_color_h","#a37e2c");
+
 	
 	
 	
-	$rollie_icon_color_first = get_theme_mod("rollie_icon_color_first_css","#212121");
-	$rollie_icon_color_first_h = get_theme_mod("rollie_icon_color_first_h_css","#ffffff");
-	$rollie_icon_color_first_shadow = get_theme_mod("rollie_icon_color_first_shadow_css","#a37e2c");
-	$rollie_icon_color_second = get_theme_mod("rollie_icon_color_second_css","#212121");
-	$rollie_icon_color_second_h = get_theme_mod("rollie_icon_color_second_h_css","#ffffff");
-	$rollie_icon_color_second_shadow = get_theme_mod("rollie_icon_color_second_shadow_css","#a37e2c");
+	$rollie_icon_color_first = get_theme_mod("rollie_icon_color_first","#212121");
+	$rollie_icon_color_first_h = get_theme_mod("rollie_icon_color_first_h","#ffffff");
+	$rollie_icon_color_first_shadow = get_theme_mod("rollie_icon_color_first_shadow","#a37e2c");
+	$rollie_icon_color_second = get_theme_mod("rollie_icon_color_second","#212121");
+	$rollie_icon_color_second_h = get_theme_mod("rollie_icon_color_second_h","#ffffff");
+	$rollie_icon_color_second_shadow = get_theme_mod("rollie_icon_color_second_shadow","#a37e2c");
 	
 	
 	
 	$rollie_sidebar_background = get_theme_mod("rollie_sidebar_background","#ffffff") ;
 	$rollie_widget_background = get_theme_mod("rollie_widget_background","#ffffff") ;
-	$rollie_second_text_color = get_theme_mod('rollie_second_text_color_css','#ffffff');
+	$rollie_second_text_color = get_theme_mod('rollie_second_text_color','#ffffff');
 	$rollie_widget_title_text_color = get_theme_mod("rollie_widget_title_text_color","#212121") ;
 	
 	$rollie_widget_text_color = get_theme_mod("rollie_widget_text_color","#212121") ;
@@ -327,18 +381,18 @@ function rollie_customizer_css ()
 			list ( $rollie_search_form_color_backg_r , $rollie_search_form_color_backg_g , $rollie_search_form_color_backg_b ) = sscanf ($rollie_search_form_color_backg, "#%02x%02x%02x");			
 			
 			
-			list ( $rollie_main_color_r , $rollie_main_color_g , $rollie_main_color_b ) = sscanf ($rollie_main_color, "#%02x%02x%02x");
-			list ( $rollie_second_color_r , $rollie_second_color_g , $rollie_second_color_b ) = sscanf($rollie_second_color, "#%02x%02x%02x");
-			list ( $rollie_third_color_r , $rollie_third_color_g , $rollie_third_color_b ) = sscanf ($rollie_third_color , "#%02x%02x%02x");
+	
+			//list ( $rollie_second_color_r , $rollie_second_color_g , $rollie_second_color_b ) = sscanf($rollie_second_color, "#%02x%02x%02x");
+			//list ( $rollie_third_color_r , $rollie_third_color_g , $rollie_third_color_b ) = sscanf ($rollie_third_color , "#%02x%02x%02x");
 			
-			$rollie_main_theme_text_color =get_theme_mod("rollie_main_theme_text_color_css","#212529");
+			$rollie_main_theme_text_color =get_theme_mod("rollie_main_theme_text_color","#212529");
 			
-			$rollie_title_text_color   = get_theme_mod("rollie_title_text_color_css", '#212121' ) ;
-			$rollie_fourth_text_color = get_theme_mod("rollie_fourth_text_color_css","#228050");
+			$rollie_title_text_color   = get_theme_mod("rollie_title_text_color", '#212121' ) ;
+			$rollie_fourth_text_color = get_theme_mod("rollie_fourth_text_color","#228050");
 			
-			$rollie_subtitle_text_color = get_theme_mod("rollie_subtitle_text_color_css","#818181");
+			$rollie_subtitle_text_color = get_theme_mod("rollie_subtitle_text_color","#818181");
 			
-			$rollie_category_title_text_color = get_theme_mod("rollie_category_title_text_color_css","#a37e2c");
+			$rollie_category_title_text_color = get_theme_mod("rollie_category_title_text_color","#a37e2c");
 			
 			
 		//Theme color section end
@@ -347,56 +401,98 @@ function rollie_customizer_css ()
 
 			
 			
-			$rollie_navbar_color=get_theme_mod("rollie_navbar_color_css","#ffffff");	
-			list ( $rollie_navbar_color_r ,$rollie_navbar_color_g , $rollie_navbar_color_b ) = sscanf($rollie_navbar_color, "#%02x%02x%02x");
-			$rollie_navbar_text_color=get_theme_mod("rollie_navbar_text_color_css","#212121");
-			$rollie_navbar_hover_text_color=get_theme_mod("rollie_navbar_text_hover_color_css","#212121");
-			$rollie_navbar_chevron =get_theme_mod("rollie_navbar_chevron_css","#212121");
-			$rollie_navbar_hover_chevron =get_theme_mod("rollie_navbar_hover_chevron_css","#a37e2c");
 			
+			$rollie_navbar_text_color=get_theme_mod("rollie_navbar_text_color","#212121");
+			$rollie_navbar_hover_text_color=get_theme_mod("rollie_navbar_text_hover_color","#212121");
+			$rollie_navbar_chevron =get_theme_mod("rollie_navbar_chevron","#212121");
+			$rollie_navbar_hover_chevron =get_theme_mod("rollie_navbar_hover_chevron","#a37e2c");
 			
+		
 			?>
 			
 			
 			<style type="text/css">
-			.body
+juhuski
+
+
+
+<?php 
+	$rollie_main_theme_color = new Rollie_Gradient ("rollie_main_theme_color", "#ffffff",'.rollie_main_color','background');
+echo $rollie_main_theme_color->css_snippet();
+	$rollie_second_theme_color = new Rollie_Gradient ("rollie_second_theme_color", "#212121",'.rollie_second_color','background');
+echo $rollie_second_theme_color->css_snippet();
+		list ( $rollie_second_color_r , $rollie_second_color_g , $rollie_second_color_b ) = sscanf ( $rollie_second_theme_color->rgb_gr_1, "#%02x%02x%02x");
+			$rollie_third_theme_color = new Rollie_Gradient ("rollie_third_theme_color", "#a37e2c",'.rollie_third_color,.rollie_fancy_line','background');
+echo $rollie_third_theme_color->css_snippet();
+		list ( $rollie_third_color_r , $rollie_third_color_g , $rollie_third_color_b ) = sscanf ( $rollie_third_theme_color->rgb_gr_1, "#%02x%02x%02x");
+		$rollie_third_color =   $rollie_third_theme_color->rgb_gr_1;
+			$rollie_darker_main_theme_color = new Rollie_Gradient ("rollie_darker_main_theme_color", "#e3e6e8",'.rollie_darker_main_color','background');
+		echo $rollie_darker_main_theme_color->css_snippet();
+			$rollie_sidebar_theme_color = new Rollie_Gradient ("rollie_sidebar_theme_color", "#e3e6e8",'.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right','background');
+					echo $rollie_sidebar_theme_color->css_snippet();
+		list ( $rollie_sidebar_theme_color_r , $rollie_sidebar_theme_color_g , $rollie_sidebar_theme_color_b ) = sscanf ( $rollie_sidebar_theme_color->rgb_gr_1, "#%02x%02x%02x");
+
+
+			$rollie_title_bg_theme_color= new Rollie_Gradient ("rollie_title_bg_theme_color", "#e3e6e8",'.rollie_title_bg_color','background');
+					echo $rollie_title_bg_theme_color->css_snippet();
+
+			$rollie_post_classic_title_bg= new Rollie_Gradient ("rollie_post_classic_title_bg_theme_color", "#ffffff",'.rollie_post_classic_title_bg_color','background');
+					echo $rollie_post_classic_title_bg->css_snippet();
+
+			$rollie_post_modern_title_bg= new Rollie_Gradient ("rollie_post_modern_title_bg_theme_color", "#ffffff",'.rollie_post_modern_title_bg_color','background');
+					echo $rollie_post_modern_title_bg->css_snippet();
+
+	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', 'background');
+						echo $rollie_navbar_color->css_snippet();
+		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button', 'background');
+						echo $rollie_button_b->css_snippet();		
+	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,'.rollie_button:hover', 'background');
+						echo $rollie_button_b_h->css_snippet();			
+
+?>
+		
+.rollie_posts_shadow
+{
+	box-shadow: 0px 0px 8px 1px	<?php echo get_theme_mod('rollie_shadow_theme_color','#e3e6e8')?>
+}
+	.rollie_child_pages_thumbnail_img:hover
+				{
+					
+					background-color: rgba(<?php echo  $rollie_second_color_r .',' .  $rollie_second_color_g . ',' . $rollie_second_color_b;?>, 0.8);
+					
+				}
+			
+				.swiper-pagination-bullet-active
 			{
-				background :<?php echo $rollie_main_color ?>; 
-				
+				background:	<?php echo $rollie_third_color ?>!important ;
 			}
 			
-			.rollie_darker_main_color
+			.rollie_pagination *
 			{
-				background :<?php echo $rollie_darker_main_color ?>; 
+				border-color:<?php echo $rollie_darker_main_theme_color->rgb_gr_1 ?>;
+		
+				color: <?php echo $rollie_main_theme_text_color ?> ;
 			}
+			.rollie_pagination_active * 
+			{
+				color: <?php echo $rollie_third_color ?> ; 		
+			}
+			/* important because overwriting bootstrap classes */
+			
+			.rollie_pagination_link:hover
+			{
+				color: <?php echo $rollie_third_color ?> ; 
+			
+				background :<?php echo $rollie_darker_main_theme_color->rgb_gr_1 ?>;	
+			}
+	
+		
+	
+		
+
+	
 			
 		
-			.rollie_main_color
-			{
-				
-				background :<?php echo $rollie_main_color ?>; 
-
-			}
-			.rollie_second_color
-			{
-				background: <?php echo $rollie_second_color ?> !important ;
-			}
-			
-			.rollie_title_container
-			{
-				
-				background : linear-gradient(to bottom, rgba(<?php echo  $rollie_main_color_r .',' .  $rollie_main_color_g . ',' . $rollie_main_color_b;?>, 0.8), rgba(<?php echo  $rollie_main_color_r ."," .  $rollie_main_color_g . "," .  $rollie_main_color_b;?>, 0.83) 50%,  rgba(<?php echo  $rollie_main_color_r ."," .  $rollie_main_color_g . "," .  $rollie_main_color_b;?>, 1)) !important;
-			}
-			.rollie_first_post_title_c
-			{
-				linear-gradient(135deg, rgba(255,255,255,0.8) 25%, rgba(255,255,255,1) 100%);
-				background : linear-gradient(135deg, rgba(<?php echo  $rollie_main_color_r .',' .  $rollie_main_color_g . ',' . $rollie_main_color_b;?>, 0.8) 25%, rgba(<?php echo  $rollie_main_color_r ."," .  $rollie_main_color_g . "," .  $rollie_main_color_b;?> , 1) 100% ) !important;
-			}
-			
-			.rollie_modern_gradient
-			{
-				background : linear-gradient(to bottom, rgba(<?php echo  $rollie_main_color_r .',' .  $rollie_main_color_g . ',' . $rollie_main_color_b;?>, 0.6), rgba(<?php echo  $rollie_main_color_r ."," .  $rollie_main_color_g . "," .  $rollie_main_color_b;?>, 0.73) 50%,  rgba(<?php echo  $rollie_main_color_r ."," .  $rollie_main_color_g . "," .  $rollie_main_color_b;?>, 1)) !important;
-			}
 			
 			.rollie_second_text_color
 			{
@@ -420,11 +516,12 @@ function rollie_customizer_css ()
 		
 <?php	}?>
 			
-			.rollie_posts_shadow
-			{
-				box-shadow: 0px 0px 8px 1px <?php echo	$rollie_posts_shadow   ?>;
-			}
-			
+
+
+
+
+
+
 			
 		
 			
@@ -456,14 +553,7 @@ function rollie_customizer_css ()
 				color: <?php echo	$rollie_subtitle_text_color  ?> ;
 				
 			}
-			
-			
-			.rollie_sidebar_bottom
-			{
-				background :<?php echo	$rollie_main_color  ?>;
-			}
-			
-			
+		
 			
 			
 			.rollie_icon_first,.cld-common-wrap,.fas,   .far  , .fal,  .fab
@@ -566,7 +656,7 @@ function rollie_customizer_css ()
 						border-radius: 0rem;
 					<?php	}	?>
 					
-					background: <?php echo 	$rollie_button_b_color ?>  !important;
+
 					
 				}
 				.rollie_button:hover,.rollie_button:active
@@ -574,16 +664,11 @@ function rollie_customizer_css ()
 					
 					
 					color: <?php echo $rollie_button_color_h ?>  ;
-					background: <?php echo 	$rollie_button_b_color_h ?>;
+
 				}
 				
 				
-				.rollie_child_pages_thumbnail_img:hover
-				{
-					
-					background-color: rgba(<?php echo  $rollie_second_color_r .',' .  $rollie_second_color_g . ',' . $rollie_second_color_b;?>, 0.8);
-					
-				}
+			
 				
 				
 				.rollie_nav_link,.rollie_dropdown_item
@@ -591,11 +676,7 @@ function rollie_customizer_css ()
 					color: <?php echo	$rollie_navbar_text_color   ?>;
 				}
 				
-				.rollie_navbar_color,.rollie_navbar_color_js
-				{
-					background: rgba(<?php echo $rollie_navbar_color_r .',' .  $rollie_navbar_color_g . ',' . $rollie_navbar_color_b;?>, 0.8);
-					
-				}
+			
 				
 				.rollie_nav_link:hover,.rollie_dropdown_item:hover
 				{
@@ -625,29 +706,7 @@ function rollie_customizer_css ()
 				{
 					height: <?php echo	get_theme_mod("rollie_footer_logo_h",100)."px" ?>;
 				}
-				.rollie_fancy_line
-			{
-				
-				background : linear-gradient(to right, rgba(<?php echo  $rollie_third_color_r .',' .  $rollie_third_color_g . ',' . $rollie_third_color_b;?>, 0) ,rgba(<?php echo  $rollie_third_color_r ."," .  $rollie_third_color_g . "," .  $rollie_third_color_b;?>, 1)  35%,  rgba(<?php echo  $rollie_third_color_r ."," .  $rollie_third_color_g . "," .  $rollie_third_color_b;?>, 0))!important;
-			}
-			
-			
-			.rollie_pagination *
-			{
-				border-color:	<?php echo $rollie_third_color ?> !important; 
-				color: <?php echo $rollie_main_theme_text_color ?> ;
-			}
-			.rollie_pagination_active * 
-			{
-				color: <?php echo $rollie_third_color ?> ; 		
-			}
-			/* important because overwriting bootstrap classes */
-			
-			.rollie_pagination_link:hover
-			{
-				color: <?php echo $rollie_third_color ?> ; 
-				background : <?php echo $rollie_darker_main_color ?> ; 				
-			}
+
 			
 			
 			
@@ -816,18 +875,12 @@ function rollie_customizer_css ()
 			
 			.swiper-pagination-bullet
 			{
-				background:	<?php echo $rollie_darker_main_color   ?>;
+
+				background:	<?php echo $rollie_darker_main_theme_color->rgb_gr_1 ?>;
 			}
-			.swiper-pagination-bullet-active
-			{
-				background:	<?php echo $rollie_third_color ?>!important ;
-			}
+		
 			
 			
-			.rollie_sidebar_left , .rollie_sidebar_right
-			{
-				background:	<?php echo $rollie_sidebar_background ?>;
-			}
 			
 			.rollie_sidebar_left  .widget-title ,.rollie_sidebar_right  .widget-title
 			{
@@ -863,7 +916,7 @@ function rollie_customizer_css ()
 				}
 				
 				
-				function rollie_add_css_font ($font_obj,$font_array,$font_str,$font_class_a)
+				function rollie_add_font ($font_obj,$font_array,$font_str,$font_class_a)
 				{
 					
 
@@ -1170,19 +1223,19 @@ function rollie_customizer_css ()
 			
 		}			
 		
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_headings_obj,$rollie_font_headings,'rollie_font_headings',array('.rollie_f_headings' ,'h1 ' ,'h2'));	
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_navbar_obj,$rollie_font_navbar,'rollie_font_navbar',array('.rollie_f_navbar'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_subtitles_obj,$rollie_font_subtitles,'rollie_font_subtitles',array('.rollie_f_subtitles','h3','h4'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_excerpt_obj,$rollie_font_excerpt,'rollie_font_excerpt',array('.rollie_f_excerpt'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_pp_content_obj,$rollie_font_pp_content,'rollie_font_pp_content',array('.rollie_f_pp_content','.rollie_font_first','body'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_website_s_obj,$rollie_font_website_s,'rollie_font_website_s',array('.rollie_f_website_s'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_b_f_obj,$rollie_font_b_f,'rollie_font_b_f',array('.rollie_f_b_f'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_comment_obj,$rollie_font_comment,'rollie_font_comment',array('.rollie_f_comment'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_widget_obj,$rollie_font_widget,'rollie_font_widget',array('.rollie_f_widget'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_footer_sub_obj ,$rollie_font_footer_sub ,'rollie_font_footer_sub',array('.rollie_f_footer_sub'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_footer_obj,$rollie_font_footer,'rollie_font_footer',array('.rollie_f_footer'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_metainfo_obj,$rollie_font_metainfo,'rollie_font_metainfo',array('.rollie_f_meta'));
-		$rollie_google_s [] = rollie_add_css_font($rollie_font_excerpt_s_obj,$rollie_font_excerpt_s,'rollie_font_excerpt_s',array('.rollie_f_excerpt_s'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_headings_obj,$rollie_font_headings,'rollie_font_headings',array('.rollie_f_headings' ,'h1 ' ,'h2'));	
+		$rollie_google_s [] = rollie_add_font($rollie_font_navbar_obj,$rollie_font_navbar,'rollie_font_navbar',array('.rollie_f_navbar'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_subtitles_obj,$rollie_font_subtitles,'rollie_font_subtitles',array('.rollie_f_subtitles','h3','h4'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_excerpt_obj,$rollie_font_excerpt,'rollie_font_excerpt',array('.rollie_f_excerpt'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_pp_content_obj,$rollie_font_pp_content,'rollie_font_pp_content',array('.rollie_f_pp_content','.rollie_font_first','body'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_website_s_obj,$rollie_font_website_s,'rollie_font_website_s',array('.rollie_f_website_s'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_b_f_obj,$rollie_font_b_f,'rollie_font_b_f',array('.rollie_f_b_f'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_comment_obj,$rollie_font_comment,'rollie_font_comment',array('.rollie_f_comment'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_widget_obj,$rollie_font_widget,'rollie_font_widget',array('.rollie_f_widget'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_footer_sub_obj ,$rollie_font_footer_sub ,'rollie_font_footer_sub',array('.rollie_f_footer_sub'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_footer_obj,$rollie_font_footer,'rollie_font_footer',array('.rollie_f_footer'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_metainfo_obj,$rollie_font_metainfo,'rollie_font_metainfo',array('.rollie_f_meta'));
+		$rollie_google_s [] = rollie_add_font($rollie_font_excerpt_s_obj,$rollie_font_excerpt_s,'rollie_font_excerpt_s',array('.rollie_f_excerpt_s'));
 
 
 		$rollie_google_s = array_values(array_filter($rollie_google_s));

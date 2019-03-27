@@ -21,7 +21,7 @@ if ( function_exists( 'icl_t' ) ) {
 ?>
 	
 
-		<header class="container-fluid rollie_title_container">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 
 					<div class="row m-0  ">
 
@@ -49,7 +49,7 @@ if ( function_exists( 'icl_t' ) ) {
 		</header>
 
 
-	  <div class="rollie_text_content_align rollie_main_color ">
+	  <div class="rollie_text_content_align  rollie_main_color">
 		 <div class=" row m-0">
 		<?php
 

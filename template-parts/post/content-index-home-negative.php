@@ -3,7 +3,7 @@
 	
 		
 	
-		<header class="container-fluid rollie_title_container">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 			
 
 			<?php
@@ -48,7 +48,7 @@
 		</header>
 
 
-	  <div class="rollie_text_content_align rollie_main_color ">
+	  <div class="rollie_text_content_align  rollie_main_colorrollie_main_color ">
 	  
 		<?php
 		if ( rollie_page_has_children() ) {

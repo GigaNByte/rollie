@@ -2,6 +2,20 @@ jQuery( document ).ready(function($) {
 	"use strict";
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function rollie_multiple_switch_underline()
 {
 		$('.rollie_multiple_switch > input').each(function(){
@@ -23,15 +37,18 @@ function rollie_multiple_switch_hide_show_controler(rollie_input_name)
 var rollie_mscc_id = '';
 
 $('.rollie_multiple_switch_row_js').find( 'input[name='+rollie_input_name+']').each(function(index){
+
+	 rollie_mscc_id = '';
 	 rollie_mscc_id = $(this).closest('.rollie_mscc_js').attr('rollie_mscc_attrs');
 
 	  if ($(this).is(":checked") ==  true) {
-
+ $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().attr('rollie_mscc_active','active');
 	   $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
   $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().last().addClass('rollie_multiple_switch_bb');
 	  } else {
+	  	 $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().attr('rollie_mscc_active','disactive');
  $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
-	console.log( $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().last());
+
 	  $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().last().removeClass('rollie_multiple_switch_bb');
 	  }
 
@@ -48,38 +65,56 @@ $(".rollie_multiple_switch > input").on("change", rollie_multiple_switch_underli
 var rollie_input_name = '';
 
 	$('.rollie_multiple_switch_row_js').each(function() {
-
+	
+rollie_input_name = '';
 		 rollie_input_name = $(this).find('input').attr('name');
+
+
 	rollie_multiple_switch_hide_show_controler(rollie_input_name); //on document ready
-	 $('input[name='+rollie_input_name+']' ).on("change",function(){//on change
+	 $(this).find('input').on("change",function(){//on change
+	 		 rollie_input_name = $(this).attr('name');
 	 	rollie_multiple_switch_hide_show_controler(rollie_input_name);
 	 });
 
 });
 
+
 }
 
-function rollie_collapse_label_toggle_controler (selector_name)
+function rollie_collapse_label_toggle_controler (selector_name,on_doc_ready)
 {
 var	value = $(selector_name).attr('rollie_collapse_elements');
 
-	$(selector_name).parent().nextAll().each(function( index ) {
 
+	$(selector_name).parent().nextAll().each(function( index ) {
+		var tr = true;
+if(!on_doc_ready)
+{
+
+
+	if (($(this).attr('rollie_mscc_active') == 'disactive'))
+	{
+	tr=false;
+	}
+
+}
 					 if (value  !== 'undefined'  && index <  value){
 					
-					 			
+					
 	
-			if( ! $( this ).hasClass('rollie_collapse_label_show_flag') ){	
-			$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js rollie_collapse_label_show_flag');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
-						$('.rollie_multiple_switch_row_js').each(function() {            
-	console.log(this);
-						var  rollie_input_name = $(this).find('input').attr('name');
-					rollie_multiple_switch_hide_show_controler(rollie_input_name);
-				});
+			if( ! $( this ).hasClass('rollie_collapse_label_show_flag')  )   {	
+
+	
+$(this).addClass('rollie_collapse_label_show_flag');
+if (tr)
+{
+			$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
+		}
+
 			}
 			else{
-				console.log(this);
 
+					
 		$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
 			}
 
@@ -90,18 +125,38 @@ var	value = $(selector_name).attr('rollie_collapse_elements');
 function rollie_collapse_label_toggle ()
 {	
 
+//on docuemtn ready
 
-rollie_collapse_label_toggle_controler('.rollie_collapse_label_toggle');//on docuemtn ready
+//on docuemtn ready
+$('.rollie_collapse_label_toggle').each(function(){
+
+rollie_collapse_label_toggle_controler(this,true);
+	});
 
 $( '.rollie_collapse_label_toggle' ).on( "click", function() { //on click
-rollie_collapse_label_toggle_controler('.rollie_collapse_label_toggle');
+
+rollie_collapse_label_toggle_controler(this,false);
+
+/*
+$('.rollie_multiple_switch_row_js').each(function() {
+
+var rrollie_input_name = '';
+		 rrollie_input_name = $(this).find('input').attr('name');
+		 rollie_multiple_switch_hide_show_controler(rrollie_input_name);
 });
-$('.rollie_collapse_label_toggle').trigger( "click" );
+*/
+});
+
 }
 
-
-rollie_multiple_switch();
 rollie_collapse_label_toggle ();
+rollie_multiple_switch();
+$('.rollie_collapse_label_toggle').each(function(){
+rollie_collapse_label_toggle_controler(this,true);
+	});
+
+
+
 
 
 

@@ -38,13 +38,13 @@ if ( ( ! empty( the_content() ) || ( function_exists( 'get_field' ) && get_field
 				<div class="  rollie_first_post_title_c_modern  
 				<?php
 				if ( ! $rollie_has_content ) {
-					echo 'rollie_modern_gradient';}
+					echo 'rollie_post_modern_title_bg_color';}
 				?>
 					 " >
 					<div class=" p-0 
 					<?php
 					if ( $rollie_has_content ) {
-						echo 'rollie_modern_gradient';}
+						echo 'rollie_post_modern_title_bg_color';}
 					?>
 					" >
 						

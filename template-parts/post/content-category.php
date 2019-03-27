@@ -1,5 +1,5 @@
 
-		<div class="container-fluid rollie_title_container">
+		<div class="container-fluid  rollie_title_container rollie_title_bg_color">
 		<?php
 
 			$rollie_q_o           = get_queried_object();
@@ -57,7 +57,7 @@ else{
 		</div>
 
 
-	  <div class="rollie_text_content_align rollie_main_color ">
+	  <div class="rollie_text_content_align  rollie_main_color ">
 		 <div class=" row m-0">
 		<?php
 
