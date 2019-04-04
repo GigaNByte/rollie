@@ -90,10 +90,12 @@
 	<?php }?>
 	  <div class="rollie_text_content_align  rollie_main_color ">
 		 <div class=" row m-0">
+
+
 		<?php
 
-		$rollie_is_active_sidebar_left  = is_active_sidebar( 'sidebar_left' );
-		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' );
+		$rollie_is_active_sidebar_left  = is_active_sidebar( 'sidebar_left' )&& $rollie_allow_sidebars ;
+		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' )&& $rollie_allow_sidebars ;
 
 		if ( $rollie_is_active_sidebar_left ) {
 			echo "<aside class='rollie_sidebar_left col-2 '>";

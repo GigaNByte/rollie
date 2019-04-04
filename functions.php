@@ -14,7 +14,7 @@ function rollie_script_start() {
 function rollie_style_start() {
 	 wp_enqueue_style( 'swiper_lib_css', get_template_directory_uri() . '/css/swiper.min.css', array(), '4.3.4', 'all' );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.2.1', 'all' );
-	wp_enqueue_style( 'rollie_stylesheet', get_template_directory_uri() . '/css/rollie.css', array(), '1.00', 'all' );
+	wp_enqueue_style( 'rollie_stylesheet', get_template_directory_uri() . '/css/rollie.css', array(),  date("h:i:s"), 'all' );
 	
 	if ( class_exists( 'WooCommerce' ) ) {
 		wp_enqueue_style( 'rollie_woocommerce_stylesheet', get_template_directory_uri() . '/css/rollie_woocommerce.css', array(), '1.00', 'all' );
@@ -42,7 +42,15 @@ function theme_support_rollie() {
 			'flex-width' => true,
 		)
 	);
-
+## Disables MIME Types Check ##
+function wph_disable_mime_check($data,$file,$filename,$mimes){
+   $wp_filetype = wp_check_filetype($filename,$mimes);
+   $ext = $wp_filetype['ext'] ;
+   $type = $wp_filetype['type'] ;
+   $proper_filename = $data['proper_filename'] ;
+   return compact('ext','type','proper_filename');
+}
+add_filter('wp_check_filetype_and_ext','wph_disable_mime_check',10,4);
 	add_theme_support( 'automatic-feed-links' );
 
 	add_theme_support( 'custom-header' );

@@ -6198,7 +6198,7 @@ $wp_customize->add_section(
 		'rollie_button_b_color',
 		array(
 			'default'     => '#ffffff',
-			'transport'   => 'post_Message',
+			'transport'   => 'postMessage',
 			'sanitize_callback'=>'rollie_sanitize_rgba',
 		)
 	);
@@ -6757,6 +6757,7 @@ $wp_customize->add_section(
 		)
 	);
 	if (class_exists('WooCommerce')){
+	require get_template_directory() . '/include/rollie_customizer_woo.php';
 	require get_template_directory() . '/include/rollie_customizer_css_woo.php';
 	}
 }

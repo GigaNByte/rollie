@@ -907,7 +907,57 @@
 									)
 								);
 
+									$wp_customize->add_setting(
+									'rollie_font_headings_h4_max',
+									array(
+										'default'   => 30,
+										'transport' => 'refresh',
+										'sanitize_callback' => 'skyrocket_sanitize_integer',
+									)
+								);
 
+
+								$wp_customize->add_control(
+									new Skyrocket_Slider_Custom_Control(
+										$wp_customize,
+										'rollie_font_headings_h4_max',
+										array(
+											'label'       => esc_html__( ' Maximum font size for h4 subtitle (px) ' ),
+											'section'     => 'rollie_font_subtitles_section',
+											'description' => esc_html__( 'Should be bigger than min font size otherwise sets default' ),
+											'input_attrs' => array(
+												'min'  => 1,
+												'max'  => 100,
+												'step' => 1,
+											),
+										)
+									)
+								);
+								$wp_customize->add_setting(
+									'rollie_font_headings_h4_min',
+									array(
+										'default'   => 26,
+										'transport' => 'refresh',
+										'sanitize_callback' => 'skyrocket_sanitize_integer',
+									)
+								);
+
+								$wp_customize->add_control(
+									new Skyrocket_Slider_Custom_Control(
+										$wp_customize,
+										'rollie_font_headings_h4_min',
+										array(
+											'label'       => esc_html__( 'Minimum font size for h4 subtitle (px)' ),
+											'description' => esc_html__( 'Should be less than max font size otherwise sets default' ),
+											'section'     => 'rollie_font_subtitles_section',
+											'input_attrs' => array(
+												'min'  => 1,
+												'max'  => 100,
+												'step' => 1,
+											),
+										)
+									)
+								);
 
 								$wp_customize->add_setting(
 									'rollie_font_subtitles_vw_min',
@@ -1526,6 +1576,7 @@
 										)
 									)
 								);
+
 
 
 

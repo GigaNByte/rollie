@@ -1,7 +1,17 @@
 <?php
 
+if ( class_exists( 'WooCommerce' ) ) {
+	if (is_account_page()){
+		$rollie_allow_sidebars = false;
+	} 
+}
+else{
+	$rollie_allow_sidebars = true;
+}
 
 if ( is_category() ) {
+
+
 		$rollie_template = '_ct';
 
 } elseif ( is_archive() ) {
@@ -22,7 +32,7 @@ if ( is_category() ) {
 	$rollie_post_display_style_classes [0]['first_div_col'] = ' col-12 ' . $rollie_m_a;
 	$rollie_post_display_style_classes [1]['first_div_col'] = 'col-6 ' . $rollie_m_a;
 
-if ( is_active_sidebar( 'sidebar_right' ) || is_active_sidebar( 'sidebar_left' ) ) {
+if ( is_active_sidebar( 'sidebar_right' ) || is_active_sidebar( 'sidebar_left' ) && $rollie_allow_sidebars ) {
 	$rollie_post_display_style_classes [2]['first_div_col'] = ' col-6 col-lg-4 p-2 p-lg-auto ' . $rollie_m_a;
 } else {
 	$rollie_post_display_style_classes [2]['first_div_col'] = ' col-6 col-md-4 p-2 p-md-auto ' . $rollie_m_a;

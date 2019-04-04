@@ -24,17 +24,18 @@
 
 	  <div class="rollie_text_content_align  rollie_main_color ">
 		 <div class=" row m-0">
+		 	
 		<?php
 
-		$rollie_is_active_sidebar_left  = is_active_sidebar( 'sidebar_left' );
-		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' );
+		$rollie_is_active_sidebar_left  = is_active_sidebar( 'sidebar_left' ) && $rollie_allow_sidebars ;
+		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' ) && $rollie_allow_sidebars ;
 
-		if ( $rollie_is_active_sidebar_left ) {
+		if ( $rollie_is_active_sidebar_left && $rollie_allow_sidebars ) {
 			echo "<aside class='rollie_sidebar_left   col-2 '>";
 			dynamic_sidebar( 'sidebar_left' );
 			echo '</aside >';
 			$rollie_offset_var = ' col-md-8 col-12 offset-md-0';
-		} elseif ( ! $rollie_is_active_sidebar_right ) {
+		} elseif ( ! $rollie_is_active_sidebar_right  ) {
 			$rollie_offset_var      = 'offset-md-0   col-12 col-md-12   offset-lg-0';// col lg-12 col-md-10
 			$rollie_entry_offset_lg = 'offset-md-1';
 		} else {

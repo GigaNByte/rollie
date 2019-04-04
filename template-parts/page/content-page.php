@@ -70,12 +70,13 @@
 		}
 		?>
 		 <div class=" row m-0">
+
+
 		<?php
 
 
 
-
-		if ( is_active_sidebar( 'sidebar_left' ) ) {
+		if ( is_active_sidebar( 'sidebar_left' )&& $rollie_allow_sidebars  ) {
 			echo "<aside class='rollie_sidebar_left ".$rollie_single_page_display_style_classes  [$rollie_display_index]['sidebar_l_offset'].$rollie_single_page_sidebar_width." '>";
 			dynamic_sidebar( 'sidebar_left' );
 			echo '</aside >';
@@ -101,7 +102,7 @@
 		</div>
 					<?php
 
-					if ( is_active_sidebar( 'sidebar_right' ) ) {
+					if ( is_active_sidebar( 'sidebar_right' ) && $rollie_allow_sidebars ) {
 						echo "<aside class='rollie_sidebar_right ".$rollie_single_page_display_style_classes  [$rollie_display_index]['sidebar_r_offset'].$rollie_single_page_sidebar_width." '>";
 							dynamic_sidebar( 'sidebar_right' );
 						echo '</aside >';

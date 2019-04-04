@@ -91,8 +91,6 @@ console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
 
   wp.customize(rollie_gradient_obj.control_name, function(setting) {
    var rollie_standard_color = setting.get();
-   console.log('wjjsada'+ rollie_standard_color);
-   console.log(rollie_gradient_obj.css_class+rollie_gradient_obj.css_property+ rollie_standard_color);
    $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property, rollie_standard_color);
   });
 
@@ -114,7 +112,6 @@ console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
   new rollie_gradient('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line', 'background'),
   new rollie_gradient('rollie_darker_main_theme_color', '.rollie_darker_main_color', 'background'),
   new rollie_gradient('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right', 'background'),
-  new rollie_gradient('rollie_shadow_theme_color', '.rollie_posts_shadow', 'box-shadow'/*,' 0px 0px 8px 1px '*/),
   new rollie_gradient('rollie_title_bg_theme_color', '.rollie_title_bg_color', 'background'),
   new rollie_gradient('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', 'background'),
   new rollie_gradient('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color', 'background'),

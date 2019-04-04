@@ -6,6 +6,10 @@ a, a:hover {
   color: inherit;
   text-decoration: inherit;
 }
+.rollie_line_h_1
+{
+line-height: 1em;
+}
 p
 {
 	margin-bottom:0px !important;
@@ -62,6 +66,11 @@ float: right;
 .alignleft {
 float: left;
 }
+.rollie_wrap_n
+{
+word-wrap: normal;
+}
+
 html,body
 {
 	white-space: normal;
@@ -70,7 +79,6 @@ html,body
 	padding:0px;
 	margin:0px;
 }
-
 
 body
 {
@@ -1245,6 +1253,7 @@ a:hover{
 }
 .rollie_button
 {
+	word-wrap: normal;
 	cursor: pointer;
 	word-break: normal;
 white-space: inherit;
