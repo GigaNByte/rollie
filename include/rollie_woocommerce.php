@@ -3,13 +3,101 @@
 1.General
 2.MyAccount
 3.Orders Table
+4.Orders table Query Snipets
 */
 /* My orders Table*/
-add_filter( 'woocommerce_my_account_my_orders_query', 'custom_my_orders_query' );
-function custom_my_orders_query($args){
-	$args['post_status'] =  array_keys( wc_get_order_statuses() );
+
+
+//query_filtering
+
+function rollie_shortcode_my_orders( $atts ) {
+    extract( shortcode_atts( array(
+        'order_count' => -1
+    ), $atts ) );
+
+    ob_start();
+    wc_get_template( 'myaccount/my-orders.php', array(
+        'current_user'  => get_user_by( 'id', get_current_user_id() ),
+        'order_count'   => $order_count
+    ) );
+    return ob_get_clean();
+}
+add_shortcode('rollie_my_orders', 'rollie_shortcode_my_orders');
+
+add_filter( 'woocommerce_my_account_my_orders_query', 'rollie_my_orders_query' );
+function rollie_my_orders_query($args){
+var_dump($endpoint = WC()->query->get_current_endpoint());
+	if( is_wc_endpoint_url('completed') )  $args['post_status'] = array('wc-completed');
+	elseif( is_wc_endpoint_url('on-hold') )  $args['post_status'] = array('wc-on-hold','wc-pending');
+	elseif( is_wc_endpoint_url('processing') )  $args['post_status'] = array('wc-processing');
+	elseif( is_wc_endpoint_url('refunded') )  $args['post_status'] = array('wc-refunded');
+	elseif( is_wc_endpoint_url('canceled') )  $args['post_status'] = array('wc-canceled','wc-failed');
 	return $args;
 }
+
+
+// 1. Register new endpoint to use for My Account page
+ 
+function rollie_add_endpoint() {
+add_rewrite_endpoint( 'recievied', EP_ROOT | EP_PAGES );
+add_rewrite_endpoint( 'on-hold', EP_ROOT | EP_PAGES );
+add_rewrite_endpoint( 'processing', EP_ROOT | EP_PAGES );
+add_rewrite_endpoint( 'completed', EP_ROOT | EP_PAGES );
+add_rewrite_endpoint( 'canceled', EP_ROOT | EP_PAGES );
+add_rewrite_endpoint( 'refunded', EP_ROOT | EP_PAGES );
+
+}
+ 
+add_action( 'init', 'rollie_add_endpoint' );
+ 
+ 
+// 2. Add new query var
+ 
+function rollie_query_vars( $vars ) {
+     foreach (["completed",'on-hold','refunded','processing','canceled'] as $e) {
+        $vars[$e] = $e;
+    }
+    return $vars;
+}
+ 
+add_filter( 'woocommerce_get_query_vars', 'rollie_query_vars' );
+
+ 
+
+// 3. Insert the new endpoint into the My Account menu
+ 
+function rollie_add_my_account_menu_items( $items ) {
+    $items['completed'] = __('Completed','woocommerce');
+    $items['processing'] = __('Processing','woocommerce')." ".__('Or','rollie')." ".__('Pending','woocommerce');
+    $items['on-hold'] = __('On-hold','woocommerce');
+   	$items['refunded'] = __('Refunded','woocommerce');
+   	$items['canceled'] = __('Canceled','woocommerce')." ".__('Or','rollie')." ".__('Failed','woocommerce');
+    return $items;
+}
+ 
+add_filter( 'woocommerce_account_menu_items', 'rollie_add_my_account_menu_items' );
+ 
+ 
+
+// 4. Add content to the new endpoint
+ 
+function rollie_my_orders_query_content() {
+echo do_shortcode( '[rollie_my_orders]' );
+}
+
+foreach ( array('completed','processing','on-hold','refunded','canceled') as $key => $value)
+{
+add_action( 'woocommerce_account_'.$value.'_endpoint', 'rollie_my_orders_query_content' );
+}
+
+    
+
+
+
+
+
+
+
 function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downloadable,$url) 
 {
 	$rollie_woo_order_status_icon = '';
@@ -39,7 +127,7 @@ function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downlo
 		}
 
 	break; 
-	case 'cancelled':
+	case 'canceled':
 	  $rollie_woo_order_status_icon = 'fas fa-times '; 
  	break;
  	case 'refunded':
@@ -76,7 +164,7 @@ function rollie_woo_order_custom_column( $order ) {
 ?>
 
 <div rollie_woo_order_table_status="<?php esc_attr_e($order->get_status())?>" class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>
-	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >s
+	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
 	<div class='  rollie_woo_order_table_banner   rollie_button  '>		
 
 	
@@ -149,9 +237,12 @@ function rollie_woo_orders_table_sort_menu ()
 {
 	?>
 <div class='row rollie_orders_sort_menu'>
+	<a href='<?php  echo wc_get_account_endpoint_url('completed') ; ?>'>
 	<div class='col-2' rollie_woo_order_table_status_trigger='pending'>
-	<i class='fas fa-sync' ></i>
+		juhuski
+		<i class='fas fa-sync' ></i>
 	</div>
+	</a>
 	<div class='col-2'  rollie_woo_order_table_status_trigger ='processing' >
 	<i class='fas fa-sync'></i>
 	</div>
@@ -281,32 +372,40 @@ echo "</div>";
 
 
 
-function rollie_woo_endpoint_title( $title, $id ) {
-	if ( is_wc_endpoint_url( 'downloads' ) && in_the_loop() ) { // add your endpoint urls
-		$title =  __( 'Downloads', 'woocommerce' );
-	}
-	elseif ( is_wc_endpoint_url( 'orders' ) && in_the_loop() ) {
-		$title = __( 'Orders', 'woocommerce' );
-	}
-	elseif ( is_wc_endpoint_url( 'edit-account' ) && in_the_loop() ) {
-		$title = __( 'Account Details', 'woocommerce' );
-	}
-	elseif(is_wc_endpoint_url( 'edit-address' ) && in_the_loop() ){
-		$title = __( 'Addresses', 'woocommerce' );
-	}
-	 elseif(is_wc_endpoint_url( 'payment-methods' ) && in_the_loop() ){
-		$title = __( 'Payment Methods', 'woocommerce' );
-	}
-	 elseif(is_wc_endpoint_url( 'customer-logout' ) && in_the_loop() ){
-		$title = __( 'Logout', 'woocommerce' );
-	}
-	 elseif(is_wc_endpoint_url( 'dashboard' ) && in_the_loop() ){
-		$title = __( 'Dashboard', 'woocommerce' );
-	}
-	return $title;
 
-}
-add_filter( 'the_title', 'rollie_woo_endpoint_title', 10, 2 );
 
   add_action ('woocommerce_account_content','rollie_action_woo_account_content',1);
   add_action ('woocommerce_account_content','rollie_action_woo_account_content_wraper_end',200);
+
+
+
+
+function wpb_woo_my_account_order() {
+	$myorder = array(
+
+
+		'edit-account'       => __( 'Account Details', 'woocommerce' ),
+		'dashboard'          => __( 'Dashboard', 'woocommerce' ),
+		'orders'             => __( 'Orders', 'woocommerce' ),
+		'completed'			 =>	__( 'Completed', 'woocommerce' ),						
+		'processing' 		=> __('Processing','woocommerce'),
+		'on-hold'			 =>	__( 'On-hold', 'woocommerce' )." ".__('Or','rollie')." ".__('Pending','woocommerce'),
+		'refunded'			 =>	__( 'Refunded', 'woocommerce' ),
+		'canceled'			 =>	__('Canceled','woocommerce')." ".__('Or','rollie')." ".__('Failed','woocommerce'),
+		'downloads'          => __( 'Downloads', 'woocommerce' ),
+		'edit-address'       => __( 'Addresses', 'woocommerce' ),
+		'payment-methods'    => __( 'Payment methods', 'woocommerce' ),
+		'customer-logout'    => __( 'Logout', 'woocommerce' ),
+
+
+
+	);
+	return $myorder;
+}
+add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_order' );
+
+
+
+
+
+
