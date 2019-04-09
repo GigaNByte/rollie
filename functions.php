@@ -10,6 +10,7 @@ function rollie_script_start() {
 	wp_enqueue_script( 'swiper_lib_js', get_template_directory_uri() . '/js/swiper.min.js', array(), '4.3.4', 'true' );
 	wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '4.2.1', 'true' );
 	wp_enqueue_script( 'rollie_js', get_template_directory_uri() . '/js/rollie.js', array(), '1.00', 'true' );
+	if (class_exists('WooCommerce')) 	wp_enqueue_script( 'rollie_woo_js', get_template_directory_uri() . '/js/rollie_woocommerce.js', array(), '1.00', 'true' );
 }
 function rollie_style_start() {
 	 wp_enqueue_style( 'swiper_lib_css', get_template_directory_uri() . '/css/swiper.min.css', array(), '4.3.4', 'all' );

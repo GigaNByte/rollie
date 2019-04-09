@@ -117,8 +117,9 @@ console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
   new rollie_gradient('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color', 'background'),
   new rollie_gradient('rollie_navbar_color', '.rollie_navbar_color ', 'background'),
   new rollie_gradient('rollie_button_b_h_color','.rollie_button:hover', 'background'),
-  new rollie_gradient('rollie_button_b_color','.rollie_button', 'background'),
-
+  new rollie_gradient('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead', 'background'),
+  new rollie_gradient('rollie_button_alt_b_h_color','.rollie_button_alt:hover, .woocommerce .checkout-button:hover', 'background'),
+  new rollie_gradient('rollie_button_alt_b_color','.rollie_button_alt , .woocommerce .checkout-button' , 'background'),
 
  ];
 

@@ -460,10 +460,14 @@ echo $rollie_third_theme_color->css_snippet();
 
 	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', 'background');
 						echo $rollie_navbar_color->css_snippet();
-		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button', 'background');
+		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button , .woocommerce a.button ,.woocommerce   .button , .woocommerce-cart-form__contents > thead', 'background-color');
 						echo $rollie_button_b->css_snippet();		
-	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,'.rollie_button:hover', 'background');
-						echo $rollie_button_b_h->css_snippet();			
+	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,' .rollie_button:hover , .rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover', 'background');
+						echo $rollie_button_b_h->css_snippet();	
+	$rollie_button_alt_b = new Rollie_Gradient ('rollie_button_alt_b_color','#212121' ,'.rollie_button_alt, .woocommerce button button.alt ,.woocommerce a.button.alt', 'background-color');
+						echo $rollie_button_alt_b->css_snippet();		
+	$rollie_button_alt_b_h = new Rollie_Gradient ('rollie_button_alt_b_h_color','#ffffff' ,' .rollie_button_alt:hover, .woocommerce a.button.alt:hover', 'background');
+						echo $rollie_button_b_h->css_snippet();								
 
 ?>
 		
@@ -658,7 +662,7 @@ echo $rollie_third_theme_color->css_snippet();
 				}
 				
 				
-				.rollie_button
+				.rollie_button,.woocommerce-cart-form__contents > thead , .woocommerce .button 
 				{
 					color: <?php echo $rollie_button_color ?>  !important;
 					border-color:<?php echo $rollie_button_shadow ?> !important;

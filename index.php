@@ -80,10 +80,10 @@ if ( have_posts() ) :
 
 
 
-if ( function_exists( 'rollie_pagination' ) ) {
+
 			rollie_pagination();
 
-}
+
 ?>
 		</div>  
 	<?php

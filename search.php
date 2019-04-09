@@ -64,10 +64,9 @@
 		get_search_form();
 
 
-		if ( function_exists( 'rollie_pagination' ) ) {
 
 			rollie_pagination();
-		}
+		
 		?>
 		</div>  
 	<?php

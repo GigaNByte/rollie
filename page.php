@@ -38,9 +38,9 @@
 	endwhile; // End of the loop.
 
 
-		if ( function_exists( 'rollie_pagination' ) ) {
+
 			rollie_pagination();
-		}
+		
 
 		?>
 				</main>

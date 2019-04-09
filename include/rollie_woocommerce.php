@@ -4,11 +4,19 @@
 2.MyAccount
 3.Orders Table
 4.Orders table Query Snipets
+5.Cart
 */
 /* My orders Table*/
 
 
 //query_filtering
+//disable stylesheets
+add_filter( 'woocommerce_enqueue_styles', 'rollie_dequeue_styles' );
+function rollie_dequeue_styles( $enqueue_styles ) {// Remove the layout
+	unset( $enqueue_styles['woocommerce-smallscreen'] );	// Remove the smallscreen optimisation
+	return $enqueue_styles;
+}
+
 
 function rollie_shortcode_my_orders( $atts ) {
     extract( shortcode_atts( array(
@@ -18,7 +26,8 @@ function rollie_shortcode_my_orders( $atts ) {
     ob_start();
     wc_get_template( 'myaccount/my-orders.php', array(
         'current_user'  => get_user_by( 'id', get_current_user_id() ),
-        'order_count'   => $order_count
+        'order_count'   => $order_count,
+       
     ) );
     return ob_get_clean();
 }
@@ -26,7 +35,7 @@ add_shortcode('rollie_my_orders', 'rollie_shortcode_my_orders');
 
 add_filter( 'woocommerce_my_account_my_orders_query', 'rollie_my_orders_query' );
 function rollie_my_orders_query($args){
-var_dump($endpoint = WC()->query->get_current_endpoint());
+
 	if( is_wc_endpoint_url('completed') )  $args['post_status'] = array('wc-completed');
 	elseif( is_wc_endpoint_url('on-hold') )  $args['post_status'] = array('wc-on-hold','wc-pending');
 	elseif( is_wc_endpoint_url('processing') )  $args['post_status'] = array('wc-processing');
@@ -65,24 +74,31 @@ add_filter( 'woocommerce_get_query_vars', 'rollie_query_vars' );
  
 
 // 3. Insert the new endpoint into the My Account menu
- 
+ /*
 function rollie_add_my_account_menu_items( $items ) {
     $items['completed'] = __('Completed','woocommerce');
-    $items['processing'] = __('Processing','woocommerce')." ".__('Or','rollie')." ".__('Pending','woocommerce');
+    $items['processing'] = __('Processing','woocommerce')." ".__('Pending','woocommerce');
     $items['on-hold'] = __('On-hold','woocommerce');
    	$items['refunded'] = __('Refunded','woocommerce');
-   	$items['canceled'] = __('Canceled','woocommerce')." ".__('Or','rollie')." ".__('Failed','woocommerce');
+   	$items['canceled'] = __('Canceled','woocommerce')." ".__('Failed','woocommerce');
     return $items;
 }
  
 add_filter( 'woocommerce_account_menu_items', 'rollie_add_my_account_menu_items' );
  
- 
+ */
 
 // 4. Add content to the new endpoint
  
 function rollie_my_orders_query_content() {
+	rollie_woo_orders_table_sort_menu();
+if( is_wc_endpoint_url('completed') )  echo "<h2 class='rollie_sibling_d_none'>".__( 'Completed', 'woocommerce' )."</h2>";
+	elseif( is_wc_endpoint_url('on-hold') ) echo "<h2 class='rollie_sibling_d_none'>".__( 'On-hold', 'woocommerce' )." & ".__( 'Pending', 'woocommerce' )."</h2>" ;
+	elseif( is_wc_endpoint_url('processing') ) echo  "<h2 class='rollie_sibling_d_none'>".__( 'Processing', 'woocommerce' )."</h2>";
+	elseif( is_wc_endpoint_url('refunded') ) echo  "<h2 class='rollie_sibling_d_none'>".__( 'Refunded', 'woocommerce' )."</h2>";
+	elseif( is_wc_endpoint_url('canceled') ) echo "<h2 class='rollie_sibling_d_none'>".__( 'Canceled', 'woocommerce' )." & ".__( 'Failed', 'woocommerce' )."</h2>" ;
 echo do_shortcode( '[rollie_my_orders]' );
+
 }
 
 foreach ( array('completed','processing','on-hold','refunded','canceled') as $key => $value)
@@ -163,7 +179,7 @@ function rollie_woo_order_custom_column( $order ) {
         // do something here
 ?>
 
-<div rollie_woo_order_table_status="<?php esc_attr_e($order->get_status())?>" class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>
+<div class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>
 	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
 	<div class='  rollie_woo_order_table_banner   rollie_button  '>		
 
@@ -189,8 +205,8 @@ function rollie_woo_order_custom_column( $order ) {
 					<div class='col-8 col-md-10'>
 						<div class='row m-0 '>
 
-							<div class='col-8 text-left'><?php echo  $product_name = $item->get_name(); ?></div>
-							<div class='col-4 text-center rollie_wrap_n'> <?php echo wc_price( $item->get_total() );?><span class='font-weight-bold'> x </span><?php echo $item->get_quantity();  ?></div>
+							<div class='col-md-8 col-12 text-left'><?php echo  $product_name = $item->get_name(); ?></div>
+							<div class='col-md-4 col-12 text-center rollie_wrap_n'> <?php echo wc_price( $item->get_total() );?><span class='font-weight-bold'> x </span><?php echo $item->get_quantity();  ?></div>
 							
 						</div>
 					
@@ -233,31 +249,112 @@ function rollie_woo_order_custom_column( $order ) {
 }
     add_action( 'woocommerce_my_account_my_orders_column_rollie_order-custom_column', 'rollie_woo_order_custom_column' );
 
+
+//Counts how many orders have been ordered 
+    function rollie_get_total_orders_e ($status)
+    {
+    		if (class_exists('WP_CountUp_JS_Main')){
+		 echo do_shortcode('[countup start="0" end="'.rollie_get_total_orders($status).'" decimals="0" duration="5"]');
+			}
+			else{
+			echo rollie_get_total_orders($status);
+		}
+    }
+ function rollie_get_total_orders($status) {
+
+    $customer_orders = wc_get_orders( array(
+
+        'meta_key'    => '_customer_user',
+        'meta_value'  => get_current_user_id(),
+        'post_type'   => wc_get_order_types(),
+       	'post_status' => $status,
+		'paginate' => true,     
+
+    ) );
+    return esc_html($customer_orders->total);
+}
+
 function rollie_woo_orders_table_sort_menu ()
 {
 	?>
-<div class='row rollie_orders_sort_menu'>
-	<a href='<?php  echo wc_get_account_endpoint_url('completed') ; ?>'>
-	<div class='col-2' rollie_woo_order_table_status_trigger='pending'>
-		juhuski
-		<i class='fas fa-sync' ></i>
-	</div>
-	</a>
-	<div class='col-2'  rollie_woo_order_table_status_trigger ='processing' >
-	<i class='fas fa-sync'></i>
-	</div>
-	<div class='col-2 '  rollie_woo_order_table_status_trigger ='completed'>
-	<i class='fas fa-sync'  ></i>
-	</div>
-	<div class='col-2' rollie_woo_order_table_status_trigger ='refunded'>
-	<i class='fas fa-sync'  ></i>
-	</div>
-	<div class='col-2' rollie_woo_order_table_status_trigger ='failed'>
-	<i class='fas fa-sync'  ></i>
-	</div>
-</div>
+<div class='row rollie_orders_sort_menu text-center'>
 
-	<?php
+	<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current';?>'  >	 
+		<a href='<?php  echo wc_get_account_endpoint_url('orders') ; ?>'>
+			<div class='rollie_sort_orders_counter m-auto'>
+				<h3>
+					<?php	rollie_get_total_orders_e(array('wc-on-hold','wc-pending', 'wc-processing' ,'wc-cancelled',' wc-refunded', 'wc-failed' ,'wc-completed', 'wc-refunded'))	?>
+						
+				</h3>
+				<i class='fas fa-shopping-basket' ></i>
+			</div>	
+				<?php	echo '<div class="m-auto text-center">'.__( 'All', 'woocommerce' ).'</div>'; ?>
+		</a>
+	</div>
+
+
+	<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side 	<?php if (is_wc_endpoint_url('completed')) echo 'rollie_sort_orders_current';?>'  >
+		<a href='<?php  echo wc_get_account_endpoint_url('completed') ; ?>'>
+			<div class='rollie_sort_orders_counter m-auto'>
+				<h3><?php	rollie_get_total_orders_e(array('wc-completed'))	?></h3>
+				<i class='fas fa-check'></i>
+				
+			</div>
+			<?php echo "<div  class='m-auto text-center'>".__( 'Completed', 'woocommerce' )."</div>";	?>
+		</a>
+	</div>
+
+
+	<div class='col-6 col-md-4 col-xl-3 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('processing')) echo 'rollie_sort_orders_current';?> '  >
+		<a href='<?php  echo wc_get_account_endpoint_url('processing') ; ?>'>
+			<div class='rollie_sort_orders_counter m-auto'>
+				<h3><?php	rollie_get_total_orders_e(array('wc-processing'))	?></h3>
+				<i class='fas fa-shipping-fast '  ></i>
+			</div>	
+			<?php echo "<div  class='m-auto text-center'>".__( 'Processing', 'woocommerce' )."</div>";	?>
+			
+		</a>
+	</div>
+
+
+	<div class='col-6 col-md-4 col-xl-3 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('on-hold')) echo 'rollie_sort_orders_current';?>' >	
+		<a href='<?php  echo wc_get_account_endpoint_url('on-hold') ; ?>'>
+			<div class='rollie_sort_orders_counter m-auto'>
+				<h3><?php	rollie_get_total_orders_e(array('wc-on-hold','wc-pending'))	?></h3>
+				<i class='fas  fa-sync'  ></i>
+			</div>	
+		<?php echo 	"<div  class='m-auto text-center'>". __( 'On-hold', 'woocommerce' ).' & '.__( 'Pending', 'woocommerce' )."</div>";	?>
+				
+		</a>
+	</div>
+	
+	
+	<div class='col-6 col-md-4 col-xl-3 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('canceled')) echo 'rollie_sort_orders_current';?>' >	
+		<a href='<?php  echo wc_get_account_endpoint_url('canceled') ; ?>'>
+			<div class='rollie_sort_orders_counter m-auto'>
+				<h3>	<?php	rollie_get_total_orders_e(array('wc-canceled','wc-failed'))	?> </h3>
+				<i class='fas fa-times'  ></i>
+			</div>		
+			<?php	echo "<div  class='m-auto text-center'>". __( 'Canceled', 'woocommerce' )." & ".__( 'Failed', 'woocommerce' )."</div>" ; 	?>
+				
+		</a>
+	</div>
+
+	
+	<div class='col-6 col-md-4 col-xl-3 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('refunded')) echo 'rollie_sort_orders_current';?>' >
+		<a href='<?php  echo wc_get_account_endpoint_url('refunded') ; ?>'>
+			<div class='rollie_sort_orders_counter m-auto '>
+				<h3>	<?php	rollie_get_total_orders_e(array('wc-refunded'))	?></h3>
+				<i class='fas fa-handshake'  ></i>
+			</div>
+	
+			<?php	echo "<div class='m-auto text-center'>".__( 'Refunded', 'woocommerce' )."</div>";	?>
+		</a>
+	</div>
+	
+</div>
+<?php
+
 }
 
 add_action('woocommerce_before_account_orders','rollie_woo_orders_table_sort_menu');
@@ -352,6 +449,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 
 function rollie_action_woo_account_content()
 {
+
 echo  "<div class='row p-0 m-0 h-100'>";
 	echo "<div class='p-0 col-12 rollie_f_headings rollie_title_text_color rollie_account_title' >".get_the_title()."</div>";
 	echo "<div class='col-12 rollie_account_content'>";
@@ -377,35 +475,83 @@ echo "</div>";
   add_action ('woocommerce_account_content','rollie_action_woo_account_content',1);
   add_action ('woocommerce_account_content','rollie_action_woo_account_content_wraper_end',200);
 
-
-
-
-function wpb_woo_my_account_order() {
-	$myorder = array(
-
-
-		'edit-account'       => __( 'Account Details', 'woocommerce' ),
-		'dashboard'          => __( 'Dashboard', 'woocommerce' ),
-		'orders'             => __( 'Orders', 'woocommerce' ),
-		'completed'			 =>	__( 'Completed', 'woocommerce' ),						
-		'processing' 		=> __('Processing','woocommerce'),
-		'on-hold'			 =>	__( 'On-hold', 'woocommerce' )." ".__('Or','rollie')." ".__('Pending','woocommerce'),
-		'refunded'			 =>	__( 'Refunded', 'woocommerce' ),
-		'canceled'			 =>	__('Canceled','woocommerce')." ".__('Or','rollie')." ".__('Failed','woocommerce'),
-		'downloads'          => __( 'Downloads', 'woocommerce' ),
-		'edit-address'       => __( 'Addresses', 'woocommerce' ),
-		'payment-methods'    => __( 'Payment methods', 'woocommerce' ),
-		'customer-logout'    => __( 'Logout', 'woocommerce' ),
-
-
-
-	);
-	return $myorder;
+function rollie_endpoint_titles( $title, $id ) {
+	if ( is_wc_endpoint_url( 'canceled' ) && in_the_loop() ) { // add your endpoint urls
+		$title =  __( 'Orders', 'woocommerce' ); // change your entry-title
+	}
+	elseif ( is_wc_endpoint_url( 'on-hold' ) && in_the_loop() ) {
+		$title =  __( 'Orders', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'refunded' ) && in_the_loop() ) {
+		$title =  __( 'Orders', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'Processing' ) && in_the_loop() ) {
+		$title =  __( 'Orders', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'completed' ) && in_the_loop() ) {
+		$title = __( 'Orders', 'woocommerce' );
+	
+	}
+	elseif ( is_wc_endpoint_url( 'edit-account' ) && in_the_loop() ) { 
+		$title = __( 'Account Details', 'woocommerce' ); 
+	}
+	elseif ( is_wc_endpoint_url( 'dashboard' ) && in_the_loop() ) {
+		$title = __( 'Dashboard', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'orders','downloads' ) && in_the_loop() ) {
+		$title = __( 'Orders', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'downloads' ) && in_the_loop() ) {
+		$title = __( 'Downloads', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'edit-address' ) && in_the_loop() ) {
+		$title = __( 'Addresses', 'woocommerce' );
+	}
+	elseif ( is_wc_endpoint_url( 'payment-methods' ) && in_the_loop() ) {
+		$title =__( 'Payment methods', 'woocommerce' );
+	}
+	return $title;
 }
-add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_order' );
+add_filter( 'the_title', 'rollie_endpoint_titles', 10, 2 );
+
+//Cart
 
 
+function rollie_woo_cart_content()
+{
+echo "<div class='rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
+}
+function rollie_woo_cart_content_wraper_end()
+{
 
+echo "</div>";
+}
+add_action('woocommerce_before_cart_table','rollie_woo_cart_content',1);
+add_action('woocommerce_after_cart_table','rollie_woo_cart_content_wraper_end',200);
 
+function rollie_woo_orders_pagination()
+{
+	$args = array('meta_value'  => get_current_user_id(),'paginate' => true);
+	if( is_wc_endpoint_url('completed') )  $args['post_status'] = array('wc-completed');
+	elseif( is_wc_endpoint_url('on-hold') )  $args['post_status'] = array('wc-on-hold','wc-pending');
+	elseif( is_wc_endpoint_url('processing') )  $args['post_status'] = array('wc-processing');
+	elseif( is_wc_endpoint_url('refunded') )  $args['post_status'] = array('wc-refunded');
+	elseif( is_wc_endpoint_url('canceled') )  $args['post_status'] = array('wc-canceled','wc-failed');
 
+$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+$cpage = ( get_query_var('cpage') ) ? get_query_var('cpage') : 1;
 
+ $customer_orders = wc_get_orders( $args ); 
+
+rollie_pagination( $customer_orders->max_num_pages,$cpage,$paged,'orders' );
+ 
+	
+}
+add_action('woocommerce_before_account_orders_pagination','rollie_woo_orders_pagination');
+function filter_woocommerce_cart_item_thumbnail( $product_get_image, $cart_item, $cart_item_key ) { 
+ 
+    return  "<div class='woocommerce_gallery_thumbnail'>".$product_get_image."</div>"; 
+}; 
+         
+// add the filter 
+add_filter( 'woocommerce_cart_item_thumbnail', 'filter_woocommerce_cart_item_thumbnail', 10, 3 );
