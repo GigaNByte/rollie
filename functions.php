@@ -5,6 +5,7 @@
 $rollie_supported_post_formats = array( 'link', 'aside', 'quote', 'status', 'audio', 'video', 'image', 'gallery' );
 
 function rollie_script_start() {
+
 		wp_enqueue_script( 'jquery' );
 
 	wp_enqueue_script( 'swiper_lib_js', get_template_directory_uri() . '/js/swiper.min.js', array(), '4.3.4', 'true' );
@@ -17,10 +18,13 @@ function rollie_style_start() {
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.2.1', 'all' );
 	wp_enqueue_style( 'rollie_stylesheet', get_template_directory_uri() . '/css/rollie.css', array(),  date("h:i:s"), 'all' );
 	if ( class_exists( 'WooCommerce' ) ) {
-		wp_enqueue_style( 'rollie_woocommerce_stylesheet', get_template_directory_uri() . '/css/rollie_woocommerce.css', array(), '1.00', 'all' );
-	} 
-}
+		wp_enqueue_style( 'rollie_woo_stylesheet', get_template_directory_uri() . '/css/rollie_woocommerce.css', array(), '1.00', 'all' );
+	}
 
+ 
+ 	require get_template_directory() . '/include/rollie_customizer_css.php';
+ 		rollie_customizer_css ();
+}
 
 
 add_action( 'customize_preview_init', 'rollie_customize_script' );
@@ -224,7 +228,6 @@ require get_template_directory() . '/include/rollie_walker_cat_swap.php';
 require get_template_directory() . '/include/rollie_walker_footer.php';
 require get_template_directory() . '/include/rollie_walker_comment.php';
 require get_template_directory() . '/include/rollie_customizer.php';
-require get_template_directory() . '/include/rollie_customizer_css.php';
 require get_template_directory() . '/include/rollie_special_functions.php';
 require get_template_directory() . '/include/rollie_walker_nav_top_toggle.php';
 require get_template_directory() . '/include/rollie_custom_shortcodes.php';
@@ -239,7 +242,7 @@ add_action( 'customize_register', 'rollie_customizer_register' );
 add_action( 'after_setup_theme', 'custom_setup' );
 add_action( 'widgets_init', 'rollie_widget_setup' );
 add_action( 'init', 'theme_support_rollie' );
-add_action( 'wp_head', 'rollie_customizer_css' );
+
 
 add_filter( 'excerpt_more', 'rollie_new_excerpt_more' );
 add_filter( 'post_gallery', 'rollie_custom_gallery', 10, 2 );
@@ -250,7 +253,6 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 
 add_action( 'customize_controls_print_styles', 'rollie_customizer_stylesheet' );
 add_action( 'customize_controls_enqueue_scripts', 'rollie_customizer_scripts' );
-
 
 
 
