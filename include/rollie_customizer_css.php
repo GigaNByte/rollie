@@ -2,21 +2,541 @@
 
 <?php
 
-
-function rollie_customizer_css () 
+function rollie_add_google_font_stylesheet($rollie_google_s)
 {
-	
-				//Theme color section
-	
+			if (!empty($rollie_google_s)&& $rollie_google_s != false )
+		{	
 
- //wp_add_inline_style( 'rollie_customizer_css', $data ); 
+			$rollie_google_s = multi_unique($rollie_google_s);
+			//$rollie_google_compressed = [];
+			$rollie_google_compressed  =  array(array('weight','name'));
+			
+			$temp_array = array(array('weight'));
+			$rollie_google_compressed_s = array();
+			$rollie_google_compressed_i = array();
+			
+			foreach ($rollie_google_s as $rollie_google_name )
+			{
+				
+				if (is_null($rollie_google_name))
+				{
+					continue;
+				}
+				$temp_array_names[] = $rollie_google_name['name'] ;
+				
+			}
+			
+			
+			
+			
+			foreach ($rollie_google_s as $rollie_google_name)
+			{
+				$isrepeated = false;
+				
+				
+				
+			//	if(isset($rollie_google_name['name'])) 
+				//{
+					//continue;
+				//}
+				
+				
+				if (!in_array($rollie_google_name['name'], $temp_array))
+				{
+					$temp_array [] = $rollie_google_name['name'];
+					
+				}
+				else
+				{
+					$isrepeated = true;
+				}
+
+				if ($isrepeated )
+				{
+					if (!empty($rollie_google_name['weight']));
+					{
+						if (empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
+						{
+							$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['weight'].",";
+						}
+						else
+						{
+							$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['weight'].",";
+						}
+					}
+					
+					if ($rollie_google_name['disable_bold_italic'] == 'false')
+					{
+						if(!empty($rollie_google_name['boldweight']))
+						{
+							if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
+							{
+								$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['boldweight']."," ;
+							}
+							else 
+							{	
+								$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['boldweight'].",";
+							}
+						}
+						if(!empty($rollie_google_name['italicweight']))
+						{							
+							if  ($rollie_google_name['italicweight']  != 'italic')
+							{
+								
+								if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
+								{
+									$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['italicweight'].",";
+								}
+								else
+								{
+									$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['italicweight'].",";
+								}													
+								
+							}
+						}
+					}
+					
+					
+					
+					
+					
+				}
+				else 
+				{	
+					
+					if ($rollie_google_name['disable_bold_italic'] == 'false' )
+					{
+						if(!empty($rollie_google_name['boldweight']))
+						{
+							
+							if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
+							{
+								$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['boldweight'].",";
+							}
+							else 
+							{	
+								$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['boldweight'].",";
+							}
+						}
+						if(!empty($rollie_google_name['italicweight']))
+						{
+							if  ($rollie_google_name['italicweight']  != 'italic')
+							{
+								
+								if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
+								{
+									$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['italicweight'].",";
+								}
+								else
+								{
+									$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['italicweight'].",";
+								}													
+								
+							}
+						}
+					}	
+					
+					$rollie_google_compressed[$rollie_google_name['name']]['name'] = $rollie_google_name['name'];
+					
+					if (!empty($rollie_google_name['weight']) )
+					{
+						if (empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
+						{
+							$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['weight'].",";
+						}
+						else
+						{
+							$rollie_google_compressed[$rollie_google_name['name']]['weight'] .=  $rollie_google_name['weight'].",";
+						}	
+					}
+
+					
+					
+				}
+				
+				if(isset($rollie_google_name['subset']) && !empty($rollie_google_name['subset'])) $rollie_google_compressed_s[] = $rollie_google_name['subset'];
+				
+				
+			}
+			
+			
+			$rollie_google_compressed_s = array_unique($rollie_google_compressed_s);
+			$rollie_google_compressed_s =  implode(",",$rollie_google_compressed_s);
+			
+
+			
 
 
+			
+			$rollie_google_compressed_url = "";
+			$rollie_google_compressed = array_values(array_filter($rollie_google_compressed));
+			foreach ($rollie_google_compressed as $rollie_single_c )
+			{
+				if(empty($rollie_single_c['name'])) 
+				{
+					continue;
+				}
+				if ( !empty($rollie_single_c['weight']) && $rollie_single_c['weight'] != ',')
+				{
+					$rollie_single_c['weight'] = substr($rollie_single_c['weight'], 0, -1);
+					$rollie_single_c['weight']  = explode(',', $rollie_single_c['weight']);
+					$rollie_single_c['weight'] = array_unique($rollie_single_c['weight']);
+					$rollie_single_c['weight'] = implode(",",$rollie_single_c['weight']);
+					if (strpos($rollie_single_c['weight'],"italic"))
+					{
+						$rollie_single_c['weight'] = str_replace("italic","i",$rollie_single_c['weight']);
+					}
+
+					$rollie_single_c['weight'] = ":".$rollie_single_c['weight'];
+					
+				}
+				else
+				{
+					$rollie_single_c['weight'] = "";
+				}				
+				
+				if (empty($rollie_single_c['name']))
+				{
+					$rollie_google_compressed_url = $rollie_single_c['name'].$rollie_single_c['weight']."|";
+				}
+				else
+				{
+					$rollie_google_compressed_url .= $rollie_single_c['name'].$rollie_single_c['weight']."|";	
+				}					
+			}
+			//deleting last "|" 
+			
+			$rollie_google_compressed_url = substr($rollie_google_compressed_url, 0, -1); 
+			
+			$rollie_google_compressed_url = 'https://fonts.googleapis.com/css?family='.$rollie_google_compressed_url.'&amp;subset='.$rollie_google_compressed_s;
+
+			wp_enqueue_style('rollie_custom_google_fonts',$rollie_google_compressed_url);
+			
+			
+
+	}
+}
+
+
+	function rollie_add_font ($font_obj,$font_array,$font_str,$font_class_a)
+	{
+						
+		$css_snippet = '';
+					
+					if (  !empty($font_str) && !empty($font_array))
+					{
+						$rollie_class="";
+						$rollie_initial_class="";
+						$rollie_apply_h2 = false;
+						$rollie_apply_h4 = false;
+						$i = 0;
+						
+						foreach ($font_class_a as $classes) 
+						{
+							
+							if ($i>0)
+							{
+								$o = ",";
+								
+								
+								
+							}
+							else
+							{
+								
+								$rollie_initial_class = $classes;
+								$o= "";
+			
+								
+							}
+							$rollie_class.=$o.$classes;
+							$i++;	
+							
+						} 
+				
+						if (array_key_exists ( "h2_min" ,  $font_array )) {
+									$rollie_apply_h2 = true;
+									$rollie_heading_str = 'h2';	
+							
+								}
+						if (array_key_exists ( "h4_min" ,  $font_array )) {
+									$rollie_apply_h4 = true;
+									$rollie_heading_str = 'h4';
+								}		
+						if ($font_array ['min']< $font_array ['max'] && $font_array ['vw_min']< $font_array ['vw_max'])
+						{?>  
+					
+							
+						
+							<?php echo $rollie_class; ?>					 
+							{
+								font-size: <?php  echo  $font_array ['min']; ?>px;
+							}
+						
+							
+							@media screen and (min-width: <?php echo  	$font_array ['vw_min'] ;?>px) {
+							
+							<?php echo $rollie_class; ?>
+							
+							{				  
+								font-size: calc( <?php echo $font_array ['min']  ?>px + ( ( <?php echo  $font_array ['max']  ?> - <?php echo  $font_array ['min'] ?> ) * (100vw - <?php echo 	  $font_array ['vw_min'] ?>px) / (<?php echo   $font_array ['vw_max'] ?> - <?php  	echo  $font_array ['vw_min'] ?>) ) );
+							}
+						}
+							@media screen and (min-width: <?php echo  	$font_array ['vw_max'];?>) {
+							<?php echo $rollie_class; ?>					 
+							{
+								font-size: <?php  echo  $font_array ['max']; ?>px;
+							}
+						}
+					
+					
+					
+					<?php
+			
+					if ($rollie_apply_h2 || $rollie_apply_h4)
+					{
+					
+							
+						?>
+						
+						<?php echo $rollie_initial_class."_".$rollie_heading_str; ?>					 
+						{
+							font-size: <?php  echo  $font_array [$rollie_heading_str.'_min']; ?>px;
+						}
+					
+						
+						@media screen and (min-width: <?php echo  	$font_array ['vw_min'] ;?>px) {
+						
+						<?php echo $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str ?>
+						
+						{				  
+							font-size: calc( <?php echo $font_array [$rollie_heading_str.'_min']  ?>px + ( ( <?php echo  $font_array [$rollie_heading_str.'_max']  ?> - <?php echo  $font_array [$rollie_heading_str.'_min'] ?> ) * (100vw - <?php echo 	  $font_array ['vw_min'] ?>px) / (<?php echo   $font_array ['vw_max'] ?> - <?php  	echo  $font_array ['vw_min'] ?>) ) ) !important;
+						}
+					}
+						@media screen and (min-width: <?php echo  	$font_array ['vw_max'];?>) {
+						<?php echo $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str; ?>				 
+						{
+							font-size: <?php  echo  $font_array [$rollie_heading_str.'_max']; ?>px !important;
+						}	
+					}
+						
+				
+				
+				<?php
+			}
+			
+			
+		}
+
+		if ($font_array ['alt_enable'] == false && is_object($font_obj))
+		{
+			
+			(is_null($font_obj->font))?( $rollie_font = "Rokkitt" ):( $rollie_font = $font_obj->font );				
+			
+			
+			(is_null($font_obj->regularweight))?( $rollie_font_w = "300" ):( $rollie_font_w  = $font_obj->regularweight );
+			
+			
+			
+			
+			if ($font_array ['disable_bold_italic'] == 'false') 
+			{		
+				
+				
+				
+				
+				(is_null($font_obj->italicweight)||$font_obj->italicweight=="italic")?( $rollie_font_i = "" ):( $rollie_font_i  = $font_obj->italicweight );
+				
+				$rollie_i_w = str_replace( "italic", '',$rollie_font_i);
+				
+				$rollie_i_w = str_replace( "i",'', $rollie_i_w);
+				
+				
+				echo $rollie_class;?>> i, <?php echo $rollie_initial_class."_i" ?>
+				{
+					font-weight:  <?php if ( is_string($rollie_i_w)): echo "normal"; else: echo $rollie_i_w ; endif ?> ;
+				}
+				<?Php 
+				(is_null($font_obj->boldweight))?( $rollie_font_b = "700" ):( $rollie_font_b  = $font_obj->boldweight );
+				echo $rollie_class;?>> b,<?php echo $rollie_initial_class."_b" ?>
+				{
+						font-weight:  <?php if ( is_string($rollie_font_b)): echo "normal"; else: echo $rollie_font_b ; endif ?> ;
+				}
+				<?Php 
+				
+			}
+			
+			else
+			{
+				
+				$rollie_font_b= '';
+				$rollie_font_i= '';
+			}
+			
+			(is_null($font_obj->subsets))?( $rollie_font_s = "latin" ):( $rollie_font_s = $font_obj->subsets );
+			
+
+
+			echo $rollie_class; ?>	
+			{
+				<?php 	if ( $font_array ['min'] == $font_array ['max']) 
+				{	?>
+					
+					font-size: <?php echo  $font_array ['max'] ;?>px;
+					
+				<?php } ?>
+
+				
+				
+				font-family: '<?php echo  $rollie_font ?>'  , Arial,serif;
+				font-weight:  <?php if ( is_string($rollie_font_w)): echo "normal"; else: echo $rollie_font_w; endif ?>  ;
+				letter-spacing: <?php echo  $font_array ['ls']; ?>px;
+				line-height: <?php echo  $font_array ['lh'] ;?>;
+				
+				
+				
+				
+				<?Php if (array_key_exists ( "U" ,  $font_array )) 
+				{
+					if ( $font_array['U'] == true)
+						{ ?>
+							
+							text-transform:uppercase;
+							
+							<?php	
+						}
+						
+					}
+					
+					
+					
+					if (array_key_exists ( "align" ,  $font_array )) 
+					{
+						
+						
+						echo rollie_text_align_f($font_array['align']);
+						
+					}	?>	
+					
+				}
+				<?php 	
+				
+
+				if(! empty($rollie_font_s) ) 
+				{
+					$rollie_font_s 	= $rollie_font_s ;
+				}	
+				else
+				{
+					$rollie_font_s 	= "latin" ;
+				}
+				
+
+				if ( empty($rollie_font_w) || $rollie_font_w == "regular"    )
+				{
+					$rollie_font_w = "regular";	
+				}	
+				
+				if ( empty($rollie_font_i) ||  $rollie_font_i == "italic"   )
+				{
+					$rollie_font_i = "";	
+				}	
+				
+				
+				if (  empty($rollie_font_b)  ||  $rollie_font_b == "regular" )
+				{
+					$rollie_font_b = "";	
+				}	
+				
+				
+				
+				
+				$rollie_font = preg_replace("/[\s_]/", "+", $rollie_font) ;
+				
+
+
+				$rollie_google_font = ['name'=>$rollie_font , 'weight'=> $rollie_font_w , 'boldweight'=>$rollie_font_b , 'italicweight' =>$rollie_font_i, 'subset'=>$rollie_font_s,'disable_bold_italic'=>$font_array['disable_bold_italic']];
+
+
+				
+				
+				
+				
+			}
+			else
+			{ 	
+				
+				echo $rollie_class;
+				?>
+				
+				{
+					
+					<?php 	if (   $font_array ['min'] ==  $font_array ['max']) {	?>			
+						font-size: <?php echo   $font_array ['max'] ?>px;
+						
+					<?php } ?>
+					font-family:<?php echo  $font_array ['alt'] ; ?>  , Arial,serif;	
+					font-weight: <?php if ( is_string($font_array ['alt_weight'])): echo "normal"; else: echo $font_array ['alt_weight']; endif ?> ;
+					letter-spacing: <?php echo  $font_array ['ls'] ;?>px;
+					line-height: <?php echo  $font_array ['lh'] ;?>;
+					<?Php if (array_key_exists ( "U" ,  $font_array )) 
+					{
+						if ( $font_array['U'])
+						{
+							?>
+							text-transform:uppercase;
+							
+							<?php		
+						}
+					}
+					if (array_key_exists ( "align" ,  $font_array )) 
+					{
+						if ( $font_array['align'])
+						{
+							
+							rollie_text_align_f($font_array['align']);
+						}	
+					} 
+					?>
+					
+				}
+				<?Php
+				
+				if ($rollie_apply_h2 || $rollie_apply_h4)
+				{
+
+					if ( $font_array [$rollie_heading_str.'_min'] == $font_array [$rollie_heading_str.'_max']) 
+						{	?>
+							<?php echo $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str?> 
+							
+							{
+								font-size: <?php echo  $font_array [$rollie_heading_str.'_max'] ;?>px;
+							}		
+							<?php 
+						}
+				}		
+					
+					
+
+					
+					
+				}	
+			}
+			if (isset($rollie_google_font))
+			{
+				
+				return $rollie_google_font;
+			}
+			
+			
+			
+			
+		}	
 
 class Rollie_Gradient {
     // constructor
 
-    public function __construct($theme_mod, $standard_color, $css_selector,$css_property,$css_before_value='' ) {
+    public function __construct($theme_mod, $standard_color, $css_selector,$css_property, $css_before_value='' ) {
         $this->theme_mod = $theme_mod;
         $this->standard_color = $standard_color;
         $this->css_selector = $css_selector;
@@ -34,44 +554,63 @@ class Rollie_Gradient {
       	$this->rgb_gr_2 = $this->ToRgb( get_theme_mod($theme_mod.'_gr_2'));
         $this->rgb_gr_3 = $this->ToRgb( get_theme_mod($theme_mod.'_gr_3'));
     }
-private function ToRgb ($color) {
+	private function ToRgb ($color) {
 
-	if ($color[0] && $color[0] !='#')
-	{
-$color=(preg_split('/rgba?\(\s*|\s*,\s*|\s*\)/', $color, -1, PREG_SPLIT_NO_EMPTY));
- return '#'.dechex($color[0]).dechex($color[1]).dechex($color[2]);
-}
-else
-{
+				if ($color[0] && $color[0] !='#')
+				{
+			$color=(preg_split('/rgba?\(\s*|\s*,\s*|\s*\)/', $color, -1, PREG_SPLIT_NO_EMPTY));
+			 return '#'.dechex($color[0]).dechex($color[1]).dechex($color[2]);
+			}
+			else
+			{
 
-	return $color;
-}
+				return $color;
+			}
 
-}
-
+		}
 
     public function css_snippet($without_selectors = false) {
-
+		$css_snippet_all = '';
 		if ($without_selectors)
 		{
-		$css_snippet_before = '';
-		$css_snippet_after = '';
+			$css_snippet_before_a = array(' ');
+			$css_snippet_after = '';
 		}
 		else{
-		$css_snippet_before = $this->css_selector.' { '. $this->css_property.":";
-		$css_snippet_after = "; } ";
+			$css_snippet_before_a = array();
+			foreach ($this->css_property as $key => $css_property) {
+				$css_snippet_before_a[] = $this->css_selector.' { '. $css_property .":";
+				}
+			$css_snippet_after = "; } ";
 		}
 
 				if (get_theme_mod( $this->theme_mod.'_gs') == 2) { //means gradient active
-				       return $css_snippet_before." linear-gradient( " . get_theme_mod($this->theme_mod.'_angle_gr',0) . "deg, " . get_theme_mod( $this->theme_mod.'_gr_1',$this->standard_color) . " " .       get_theme_mod( $this->theme_mod.'_stop_gr_1',100) . "% , " . get_theme_mod( $this->theme_mod.'_gr_2',$this->standard_color) . " " . get_theme_mod( $this->theme_mod.'_stop_gr_2',0) . "% , " . get_theme_mod( $this->theme_mod.'_gr_3',$this->standard_color) . " " . get_theme_mod( $this->theme_mod.'_stop_gr_3',0) . "% )".$css_snippet_after ;
+					foreach ( $css_snippet_before_a as $css_snippet_before )
+				      $css_snippet_all .= $css_snippet_before." linear-gradient( " . get_theme_mod($this->theme_mod.'_angle_gr',0) . "deg, " . get_theme_mod( $this->theme_mod.'_gr_1',$this->standard_color) . " " .       get_theme_mod( $this->theme_mod.'_stop_gr_1',100) . "% , " . get_theme_mod( $this->theme_mod.'_gr_2',$this->standard_color) . " " . get_theme_mod( $this->theme_mod.'_stop_gr_2',0) . "% , " . get_theme_mod( $this->theme_mod.'_gr_3',$this->standard_color) . " " . get_theme_mod( $this->theme_mod.'_stop_gr_3',0) . "% )".$css_snippet_after ;
+				
 				    }
 				    else{
-
-				       return $css_snippet_before.$this->css_before_value.' '.get_theme_mod($this->theme_mod,$this->standard_color).$css_snippet_after ;
+						foreach ( $css_snippet_before_a as $css_snippet_before )
+							{
+				     		 $css_snippet_all .=  $css_snippet_before.$this->css_before_value.' '.get_theme_mod($this->theme_mod,$this->standard_color).$css_snippet_after ;
+							}
+ 						
 				    }
-		
+		  return $css_snippet_all;
 	}
 }
+
+
+function rollie_customizer_css () 
+{
+	
+				//Theme color section
+	
+
+ //wp_add_inline_style( 'rollie_customizer_css', $data ); 
+
+
+
 
 
 
@@ -425,48 +964,48 @@ else
 			
 			
 			<style type="text/css">
-juhuski
+
 
 
 
 <?php 
-	$rollie_main_theme_color = new Rollie_Gradient ("rollie_main_theme_color", "#ffffff",'.rollie_main_color','background');
+	$rollie_main_theme_color = new Rollie_Gradient ("rollie_main_theme_color", "#ffffff",'.rollie_main_color',array('background'));
 echo $rollie_main_theme_color->css_snippet();
-	$rollie_second_theme_color = new Rollie_Gradient ("rollie_second_theme_color", "#212121",'.rollie_second_color','background');
+	$rollie_second_theme_color = new Rollie_Gradient ("rollie_second_theme_color", "#212121",'.rollie_second_color',array('background'));
 echo $rollie_second_theme_color->css_snippet();
 		list ( $rollie_second_color_r , $rollie_second_color_g , $rollie_second_color_b ) = sscanf ( $rollie_second_theme_color->rgb_gr_1, "#%02x%02x%02x");
-			$rollie_third_theme_color = new Rollie_Gradient ("rollie_third_theme_color", "#a37e2c",'.rollie_third_color,.rollie_fancy_line','background');
+			$rollie_third_theme_color = new Rollie_Gradient ("rollie_third_theme_color", "#a37e2c",'.rollie_third_color,.rollie_fancy_line',array('background'));
 
 echo $rollie_third_theme_color->css_snippet();
 
 		list ( $rollie_third_color_r , $rollie_third_color_g , $rollie_third_color_b ) = sscanf ( $rollie_third_theme_color->rgb_gr_1, "#%02x%02x%02x");
 		$rollie_third_color =   $rollie_third_theme_color->rgb_gr_1;
 
-			$rollie_darker_main_theme_color = new Rollie_Gradient ("rollie_darker_main_theme_color", "#e3e6e8",'.rollie_darker_main_color','background');
+			$rollie_darker_main_theme_color = new Rollie_Gradient ("rollie_darker_main_theme_color", "#e3e6e8",'.rollie_darker_main_color',array('background'));
 		echo $rollie_darker_main_theme_color->css_snippet();
-			$rollie_sidebar_theme_color = new Rollie_Gradient ("rollie_sidebar_theme_color", "#e3e6e8",'.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right','background');
+			$rollie_sidebar_theme_color = new Rollie_Gradient ("rollie_sidebar_theme_color", "#e3e6e8",'.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',array('background'));
 					echo $rollie_sidebar_theme_color->css_snippet();
 		list ( $rollie_sidebar_theme_color_r , $rollie_sidebar_theme_color_g , $rollie_sidebar_theme_color_b ) = sscanf ( $rollie_sidebar_theme_color->rgb_gr_1, "#%02x%02x%02x");
 
 
-			$rollie_title_bg_theme_color= new Rollie_Gradient ("rollie_title_bg_theme_color", "#e3e6e8",'.rollie_title_bg_color','background');
+			$rollie_title_bg_theme_color= new Rollie_Gradient ("rollie_title_bg_theme_color", "#e3e6e8",'.rollie_title_bg_color',array('background'));
 					echo $rollie_title_bg_theme_color->css_snippet();
 
-			$rollie_post_classic_title_bg= new Rollie_Gradient ("rollie_post_classic_title_bg_theme_color", "#ffffff",'.rollie_post_classic_title_bg_color','background');
+			$rollie_post_classic_title_bg= new Rollie_Gradient ("rollie_post_classic_title_bg_theme_color", "#ffffff",'.rollie_post_classic_title_bg_color',array('background'));
 					echo $rollie_post_classic_title_bg->css_snippet();
 
-			$rollie_post_modern_title_bg= new Rollie_Gradient ("rollie_post_modern_title_bg_theme_color", "#ffffff",'.rollie_post_modern_title_bg_color','background');
+			$rollie_post_modern_title_bg= new Rollie_Gradient ("rollie_post_modern_title_bg_theme_color", "#ffffff",'.rollie_post_modern_title_bg_color',array('background'));
 					echo $rollie_post_modern_title_bg->css_snippet();
 
-	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', 'background');
+	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', array('background'));
 						echo $rollie_navbar_color->css_snippet();
-		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button , .woocommerce a.button ,.woocommerce   .button , .woocommerce-cart-form__contents > thead', 'background-color');
+		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button , .woocommerce a.button ,.woocommerce   .button , .woocommerce-cart-form__contents > thead', array('background-color'));
 						echo $rollie_button_b->css_snippet();		
-	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,' .rollie_button:hover , .rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover', 'background');
+	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,' .rollie_button:hover , .rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover', array('background'));
 						echo $rollie_button_b_h->css_snippet();	
-	$rollie_button_alt_b = new Rollie_Gradient ('rollie_button_alt_b_color','#212121' ,'.rollie_button_alt, .woocommerce button button.alt ,.woocommerce a.button.alt', 'background-color');
+	$rollie_button_alt_b = new Rollie_Gradient ('rollie_button_alt_b_color','#212121' ,'.rollie_button_alt, .woocommerce button button.alt ,.woocommerce a.button.alt',array( 'background-color'));
 						echo $rollie_button_alt_b->css_snippet();		
-	$rollie_button_alt_b_h = new Rollie_Gradient ('rollie_button_alt_b_h_color','#ffffff' ,' .rollie_button_alt:hover, .woocommerce a.button.alt:hover', 'background');
+	$rollie_button_alt_b_h = new Rollie_Gradient ('rollie_button_alt_b_h_color','#ffffff' ,' .rollie_button_alt:hover, .woocommerce a.button.alt:hover',array('background'));
 						echo $rollie_button_b_h->css_snippet();								
 
 ?>
@@ -937,320 +1476,7 @@ echo $rollie_third_theme_color->css_snippet();
 				}
 				
 				
-				function rollie_add_font ($font_obj,$font_array,$font_str,$font_class_a)
-				{
-					
-
-					
-					if (  !empty($font_str) && !empty($font_array))
-					{
-						$rollie_class="";
-						$rollie_initial_class="";
-						$rollie_apply_h2 = false;
-						$rollie_apply_h4 = false;
-						$i = 0;
-						
-						foreach ($font_class_a as $classes) 
-						{
-							
-							if ($i>0)
-							{
-								$o = ",";
-								
-								
-								
-							}
-							else
-							{
-								
-								$rollie_initial_class = $classes;
-								$o= "";
-			
-								
-							}
-							$rollie_class.=$o.$classes;
-							$i++;	
-							
-						} 
-				
-						if (array_key_exists ( "h2_min" ,  $font_array )) {
-									$rollie_apply_h2 = true;
-									$rollie_heading_str = 'h2';	
-							
-								}
-						if (array_key_exists ( "h4_min" ,  $font_array )) {
-									$rollie_apply_h4 = true;
-									$rollie_heading_str = 'h4';
-								}		
-						if ($font_array ['min']< $font_array ['max'] && $font_array ['vw_min']< $font_array ['vw_max'])
-						{  
-
-							?>
-						
-							<?php echo $rollie_class; ?>					 
-							{
-								font-size: <?php  echo  $font_array ['min']; ?>px;
-							}
-						
-							
-							@media screen and (min-width: <?php echo  	$font_array ['vw_min'] ;?>px) {
-							
-							<?php echo $rollie_class; ?>
-							
-							{				  
-								font-size: calc( <?php echo $font_array ['min']  ?>px + ( ( <?php echo  $font_array ['max']  ?> - <?php echo  $font_array ['min'] ?> ) * (100vw - <?php echo 	  $font_array ['vw_min'] ?>px) / (<?php echo   $font_array ['vw_max'] ?> - <?php  	echo  $font_array ['vw_min'] ?>) ) );
-							}
-						}
-							@media screen and (min-width: <?php echo  	$font_array ['vw_max'];?>) {
-							<?php echo $rollie_class; ?>					 
-							{
-								font-size: <?php  echo  $font_array ['max']; ?>px;
-							}
-						}
-					
-					
-					
-					<?php
-			
-					if ($rollie_apply_h2 || $rollie_apply_h4)
-					{
-					
-							
-						?>
-						
-						<?php echo $rollie_initial_class."_".$rollie_heading_str; ?>					 
-						{
-							font-size: <?php  echo  $font_array [$rollie_heading_str.'_min']; ?>px;
-						}
-					
-						
-						@media screen and (min-width: <?php echo  	$font_array ['vw_min'] ;?>px) {
-						
-						<?php echo $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str ?>
-						
-						{				  
-							font-size: calc( <?php echo $font_array [$rollie_heading_str.'_min']  ?>px + ( ( <?php echo  $font_array [$rollie_heading_str.'_max']  ?> - <?php echo  $font_array [$rollie_heading_str.'_min'] ?> ) * (100vw - <?php echo 	  $font_array ['vw_min'] ?>px) / (<?php echo   $font_array ['vw_max'] ?> - <?php  	echo  $font_array ['vw_min'] ?>) ) ) !important;
-						}
-					}
-						@media screen and (min-width: <?php echo  	$font_array ['vw_max'];?>) {
-						<?php echo $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str; ?>				 
-						{
-							font-size: <?php  echo  $font_array [$rollie_heading_str.'_max']; ?>px !important;
-						}	
-					}
-						
-				
-				
-				<?php
-			}
-			
-			
-		}
-
-		if ($font_array ['alt_enable'] == false && is_object($font_obj))
-		{
-			
-			(is_null($font_obj->font))?( $rollie_font = "Rokkitt" ):( $rollie_font = $font_obj->font );				
-			
-			
-			(is_null($font_obj->regularweight))?( $rollie_font_w = "300" ):( $rollie_font_w  = $font_obj->regularweight );
-			
-			
-			
-			
-			if ($font_array ['disable_bold_italic'] == 'false') 
-			{		
-				
-				
-				
-				
-				(is_null($font_obj->italicweight)||$font_obj->italicweight=="italic")?( $rollie_font_i = "" ):( $rollie_font_i  = $font_obj->italicweight );
-				
-				$rollie_i_w = str_replace( "italic", '',$rollie_font_i);
-				
-				$rollie_i_w = str_replace( "i",'', $rollie_i_w);
-				
-				
-				echo $rollie_class;?>> i, <?php echo $rollie_initial_class."_i" ?>
-				{
-					font-weight:  <?php if ( is_string($rollie_i_w)): echo "normal"; else: echo $rollie_i_w ; endif ?> ;
-				}
-				<?Php 
-				(is_null($font_obj->boldweight))?( $rollie_font_b = "700" ):( $rollie_font_b  = $font_obj->boldweight );
-				echo $rollie_class;?>> b,<?php echo $rollie_initial_class."_b" ?>
-				{
-						font-weight:  <?php if ( is_string($rollie_font_b)): echo "normal"; else: echo $rollie_font_b ; endif ?> ;
-				}
-				<?Php 
-				
-			}
-			
-			else
-			{
-				
-				$rollie_font_b= '';
-				$rollie_font_i= '';
-			}
-			
-			(is_null($font_obj->subsets))?( $rollie_font_s = "latin" ):( $rollie_font_s = $font_obj->subsets );
-			
-
-
-			echo $rollie_class; ?>	
-			{
-				<?php 	if ( $font_array ['min'] == $font_array ['max']) 
-				{	?>
-					
-					font-size: <?php echo  $font_array ['max'] ;?>px;
-					
-				<?php } ?>
-
-				
-				
-				font-family: '<?php echo  $rollie_font ?>'  , Arial,serif;
-				font-weight:  <?php if ( is_string($rollie_font_w)): echo "normal"; else: echo $rollie_font_w; endif ?>  ;
-				letter-spacing: <?php echo  $font_array ['ls']; ?>px;
-				line-height: <?php echo  $font_array ['lh'] ;?>;
-				
-				
-				
-				
-				<?Php if (array_key_exists ( "U" ,  $font_array )) 
-				{
-					if ( $font_array['U'] == true)
-						{ ?>
-							
-							text-transform:uppercase;
-							
-							<?php	
-						}
-						
-					}
-					
-					
-					
-					if (array_key_exists ( "align" ,  $font_array )) 
-					{
-						
-						
-						echo rollie_text_align_f($font_array['align']);
-						
-					}	?>	
-					
-				}
-				<?php 	
-				
-
-				if(! empty($rollie_font_s) ) 
-				{
-					$rollie_font_s 	= $rollie_font_s ;
-				}	
-				else
-				{
-					$rollie_font_s 	= "latin" ;
-				}
-				
-
-				if ( empty($rollie_font_w) || $rollie_font_w == "regular"    )
-				{
-					$rollie_font_w = "regular";	
-				}	
-				
-				if ( empty($rollie_font_i) ||  $rollie_font_i == "italic"   )
-				{
-					$rollie_font_i = "";	
-				}	
-				
-				
-				if (  empty($rollie_font_b)  ||  $rollie_font_b == "regular" )
-				{
-					$rollie_font_b = "";	
-				}	
-				
-				
-				
-				
-				$rollie_font = preg_replace("/[\s_]/", "+", $rollie_font) ;
-				
-
-
-				$rollie_google_font = ['name'=>$rollie_font , 'weight'=> $rollie_font_w , 'boldweight'=>$rollie_font_b , 'italicweight' =>$rollie_font_i, 'subset'=>$rollie_font_s,'disable_bold_italic'=>$font_array['disable_bold_italic']];
-
-
-				
-				
-				
-				
-			}
-			else
-			{ 	
-				
-				echo $rollie_class;
-				?>
-				
-				{
-					
-					<?php 	if (   $font_array ['min'] ==  $font_array ['max']) {	?>			
-						font-size: <?php echo   $font_array ['max'] ?>px;
-						
-					<?php } ?>
-					font-family:<?php echo  $font_array ['alt'] ; ?>  , Arial,serif;	
-					font-weight: <?php if ( is_string($font_array ['alt_weight'])): echo "normal"; else: echo $font_array ['alt_weight']; endif ?> ;
-					letter-spacing: <?php echo  $font_array ['ls'] ;?>px;
-					line-height: <?php echo  $font_array ['lh'] ;?>;
-					<?Php if (array_key_exists ( "U" ,  $font_array )) 
-					{
-						if ( $font_array['U'])
-						{
-							?>
-							text-transform:uppercase;
-							
-							<?php		
-						}
-					}
-					if (array_key_exists ( "align" ,  $font_array )) 
-					{
-						if ( $font_array['align'])
-						{
-							
-							rollie_text_align_f($font_array['align']);
-						}	
-					} 
-					?>
-					
-				}
-				<?Php
-				
-				if ($rollie_apply_h2 || $rollie_apply_h4)
-				{
-
-					if ( $font_array [$rollie_heading_str.'_min'] == $font_array [$rollie_heading_str.'_max']) 
-						{	?>
-							<?php echo $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str?> 
-							
-							{
-								font-size: <?php echo  $font_array [$rollie_heading_str.'_max'] ;?>px;
-							}		
-							<?php 
-						}
-				}		
-					
-					
-
-					
-					
-				}	
-			}
-			if (isset($rollie_google_font))
-			{
-				
-				return $rollie_google_font;
-			}
-			
-			
-			
-			
-		}			
+		
 		
 		$rollie_google_s [] = rollie_add_font($rollie_font_headings_obj,$rollie_font_headings,'rollie_font_headings',array('.rollie_f_headings' ,'h1 ' ,'h2'));	
 		$rollie_google_s [] = rollie_add_font($rollie_font_navbar_obj,$rollie_font_navbar,'rollie_font_navbar',array('.rollie_f_navbar'));
@@ -1269,243 +1495,28 @@ echo $rollie_third_theme_color->css_snippet();
 
 		$rollie_google_s = array_values(array_filter($rollie_google_s));
 
+				rollie_add_google_font_stylesheet($rollie_google_s);
+
+
+
+	?>
+	
 		
 
 
-		if (!empty($rollie_google_s)&& $rollie_google_s != false )
-		{	
-
-			$rollie_google_s = multi_unique($rollie_google_s);
-			//$rollie_google_compressed = [];
-			$rollie_google_compressed  =  array(array('weight','name'));
-			
-			$temp_array = array(array('weight'));
-			$rollie_google_compressed_s = array();
-			$rollie_google_compressed_i = array();
-			
-			foreach ($rollie_google_s as $rollie_google_name )
-			{
-				
-				if (is_null($rollie_google_name))
-				{
-					continue;
-				}
-				$temp_array_names[] = $rollie_google_name['name'] ;
-				
-			}
-			
-			
-			
-			
-			foreach ($rollie_google_s as $rollie_google_name)
-			{
-				$isrepeated = false;
-				
-				
-				
-			//	if(isset($rollie_google_name['name'])) 
-				//{
-					//continue;
-				//}
-				
-				
-				if (!in_array($rollie_google_name['name'], $temp_array))
-				{
-					$temp_array [] = $rollie_google_name['name'];
-					
-				}
-				else
-				{
-					$isrepeated = true;
-				}
-
-				if ($isrepeated )
-				{
-					if (!empty($rollie_google_name['weight']));
-					{
-						if (empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
-						{
-							$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['weight'].",";
-						}
-						else
-						{
-							$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['weight'].",";
-						}
-					}
-					
-					if ($rollie_google_name['disable_bold_italic'] == 'false')
-					{
-						if(!empty($rollie_google_name['boldweight']))
-						{
-							if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
-							{
-								$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['boldweight']."," ;
-							}
-							else 
-							{	
-								$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['boldweight'].",";
-							}
-						}
-						if(!empty($rollie_google_name['italicweight']))
-						{							
-							if  ($rollie_google_name['italicweight']  != 'italic')
-							{
-								
-								if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
-								{
-									$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['italicweight'].",";
-								}
-								else
-								{
-									$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['italicweight'].",";
-								}													
-								
-							}
-						}
-					}
-					
-					
-					
-					
-					
-				}
-				else 
-				{	
-					
-					if ($rollie_google_name['disable_bold_italic'] == 'false' )
-					{
-						if(!empty($rollie_google_name['boldweight']))
-						{
-							
-							if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
-							{
-								$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['boldweight'].",";
-							}
-							else 
-							{	
-								$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['boldweight'].",";
-							}
-						}
-						if(!empty($rollie_google_name['italicweight']))
-						{
-							if  ($rollie_google_name['italicweight']  != 'italic')
-							{
-								
-								if(empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
-								{
-									$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['italicweight'].",";
-								}
-								else
-								{
-									$rollie_google_compressed[$rollie_google_name['name']]['weight'] .= $rollie_google_name['italicweight'].",";
-								}													
-								
-							}
-						}
-					}	
-					
-					$rollie_google_compressed[$rollie_google_name['name']]['name'] = $rollie_google_name['name'];
-					
-					if (!empty($rollie_google_name['weight']) )
-					{
-						if (empty($rollie_google_compressed[$rollie_google_name['name']]['weight']))
-						{
-							$rollie_google_compressed[$rollie_google_name['name']]['weight'] = $rollie_google_name['weight'].",";
-						}
-						else
-						{
-							$rollie_google_compressed[$rollie_google_name['name']]['weight'] .=  $rollie_google_name['weight'].",";
-						}	
-					}
-
-					
-					
-				}
-				
-				if(isset($rollie_google_name['subset']) && !empty($rollie_google_name['subset'])) $rollie_google_compressed_s[] = $rollie_google_name['subset'];
-				
-				
-			}
-			
-			
-			$rollie_google_compressed_s = array_unique($rollie_google_compressed_s);
-			$rollie_google_compressed_s =  implode(",",$rollie_google_compressed_s);
-			
-
-			
-
-
-			
-			$rollie_google_compressed_url = "";
-			$rollie_google_compressed = array_values(array_filter($rollie_google_compressed));
-			foreach ($rollie_google_compressed as $rollie_single_c )
-			{
-				if(empty($rollie_single_c['name'])) 
-				{
-					continue;
-				}
-				if ( !empty($rollie_single_c['weight']) && $rollie_single_c['weight'] != ',')
-				{
-					$rollie_single_c['weight'] = substr($rollie_single_c['weight'], 0, -1);
-					$rollie_single_c['weight']  = explode(',', $rollie_single_c['weight']);
-					$rollie_single_c['weight'] = array_unique($rollie_single_c['weight']);
-					$rollie_single_c['weight'] = implode(",",$rollie_single_c['weight']);
-					if (strpos($rollie_single_c['weight'],"italic"))
-					{
-						$rollie_single_c['weight'] = str_replace("italic","i",$rollie_single_c['weight']);
-					}
-
-					$rollie_single_c['weight'] = ":".$rollie_single_c['weight'];
-					
-				}
-				else
-				{
-					$rollie_single_c['weight'] = "";
-				}				
-				
-				if (empty($rollie_single_c['name']))
-				{
-					$rollie_google_compressed_url = $rollie_single_c['name'].$rollie_single_c['weight']."|";
-				}
-				else
-				{
-					$rollie_google_compressed_url .= $rollie_single_c['name'].$rollie_single_c['weight']."|";	
-				}					
-			}
-			//deleting last "|" 
-			
-			$rollie_google_compressed_url = substr($rollie_google_compressed_url, 0, -1); 
-			
-			$rollie_google_compressed_url = 'https://fonts.googleapis.com/css?family='.$rollie_google_compressed_url.'&amp;subset='.$rollie_google_compressed_s;
-
-			wp_enqueue_style('rollie_custom_google_fonts',$rollie_google_compressed_url);
-			
-			
-
-		}
-
-	if ( class_exists( 'WooCommerce' ) ) { ?>
-	
-		.rollie_woo_border_color_custom_column
-	{
-
-	border-color: <?php echo $rollie_third_theme_color->css_snippet(true);?>;
-	}			
-
-<?php	}
-		?>
 		
 		
 	</style>
 
 	<?Php 
 	
+	if (class_exists('WooCommerce'))
+	{
+		require get_template_directory() . '/include/rollie_woo_customizer_css.php';
 
-	
-	
-	
-
-} 
+	}
+}
+ 
 
 function multi_unique($src){
 	$output = array_map("unserialize",
@@ -1544,7 +1555,6 @@ function rollie_text_align_f($align)
 	
 	
 }
-
 
 
 

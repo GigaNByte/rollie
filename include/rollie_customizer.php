@@ -1,8 +1,289 @@
 <?php
 
+/*
 
+@param
+ $section -> full name of section
+  $setting -> name of section will be applied to section and control
+  $title -> frontend title of hidable,toogable gradient/color customizer
+  $default-> default value of single color (this function only supoorts defaults for single colors)
+*/
+function rollie_add_gradient_control ($wp_customize,$section_name,$setting_name,$title,$default) 
+{
+
+
+$wp_customize->add_setting(	$setting_name.'_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			$setting_name.'_label',
+			array(
+				'label'   => esc_html__( $title, 'rollie' ),
+				'section'       => $section_name,
+				'input_attrs'=> array (
+								'rollie_collapse_elements_number'=> 9,
+							)
+			)
+		)
+	);
+
+
+		$wp_customize->add_setting(
+						$setting_name.'_gs',
+						array(
+							'default'           => 1,
+							'sanitize_callback' => 'rollie_sanitize_radio',
+							'transport' =>'postMessage'
+						)
+					);
+
+			$wp_customize->add_control(
+				new Rollie_Multiple_Switch_Customizer_Control(
+					$wp_customize,
+					$setting_name.'_gs',
+					array(					
+						'section' => $section_name,
+						'choices' => array(
+							1 => esc_html__( ' Simple Color ', 'rollie' ),
+						2 => esc_html__( ' Gradient ', 'rollie' ),
+				
+						
+					),
+					)
+				)
+			);
+
+
+
+
+	$wp_customize->add_setting(
+		$setting_name.'_gr_1',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			$setting_name.'_gr_1',
+			array(
+				'label'         => __( 'Alpha Color Picker', 'rollie' ),
+				'section'       => $section_name,
+				'show_opacity'  => true, 
+			'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => $setting_name.'_gs-2'
+		
+			)
+		
+			)
+		)
+	);
+	
+			$wp_customize->add_setting(
+			$setting_name.'_stop_gr_1',
+			array(
+				'default'           => 40,
+				'transport' =>'postMessage',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => $setting_name.'_gs-2'
+		
+			)
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			$setting_name.'_stop_gr_1',
+			array(
+				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'section'     => $section_name,
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => $setting_name.'_gs-2',	
+				),
+			)
+		)
+	);
+		
+
+	
+	$wp_customize->add_setting(
+		$setting_name.'_gr_2',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			$setting_name.'_gr_2',
+			array(
+				'label'         => __( 'Alpha Color Picker', 'rollie' ),
+				'section'       => $section_name,
+				'show_opacity'  => true, 
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => $setting_name.'_gs-2'
+		
+			)
+		
+		
+			)
+		)
+	);
+
+
+				$wp_customize->add_setting(
+			$setting_name.'_stop_gr_2',
+			array(
+				'default'           => 40,
+				'transport' =>'postMessage',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+		$setting_name.'_stop_gr_2',
+			array(
+				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'section'     => $section_name,
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => $setting_name.'_gs-2',
+				),
+			)
+		)
+	);
+		$wp_customize->add_setting(
+		$setting_name.'_gr_3',
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+
+
+	// Alpha Color Picker control.
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			$setting_name.'_gr_3',
+			array(
+				'label'         => __( 'Alpha Color Picker', 'rollie' ),
+				'section'       => $section_name,
+				'show_opacity'  => true, 
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => $setting_name.'_gs-2'
+		
+			)
+			)
+		)
+	);
+
+				$wp_customize->add_setting(
+			$setting_name.'_stop_gr_3',
+			array(
+				'default'           => 0,
+					'transport' =>'postMessage',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			$setting_name.'_stop_gr_3',
+			array(
+				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'section'     => $section_name,
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => $setting_name.'_gs-2',
+				),
+			)
+		)
+	);
+			$wp_customize->add_setting(
+			$setting_name.'_angle_gr',
+			array(
+				'default'           => 45,
+					'transport' =>'postMessage',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			$setting_name.'_angle_gr',
+			array(
+				'label'       => esc_html__( 'Gradient Angle','rollie' ),
+				'section'     => $section_name,
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 360,
+					'step' => 1,
+					'rollie_multiple_switch_cc' => $setting_name.'_gs-2',
+					
+				),
+			)
+		));
+
+
+		$wp_customize->add_setting(
+		$setting_name,
+		array(
+			'default'     => 'rgba(255,255,255,1)',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+
+
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			$setting_name,
+			array(
+				'label'             => __( 'Single Color', 'Rollie' ),
+				'section'           => $section_name,
+				
+				'show_opacity'  => true, 
+					'input_attrs'=>array(
+				'rollie_multiple_switch_cc' => $setting_name.'_gs-1'
+		
+			)
+			)
+		)
+	);
+}
 
 function rollie_customizer_register( $wp_customize ) {
+
+
 	require get_template_directory() . '/include/rollie_customizer_control_classes.php';
 
 
@@ -1790,8 +2071,6 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-
-		// widget end
 	$wp_customize->add_section(
 		'rollie_theme_colors_section',
 		array(
@@ -1800,827 +2079,22 @@ function rollie_customizer_register( $wp_customize ) {
 			'priority' => 30,
 		)
 	);
+
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_main_theme_color','Main Theme Text Color','#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_darker_main_theme_color','Darker/Contrast Theme Color','#e3e6e8'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_second_theme_color','Second Theme Color','#212121'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_third_theme_color','Third Theme Color','#a37e2c'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_sidebar_theme_color','Sidebars Color','#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_color','Button Color','#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_h_color','Button Color At Hover','#212121'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_color','Alternate Button Color','#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_h_color','Alternate Button Color At Hover','#212121'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_navbar_section','rollie_navbar_color','Navbar Color','rgba(255,255,255,0.8)'); 
+
+
+
+		// widget end#ffffff
 	
-{
-
-		$wp_customize->add_setting(	'rollie_main_theme_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_main_theme_color_label',
-			array(
-				'label'   => esc_html__( 'Main Theme Text Color ', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_main_theme_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_main_theme_color_gs',
-					array(					
-						'section' => 'rollie_theme_colors_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_main_theme_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_main_theme_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_main_theme_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_main_theme_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_main_theme_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_main_theme_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_main_theme_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_main_theme_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_main_theme_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_main_theme_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_main_theme_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_main_theme_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_main_theme_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_main_theme_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_main_theme_color',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_main_theme_color',
-			array(
-				'label'             => __( 'Main Theme Color', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_main_theme_color_gs-1'
-		
-			)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(	'rollie_second_theme_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_second_theme_color_label',
-			array(
-				'label'             => __( 'Second Theme Color', 'Rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'input_attrs'=>array(
-			'rollie_collapse_elements_number' => 9,
-				)
-			)
-		)
-	);
-
-
-
-		$wp_customize->add_setting(
-						'rollie_second_theme_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_second_theme_color_gs',
-					array(					
-						'section' => 'rollie_theme_colors_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_second_theme_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_second_theme_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_second_theme_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_second_theme_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_second_theme_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_second_theme_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_second_theme_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_second_theme_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_second_theme_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_second_theme_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_second_theme_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_second_theme_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_second_theme_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_second_theme_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-2',
-					
-				),
-			)
-		));
-
-
-
-
-		$wp_customize->add_setting(
-		'rollie_second_theme_color',
-		array(
-			'default'   => 'rgba(33, 33, 33, 1)',//212121
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_second_theme_color',
-			array(
-				'label'             => __( 'Second Theme Color', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-			'rollie_multiple_switch_cc' => 'rollie_second_theme_color_gs-1',
-		
-			)
-			)
-		)
-	);
-
-
-
-
-		$wp_customize->add_setting(	'rollie_third_theme_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_third_theme_color_label',
-			array(
-				'label'   => esc_html__( 'Third Theme Color ', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_third_theme_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_third_theme_color_gs',
-					array(					
-						'section' => 'rollie_theme_colors_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_third_theme_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_third_theme_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_third_theme_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_third_theme_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_third_theme_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_third_theme_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_third_theme_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_third_theme_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_third_theme_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_third_theme_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_third_theme_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_third_theme_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_third_theme_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_third_theme_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_third_theme_color',
-		array(
-			'default'     => '#a37e2c',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_third_theme_color',
-			array(
-				'label'             => __( 'Third Theme Color', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_third_theme_color_gs-1'
-		
-			)
-			)
-		)
-	);
-
-
-
 
 
 		$wp_customize->add_setting(	'rollie_title_bg_theme_color_label');
@@ -2901,555 +2375,6 @@ function rollie_customizer_register( $wp_customize ) {
 
 
 
-
-		$wp_customize->add_setting(	'rollie_darker_main_theme_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_label',
-			array(
-				'label'   => esc_html__( 'Darker main Theme Text Color ', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_darker_main_theme_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_darker_main_theme_color_gs',
-					array(					
-						'section' => 'rollie_theme_colors_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_darker_main_theme_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_darker_main_theme_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_darker_main_theme_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_darker_main_theme_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_darker_main_theme_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_darker_main_theme_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_darker_main_theme_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_darker_main_theme_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_darker_main_theme_color',
-		array(
-			'default'     => '#e3e6e8',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_darker_main_theme_color',
-			array(
-				'label'             => __( 'Darker Main Theme Color', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_darker_main_theme_color_gs-1'
-		
-			)
-			)
-		)
-	);
-
-
-
-
-		$wp_customize->add_setting(	'rollie_sidebar_theme_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_label',
-			array(
-				'label'   => esc_html__( 'Sidebar Color', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_sidebar_theme_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_sidebar_theme_color_gs',
-					array(					
-						'section' => 'rollie_theme_colors_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_sidebar_theme_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_sidebar_theme_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_sidebar_theme_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_sidebar_theme_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_sidebar_theme_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_sidebar_theme_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_theme_colors_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_sidebar_theme_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_sidebar_theme_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_theme_colors_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_sidebar_theme_color',
-		array(
-			'default'     => '#e3e6e8',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_sidebar_theme_color',
-			array(
-				'label'             => __( 'Sidebar Color', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_sidebar_theme_color_gs-1'
-		
-			)
-			)
-		)
-	);
-
-}
 
 
 
@@ -4347,277 +3272,6 @@ $wp_customize->add_section(
 
 
 
-		$wp_customize->add_setting(	'rollie_navbar_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_navbar_color_label',
-			array(
-				'label'   => esc_html__( 'Navbar Color', 'rollie' ),
-				'section'       => 'rollie_navbar_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_navbar_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_navbar_color_gs',
-					array(					
-						'section' => 'rollie_navbar_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_navbar_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,0.75)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_navbar_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_navbar_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_navbar_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_navbar_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_navbar_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_navbar_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,0.9)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_navbar_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_navbar_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_navbar_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_navbar_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_navbar_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_navbar_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_navbar_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_navbar_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_navbar_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_navbar_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_navbar_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_navbar_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_navbar_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_navbar_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_navbar_color',
-		array(
-			'default'     => 'rgba(255,255,255,0.8)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_navbar_color',
-			array(
-				'label'             => __( 'Navbar Color', 'Rollie' ),
-				'section'           => 'rollie_navbar_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_navbar_color_gs-1'
-		
-			)
-			)
-		)
-	);
 
 
 	$wp_customize->add_setting(
@@ -5954,1104 +4608,6 @@ $wp_customize->add_section(
 
 
 
-		$wp_customize->add_setting(	'rollie_button_b_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_button_b_color_label',
-			array(
-				'label'   => esc_html__( 'Button Color', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_button_b_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_button_b_color_gs',
-					array(					
-						'section' => 'rollie_buttons_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_button_b_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,0.75)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_button_b_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_b_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_button_b_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,0.9)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_button_b_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_button_b_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_button_b_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_button_b_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_b_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_button_b_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_b_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_button_b_color',
-		array(
-			'default'     => '#ffffff',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_color',
-			array(
-				'label'             => __( 'Button Color', 'Rollie' ),
-				'section'           => 'rollie_buttons_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_color_gs-1'
-		
-			)
-			)
-		)
-	);
-	
-
-
-		$wp_customize->add_setting(	'rollie_button_b_h_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_label',
-			array(
-				'label'             => __( 'Button Color At Hover', 'Rollie' ),
-		
-				'section'       => 'rollie_buttons_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_button_b_h_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_button_b_h_color_gs',
-					array(					
-						'section' => 'rollie_buttons_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_button_b_h_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,0.75)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_button_b_h_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_button_b_h_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,0.9)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_button_b_h_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_button_b_h_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_button_b_h_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_button_b_h_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_button_b_h_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_b_h_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_button_b_h_color',
-		array(
-			'default'     => '#212121',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_b_h_color',
-			array(
-				'label'             => __( 'Button Color At Hover', 'Rollie' ),
-				'section'           => 'rollie_buttons_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_b_h_color_gs-1'
-		
-			)
-			)
-		)
-	);
- 
-
-
-
-		$wp_customize->add_setting(	'rollie_button_alt_b_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_label',
-			array(
-				'label'   => esc_html__( 'Alternate button Color', 'rollie' ),
-				'description' => 'Alternate style for buttons will be applied to buttons like Woocommerce Submit Buttons',
-				'section'       => 'rollie_buttons_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_button_alt_b_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_button_alt_b_color_gs',
-					array(					
-						'section' => 'rollie_buttons_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_button_alt_b_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,0.75)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_button_alt_b_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_button_alt_b_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,0.9)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_button_alt_b_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_button_alt_b_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_button_alt_b_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_button_alt_b_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_button_alt_b_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_button_alt_b_color',
-		array(
-			'default'     => '#ffffff',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_color',
-			array(
-				'label'             => __( 'Alternate Button Color', 'Rollie' ),
-				'section'           => 'rollie_buttons_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_color_gs-1'
-		
-			)
-			)
-		)
-	);
-	
-
-
-		$wp_customize->add_setting(	'rollie_button_alt_b_h_color_label');
-		$wp_customize->add_control(
-		new Rollie_Customizer_Collapse_Label_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_label',
-			array(
-				'label'             => __( 'Alternate Button Color At Hover', 'Rollie' ),
-		
-				'section'       => 'rollie_buttons_section',
-				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 9,
-							)
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-						'rollie_button_alt_b_h_color_gs',
-						array(
-							'default'           => 1,
-							'sanitize_callback' => 'rollie_sanitize_radio',
-							'transport' =>'postMessage'
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-					'rollie_button_alt_b_h_color_gs',
-					array(					
-						'section' => 'rollie_buttons_section',
-						'choices' => array(
-							1 => esc_html__( ' Simple Color ', 'rollie' ),
-						2 => esc_html__( ' Gradient ', 'rollie' ),
-				
-						
-					),
-					)
-				)
-			);
-
-
-
-
-	$wp_customize->add_setting(
-		'rollie_button_alt_b_h_color_gr_1',
-		array(
-			'default'     => 'rgba(255,255,255,0.75)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_gr_1',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-			'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2'
-		
-			)
-		
-			)
-		)
-	);
-	
-			$wp_customize->add_setting(
-			'rollie_button_alt_b_h_color_stop_gr_1',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2'
-		
-			)
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_stop_gr_1',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2',	
-				),
-			)
-		)
-	);
-		
-
-	
-	$wp_customize->add_setting(
-		'rollie_button_alt_b_h_color_gr_2',
-		array(
-			'default'     => 'rgba(255,255,255,0.9)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_gr_2',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2'
-		
-			)
-		
-		
-			)
-		)
-	);
-
-
-				$wp_customize->add_setting(
-			'rollie_button_alt_b_h_color_stop_gr_2',
-			array(
-				'default'           => 40,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-		'rollie_button_alt_b_h_color_stop_gr_2',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2',
-				),
-			)
-		)
-	);
-		$wp_customize->add_setting(
-		'rollie_button_alt_b_h_color_gr_3',
-		array(
-			'default'     => 'rgba(255,255,255,1)',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_gr_3',
-			array(
-				'label'         => __( 'Alpha Color Picker', 'rollie' ),
-				'section'       => 'rollie_buttons_section',
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2'
-		
-			)
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-			'rollie_button_alt_b_h_color_stop_gr_3',
-			array(
-				'default'           => 0,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_stop_gr_3',
-			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2',
-				),
-			)
-		)
-	);
-			$wp_customize->add_setting(
-			'rollie_button_alt_b_h_color_angle_gr',
-			array(
-				'default'           => 45,
-					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color_angle_gr',
-			array(
-				'label'       => esc_html__( 'Gradient Angle','rollie' ),
-				'section'     => 'rollie_buttons_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 360,
-					'step' => 1,
-					'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-2',
-					
-				),
-			)
-		));
-
-
-		$wp_customize->add_setting(
-		'rollie_button_alt_b_h_color',
-		array(
-			'default'     => '#212121',
-			'transport'   => 'postMessage',
-			'sanitize_callback'=>'rollie_sanitize_rgba',
-		)
-	);
-
-
-
-
-
-
-	// Alpha Color Picker control.
-	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
-			$wp_customize,
-			'rollie_button_alt_b_h_color',
-			array(
-				'label'             => __( 'Alternate Button Color At Hover', 'Rollie' ),
-				'section'           => 'rollie_buttons_section',
-				
-				'show_opacity'  => true, 
-					'input_attrs'=>array(
-				'rollie_multiple_switch_cc' => 'rollie_button_alt_b_h_color_gs-1'
-		
-			)
-			)
-		)
-	);
-
 			$wp_customize->add_setting(
 				'rollie_button_shadow_on',
 				array(
@@ -7309,8 +4865,7 @@ $wp_customize->add_section(
 	);
 	if (class_exists('WooCommerce')){
 	require get_template_directory() . '/include/rollie_customizer_woo.php';
-	require get_template_directory() . '/include/rollie_customizer_css_woo.php';
-	}
+		}
 }
 
 

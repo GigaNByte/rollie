@@ -79,11 +79,14 @@ function rollieGradientControl(rollie_gradient_obj) {
 
   rollie_gr_css = /*rollie_gradient_obj.css_before_value*/  " linear-gradient( " + rollie_angle_gr + "deg, " + rollie_gr_1 + " " + rollie_stop_gr_1 + "% , " + rollie_gr_2 + " " + rollie_stop_gr_2 + "% , " + rollie_gr_3 + " " + rollie_stop_gr_3 + "% )";
 console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
-  $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property, rollie_gr_css);
-  wp.customize(rollie_gradient_obj.control_name, function(setting) {
+for (index = 0; index < rollie_gradient_obj.css_property.length; ++index) {
+    $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property[index], rollie_gr_css);
+}
+
+ /* wp.customize(rollie_gradient_obj.control_name, function(setting) {
    //setting.set(rollie_gr_css);
   });
-
+*/
 
 
 
@@ -91,7 +94,9 @@ console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
 
   wp.customize(rollie_gradient_obj.control_name, function(setting) {
    var rollie_standard_color = setting.get();
-   $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property, rollie_standard_color);
+   for (index = 0; index < rollie_gradient_obj.css_property.length; ++index) {
+   $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property[index], rollie_standard_color);
+ }
   });
 
 
@@ -107,19 +112,19 @@ console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
  var customize = wp.customize;
 
  var rollie_gr_controls = [
-  new rollie_gradient('rollie_main_theme_color', '.rollie_main_color', 'background'),
-  new rollie_gradient('rollie_second_theme_color', '.rollie_second_color', 'background'),
-  new rollie_gradient('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line', 'background'),
-  new rollie_gradient('rollie_darker_main_theme_color', '.rollie_darker_main_color', 'background'),
-  new rollie_gradient('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right', 'background'),
-  new rollie_gradient('rollie_title_bg_theme_color', '.rollie_title_bg_color', 'background'),
-  new rollie_gradient('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', 'background'),
-  new rollie_gradient('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color', 'background'),
-  new rollie_gradient('rollie_navbar_color', '.rollie_navbar_color ', 'background'),
-  new rollie_gradient('rollie_button_b_h_color','.rollie_button:hover', 'background'),
-  new rollie_gradient('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead', 'background'),
-  new rollie_gradient('rollie_button_alt_b_h_color','.rollie_button_alt:hover, .woocommerce .checkout-button:hover', 'background'),
-  new rollie_gradient('rollie_button_alt_b_color','.rollie_button_alt , .woocommerce .checkout-button' , 'background'),
+   new rollie_gradient('rollie_main_theme_color', '.rollie_main_color', Array('background')),
+  new rollie_gradient('rollie_second_theme_color', '.rollie_second_color',Array( 'background')),
+  new rollie_gradient('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line',Array( 'background')),
+  new rollie_gradient('rollie_darker_main_theme_color', '.rollie_darker_main_color',Array('background')),
+  new rollie_gradient('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',Array( 'background')),
+  new rollie_gradient('rollie_title_bg_theme_color', '.rollie_title_bg_color',  Array('background')),
+  new rollie_gradient('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', Array('background')),
+  new rollie_gradient('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color',Array( 'background')),
+  new rollie_gradient('rollie_navbar_color', '.rollie_navbar_color ', Array( 'background')),
+  new rollie_gradient('rollie_button_b_h_color','.rollie_button:hover',  Array('background')),
+  new rollie_gradient('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead', Array('background')),
+  new rollie_gradient('rollie_button_alt_b_h_color','.rollie_button_alt:hover, .woocommerce .checkout-button:hover',Array('background')),
+  new rollie_gradient('rollie_button_alt_b_color','.rollie_button_alt , .woocommerce .checkout-button' , Array( 'background')),
 
  ];
 
