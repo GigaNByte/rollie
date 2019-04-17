@@ -23,7 +23,7 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 		
 				
 				
-				<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0 rollie_posts_shadow  <?php echo 'rollie_main_color'; ?> ">
+				<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0 rollie_posts_shadow  ">
 					
 							<?php
 							if ( get_theme_mod( 'rollie_display_format_icon_link' ) ) {

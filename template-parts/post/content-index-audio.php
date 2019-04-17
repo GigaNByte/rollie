@@ -29,7 +29,7 @@ if ( ! $rollie_format_icon ) {
 						</div>
 							<a href="<?php echo get_page_link(); ?>">		
 									<div class="rollie_min_h_modern w-100 p-1 ">
-									<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  rollie_main_color <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>"> 
+									<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt   <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>"> 
 									
 							
 								

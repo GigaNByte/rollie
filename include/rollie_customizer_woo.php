@@ -67,36 +67,104 @@ $wp_customize->add_section(
 				'priority' => 20,
 			)
 		);
-		$wp_customize->add_setting(
-			'rollie_woo_notice_design', // rollie_one_on_row_design_php_0
-			array(
-				'sanitize_callback' => 'rollie_sanitize_select',
-				'default'           => 1,
 
+
+
+
+
+
+	$wp_customize->add_setting(
+		'rollie_woo_notice_text_color',
+		array(
+			'default'   => '#212529',
+			'transport' => 'refresh',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_woo_notice_text_color',
+			array(
+				'label'             => __( 'Main Theme Text Color', 'Rollie' ),
+				'section'           => 'rollie_woo_notifications_section',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
+		$wp_customize->add_setting(
+			'rollie_woo_notice_radius',
+			array(
+				'default'           => 0,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
 			)
 		);
 
-		$wp_customize->add_control(
-			'rollie_woo_notice_design', // rollie_one_on_row_design_php_0
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'rollie_woo_notice_radius',
 			array(
-				'label'   => esc_html__( 'Design of posts displayed as one in one row', 'Rollie' ),
-				'section' => 'rollie_woo_notifications_section',
-				'type'    => 'select',
-				'choices' => array(
-					1 => esc_html__( 'Classic', 'rollie' ),
-					2 => esc_html__( 'Modern', 'rollie' ),
+				'label'       => esc_html__( 'Notice border radius ' ),
+				'section'     => 'rollie_woo_notifications_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 10,
+					'step' => 1,
 				),
 			)
+		)
+	);
+
+			$wp_customize->add_setting(
+					'rollie_woo_notice_icon_invert',
+					array(
+						'default'           => false,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_woo_notice_icon_invert',
+				array(
+					'label'   => esc_html__( 'Invert Icon Color', 'rollie' ),
+					'section' => 'rollie_woo_notifications_section',
+
+				)
+			)
+		);
+
+			$wp_customize->add_setting(
+					'rollie_woo_notice_width_full',
+					array(
+						'default'           => true,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_woo_notice_width_full',
+				array(
+					'label'   => esc_html__( 'Display Message In Full Width', 'rollie' ),
+					'section' => 'rollie_woo_notifications_section',
+
+				)
+			)
 		);
 
 
 
 
-	rollie_add_gradient_control ($wp_customize,'rollie_woo_notifications_section','rollie_woo_notice_color','Notice Color','#ccedfd'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_woo_notifications_section','rollie_woo_error_color','Error Color','#ef9a9a'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_woo_notifications_section','rollie_woo_success_color','Success Color','#a5d6a7'); 
 
-$wp_customize->add_setting(
+	rollie_add_gradient_control ($wp_customize,'rollie_woo_notifications_section','rollie_woo_notice_color','Notice Color','#e3e6e8'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_woo_notifications_section','rollie_woo_error_color','Error Color','#e3e6e8'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_woo_notifications_section','rollie_woo_success_color','Success Color','#e3e6e8'); 
+	$wp_customize->add_setting(
 		'rollie_notification_text_color',
 		array(
 			'default'   => '#212121',
@@ -117,6 +185,70 @@ $wp_customize->add_setting(
 			)
 		)
 	);
+
+	$wp_customize->add_setting(
+		'rollie_woo_notice_border_color',
+		array(
+			'default'     => '#ccedfd',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_woo_notice_border_color',
+			array(
+				'label'         => __( 'Notice Border Color', 'rollie' ),
+				'section'       => 'rollie_woo_notifications_section',
+				'show_opacity'  => true, 	
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_woo_error_border_color',
+		array(
+			'default'     => '#ef9a9a',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_woo_error_border_color',
+			array(
+				'label'         => __( 'Error Border Color', 'rollie' ),
+				'section'       => 'rollie_woo_notifications_section',
+				'show_opacity'  => true, 	
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_woo_success_border_color',
+		array(
+			'default'     => '#a5d6a7',
+			'transport'   => 'postMessage',
+			'sanitize_callback'=>'rollie_sanitize_rgba',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Customize_Alpha_Color_Control(
+			$wp_customize,
+			'rollie_woo_success_border_color',
+			array(
+				'label'         => __( 'Success Border Color', 'rollie' ),
+				'section'       => 'rollie_woo_notifications_section',
+				'show_opacity'  => true, 	
+			)
+		)
+	);
+
 
 
 		

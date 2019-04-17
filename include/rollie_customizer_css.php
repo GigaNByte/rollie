@@ -1,5 +1,16 @@
 <?php
-			
+		function rgba2rgb($color) {
+    if ( empty( $color ) || is_array( $color ) )
+        return 'rgb(0,0,0)';
+    if ( false === strpos( $color, 'rgba' ) ) {
+        return $color;
+    }
+    $color = str_replace( ' ', '', $color );
+    sscanf( $color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
+    return 'rgb('.$red.','.$green.','.$blue.')';
+}
+
+
 function rollie_customizer_css () 
 {
 
@@ -324,11 +335,11 @@ function rollie_customizer_css ()
 	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,' .rollie_button:hover , .rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover', array('background'));
 						
      wp_add_inline_style( 'rollie_stylesheet',  $rollie_button_b_h->css_snippet());	
-	$rollie_button_alt_b = new Rollie_Gradient ('rollie_button_alt_b_color','#212121' ,'.rollie_button_alt, .woocommerce button button.alt ,.woocommerce a.button.alt',array( 'background-color'));
+	$rollie_button_alt_b = new Rollie_Gradient ('rollie_button_alt_b_color','#212121' ,'.rollie_button_alt,.woocommerce button.button.alt ,.woocommerce a.button.alt,.woocommerce .checkout-button',array( 'background-color'));
 						
      wp_add_inline_style( 'rollie_stylesheet',  $rollie_button_alt_b->css_snippet());		
-	$rollie_button_alt_b_h = new Rollie_Gradient ('rollie_button_alt_b_h_color','#ffffff' ,' .rollie_button_alt:hover, .woocommerce a.button.alt:hover',array('background'));
-     wp_add_inline_style( 'rollie_stylesheet',  $rollie_button_b_h->css_snippet());
+	$rollie_button_alt_b_h = new Rollie_Gradient ('rollie_button_alt_b_h_color','#ffffff' ,' .rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover',array('background'));
+     wp_add_inline_style( 'rollie_stylesheet',  $rollie_button_alt_b_h->css_snippet());
 
 
 
@@ -369,13 +380,10 @@ function rollie_customizer_css ()
 	$rollie_icon_gallery_color_h = get_theme_mod("rollie_icon_gallery_color_h","#ffffff");
 	$rollie_icon_gallery_shadow = get_theme_mod("rollie_icon_gallery_shadow","#a37e2c");
 	
-	$rollie_search_form_shadow_backg = get_theme_mod("rollie_search_form_shadow_backg","#a37e2c");
-
-	$rollie_search_form_color_backg = get_theme_mod("rollie_search_form_color_backg","#ffffff");
+	$rollie_form_input_border_color = get_theme_mod("rollie_form_input_border_color","#a37e2c");
+	$rollie_form_input_color_backg = get_theme_mod("rollie_form_input_color_backg","rgba(255,255,255,0.8)");
 	
-	$rollie_search_form_color = get_theme_mod("rollie_search_form_color","#212121");
-	$rollie_search_form_color_h = get_theme_mod("rollie_search_form_color_h","#ffffff");
-	$rollie_search_form_shadow = get_theme_mod("rollie_search_form_shadow","#a37e2c");
+
 	
 	$rollie_comment_s_s_color = get_theme_mod("rollie_comment_s_s_color","#212121");
 	$rollie_comment_f_s_color = get_theme_mod("rollie_comment_f_s_color","#212121");
@@ -412,7 +420,7 @@ function rollie_customizer_css ()
 	$rollie_widget_shadow_color = get_theme_mod("rollie_widget_shadow_color","#a37e2c") ;
 
 
-list ( $rollie_search_form_color_backg_r , $rollie_search_form_color_backg_g , $rollie_search_form_color_backg_b ) = sscanf ($rollie_search_form_color_backg, "#%02x%02x%02x");			
+	
 			
 			
 	
@@ -600,18 +608,20 @@ wp_add_inline_style( 'rollie_stylesheet'," .rollie_subtitle_text_color { color: 
 			
 			wp_add_inline_style( 'rollie_stylesheet'," .rollie_icon_gallery_custom_colors{ color: ". $rollie_icon_gallery_color ." ; \n text-shadow: 0px 0px 3px  ". $rollie_icon_gallery_shadow ." ;}");
 
-		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_search_form_custom_colors:hover { color: ". $rollie_search_form_color_h ." ;}");
-			
-			wp_add_inline_style( 'rollie_stylesheet'," .rollie_search_form_custom_colors{ color: ". $rollie_search_form_color ." ;\n  text-shadow: 0px 0px 3px  ". $rollie_search_form_shadow ." ;}");
 
-		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_search_form_m_1:active,.rollie_search_form_m_1:active:hover,.rollie_search_form_m_1:focus-within,.rollie_search_button_m_1 { background: ". 		$rollie_search_form_color_backg    ."; }");
+		wp_add_inline_style( 'rollie_stylesheet',".quantity:active,.quantity-button:hover,.quantity-button :focus-within,.input-text:active,.input-text:hover,.input-text:focus-within,.rollie_form_input:active, .rollie_form_input:hover,[type='radio']:checked:hover + label::after,[type='radio']:not(:checked):hover + label::before,.rollie_form_input:focus-within { background: ".rgba2rgb($rollie_form_input_color_backg)."; }");
 		
-		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_search_form_m_1{	border-color: ". $rollie_search_form_shadow_backg     ."; \n background: ". "rgba(".$rollie_search_form_color_backg_r. ",".$rollie_search_form_color_backg_g .",".$rollie_search_form_color_backg_b .",0.90) " ."; }");
+		wp_add_inline_style( 'rollie_stylesheet',"[type='radio']:checked + label:before,
+[type='radio']:not(:checked) + label:before,.quantity ,.input-text,.rollie_form_input{ \n border-width:".get_theme_mod('rollie_form_input_b_width',1)."px; \n color: ".get_theme_mod('rollie_form_input_text_color','	#212529').";\n border-style:solid; \n border-radius: ".get_theme_mod('rollie_form_input_radius',2)."px ;	\n border-color: ".  $rollie_form_input_border_color     ." !important; \n background: ". $rollie_form_input_color_backg ."; }");
+wp_add_inline_style('rollie_stylesheet','.rollie_form_input button { border-style:none; }');
+			
+		wp_add_inline_style( 'rollie_stylesheet',"[type='radio']:checked + label:after,[type='radio']:not(:checked) + label:after{\n  background:".$rollie_form_input_border_color .";\n }");
 
-		wp_add_inline_style( 'rollie_stylesheet'," 	nav .rollie_search_form_m_1 {	border-color: ". $rollie_search_form_shadow_backg     ."; \n  background: ". "rgba(".$rollie_search_form_color_backg_r. ",".$rollie_search_form_color_backg_g .",".$rollie_search_form_color_backg_b .",0.75) "  ."; }");
-			
-		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_search_form_shadow :focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_search_form_shadow_backg     ."; }");
-			
+
+
+
+		wp_add_inline_style( 'rollie_stylesheet'," .quantity:focus-within,.input-text:focus-within,	.rollie_search_form_shadow:focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_form_input_border_color     ."; }");
+		
 		wp_add_inline_style( 'rollie_stylesheet'," 	.swiper-pagination-bullet{		background:	". $rollie_darker_main_theme_color->rgb_gr_1 .";}");
 		
 			

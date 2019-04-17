@@ -1,13 +1,11 @@
 <?php
-
+$rollie_allow_sidebars = true;
 if ( class_exists( 'WooCommerce' ) ) {
 	if (is_account_page()){
 		$rollie_allow_sidebars = false;
 	} 
 }
-else{
-	$rollie_allow_sidebars = true;
-}
+
 
 if ( is_category() ) {
 

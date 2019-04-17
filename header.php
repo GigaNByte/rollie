@@ -11,9 +11,18 @@
 
 			
 
-<body class="rollie_main_color <?php echo 'body_page_id-' . get_queried_object_id(); ?>">
+<body class=" <?php echo 'body_page_id-' . get_queried_object_id(); ?>">
 
-		<?php
+<div class='rollie_main_color rollie_background_color_div'></div>
+		
+
+	<div class="container-fluid position-relative p-0">
+
+		<div class="row p-0">
+			<div class="rollie_header_container   text-center">
+			<?php
+
+		//HEADER IMAGE
 		$page_for_posts = get_option( 'page_for_posts' );
 		$rollie_home    = '';
 		$rollie_home_c  = '';
@@ -50,12 +59,6 @@
 			}
 		}
 		?>
-
-	<div class="container-fluid">
-
-		<div class="row p-0">
-			<div class="rollie_header_container <?php echo $rollie_home_c; ?>  text-center">
-
 
 
 <?php
@@ -135,11 +138,14 @@ if ( has_nav_menu( 'Rollie_Top_Menu' ) ) {
 <?php }
 			?>						
 									</nav>
+
 			</div>
-									
+					
 <?php } ?>
 	
 
 				</div>
 			</div>
-		</div>
+
+
+	

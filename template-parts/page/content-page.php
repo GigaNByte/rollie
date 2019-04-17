@@ -17,8 +17,8 @@
 			$parent_title = get_the_title( $post->post_parent );
  ?>
 
-	<div class="m-auto">
-		<div class="container-fluid rollie_title_container rollie_title_bg_color">
+	
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 			<div class="titles">
 
 			<?php
@@ -58,10 +58,12 @@
 			
 			
 			</div>
-		</div>
-
-
-	  <article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align  rollie_main_color">
+		</header>
+	</div><!-- closing page head from header.php-->
+	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in page.php-->
+		<main id="<?php echo 'page-' . get_the_ID(); ?>">
+		<div class="m-auto">
+	  <article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align ">
 	  
 		<?php
 				require locate_template('/template-parts/special/content-singlemeta.php');
@@ -125,8 +127,6 @@
 
 
 
-
-		</div> 
 					
 		
 <?php

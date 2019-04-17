@@ -1,6 +1,7 @@
 <?php get_header(); ?>
-	<div class="rollie_content_container_padding_bottom">
-			<main id="<?php echo 'page-' . get_the_ID(); ?>">
+	
+	
+
 	<?php
 
 
@@ -54,10 +55,11 @@
 
 
 	?>
-		</main>  
+		 
 		
 	
 			
-		</div>	
-		
+			</div>
+		</main>
+	
 	<?php get_footer(); ?>

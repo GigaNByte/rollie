@@ -3,7 +3,7 @@ if ( post_password_required() ) {
 	return;
 }
 if ( function_exists( 'icl_t' ) ) {
-			$rollie_c_and_r_str             = icl_t( 'Rollie', 'info-comments_and_replies_on', 'Comments and replies on' );
+			$rollie_c_and_r_str             = icl_t( 'Rollie', 'info-comments_and_replies_on', 'Comments and replies' );
 			$rollie_s_and_c_str             = icl_t( 'Rollie', 'info-submit_comment', 'Submit a comment' );
 			$rollie_comment_str             = icl_t( 'Rollie', 'info-comment', 'Comment' );
 			$rollie_lr_str                  = icl_t( 'Rollie', 'info-leave_reply', 'Leave reply' );
@@ -23,7 +23,7 @@ if ( function_exists( 'icl_t' ) ) {
 
 
 } else {
-	$rollie_c_and_r_str       = 'Comments and replies on';
+	$rollie_c_and_r_str       = 'Comments and replies';
 	$rollie_s_and_c_str       = 'Submit a comment';
 	$rollie_comment_str       = 'Comment';
 	$rollie_lr_str            = 'Leave reply';
@@ -129,7 +129,7 @@ if ( function_exists( 'icl_t' ) ) {
 				<?php
 
 
-					echo '<h3 ><span>' . $rollie_c_and_r_str . ' "</span><span>' . get_the_title() . '"</span><span> (' . get_comments_number() . ') </span></h3>';
+					echo '<h3 ><span>' . $rollie_c_and_r_str . ' <span> (' . get_comments_number() . ') </span></h3>';
 
 
 				?>

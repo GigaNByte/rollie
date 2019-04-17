@@ -21,8 +21,8 @@ if ( ! has_post_thumbnail( get_the_ID() ) ) {
 
 	
 						
-				<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0 rollie_posts_shadow <?php echo 'rollie_main_color'; ?> ">
-					<div onclick="window.location='<?php echo get_page_link(); ?>'" class="  rollie_link_js p-0 rollie_posts_shadow  <?php echo 'rollie_main_color'; ?> ">
+				<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0 rollie_posts_shadow  ">
+					<div onclick="window.location='<?php echo get_page_link(); ?>'" class="  rollie_link_js p-0 rollie_posts_shadow   ">
 				
 				<?php
 				if ( get_theme_mod( 'rollie_display_format_icon_status' ) ) {
@@ -38,11 +38,11 @@ if ( ! has_post_thumbnail( get_the_ID() ) ) {
 						if ( the_content() ) {
 							?>
 						
-							<div class="rollie_main_color rollie_min_h_modern w-100 ">	
+							<div class=" rollie_min_h_modern w-100 ">	
 					
 			
 										
-								<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  rollie_main_color <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>">
+								<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt   <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>">
 							
 										
 							<?php	the_content(); ?>

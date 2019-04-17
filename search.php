@@ -1,6 +1,7 @@
 <?php get_header(); ?>
-	<div class="rollie_content_container_padding_bottom">
-		<main id="<?php echo 'page-' . get_the_ID(); ?>">
+	
+
+
 	<?php
 
 
@@ -34,7 +35,7 @@
 			<?php
 			get_search_form();
 			?>
-		</div>
+			</div>
 		</div>
 		<?php
 		while ( have_posts() ) :
@@ -67,9 +68,8 @@
 
 			rollie_pagination();
 		
-		?>
-		</div>  
-	<?php
+		?>	
+				<?php
 
 	if ( is_active_sidebar( 'sidebar_right' && $rollie_allow_sidebars ) ) {
 		echo "<aside class='rollie_sidebar_right offset-1 col-2 '>";// offset-1
@@ -82,7 +82,7 @@
 		
 	
 				
-		</main>	
+		
 			
 	<?php
 	get_sidebar( 'bottom_1' );
@@ -92,6 +92,9 @@
 				dynamic_sidebar( 'sidebar_bottom_archive' );
 			echo '</section>';
 		}
-	}
-	get_footer()
-	?>
+	}?>
+		</div> <!--rollie_content_container_padding_bottom-->
+	</main>  
+
+<?php	get_footer();?>
+	

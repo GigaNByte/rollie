@@ -74,13 +74,13 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 							?>
 						
 							<a href="<?php echo get_page_link(); ?>">	
-								<div class="rollie_main_color rollie_min_h_modern w-100 ">	
+								<div class=" rollie_min_h_modern w-100 ">	
 						
 							<?php
 							if ( $rollie_post_display_style_classes[ $rollie_current_style ]['post_excerpt_lenght'] === 'full' ) {
 
 								?>
-									<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  rollie_main_color <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?> "> 
+									<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?> "> 
 																																				<?php
 
 																																				if ( function_exists( 'get_field' ) && get_field( 'rollie_excerpt' ) ) {
@@ -95,7 +95,7 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 							if ( $rollie_post_display_style_classes[ $rollie_current_style ]['post_excerpt_lenght'] > 2 ) {
 
 								?>
-											<div class="rollie_main_theme_text_color rollie_main_color rollie_post_excerpt rollie_f_excerpt  <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?> ">	
+											<div class="rollie_main_theme_text_color  rollie_post_excerpt rollie_f_excerpt  <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?> ">	
 												
 												<p>
 									  <?php

@@ -24,7 +24,7 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 
 
 ?>
-				<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0 rollie_posts_shadow  <?php echo 'rollie_main_color'; ?> ">
+				<article id="<?php echo 'post-' . get_the_ID(); ?>" class=" p-0 rollie_posts_shadow  ">
 					<div onclick="window.location='<?php echo get_page_link(); ?>'" class=" p-0 rollie_link_js <?php echo 'rollie_main_color'; ?> ">
 				<?php
 				if ( get_theme_mod( 'rollie_display_format_icon_gallery' ) ) {
@@ -98,13 +98,13 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 						if ( $rollie_has_content ) {
 							?>
 						
-							<div class="rollie_main_color rollie_min_h_modern w-100 ">	
+							<div class=" rollie_min_h_modern w-100 ">	
 					
 							<?php
 							if ( $rollie_post_display_style_classes[ $rollie_current_style ]['post_excerpt_lenght'] === 'full' ) {
 
 								?>
-								<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  rollie_main_color <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>">
+								<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt   <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?>">
 																																			<?php
 
 																																			if ( function_exists( 'get_field' ) && get_field( 'rollie_excerpt' ) ) {

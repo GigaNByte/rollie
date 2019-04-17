@@ -20,9 +20,10 @@
 				
 		
 		</header>
-
-
-	  <div class="rollie_text_content_align  rollie_main_color ">
+</div><!-- closing page head from header.php-->
+<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in index.php-->
+	<main id="<?php echo 'page-' . get_the_ID(); ?>">
+	  <div class="rollie_text_content_align   ">
 		 <div class=" row m-0">
 		 	
 		<?php

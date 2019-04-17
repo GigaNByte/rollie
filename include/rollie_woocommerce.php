@@ -14,6 +14,7 @@
 add_filter( 'woocommerce_enqueue_styles', 'rollie_dequeue_styles' );
 function rollie_dequeue_styles( $enqueue_styles ) {// Remove the layout
 	unset( $enqueue_styles['woocommerce-smallscreen'] );	// Remove the smallscreen optimisation
+	unset( $enqueue_styles['woocommerce'] );	// Remove the smallscreen optimisation
 	return $enqueue_styles;
 }
 
@@ -179,7 +180,7 @@ function rollie_woo_order_custom_column( $order ) {
         // do something here
 ?>
 
-<div class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>
+<div class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad '>
 	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
 	<div class='  rollie_woo_order_table_banner   rollie_button  '>		
 
@@ -277,7 +278,7 @@ function rollie_woo_order_custom_column( $order ) {
 function rollie_woo_orders_table_sort_menu ()
 {
 	?>
-<div class='row rollie_orders_sort_menu text-center'>
+<div class='row rollie_orders_sort_menu text-center mb-3'>
 
 	<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current';?>'  >	 
 		<a href='<?php  echo wc_get_account_endpoint_url('orders') ; ?>'>
@@ -516,19 +517,34 @@ add_filter( 'the_title', 'rollie_endpoint_titles', 10, 2 );
 
 //Cart
 
-
+function rollie_woo_cart_total_content()
+{
+	echo "<div class='rollie_woo_cart_total rollie_woo_border_color_custom_column rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad col-12'>";
+}
 function rollie_woo_cart_content()
 {
-echo "<div class='rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
+echo "<div class='rollie_woo_cart_content rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
 }
 function rollie_woo_cart_content_wraper_end()
 {
 
 echo "</div>";
 }
+function rollie_woo_cart_totals_before_order_total (){
+	//echo "<div class='rollie_f_subtitles_h4 '>";
+
+	}
+
 add_action('woocommerce_before_cart_table','rollie_woo_cart_content',1);
 add_action('woocommerce_after_cart_table','rollie_woo_cart_content_wraper_end',200);
-
+add_action('woocommerce_before_cart_totals','rollie_woo_cart_total_content',1);
+add_action('woocommerce_after_cart_totals','rollie_woo_cart_content_wraper_end',200);
+function rollie_woo_cart_totals_order_total_html( $value)
+{
+	$value="<h4 class='rollie_f_subtitles_h4 '>".$value.'</h4>';
+return  $value;
+}
+add_filter( 'woocommerce_cart_totals_order_total_html', 'rollie_woo_cart_totals_order_total_html', 10, 1 ); 
 function rollie_woo_orders_pagination()
 {
 	$args = array('meta_value'  => get_current_user_id(),'paginate' => true);
@@ -548,10 +564,10 @@ rollie_pagination( $customer_orders->max_num_pages,$cpage,$paged,'orders' );
 	
 }
 add_action('woocommerce_before_account_orders_pagination','rollie_woo_orders_pagination');
-function filter_woocommerce_cart_item_thumbnail( $product_get_image, $cart_item, $cart_item_key ) { 
+function rollie_woo_cart_item_thumbnail( $product_get_image, $cart_item, $cart_item_key ) { 
  
     return  "<div class='woocommerce_gallery_thumbnail'>".$product_get_image."</div>"; 
 }; 
          
 // add the filter 
-add_filter( 'woocommerce_cart_item_thumbnail', 'filter_woocommerce_cart_item_thumbnail', 10, 3 );
+add_filter( 'woocommerce_cart_item_thumbnail', 'rollie_woo_cart_item_thumbnail', 10, 3 );

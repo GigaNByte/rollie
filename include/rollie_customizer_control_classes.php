@@ -697,9 +697,18 @@ class Rollie_Customizer_Collapse_Label_Control extends WP_Customize_Control {
 
 public $type = 'toogle-label';
 	public function render_content() {	
+		 if (isset($this->input_attrs['rollie_open_close_auto']) && $this->input_attrs['rollie_open_close_auto']){
+		 	 $rollie_open_close_auto ='true';
+		 }
+		 else {
+		 	$rollie_open_close_auto='false';
+		 }
+		 	
             ?> 
+
             <?php if ( ! empty( $this->label ) ) : ?>
-            	<h3 class="rollie_collapse_label_toggle accordion-section-title customize-control-title  rollie_customizer_label " rollie_collapse_elements="<?Php if (isset($this->input_attrs['rollie_collapse_elements_number'])) echo esc_attr ($this->input_attrs['rollie_collapse_elements_number'])  ?>">
+            	<h3 class="rollie_collapse_label_toggle accordion-section-title customize-control-title  rollie_customizer_label " rollie_open_close_auto="<?Php echo esc_attr($rollie_open_close_auto)?>" rollie_collapse_elements="<?Php if (isset($this->input_attrs['rollie_collapse_elements_number'])) echo esc_attr ($this->input_attrs['rollie_collapse_elements_number'])  ?>">
+
             		<?php echo esc_html( $this->label ); ?></h3>
                 
             <?php endif; ?>

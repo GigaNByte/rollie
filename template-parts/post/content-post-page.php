@@ -60,7 +60,7 @@
 		if ( $is_display_content_post_page && $is_post_page_title_single_row ) {
 
 			?>
-					<div class="row m-0  ">
+					
 						<div class=" offset-1 col-5   rollie_f_headings rollie_title_text_color rollie_flex_text_center">
 					<?php
 					if ( $rollie_alt_cat_title ) {
@@ -77,18 +77,22 @@
 							
 						</div>
 				
-					</div>
+					
 				
 				<?php
 		}
 		?>
+
 		</header>
 
 	<?php } else {?>
 			<header class="container-fluid rollie_title_container rollie_title_bg_color">
 			</header>
 	<?php }?>
-	  <div class="rollie_text_content_align  rollie_main_color ">
+</div><!-- closing page head from header.php-->	
+<div class="rollie_content_container_padding_bottom"><!-- tag will be colosed in index.php-->
+	<main id="<?php echo 'page-' . get_the_ID(); ?>">
+	  <div class="rollie_text_content_align  ">
 		 <div class=" row m-0">
 
 
@@ -139,6 +143,7 @@
 				  <!-- Page Content -->
 					</div>
 				</div>
+
 			</div><!-- .entry-content-page -->
 
 		

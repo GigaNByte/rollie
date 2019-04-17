@@ -85,6 +85,14 @@ function rollie_collapse_label_toggle_controler (selector_name,on_doc_ready)
 {
 var	value = $(selector_name).attr('rollie_collapse_elements');
 
+		if ($(selector_name).attr('rollie_open_close_auto') == 'true'){
+			$(selector_name).parent().next().css('margin-top','0');
+			$(selector_name).parent().css('margin-bottom','0');
+			$(selector_name).children().first().css('margin-top','0');
+				$(selector_name).parent().nextAll().eq(parseInt(value)-1).addClass('rollie_collapse_bb');
+		}
+
+
 
 	$(selector_name).parent().nextAll().each(function( index ) {
 		var tr = true;

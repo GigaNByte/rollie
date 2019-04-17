@@ -1,9 +1,9 @@
 <?php require locate_template( 'include/rollie_single_pages_bootstrap_class_variables.php' ); ?>	
 	
-<main id="<?php echo 'page-' . get_the_ID(); ?>">
+
 
 			
-		<div class="container-fluid rollie_title_container rollie_title_bg_color">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 		<?php
 		
 		get_template_part( 'template-parts/special/content', 'swap_cat' );
@@ -64,10 +64,11 @@
 			 //} ?>	
 		
 	
-		</div>
-
-
-	  <article  id="<?php echo 'post-content-' . get_the_ID(); ?> " class="rollie_text_content_align  rollie_main_color ">
+		</header>
+</div><!-- closing page head from header.php-->		
+<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in single.php-->
+	<main id="<?php echo 'page-' . get_the_ID(); ?>">
+	  <article  id="<?php echo 'post-content-' . get_the_ID(); ?> " class="rollie_text_content_align   ">
 	  
 
 	
@@ -136,7 +137,9 @@
 
 		</article>
 	
-		
+	
+	</main>
+</div>	
 <?php
 
 

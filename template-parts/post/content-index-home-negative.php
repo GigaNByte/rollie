@@ -48,7 +48,7 @@
 		</header>
 
 
-	  <div class="rollie_text_content_align  rollie_main_colorrollie_main_color ">
+	  <div class="rollie_text_content_align   ">
 	  
 		<?php
 		if ( rollie_page_has_children() ) {

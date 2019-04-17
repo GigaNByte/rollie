@@ -1,5 +1,6 @@
 <?php get_header(); ?>
-	<div class="rollie_content_container_padding_bottom">
+		
+
 	<?php
 
 
@@ -30,7 +31,7 @@
 	// numver says how many words you want to display in excerpt
 	// variables for content-post-page and customizer END
 	?>
-<main id="<?php echo 'page-' . get_the_ID(); ?>">
+
 <?php
 
 if ( is_home() ) {
@@ -85,7 +86,7 @@ if ( have_posts() ) :
 
 
 ?>
-		</div>  
+		  
 	<?php
 
 	if ( is_active_sidebar( 'sidebar_right' ) && $rollie_allow_sidebars ) {
@@ -99,7 +100,7 @@ if ( have_posts() ) :
 		
 	
 				
-		</main>
+		
 			
 	<?php
 	get_sidebar( 'bottom_1' );
@@ -111,5 +112,6 @@ if ( have_posts() ) :
 		}
 	}
 	?>
-	
+		</div>
+	</main>
 	<?php get_footer(); ?>

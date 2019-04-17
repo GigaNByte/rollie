@@ -23,11 +23,9 @@
 	 get_header();?>
 
 
-	<!-- div empty from header -->
+	
 
-
-		<div class="rollie_content_container_padding_bottom">
-			<main id="<?php echo 'page-' . get_the_ID(); ?>">
+			
 			<?php woocommerce_content(); ?>
 		<?php
 		/*while ( have_posts() ) :
@@ -44,7 +42,8 @@
 		}
 */
 		?>
-				</main>
 			</div> <!--rollie_content_container_padding_bottom-->
+				</main>
+		
 		<!--</div>  end of div empty div from header -->
 	<?php get_footer(); ?>

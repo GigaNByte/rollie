@@ -1,10 +1,16 @@
-function rollie_gradient(control_name, css_class, css_property/*,css_before_value*/) {
+class  RollieCustomizerObj{
+
+constructor(control_name, css_class, css_property) {
  this.control_name = control_name;
  this.css_class = css_class;
  this.css_property = css_property;
+  this.css_value = '';
+
 /*this.css_before_value = css_before_value;*/
 }
 
+
+}
 function hexToRgbA_2(hex) {
  var c;
  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
@@ -78,10 +84,13 @@ function rollieGradientControl(rollie_gradient_obj) {
   var rollie_gr_css = '';
 
   rollie_gr_css = /*rollie_gradient_obj.css_before_value*/  " linear-gradient( " + rollie_angle_gr + "deg, " + rollie_gr_1 + " " + rollie_stop_gr_1 + "% , " + rollie_gr_2 + " " + rollie_stop_gr_2 + "% , " + rollie_gr_3 + " " + rollie_stop_gr_3 + "% )";
-console.log(rollie_gradient_obj.css_class+' '+rollie_gr_css+'grad');
-for (index = 0; index < rollie_gradient_obj.css_property.length; ++index) {
+
+
+for (index = 0; index < rollie_gradient_obj.css_property.length; index++) {
     $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property[index], rollie_gr_css);
 }
+rollie_gradient_obj.css_value = rollie_gr_css;
+
 
  /* wp.customize(rollie_gradient_obj.control_name, function(setting) {
    //setting.set(rollie_gr_css);
@@ -91,20 +100,34 @@ for (index = 0; index < rollie_gradient_obj.css_property.length; ++index) {
 
 
  } else {
-
-  wp.customize(rollie_gradient_obj.control_name, function(setting) {
-   var rollie_standard_color = setting.get();
-   for (index = 0; index < rollie_gradient_obj.css_property.length; ++index) {
-   $(rollie_gradient_obj.css_class).css(rollie_gradient_obj.css_property[index], rollie_standard_color);
- }
-  });
-
+rollieUniversalControl(rollie_gradient_obj);
 
  }
+
 }
 
+function rollieColor(control_name, css_class, css_property) {
+ this.control_name = control_name;
+ this.css_class = css_class;
+ this.css_property = css_property;
+  this.css_value = '';
+
+}
+function rollieUniversalControl(rollie_color_obj) {
+  wp.customize(rollie_color_obj.control_name, function(setting) {
+   var rollie_standard_color = setting.get();
 
 
+rollie_color_obj.css_value = rollie_standard_color;
+
+   for (index = 0; index < rollie_color_obj.css_property.length; index++) {
+
+   $(rollie_color_obj.css_class).css(rollie_color_obj.css_property[index], rollie_standard_color);
+ }
+
+  });
+
+}
 
 (function($) {
 
@@ -112,19 +135,19 @@ for (index = 0; index < rollie_gradient_obj.css_property.length; ++index) {
  var customize = wp.customize;
 
  var rollie_gr_controls = [
-   new rollie_gradient('rollie_main_theme_color', '.rollie_main_color', Array('background')),
-  new rollie_gradient('rollie_second_theme_color', '.rollie_second_color',Array( 'background')),
-  new rollie_gradient('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line',Array( 'background')),
-  new rollie_gradient('rollie_darker_main_theme_color', '.rollie_darker_main_color',Array('background')),
-  new rollie_gradient('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',Array( 'background')),
-  new rollie_gradient('rollie_title_bg_theme_color', '.rollie_title_bg_color',  Array('background')),
-  new rollie_gradient('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', Array('background')),
-  new rollie_gradient('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color',Array( 'background')),
-  new rollie_gradient('rollie_navbar_color', '.rollie_navbar_color ', Array( 'background')),
-  new rollie_gradient('rollie_button_b_h_color','.rollie_button:hover',  Array('background')),
-  new rollie_gradient('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead', Array('background')),
-  new rollie_gradient('rollie_button_alt_b_h_color','.rollie_button_alt:hover, .woocommerce .checkout-button:hover',Array('background')),
-  new rollie_gradient('rollie_button_alt_b_color','.rollie_button_alt , .woocommerce .checkout-button' , Array( 'background')),
+   new RollieCustomizerObj('rollie_main_theme_color', '.rollie_main_color', Array('background')),
+  new RollieCustomizerObj('rollie_second_theme_color', '.rollie_second_color',Array( 'background')),
+  new RollieCustomizerObj('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line',Array( 'background')),
+  new RollieCustomizerObj('rollie_darker_main_theme_color', '.rollie_darker_main_color',Array('background')),
+  new RollieCustomizerObj('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',Array( 'background')),
+  new RollieCustomizerObj('rollie_title_bg_theme_color', '.rollie_title_bg_color',  Array('background')),
+  new RollieCustomizerObj('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', Array('background')),
+  new RollieCustomizerObj('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color',Array( 'background')),
+  new RollieCustomizerObj('rollie_navbar_color', '.rollie_navbar_color ', Array( 'background')),
+  new RollieCustomizerObj('rollie_button_b_h_color','.rollie_button:hover',  Array('background')),
+  new RollieCustomizerObj('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead', Array('background')),
+  new RollieCustomizerObj('rollie_button_alt_b_h_color','.rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover',Array('background')),
+  new RollieCustomizerObj('rollie_button_alt_b_color','.rollie_button_alt,.woocommerce button.button.alt  ,.woocommerce a.button.alt,.woocommerce .checkout-button' , Array( 'background')),
 
  ];
 

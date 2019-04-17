@@ -518,13 +518,14 @@ display: none;
   justify-content: center;
   align-items: center;
 }
-.rollie_multiple_switch_bb
+.rollie_multiple_switch_bb,.rollie_collapse_bb
 {
 border-bottom: solid;
 border-width: 2px;
 border-color: #cccccc;
 margin-bottom: 12px;
 } 
+
 .rollie_multiple_switch 
 {
 

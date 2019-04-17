@@ -1,23 +1,28 @@
 <?php
 
  get_header();?>
-	  <div class="rollie_content_container_padding_bottom">
+ 	
+ 	</div><!-- closing page head from header.php-->
+ 		 <div class="rollie_content_container_padding_bottom">
+			<main id="<?php echo 'page-' . get_the_ID(); ?>">	
+ 		 
 
-	<main id="<?php echo 'page-' . get_the_ID(); ?>">
-		<div class="container-fluid rollie_title_container rollie_title_bg_color">
-	
-	<div class="rollie_f_headings rollie_category_title_text_color"> 404 Something went wrong </div>
-		</div>
-		  <div class="rollie_text_content_align  rollie_main_colortext-center  ">
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
+			<div class="rollie_f_headings rollie_category_title_text_color"> 404 Ching Chong Something Went Wrong </div>
+
+		</header>
+	</main>
+</div>
+		  <div class="rollie_text_content_align  text-center  ">
 		More family friendly 404 page will be added soon
 		</div>
 
 
 
 
-		</main>
+		
+			 </div> <!--rollie_content_container_padding_bottom-->
+		</main>	
 
-			
-	 </div> <!--rollie_content_container_padding_bottom-->
 
 <?php get_footer(); ?>

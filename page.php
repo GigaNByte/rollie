@@ -23,11 +23,9 @@
 	 get_header();?>
 
 
-	<!-- div empty from header -->
 
-
-		<div class="rollie_content_container_padding_bottom">
-			<main id="<?php echo 'page-' . get_the_ID(); ?>">
+		
+	
 		<?php
 		while ( have_posts() ) :
 			the_post();
@@ -42,8 +40,9 @@
 			rollie_pagination();
 		
 
-		?>
+		?>	
+					</div> <!--rollie_content_container_padding_bottom-->
 				</main>
-			</div> <!--rollie_content_container_padding_bottom-->
+		
 		<!--</div>  end of div empty div from header -->
 	<?php get_footer(); ?>
