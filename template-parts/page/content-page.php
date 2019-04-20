@@ -36,15 +36,26 @@
 		
 			$rollie_below ="";
 	}
+		$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
+							} 
+
+
+
 
 			if ( is_page() && $post->post_parent && ( ! $rollie_alt_cat_title ) ) {
-				echo '<div class="rollie_parent_title '.$rollie_below.' rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $parent_title . '</div>';
+				echo '<div class="rollie_parent_title '.$rollie_below.$rollie_line.' rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $parent_title . '</div>';
 			} elseif ( $rollie_alt_cat_title ) {
-					  echo '<div class="rollie_parent_title '.$rollie_below.' rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
-			}
+					  echo '<div class="rollie_parent_title '.$rollie_below.$rollie_line.' rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
+			}?>
 
-				the_title( '<div class="  rollie_f_headings rollie_title_text_color">', '</div>' ); ?>
-				
+	<div class="rollie_f_headings <?Php echo $rollie_line ?> rollie_title_text_color">
+	<?php the_title(); ?>
+	</div>
 				<div class=" rollie_f_excerpt_s rollie_subtitle_text_color col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 ">
 					<p>
 		<?php

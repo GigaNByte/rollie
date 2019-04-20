@@ -34,7 +34,7 @@ while ( $child_query->have_posts() ) :
 													?>
 											
 										</div>
-									<span class="w-25 rollie_fancy_line d-inline-block"></span>
+									
 										<div class='rollie_child_pages_thumbnail_ex rollie_f_excerpt_s w-100 '>
 											<?php
 

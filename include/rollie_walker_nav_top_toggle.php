@@ -61,6 +61,16 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu {
 
 			$this->dropdownsibling = true;
 			$classes[]             = 'nav-item';
+					if ( get_theme_mod ('rollie_embl_navbar' ,2 ) == 1){
+								$classes[] =' rollie_fancy_line_vertical' ;
+								$classes[] =' rollie_fancy_line';
+									$classes[] ='rollie_fancy_line_n';
+							} 
+							 if ( get_theme_mod ('rollie_embl_navbar' ,2) == 2){
+									$classes[] =' rollie_fancy_line';
+									$classes[] ='rollie_fancy_line_n';
+									$classes[] ='rollie_fancy_line_horizontal';
+							} 
 
 			$classes[] = 'rollie_nav_item';
 			$classes[] = 'dropdown';
@@ -79,9 +89,11 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu {
 			$attributes                .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes                .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
 			$attributes                .= 'style=" display: inline-block"';
-			$attributes                .= ' data-target="#" class="nav-link rollie_nav_link"';
+			
+			$attributes                .= ' data-target="#" class="nav-link rollie_nav_link "';
 
 			$item_output = $args->before;
+		
 
 			$item_output .= '<a ' . $attributes . '>';
 
@@ -90,7 +102,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu {
 			$item_output .= ( $depth == 0 && $args->walker->has_children ) ? ' </a>' : '</a>';
 			$item_output .= ' <span style="align:right" href="#" data-target="#" class="dropdown-toggle rollie_dropdown_toogle  rollie_chevron_menu rollie_icon_nav rollie_icon_global" data-toggle="dropdown"> <i class="fas fa-chevron-down fa-1x fa-gradient"></i></span>';
 
-			$item_output .= '<span class="rollie_fancy_line"></span>';
+			
 
 			$item_output .= $args->after;
 
@@ -170,17 +182,25 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu {
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-
-			$attributes .= 'data-target="#"  class="nav-link rollie_nav_link"';
+$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_navbar' ,2 ) == 1){
+								$rollie_line='  rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_navbar' ,2) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_n rollie_fancy_line_horizontal';
+							} 
+	
+			$attributes .= 'data-target="#"  class="nav-link rollie_nav_link '.$rollie_line.'"';
 			
 		
 			$item_output = $args->before;
-
+		
 			$item_output .= '<a ' . $attributes . '>';
-
+		
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
-			$item_output .= '<span class="rollie_fancy_line"></span>';
+
+			
 
 			$item_output .= $args->after;
 
@@ -210,7 +230,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu {
 
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= ( $depth == 0 && $args->walker->has_children ) ? ' </a>' : '</a>';
-			$item_output .= '<span class="rollie_fancy_line"></span>';
+	
 
 			$item_output .= $args->after;
 

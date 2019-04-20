@@ -106,20 +106,29 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
 
-	
-				$attributes .= ' class="nav-link rollie_second_text_color rollie_footer_nav_link dropdown-toggle"';
+	$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_footer' ,2 ) == 1){
+								$rollie_line='  rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_footer' ,2) == 2){
+								$rollie_line=' rollie_fancy_line  rollie_fancy_line_horizontal rollie_fancy_line_n ';
+							} 
+				$attributes .= ' class="nav-link rollie_second_text_color rollie_footer_nav_link dropdown-toggle '.$rollie_line.'"';
 			
 
 			$attributes .= ' data-target="#" data-toggle="dropdown"';
 
 			$item_output = $args->before;
+		
+		
 
 			$item_output .= '<a ' . $attributes . ' >';
-
+	
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+
 			$item_output .= ( $depth == 0 && $args->walker->has_children ) ? ' </a>' : '</a>';
 
-				$item_output .= '<span class="rollie_fancy_line"></span>';
+		
 			
 
 			$item_output .= $args->after;
@@ -204,8 +213,14 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-
-			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_footer_nav_link"';
+$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_footer' ,2 ) == 1){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_footer' ,2) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_horizontal rollie_fancy_line_n ';
+							} 
+			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_footer_nav_link'.$rollie_line.'"';
 
 			/*
 			 -----------------------------------------------
@@ -214,12 +229,16 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 			*/
 
 			$item_output = $args->before;
+		
+	
 
 			$item_output .= '<a ' . $attributes . '>';
-
+	
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
-			$item_output .= '<span class="rollie_fancy_line"></span>';
+
+
+			
 
 			$item_output .= $args->after;
 

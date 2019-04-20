@@ -1,5 +1,6 @@
 
 		<header class="container-fluid  rollie_title_container rollie_title_bg_color">
+				<div class='row'>
 		<?php
 
 			$rollie_q_o           = get_queried_object();
@@ -18,30 +19,27 @@ else{
 		
 			$rollie_below ="";
 		}
+				$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
+							} 
 		?>
-			<div class="titles">
 
-			<?php
-
+						<div class=" offset-1 col-5 rollie_title <?php echo 	$rollie_line ?>rollie_f_headings rollie_title_text_color ">
 
 
-
-			if ( $rollie_alt_cat_title ) {
-					  echo '<div class="rollie_parent_title '.$rollie_below.' rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
-			}
-
-
-			?>
-			
-			</div>
-								<div class="row m-0  ">
-						<div class=" offset-1 col-5 rollie_title  rollie_f_headings rollie_title_text_color rollie_flex_text_center">
 						<?php
 						if ( $rollie_alt_cat_title ) {
-							echo '<div class="rollie_parent_title '.$rollie_below.'rollie_second_title_ppr rollie_f_headings rollie_f_headings_h2  rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
+							echo '<div class="rollie_parent_title '.$rollie_below.'rollie_second_title_ppr  rollie_f_headings_h2  rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
 						}
+					
 							 single_cat_title();
+					
 						?>
+
 						</div>
 						<div class="col-5  rollie_f_excerpt_s  rollie_flex_text_center rollie_subtitle_text_color">
 							
@@ -51,8 +49,8 @@ else{
 						?>
 						</div>
 				
-					</div>
-				
+					
+				</div>
 			
 		</header>
 </div><!-- closing page head from header.php-->

@@ -3,18 +3,31 @@
 		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 
 					<div class="row m-0  ">
+
+						<?php 
+						$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t';
+							} ?>
+							<?php if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+								$rollie_line='rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
+							} ?>
 						<div class="col-4 col-md-2 ">
 							
 				<?PHP	echo get_avatar( $rollie_author->ID, '', '', '', array( 'class' => 'float-right' ) ); ?>
 						</div>
-						<div class="  col-8  col-md-4   rollie_f_headings rollie_f_headings_h2 rollie_title_text_color rollie_flex_text_center">
+				
+						<div class=" <?php echo $rollie_line ?> col-8  col-md-4   rollie_f_headings rollie_f_headings_h2 rollie_title_text_color ">
 						<?php
+							
+
 						$rollie_arch_title = rollie_get_translated_archive_title();
 							echo $rollie_arch_title;
 
 						?>
+							
 						</div>
-						<div class="col-6  rollie_f_excerpt_s  rollie_flex_text_center rollie_subtitle_text_color">
+						<div class="col-6  rollie_f_excerpt_s   rollie_subtitle_text_color">
 							<?php echo $rollie_author->description; ?>
 							
 						</div>

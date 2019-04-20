@@ -145,7 +145,7 @@ rollie_color_obj.css_value = rollie_standard_color;
   new RollieCustomizerObj('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color',Array( 'background')),
   new RollieCustomizerObj('rollie_navbar_color', '.rollie_navbar_color ', Array( 'background')),
   new RollieCustomizerObj('rollie_button_b_h_color','.rollie_button:hover',  Array('background')),
-  new RollieCustomizerObj('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead', Array('background')),
+  new RollieCustomizerObj('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead ,.woocommerce-checkout-review-order-table', Array('background')),
   new RollieCustomizerObj('rollie_button_alt_b_h_color','.rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover',Array('background')),
   new RollieCustomizerObj('rollie_button_alt_b_color','.rollie_button_alt,.woocommerce button.button.alt  ,.woocommerce a.button.alt,.woocommerce .checkout-button' , Array( 'background')),
 
