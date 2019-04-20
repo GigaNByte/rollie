@@ -1,12 +1,6 @@
 	
 	<?php
-	$page_for_posts_id = get_option( 'page_for_posts' );
-	if ( $page_for_posts_id ) { ?>
-		<header class="container-fluid rollie_title_container rollie_title_bg_color">
-		
-		
-		<?php
-	
+
 
 			$is_post_page_title_single_row = get_theme_mod( 'rollie_posts_page_title_single_row' );
 					$parent_title          = get_the_title( $post->post_parent );
@@ -31,19 +25,32 @@
 		
 			$rollie_below ="";
 		}
+
+	$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
+							} 
+
+	$page_for_posts_id = get_option( 'page_for_posts' );
+	if ( $page_for_posts_id ) { ?>
+		<header class="container-fluid rollie_title_container rollie_title_bg_color">
+			<div class='row'>
+		
+		<?php
+
+
 		if ( $is_display_content_post_page && ( ! $is_post_page_title_single_row ) ) {
-			?>
-
-			<?php
-
-
-
+		
+			
 
 			if ( $rollie_alt_cat_title ) {
-					  echo '<div class="rollie_parent_title '.$rollie_below.' rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
+					  echo '<div class="rollie_parent_title '.$rollie_below.$rollie_line.' rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
 			}
 
-				the_title( '<div class="  rollie_f_headings  rollie_title_text_color">', '</div>' );
+				the_title( '<div class="  rollie_f_headings '.$rollie_line.' rollie_title_text_color">', '</div>' );
 
 
 			?>
@@ -58,15 +65,26 @@
 			<?php
 		}
 		if ( $is_display_content_post_page && $is_post_page_title_single_row ) {
+						if ( get_theme_mod ('rollie_embl_titles' ,0)== 1){
+						echo '<span class="rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t"></span>';
+						}
 
 			?>
-					
-						<div class=" offset-1 col-5   rollie_f_headings rollie_title_text_color rollie_flex_text_center">
+						
+						<div class=" offset-1 col-5   rollie_f_headings rollie_title_text_color ">
+				
 					<?php
+					
 					if ( $rollie_alt_cat_title ) {
-						echo '<div class="rollie_parent_title '.$rollie_below.' rollie_second_title_ppr  rollie_f_headings rollie_f_headings_h2 rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
+						echo '<div class="rollie_parent_title '.$rollie_below.' rollie_second_title_ppr   rollie_f_headings_h2 rollie_category_title_text_color ">' . $rollie_alt_cat_title . '</div>';
 					}
-						 the_title();
+
+				
+
+						the_title();
+				
+						}
+
 					?>
 						</div>
 						<div class="col-5  rollie_f_excerpt_s  rollie_flex_text_center rollie_subtitle_text_color">
@@ -78,14 +96,14 @@
 						</div>
 				
 					
-				
+				</div>
+		</header>
 				<?php
 		}
-		?>
+		
+			
 
-		</header>
-
-	<?php } else {?>
+	 else {?>
 			<header class="container-fluid rollie_title_container rollie_title_bg_color">
 			</header>
 	<?php }?>

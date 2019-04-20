@@ -40,4 +40,34 @@
 
     });
 
+//  console.log('dasd');
+
+
+function rollie_checked_payment_method(){
+  $('.wc_payment_method > input').each(function(){
+  if ($(this).is(':checked')){
+    console.log('dasd');
+    $(this).closest('.wc_payment_method ').addClass('rollie_checked_payment_method rollie_woo_border_color_custom_column');
+  }else{
+
+ $(this).closest('.wc_payment_method ').removeClass('rollie_checked_payment_method rollie_woo_border_color_custom_column');
+  }
+
+    });
+}
+
+ rollie_checked_payment_method();
+$( document ).ajaxComplete(function() {
+ rollie_checked_payment_method();
 });
+
+
+$('body').on("change",'.wc_payment_method > input', function() { 
+ rollie_checked_payment_method();
+});
+
+})
+
+
+
+

@@ -18,6 +18,14 @@ if ( function_exists( 'icl_t' ) ) {
 		
 			$rollie_below ="";
 		}
+
+	$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
+							} 
 ?>
 	
 
@@ -25,15 +33,16 @@ if ( function_exists( 'icl_t' ) ) {
 
 					<div class="row m-0  ">
 
-			
+				
 						
-						<div class=" offset-1 col-5   rollie_f_headings rollie_title_text_color rollie_flex_text_center">
-							<div class="rollie_parent_title <?php echo $rollie_below ?> rollie_second_title_ppr  rollie_f_headings  rollie_f_headings_h2 rollie_category_title_text_color "><?php echo $rollie_search_str; ?></div>
+						<div class=" offset-1 col-5 <?php echo $rollie_line ?>  rollie_f_headings rollie_title_text_color ">
+							<div class="rollie_parent_title <?php echo $rollie_below ?> rollie_second_title_ppr   rollie_f_headings_h2 rollie_category_title_text_color "><?php echo $rollie_search_str; ?></div>
 						<?php if ( have_posts() ) : ?>							
 							<?php	echo '<div class="text-uppercase  h2 d-inline-block" ><p class="font-weight-normal">' . '(' . $wp_query->found_posts . ') ' . $rollie_results_str,' <i>' . get_search_query() . '</i></div>'; ?>
 						<?php else : ?>
 							<?php	echo '<div class="text-uppercase  h2 d-inline-block" ><p class="font-weight-normal"><i>' . get_search_query() . '<i></div>'; ?>
 						<?php endif; ?>
+							
 						</div>
 						<div class="col-5  rollie_f_excerpt_s  rollie_flex_text_center rollie_subtitle_text_color">
 							<?php

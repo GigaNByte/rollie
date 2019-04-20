@@ -37,7 +37,7 @@ if ( $rollie_cat[0] && get_theme_mod( 'rollie_display_cat' . $rollie_template ) 
 													
 				<?php echo $rollie_cat[ $x ]; ?>
 													
-														<span class="w-50 rollie_fancy_line"></span>
+														
 													</a>												
 				<?php
 			}

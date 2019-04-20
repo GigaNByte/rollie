@@ -31,5 +31,24 @@ if (get_theme_mod('rollie_woo_notice_width_full',true)){
 wp_add_inline_style('rollie_woo_stylesheet' ,'.woocommerce-notices-wrapper{width:100%;}');
 }
 
+if ( get_theme_mod ('rollie_embl_subtitles' ,1 ) == 1){
+		wp_add_inline_style('rollie_woo_stylesheet' ,
+	" .cart-subtotal,  .order-total  \n { border-right-style:solid \n}" 
+	);
+
+		wp_add_inline_style('rollie_woo_stylesheet' ,
+	"  .woocommerce-shipping-totals  > th,.rollie_checked_payment_method \n { border-left-style:solid \n}" 
+	);	
+} 
+ if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+	wp_add_inline_style('rollie_woo_stylesheet' ,);
+		wp_add_inline_style('rollie_woo_stylesheet' ,
+	" .woocommerce-shipping-totals  > th ,.rollie_checked_payment_method,   .cart-subtotal\n { border-bottom-style:solid \n}" 
+	);
+} 
+
+
+
+
 ?>
 

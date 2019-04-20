@@ -163,6 +163,9 @@ function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downlo
 
 function rollie_woo_orders_custom_column( $columns ) {
 
+	$rollie_line='';
+	$rollie_line_r='';
+
 
 	    unset( $columns['order-number'] );
         unset( $columns['order-date'] );
@@ -177,7 +180,14 @@ function rollie_woo_orders_custom_column( $columns ) {
 add_filter( 'woocommerce_my_account_my_orders_columns', 'rollie_woo_orders_custom_column' );
 
 function rollie_woo_order_custom_column( $order ) {
-        // do something here
+       	if ( get_theme_mod ('rollie_embl_subtitles' ,1 ) == 1){
+			$rollie_line='  rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
+			$rollie_line_r ='rollie_fancy_line rollie_fancy_line_vertical_r'  ;
+		} 
+		 if ( get_theme_mod ('rollie_embl_subtitles' ,1) == 2){
+			$rollie_line=' rollie_fancy_line  rollie_fancy_line_horizontal rollie_fancy_line_n ';
+
+		} 
 ?>
 
 <div class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad '>
@@ -196,11 +206,12 @@ function rollie_woo_order_custom_column( $order ) {
 	<div class=' row  m-0 p-0 rollie_woo_order_table  rollie_woo_border_color_custom_column '>
 	
 			<div class='col-12'>
+					<div class='<?php echo $rollie_line;?>'>
 			<?Php	foreach( $order->get_items() as $item_id => $item ){
 					$product = $item->get_product(); 
 			?>
 	
-				<div class='row rollie_woo_order_item_row rollie_woo_border_color_custom_column '>
+				<div class='row rollie_woo_order_item_row  rollie_woo_border_color_custom_column '>
 				
 					<div class='col-4 col-md-2  rollie_woo_order_table_thumbnail'><?php echo $product->get_image('woocommerce_gallery_thumbnail');?></div>
 					<div class='col-8 col-md-10'>
@@ -214,7 +225,8 @@ function rollie_woo_order_custom_column( $order ) {
 					</div>
 				</div>
 			<?php } ?>
-				<div class='row rollie_woo_order_summary_row rollie_woo_border_color_custom_column '>		
+				</div>
+				<div class='row rollie_woo_order_summary_row  rollie_woo_border_color_custom_column <?php echo $rollie_line_r;?>'>		
 						<div class='col-4 small text-center rollie_flex_text_center'> 
 							<div> 	
 
@@ -452,7 +464,21 @@ function rollie_action_woo_account_content()
 {
 
 echo  "<div class='row p-0 m-0 h-100'>";
-	echo "<div class='p-0 col-12 rollie_f_headings rollie_title_text_color rollie_account_title' >".get_the_title()."</div>";
+		$rollie_line='';
+						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
+								$rollie_line=' rollie_fancy_line  rollie_fancy_line_vertical rollie_fancy_line_t ';
+							} 
+							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
+								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
+							} 
+	
+
+	echo "<div class='p-0 col-12 ".$rollie_line." rollie_f_headings rollie_title_text_color rollie_account_title' >";
+
+	echo get_the_title();
+	
+	echo "</div>";
+
 	echo "<div class='col-12 rollie_account_content'>";
 
 }
@@ -530,15 +556,17 @@ function rollie_woo_cart_content_wraper_end()
 
 echo "</div>";
 }
-function rollie_woo_cart_totals_before_order_total (){
-	//echo "<div class='rollie_f_subtitles_h4 '>";
-
-	}
+function rollie_woo_order_review_content()
+{
+echo "<div class='rollie_woo_order_review_content rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
+}
 
 add_action('woocommerce_before_cart_table','rollie_woo_cart_content',1);
 add_action('woocommerce_after_cart_table','rollie_woo_cart_content_wraper_end',200);
 add_action('woocommerce_before_cart_totals','rollie_woo_cart_total_content',1);
 add_action('woocommerce_after_cart_totals','rollie_woo_cart_content_wraper_end',200);
+ add_action( 'woocommerce_checkout_before_order_review','rollie_woo_order_review_content' ,1);
+    add_action( 'woocommerce_checkout_after_order_review','rollie_woo_cart_content_wraper_end',200);
 function rollie_woo_cart_totals_order_total_html( $value)
 {
 	$value="<h4 class='rollie_f_subtitles_h4 '>".$value.'</h4>';
@@ -568,6 +596,7 @@ function rollie_woo_cart_item_thumbnail( $product_get_image, $cart_item, $cart_i
  
     return  "<div class='woocommerce_gallery_thumbnail'>".$product_get_image."</div>"; 
 }; 
-         
+
+  
 // add the filter 
 add_filter( 'woocommerce_cart_item_thumbnail', 'rollie_woo_cart_item_thumbnail', 10, 3 );
