@@ -249,7 +249,27 @@ $wp_customize->add_section(
 		)
 	);
 
+$wp_customize->add_setting(
+		'rollie_muted_color',
+		array(
+			'default'   => '#282828',
+			'transport' => 'refresh',
 
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_muted_color',
+			array(
+				'label'             => __( 'Muted Color ', 'Rollie' ),
+				'section'           => 'rollie_theme_colors_text_section',
+				'settings'          => 'rollie_title_text_color',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
 
 		
 

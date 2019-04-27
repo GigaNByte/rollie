@@ -1,5 +1,5 @@
 <?php
-function rollie_pagination( $pages = '', $range = 2 , $paged=false ,$woo_endpoint='') {
+function rollie_pagination( $pages = '', $range = 2 , $paged = false ,$woo_endpoint=false) {
 
 	 // thanks to fellowtuts edited and mulitlanguage edit by Wilczurs/Squanchy
 	if ( function_exists( 'icl_t' ) ) {
@@ -21,7 +21,7 @@ function rollie_pagination( $pages = '', $range = 2 , $paged=false ,$woo_endpoin
 		$rollie_first_str        = 'First';
 	}
 
-	$showitems = ( $range * 2 ) + 1;
+	$showitems =  ( $range * 2 ) + 1;
 
 	
 	if (! $paged )
@@ -82,6 +82,7 @@ global $paged;
 				else{
 					$rollie_page_link =  get_pagenum_link( $i );
 				}
+
 
 				echo ( $paged == $i ) ? '<li class="rollie_pagination_item page-item rollie_pagination_active active"><span class="page-link rollie_second_color "><span class="sr-only">' . $rollie_current_page_str . '</span>' . $i . '</span></li>' : '<li class="page-item rollie_pagination_item"><a class="page-link rollie_pagination_link " href="' .$rollie_page_link . '"><span class="sr-only">Page </span>' . $i . '</a></li>';
 			}

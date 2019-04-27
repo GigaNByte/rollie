@@ -3,17 +3,17 @@
 
 wp_enqueue_style( 'rollie_woo_stylesheet', get_template_directory_uri() . '/css/rollie_inline.css', array(),  date("h:i:s"), 'all' );
 
-wp_add_inline_style( 'rollie_woo_stylesheet', ".rollie_woo_border_color_custom_column{border-color:".$rollie_third_theme_color->css_snippet(true)."}" );
+wp_add_inline_style( 'rollie_woo_stylesheet', ".woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register,.rollie_woo_border_color_custom_column,.woocommerce .woocommerce-customer-details address \n {border-color:".$rollie_third_theme_color->css_snippet(true)."}" );
 
 
-$rollie_woo_notice_color = new Rollie_Gradient ('rollie_woo_notice_color','#ccedfd' ,'.woocommerce-info', array('background'));
-$rollie_woo_error_color = new Rollie_Gradient ('rollie_woo_error_color','#ef9a9a' ,' .woocommerce-error', array('background'));
-$rollie_woo_success_color = new Rollie_Gradient ('rollie_woo_success_color','#a5d6a7' ,'.woocommerce-message', array('background'));
+$rollie_woo_notice_color = new Rollie_Gradient ('rollie_woo_notice_color','#ccedfd' ,'.woocommerce-info ', array('background'));
+$rollie_woo_error_color = new Rollie_Gradient ('rollie_woo_error_color','#ef9a9a' ,' .woocommerce-error ,.rollie_error_color', array('background'));
+$rollie_woo_success_color = new Rollie_Gradient ('rollie_woo_success_color','#a5d6a7' ,'.woocommerce-message, .rollie_success_color ', array('background'));
 
 wp_add_inline_style('rollie_woo_stylesheet' ,$rollie_woo_error_color->css_snippet());	
 wp_add_inline_style('rollie_woo_stylesheet' ,$rollie_woo_success_color->css_snippet());	
 wp_add_inline_style('rollie_woo_stylesheet' ,$rollie_woo_notice_color->css_snippet());	
-
+wp_add_inline_style('rollie_woo_stylesheet',".rollie_muted_text_color{color:\n". get_theme_mod('rollie_muted_color','#555555').";\n}\n.rollie_muted_color{ background: ".get_theme_mod("rollie_muted_color",'#555555').";\n }");
 
 
 wp_add_inline_style('rollie_woo_stylesheet' ,".woocommerce-error,.woocommerce-message,.woocommerce-info {"."\n"." color:".get_theme_mod('rollie_woo_notice_text_color','#212529').";\n border-radius: ".get_theme_mod('rollie_woo_notice_radius')."px; \n}\n");

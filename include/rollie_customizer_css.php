@@ -59,8 +59,8 @@ function rollie_customizer_css ()
 				$rollie_font_subtitles_obj		= get_theme_mod('rollie_font_subtitles_obj');
 				$rollie_font_subtitles ['max']	= get_theme_mod("rollie_font_subtitles_max",32) ;
 				$rollie_font_subtitles ['min']	= get_theme_mod("rollie_font_subtitles_min",26) ;
-				$rollie_font_headings['h4_max']	= get_theme_mod("rollie_font_headings_h4_max",30) ;
-				$rollie_font_headings['h4_min']	= get_theme_mod("rollie_font_headings_h4_min",26) ;
+				$rollie_font_subtitles['h4_max']	= get_theme_mod("rollie_font_subtitles_h4_max",30) ;
+				$rollie_font_subtitles['h4_min']	= get_theme_mod("rollie_font_subtitles_h4_min",26) ;
 				$rollie_font_subtitles ['vw_min'] = get_theme_mod("rollie_font_subtitles_vw_min",500) ;
 				$rollie_font_subtitles ['vw_max'] = get_theme_mod("rollie_font_subtitles_vw_max",1200) ;
 				$rollie_font_subtitles ['alt_enable']	= get_theme_mod('rollie_font_subtitles_alt_enable',false);
@@ -308,7 +308,7 @@ function rollie_customizer_css ()
 
 
 			$rollie_darker_main_theme_color = new Rollie_Gradient ("rollie_darker_main_theme_color", "#e3e6e8",'.rollie_darker_main_color',array('background'));
-		
+
      wp_add_inline_style( 'rollie_stylesheet',  $rollie_darker_main_theme_color->css_snippet());
 			$rollie_sidebar_theme_color = new Rollie_Gradient ("rollie_sidebar_theme_color", "#e3e6e8",'.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',array('background'));
 					
@@ -331,7 +331,7 @@ function rollie_customizer_css ()
 	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', array('background'));
 					
      wp_add_inline_style( 'rollie_stylesheet', 	 $rollie_navbar_color->css_snippet());
-		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button , .woocommerce a.button ,.woocommerce   .button ,.woocommerce-checkout-review-order-table > thead, .woocommerce-cart-form__contents > thead', array('background-color'));
+		$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button , .woocommerce a.button ,.rollie_woo_order_table_banner    ,.woocommerce   .button ,.shop_table > thead', array('background-color'));
 					
      wp_add_inline_style( 'rollie_stylesheet', 	 $rollie_button_b->css_snippet());		
 	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,' .rollie_button:hover , .rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover', array('background'));
@@ -481,7 +481,7 @@ wp_add_inline_style ( 'rollie_stylesheet',".rollie_fancy_line,.woocommerce h3 ,.
 		} 
 	
 
-wp_add_inline_style( 'rollie_stylesheet'," .rollie_pagination * { border-color:". $rollie_darker_main_theme_color->rgb_gr_1 .";\n color: ". $rollie_main_theme_text_color ." ;}");
+wp_add_inline_style( 'rollie_stylesheet'," .rollie_pagination * { border-color:". $rollie_darker_main_theme_color->rgb .";\n color: ". $rollie_main_theme_text_color ." ;}");
 wp_add_inline_style( 'rollie_stylesheet'," .rollie_pagination_active * { color: ". $rollie_third_color ." ; }");
 wp_add_inline_style( 'rollie_stylesheet'," .rollie_pagination_link:hover{ color: ". $rollie_third_color ." ;\n  background :". $rollie_darker_main_theme_color->rgb_gr_1 .";	}");
 
@@ -513,11 +513,11 @@ wp_add_inline_style( 'rollie_stylesheet'," .rollie_subtitle_text_color { color: 
 
 
 			
-		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first,.cld-common-wrap,.fas,   .far  , .fal,  .fab { color: ". $rollie_icon_color_first ." !important ;\n  text-shadow: 0px 0px 3px  ". $rollie_icon_color_first_shadow ." !important; }");
+		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first,.cld-common-wrap,.fas,   .far  , .fal,  .fab { color: ". $rollie_icon_color_first ." ;\n  text-shadow: 0px 0px 3px  ". $rollie_icon_color_first_shadow ." ; }");
 			
 			
 
-		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first:hover,.cld-common-wrap:hover,.fas:hover ,.fal:hover,.fab:hover,.far:hover,button:hover .fas,button:hover .far ,button:hover .fas,button:hover .fal{ color: ". $rollie_icon_color_first_h ." !important ; }");
+		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first:hover,.cld-common-wrap:hover,.fas:hover ,.fal:hover,.fab:hover,.far:hover,button:hover .fas,button:hover .far ,button:hover .fas,button:hover .fal{ color: ". $rollie_icon_color_first_h ." ; }");
 			
 		wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_second { color: ". $rollie_icon_color_second ." !important ;\n  text-shadow: 0px 0px 3px  ". $rollie_icon_color_second_shadow ." !important;}");
 			
@@ -564,7 +564,7 @@ wp_add_inline_style( 'rollie_stylesheet'," .rollie_subtitle_text_color { color: 
 				}	
 
 
-				wp_add_inline_style( 'rollie_stylesheet'," .rollie_button,.woocommerce-cart-form__contents > thead ,.woocommerce-checkout-review-order-table > thead, .woocommerce .button { color: ". $rollie_button_color ."  !important;\n border-color:". $rollie_button_shadow ." !important; ".$rollie_button_shadow_stl."}");
+				wp_add_inline_style( 'rollie_stylesheet'," .rollie_button,.shop_table > thead, .rollie_woo_order_table_banner,.woocommerce .button { color: ". $rollie_button_color ."  !important;\n border-color:". $rollie_button_shadow ." !important; ".$rollie_button_shadow_stl."}");
 				wp_add_inline_style( 'rollie_stylesheet'," .rollie_button:hover,.rollie_button:active{ color: ". $rollie_button_color_h ."  ;}");
 				
 				
@@ -633,7 +633,7 @@ wp_add_inline_style('rollie_stylesheet','.rollie_form_input button { border-styl
 
 
 
-		wp_add_inline_style( 'rollie_stylesheet'," .quantity:focus-within,.input-text:focus-within,	.rollie_search_form_shadow:focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_form_input_border_color     ."; }");
+		wp_add_inline_style( 'rollie_stylesheet'," label:hover::before  , .quantity:focus-within,.input-text:focus-within,	.rollie_search_form_shadow:focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_form_input_border_color     ."; }");
 		
 		wp_add_inline_style( 'rollie_stylesheet'," 	.swiper-pagination-bullet{		background:	". $rollie_darker_main_theme_color->rgb_gr_1 .";}");
 		
@@ -740,17 +740,18 @@ function rollie_text_align_f($align)
 						} 
 				
 						if (array_key_exists ( "h2_min" ,  $font_array )) {
+					
 									$rollie_apply_h2 = true;
 									$rollie_heading_str = 'h2';	
-							
 								}
 						if (array_key_exists ( "h4_min" ,  $font_array )) {
 									$rollie_apply_h4 = true;
 									$rollie_heading_str = 'h4';
 								}		
-						if ($font_array ['min']< $font_array ['max'] && $font_array ['vw_min']< $font_array ['vw_max'])
+				
+						if ($font_array ['min']< $font_array ['max'] && $font_array ['vw_min'] < $font_array ['vw_max'])
 						{ 
-					
+
 						$css_snippet .=	 $rollie_class ."{"."\n";					 
 							
 							$css_snippet .=	"font-size:". $font_array ['min'] ."px;";
@@ -774,24 +775,26 @@ function rollie_text_align_f($align)
 					
 					
 					
-				
-			
+		
 					if ($rollie_apply_h2 || $rollie_apply_h4)
 					{
+						
+		
+
 									$css_snippet .= $rollie_initial_class."_".$rollie_heading_str."{"."\n"; 
 								$css_snippet .= "font-size: ".$font_array [$rollie_heading_str.'_min']."px;";
 								$css_snippet .=	"}"."\n";
 								$css_snippet .= "@media screen and (min-width: ".	$font_array ['vw_min'] ."px) {"."\n";
 								$css_snippet .= $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str."{"."\n" ;
-								$css_snippet .= "font-size: calc( ". $font_array [$rollie_heading_str.'_min']  ." px + ( ( ".  $font_array [$rollie_heading_str.'_max']  ." - ".  $font_array [$rollie_heading_str.'_min'] ." ) * (100vw - ". $font_array ['vw_min'] ."px) / (".  $font_array ['vw_max'] ." - ".$font_array ['vw_min'] .") ) ) !important;";
+								$css_snippet .= "font-size: calc( ". $font_array [$rollie_heading_str.'_min']  ."px + ( ( ".  $font_array [$rollie_heading_str.'_max']  ." - ".  $font_array [$rollie_heading_str.'_min'] ." ) * (100vw - ". $font_array ['vw_min'] ."px) / (".  $font_array ['vw_max'] ." - ".$font_array ['vw_min'] .") ) ) !important;";
 								$css_snippet .=	"}"."\n";
 								$css_snippet .=	"}"."\n";
 								$css_snippet .= "@media screen and (min-width: ".	$font_array ['vw_max'] ."px) {"."\n";
 								$css_snippet .= $rollie_initial_class."_".$rollie_heading_str." , ".$rollie_heading_str."{"."\n" ;
-								$css_snippet .=	"font-size: calc( ".$font_array [$rollie_heading_str.'_min']  ." px + ( ( ".$font_array [$rollie_heading_str.'_max']  ." - ".$font_array [$rollie_heading_str.'_min'] ." ) * (100vw - ".$font_array ['vw_min'] ."px) / (".$font_array ['vw_max'] ." - ".$font_array ['vw_min'] .") ) ) !important;";
+								$css_snippet .=	"font-size: calc( ".$font_array [$rollie_heading_str.'_min']  ."px + ( ( ".$font_array [$rollie_heading_str.'_max']  ." - ".$font_array [$rollie_heading_str.'_min'] ." ) * (100vw - ".$font_array ['vw_min'] ."px) / (".$font_array ['vw_max'] ." - ".$font_array ['vw_min'] .") ) ) !important;";
 								$css_snippet .=	"}"."\n";
 								$css_snippet .=	"}"."\n";
-			}
+					}
 			
 			
 		}

@@ -2432,13 +2432,16 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_main_theme_color','Main Theme Text Color','#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_main_theme_color','Main Theme Color','#ffffff'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_darker_main_theme_color','Darker/Contrast Theme Color','#e3e6e8'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_second_theme_color','Second Theme Color','#212121'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_third_theme_color','Third Theme Color','#a37e2c'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_sidebar_theme_color','Sidebars Color','#ffffff'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_color','Button Color','#ffffff'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_h_color','Button Color At Hover','#212121'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_h_color','Button Color At Hover','#212121');
+
+
+
 	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_color','Alternate Button Color','#ffffff'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_h_color','Alternate Button Color At Hover','#212121'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_navbar_section','rollie_navbar_color','Navbar Color','rgba(255,255,255,0.8)'); 

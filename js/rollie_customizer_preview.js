@@ -139,6 +139,7 @@ rollie_color_obj.css_value = rollie_standard_color;
   new RollieCustomizerObj('rollie_second_theme_color', '.rollie_second_color',Array( 'background')),
   new RollieCustomizerObj('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line',Array( 'background')),
   new RollieCustomizerObj('rollie_darker_main_theme_color', '.rollie_darker_main_color',Array('background')),
+
   new RollieCustomizerObj('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',Array( 'background')),
   new RollieCustomizerObj('rollie_title_bg_theme_color', '.rollie_title_bg_color',  Array('background')),
   new RollieCustomizerObj('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', Array('background')),

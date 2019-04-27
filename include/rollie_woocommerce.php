@@ -5,6 +5,7 @@
 3.Orders Table
 4.Orders table Query Snipets
 5.Cart
+6.Functions 
 */
 /* My orders Table*/
 
@@ -115,23 +116,26 @@ add_action( 'woocommerce_account_'.$value.'_endpoint', 'rollie_my_orders_query_c
 
 
 
-function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downloadable,$url) 
+function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downloadable=false,$url=false,$animated = true) 
 {
 	$rollie_woo_order_status_icon = '';
 	switch($rollie_woo_order_status)
 		{
 	case 'pending':
-	  $rollie_woo_order_status_icon = 'fas fa-sync fa-pulse ' ;
+	  $rollie_woo_order_status_icon = 'fas fa-sync  ' ;
+	  if ($animated)  $rollie_woo_order_status_icon .= 'fa-pulse';
  	break;		
 	case 'on-hold':
 	  $rollie_woo_order_status_icon = 'fas fa-hand-holding-usd    ' ;
  	break;							 	
  	case 'processing':
 		if ($rollie_is_downloadable){
- 		 $rollie_woo_order_status_icon = 'fas fa-sync fa-pulse animated';
+ 		 $rollie_woo_order_status_icon = 'fas fa-sync';
+ 		 if ($animated)  $rollie_woo_order_status_icon .= ' fa-pulse animated ';
 		}
 		else{
-			$rollie_woo_order_status_icon = 'fas fa-shipping-fast    faa-passing animated';
+			$rollie_woo_order_status_icon = 'fas fa-shipping-fast    ';
+			 if ($animated)  $rollie_woo_order_status_icon .= ' faa-passing animated ';
 		}
 
  	break;
@@ -140,7 +144,8 @@ function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downlo
 			$rollie_woo_order_status_icon = 'fas fa-download ' ;
 		}
 		else{
-			 $rollie_woo_order_status_icon = 'fas fa-check faa-pulse animated faa-slow';	
+			 $rollie_woo_order_status_icon = 'fas fa-check ';	
+			  if ($animated)  $rollie_woo_order_status_icon .= ' faa-pulse animated faa-slow';
 		}
 
 	break; 
@@ -151,14 +156,20 @@ function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downlo
 	  $rollie_woo_order_status_icon = 'far fa-handshake'; 
  	break;
 	case 'failed':
-	  $rollie_woo_order_status_icon = 'fas fa-exclamation-triangle flash faa-slow'; 
+	  $rollie_woo_order_status_icon = 'fas fa-exclamation-triangle faa-slow'; 
+	    if ($animated)  $rollie_woo_order_status_icon .= ' flash  faa-slow';
  	break;
  	default:
  	  $rollie_woo_order_status_icon = 'fas fa-dolly-flatbed'; 
  	break;
 			
 		}
+		if ($url)
+		{
 	return  "<a href=".esc_url($url) ."><i class= 'm-3 rollie_woo_order_status_icon  ".$rollie_woo_order_status_icon."' ></i></a>" ;
+		}
+		else
+			return "<i class= 'm-3 rollie_woo_order_status_icon  ".$rollie_woo_order_status_icon."' ></i>";
 }
 
 function rollie_woo_orders_custom_column( $columns ) {
@@ -192,7 +203,7 @@ function rollie_woo_order_custom_column( $order ) {
 
 <div class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad '>
 	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
-	<div class='  rollie_woo_order_table_banner   rollie_button  '>		
+	<div class='  rollie_woo_order_table_banner    '>		
 
 	
 		<?php $rollie_o_date = $order->get_date_created()->date_i18n('Y-m-d')?>
@@ -479,7 +490,11 @@ echo  "<div class='row p-0 m-0 h-100'>";
 	
 	echo "</div>";
 
-	echo "<div class='col-12 rollie_account_content'>";
+$rollie_remove_order_status_text_flag='';
+
+if (is_wc_endpoint_url( 'view-order' ))	$rollie_remove_order_status_text_flag = 'rollie_remove_order_status_text_flag';
+	echo "<div class='col-12 rollie_account_content ".$rollie_remove_order_status_text_flag."'>";
+
 
 }
 
@@ -573,6 +588,7 @@ function rollie_woo_cart_totals_order_total_html( $value)
 return  $value;
 }
 add_filter( 'woocommerce_cart_totals_order_total_html', 'rollie_woo_cart_totals_order_total_html', 10, 1 ); 
+
 function rollie_woo_orders_pagination()
 {
 	$args = array('meta_value'  => get_current_user_id(),'paginate' => true);
@@ -582,12 +598,15 @@ function rollie_woo_orders_pagination()
 	elseif( is_wc_endpoint_url('refunded') )  $args['post_status'] = array('wc-refunded');
 	elseif( is_wc_endpoint_url('canceled') )  $args['post_status'] = array('wc-canceled','wc-failed');
 
-$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
-$cpage = ( get_query_var('cpage') ) ? get_query_var('cpage') : 1;
+
+
 
  $customer_orders = wc_get_orders( $args ); 
+ global $wp_query;
 
-rollie_pagination( $customer_orders->max_num_pages,$cpage,$paged,'orders' );
+$paged = get_query_var('orders') ? get_query_var('orders') : 1 ;
+
+rollie_pagination( $customer_orders->max_num_pages ,2,$paged,'orders' );
  
 	
 }
@@ -600,3 +619,279 @@ function rollie_woo_cart_item_thumbnail( $product_get_image, $cart_item, $cart_i
   
 // add the filter 
 add_filter( 'woocommerce_cart_item_thumbnail', 'rollie_woo_cart_item_thumbnail', 10, 3 );
+
+function rollie_order_details($order)
+{?>
+
+<?php
+
+
+
+
+
+
+
+ 	$status = $order->get_status();
+$step_0 ='';
+$step_1 ='';
+$step_2 ='';
+$step_0_i = rollie_woo_order_status_icon('on-hold',false,false,false);
+$step_1_i = rollie_woo_order_status_icon('processing',false,false,false);
+$step_2_i = rollie_woo_order_status_icon('completed',false,false,false);
+
+$step_1_str = __('Processing','woocommerce');
+
+
+
+	if($status == 'cancelled'|| $status == 'failed')
+	{
+		$step_0 = 'rollie_error_color';
+		$step_1 = 'rollie_muted_color';
+		$step_2 = 'rollie_muted_color';
+			$step_0_status= true;
+			$step_1_status=false;  
+			$step_2_status=false; 
+		
+	$step_0_i = rollie_woo_order_status_icon($status);
+
+	}
+	elseif ($status == 'pending' || $status == 'on-hold' )
+	{
+		$step_0 = 'rollie_success_color';
+		$step_1 = 'rollie_muted_color';
+		$step_2 = 'rollie_muted_color';
+	
+		$step_0_i =	rollie_woo_order_status_icon($status);	
+		$step_1_i .= " rollie_muted_text_color ";
+		$step_2_i .= " rollie_muted_text_color ";
+		$step_0_status= true;
+		$step_1_status=false;  
+		$step_2_status=false; 
+	}
+	elseif  ( $status == 'processing'){
+		
+
+	$step_0 = 'rollie_success_color';
+	$step_1 = 'rollie_success_color';
+	$step_2 = 'rollie_muted_color';
+	$step_1_i .= rollie_woo_order_status_icon($status);
+	$step_2_i .= " rollie_muted_text_color ";
+	$step_0_status= true;
+	$step_1_status=true;  
+	$step_2_status=false; 
+	}
+	elseif  ( $status == 'completed'|| $status =='refunded'){
+	$step_0 = 'rollie_success_color';
+	$step_1 = 'rollie_success_color';
+	$step_2 = 'rollie_success_color';
+	$step_0_status= true;
+	$step_1_status=true;  
+	$step_2_status=true; 
+		$step_2_i .= rollie_woo_order_status_icon($status);
+
+
+		
+	}
+	else 	//for suuum plugins
+	{
+	$step_0 = 'rollie_success_color';
+	$step_1 = 'rollie_success_color';
+	$step_2 = 'rollie_muted_color';
+	$step_2_i .= " rollie_muted_text_color ";
+	$step_0_status= true;
+	$step_1_status=true;  
+	$step_2_status=false; 
+	}	
+	
+		$date_cr = $order->get_date_created();
+		$date_paid = $order->get_date_paid();
+		$date_completed = $order->get_date_completed();
+
+	
+
+	
+if ($order->has_downloadable_item() &&  !$status =='refunded') $step_2_i = rollie_woo_order_status_icon($status,true,false,false);
+?>
+
+	<div class='container-fluid rollie_woo_order_progress px-0 py-3 '>
+
+		<div class= 'row'>
+			
+
+
+
+			<h2 class='w-100'><?php _e('Order details','woocommerce');?></h2>
+
+
+
+
+	
+	<?php if( $order->get_status() == 'failed' || $order->get_status() == 'canceled'   ){
+			$color_status = 'text-danger';
+			}elseif ($order->get_status() == 'processing'||$order->get_status() == 'success'||$order->get_status() == 'refunded') {
+				$color_status = 'text-success';
+			}else{
+			$color_status = 'text-warning';
+			} ?>
+<div class='order-describe text-center w-100 p-2 '>
+<?php 
+
+		echo substr( wp_kses_post( apply_filters( 'woocommerce_order_tracking_status', sprintf(
+		__( 'Order #%1$s was placed on %2$s and is currently %3$s.', 'woocommerce' ),
+		'<span class="order-number">' . $order->get_order_number() . '</span>',
+		'<span class="order-date">' . wc_format_datetime( $order->get_date_created() ) . '</span>',
+		'<h4 class="order-status '. $color_status . '">' . wc_get_order_status_name( $order->get_status() ) . '</h4>'
+	) ) ),0, -1);
+
+?>
+</div>
+		<?php
+
+	if($order->get_payment_method()=='bacs' && ($order->get_status() == 'pending' || $order->get_status() == 'on-hold')  ) {
+			echo'<div class="col-12" >';
+		 rollie_get_bacs_account_details_order();
+		echo' </div>';
+	}
+	?>
+			<h3 class='col-12 rollie_fancy_line '><?php echo  substr(__('Order status.','woocommerce'),0, -1)?></h3>
+				<div class='rollie_woo_order_progress_bar  col-3 '><i class=" rollie_flex_text_center rollie_woo_order_status_icon fas fa-clipboard-list  "></i><hr class='rollie_success_color'></hr>
+					<?php echo '<div>'.__('Order created','woocommerce').'</div>';
+					if ($date_cr)	echo '<small>'.$date_cr->date_i18n().' '.$date_cr->date_i18n('h:m').'</small>';?>
+				</div>
+
+				<div class='rollie_woo_order_progress_bar col-3 <?php if (!$step_0_status  ) echo 'rollie_muted_text_color' ?> '><i class=' rollie_flex_text_center  <?php echo esc_html($step_0_i ) ?>'></i><hr class='<?Php echo  esc_html($step_0)?>'></hr>
+				<?php 	 
+					if($status != 'refunded'&&$status != 'completed'&& $status != 'processing'){
+						echo wc_get_order_status_name($status);
+				
+					}
+						 echo '<div>'.__('Payment','woocommerce').': '.'</div>';
+						$payment =  wc_get_payment_gateway_by_order($order);
+						if ($payment){
+						echo '<div>'.$payment->get_method_title( ).'</div>';
+						}
+					
+					
+					
+					if ($date_paid){
+					
+					echo '<small>'.$date_paid->date_i18n().' '.$date_paid->date_i18n('h:m').'</small>' ;
+					}
+							
+				?>
+				</div>
+				
+				<div class='rollie_woo_order_progress_bar col-3 <?php if (!$step_1_status) echo 'rollie_muted_text_color' ?> '><i class=' rollie_flex_text_center  <?php echo esc_html($step_1_i ) ?>'></i><hr class='<?Php echo esc_html($step_1)?>'></hr> <span><?php?></span>
+					<?php 	echo '<div>'.__('Processing','woocommerce').'</div>' ?>
+				</div>
+				<div class='rollie_woo_order_progress_bar  <?php if (!$step_2_status) echo 'rollie_muted_text_color' ?> col-3'><i class=' rollie_flex_text_center  <?php echo esc_html($step_2_i ) ?>'></i><hr class='<?Php echo esc_html($step_2)?>'></hr>
+			<?php 
+
+		
+				echo  '<div>'.wc_get_order_status_name($status).'</div>' ;
+			if ($date_completed){
+				echo '<small>'.$date_completed->date_i18n().' '.$date_completed->date_i18n('h:m').'</small>' ;
+			}
+		
+			?>
+				</div>	
+	<?php			if ($status == 'completed') echo  '<div>'.$order->get_date_completed().'</div>' ; ?>
+		</div>
+	</div>
+
+<div class="rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad ">
+
+
+<?php
+
+}
+    add_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_coupon_form' ,10);
+    remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form');
+
+add_action('woocommerce_order_details_before_order_table','rollie_order_details');
+add_action('woocommerce_order_details_after_order_table','rollie_woo_cart_content_wraper_end');
+add_filter( 'woocommerce_order_item_name', 'rollie_product_thumbnail_order_details', 20, 3 );
+    // define the woocommerce_thankyou_order_received_text callback 
+
+function rollie_get_bacs_account_details_order(){
+	
+	rollie_get_bacs_account_details_html();
+}
+
+    function rollie_woo_thankyou_order_received_text( $var, $order ) { 
+        // make filter magic happen here... 
+    $var = '<div class="rollie_thankyou_message text-center">'.'<div><i class="fas fa-check text-success rollie_thankyou_icon"></i></div>'.$var;
+
+   
+       
+       $var .='</div>';
+        return $var; 
+
+
+    }; 
+             
+    // add the filter 
+    add_filter( 'woocommerce_thankyou_order_received_text', 'rollie_woo_thankyou_order_received_text', 10, 2 ); 
+
+function rollie_product_thumbnail_order_details( $item_name, $item, $is_visible ) {
+    if( is_wc_endpoint_url( 'view-order' ) || is_wc_endpoint_url( 'order-received' )) {
+        $product   = $item->get_product(); 
+        $thumbnail = $product->get_image('woocommerce_gallery_thumbnail'); 
+        if( $product->get_image_id() > 0 )
+            $item_name = "<div class=' d-inline-block p-1 rollie_woo_order_table_thumbnail'>" . $thumbnail . '</div><div class="d-inline-block">' . $item_name.'</div>';
+    }
+    return $item_name;
+
+}
+
+function rollie_get_bacs_account_details_html( $echo = true ) {
+
+
+    ob_start();
+
+    $gateway    = new WC_Gateway_BACS();
+    $country    = WC()->countries->get_base_country();
+    $locale     = $gateway->get_country_locale();
+    $bacs_info  = get_option( 'woocommerce_bacs_accounts');
+
+    // Get sortcode label in the $locale array and use appropriate one
+    $sort_code_label = isset( $locale[ $country ]['sortcode']['label'] ) ? $locale[ $country ]['sortcode']['label'] : __( 'Sort code', 'woocommerce' );
+
+
+    ?>
+    <div class="woocommerce-bacs-bank-details m-2">
+    <h2 class="wc-bacs-bank-details-heading"><?php _e('Our bank details'); ?></h2>
+   	 <div class=' rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>
+    <?php
+
+    if ( $bacs_info ) : foreach ( $bacs_info as $account ) :
+
+
+    $account_name   = esc_attr( wp_unslash( $account['account_name'] ) );
+    $bank_name      = esc_attr( wp_unslash( $account['bank_name'] ) );
+    $account_number = esc_attr( $account['account_number'] );
+    $sort_code      = esc_attr( $account['sort_code'] );
+    $iban_code      = esc_attr( $account['iban'] );
+    $bic_code       = esc_attr( $account['bic'] );
+    ?>
+    <h3 class="wc-bacs-bank-details-account-name"><?php echo $account_name; ?>:</h3>
+    <ul class="wc-bacs-bank-details order_details bacs_details">
+        <li class="bank_name"><?php _e('Bank'); ?>: <strong><?php echo $bank_name; ?></strong></li>
+        <li class="account_number"><?php _e('Account number'); ?>: <strong><?php echo $account_number; ?></strong></li>
+        <li class="sort_code"><?php echo $sort_code_label; ?>: <strong><?php echo $sort_code; ?></strong></li>
+        <li class="iban"><?php _e('IBAN'); ?>: <strong><?php echo $iban_code; ?></strong></li>
+        <li class="bic"><?php _e('BIC'); ?>: <strong><?php echo $bic_code; ?></strong></li>
+    </ul>
+    <?php endforeach; endif; ?>
+    	</div>
+    </div>
+    <?php
+
+
+    $output = ob_get_clean();
+
+    if ( $echo )
+        echo $output;
+    else
+        return $output;
+}

@@ -65,7 +65,6 @@ if ( is_home() ) {
 
 
 
-
 if ( have_posts() ) :
 
 	while ( have_posts() ) :

@@ -39,6 +39,7 @@ button:focus
 {
 	color:#228050;
 }
+.
 .rollie_text_post_content > a
 .size-auto,
 .size-full,
@@ -111,10 +112,7 @@ color:#212529;
 {
 color: #a37e2c;
 }
-hr
-{
-border-color:#a37e2c;
-}
+
 
 .rollie_fourth_text_color,.entry-content-page a:hover
 {
@@ -1094,7 +1092,7 @@ letter-spacing: .05em;
 }
 .rollie_pagination_link
 {
-	height: 100%;
+	display: flex;
 }
 /*Raaw*/
 /*pagination*/
