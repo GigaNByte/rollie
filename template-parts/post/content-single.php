@@ -53,7 +53,11 @@
 ?> <div class="  rollie_f_headings <?php echo $rollie_line ?> rollie_title_text_color">
 
 		
-			<?php	the_title( );
+			<?php	
+
+	the_title();
+
+
 		
 			?> 
 			</div>
@@ -61,9 +65,11 @@
 				<div class=" rollie_f_excerpt_s  rollie_subtitle_text_color col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
 					<p>
 					<?php
+			
+
 					if ( function_exists( 'get_field' ) ) {
-						get_field( 'rollie_excerpt' );}
-					?>
+						get_field( 'rollie_excerpt' );
+					}?>
 					</p>
 				</div>
 			

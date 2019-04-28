@@ -1,6 +1,7 @@
 <?php
 /*
 1.General
+2.Archive product 
 2.MyAccount
 3.Orders Table
 4.Orders table Query Snipets
@@ -12,10 +13,58 @@
 
 //query_filtering
 //disable stylesheets
+
+//archive prod
+/*
+function rollie_woo_content_container_wrapper()
+{
+echo '<div class="rollie_content_container_padding_bottom">';
+}
+add_action('woocommerce_sidebar','rollie_woo_content_container_wrapper');
+add_action('woocommerce_sidebar','rollie_div_wraper_end');
+*/
+function rollie_woo_content_post_page()
+{
+get_template_part( 'template-parts/post/content-post-page' );
+}
+function rollie_woo_output_content_wrapper()
+{
+	echo '<div class="woocommerce rollie_woo_template">';
+}
+function woo_before_shop_loop_row()
+{
+	echo 'juhuski';
+	if ( wc_get_loop_prop( 'columns' )< 6 && wc_get_loop_prop( 'columns') > 0  ){
+		$rollie_standard_col = wc_get_loop_prop( 'columns' );
+	}else{
+		$rollie_standard_col = 0;
+	}
+	if (get_theme_mod('rollie_woo_l_shop_columns_md',2))
+	{
+		$rollie_md_col = get_theme_mod('rollie_woo_l_shop_columns_md',2);
+	}else{
+		$rollie_md_col = 0;
+	}
+		echo '<div class="row rollie_products rollie_products-'.$rollie_standard_col.' rollie_products_md-'.$rollie_md_col.' ">';
+	
+	
+	
+}
+
+add_action('woocommerce_before_main_content','rollie_woo_content_post_page',8);
+add_action('woocommerce_before_main_content','rollie_woo_output_content_wrapper',11);
+add_action('woocommerce_after_main_content','rollie_div_wraper_end',11);
+remove_action('woocommerce_before_main_content','woocommerce_output_content_wrapper');
+
+remove_action('woocommerce_after_main_content','woocommerce_output_content_wrapper_end');
+add_action('woocommerce_before_shop_loop','woo_before_shop_loop_row',9);
+add_action('woocommerce_after_shop_loop','rollie_div_wraper_end',200);
+//archive prod end 
 add_filter( 'woocommerce_enqueue_styles', 'rollie_dequeue_styles' );
 function rollie_dequeue_styles( $enqueue_styles ) {// Remove the layout
 	unset( $enqueue_styles['woocommerce-smallscreen'] );	// Remove the smallscreen optimisation
-	unset( $enqueue_styles['woocommerce'] );	// Remove the smallscreen optimisation
+	unset( $enqueue_styles['woocommerce-layout'] );	// Remove the layout
+	unset( $enqueue_styles['woocommerce'] );	// will be added manualy 
 	return $enqueue_styles;
 }
 
@@ -566,7 +615,7 @@ function rollie_woo_cart_content()
 {
 echo "<div class='rollie_woo_cart_content rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
 }
-function rollie_woo_cart_content_wraper_end()
+function rollie_div_wraper_end()
 {
 
 echo "</div>";
@@ -577,11 +626,11 @@ echo "<div class='rollie_woo_order_review_content rollie_woo_border_color_custom
 }
 
 add_action('woocommerce_before_cart_table','rollie_woo_cart_content',1);
-add_action('woocommerce_after_cart_table','rollie_woo_cart_content_wraper_end',200);
+add_action('woocommerce_after_cart_table','rollie_div_wraper_end',200);
 add_action('woocommerce_before_cart_totals','rollie_woo_cart_total_content',1);
-add_action('woocommerce_after_cart_totals','rollie_woo_cart_content_wraper_end',200);
+add_action('woocommerce_after_cart_totals','rollie_div_wraper_end',200);
  add_action( 'woocommerce_checkout_before_order_review','rollie_woo_order_review_content' ,1);
-    add_action( 'woocommerce_checkout_after_order_review','rollie_woo_cart_content_wraper_end',200);
+    add_action( 'woocommerce_checkout_after_order_review','rollie_div_wraper_end',200);
 function rollie_woo_cart_totals_order_total_html( $value)
 {
 	$value="<h4 class='rollie_f_subtitles_h4 '>".$value.'</h4>';
@@ -809,7 +858,7 @@ if ($order->has_downloadable_item() &&  !$status =='refunded') $step_2_i = rolli
     remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form');
 
 add_action('woocommerce_order_details_before_order_table','rollie_order_details');
-add_action('woocommerce_order_details_after_order_table','rollie_woo_cart_content_wraper_end');
+add_action('woocommerce_order_details_after_order_table','rollie_div_wraper_end');
 add_filter( 'woocommerce_order_item_name', 'rollie_product_thumbnail_order_details', 20, 3 );
     // define the woocommerce_thankyou_order_received_text callback 
 

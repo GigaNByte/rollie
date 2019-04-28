@@ -53,13 +53,4 @@
 		echo '</aside >';
 	}
 
-
-	?>
-		 
-		
-	
-			
-			</div>
-		</main>
-	
-	<?php get_footer(); ?>
+ get_footer(); ?>

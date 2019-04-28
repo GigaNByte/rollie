@@ -21,7 +21,7 @@ if ( is_category() ) {
 
 }
 
-
+			$rollie_m_a ='';
 	         if (get_theme_mod( 'rollie_post_margin_auto'.$rollie_template ,true))
 			 {
 				 $rollie_m_a = 'm-auto';

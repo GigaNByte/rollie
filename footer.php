@@ -1,4 +1,8 @@
-<?php wp_footer();
+	
+		</div> <!--rollie_content_container_padding_bottom-->
+	</main>				
+<?php 
+wp_footer();
 
 
 

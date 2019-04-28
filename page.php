@@ -39,10 +39,4 @@
 
 			rollie_pagination();
 		
-
-		?>	
-					</div> <!--rollie_content_container_padding_bottom-->
-				</main>
-		
-		<!--</div>  end of div empty div from header -->
-	<?php get_footer(); ?>
+ get_footer(); ?>

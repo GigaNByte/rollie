@@ -111,6 +111,5 @@ if ( have_posts() ) :
 		}
 	}
 	?>
-		</div>
-	</main>
+
 	<?php get_footer(); ?>

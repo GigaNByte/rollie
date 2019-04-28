@@ -4,6 +4,7 @@
 	_c -> means container
 
 	1.General
+	2.shop archibe
 	icons
 	2.MyAccount Navigation
 	3.My Orders Table
@@ -20,6 +21,10 @@
 	*/
 
 /* General */
+.woocommerce-products-header
+{
+	display: none; /*IF WOOCOMERCE.PHP IN ROLLIE DIR IS DISABLED*/
+}
 .woocommerce .woocommerce-customer-details address
 {
 text-align: center;
@@ -102,7 +107,78 @@ margin-left: auto
 }
 
 /* General End*/
+/*Archive shop*/
+.woocommerce ul.products{
+list-style:none;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+text-align:center;
+padding: 0;
+}
+.woocommerce ul.products li.product a img
+{
+	width: initial;
+}
+.woocommerce .rollie_products-1 .product{
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0.5rem;
+}
+.woocommerce .rollie_products-2 .product{
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0.5rem;
+}
+.woocommerce .rollie_products-3 .product{
+  -ms-flex: 0 0 33.333333%;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  padding: 0.5rem;
+}
+.woocommerce .rollie_products-4 .product{
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 0.5rem;
+}
+.woocommerce .rollie_products-5 .product,.woocommerce .rollie_products-6 .product{
+  -ms-flex: 0 0 16.666667%;
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+  padding: 0.5rem;
+}
 
+@media (max-width: 768px) { 
+	.woocommerce .rollie_products_md-1 .product{
+	  -ms-flex: 0 0 100%;
+	  flex: 0 0 100%;
+	  max-width: 100%;
+	  padding: 0.5rem;
+	}
+	.woocommerce .rollie_products_md-2 .product{
+	  -ms-flex: 0 0 50%;
+	  flex: 0 0 50%;
+	  max-width: 50%;
+	  padding: 0.5rem;
+	}
+	.woocommerce .rollie_products_md-3 .product{
+	  -ms-flex: 0 0 33.333333%;
+	  flex: 0 0 33.333333%;
+	  max-width: 33.333333%;
+	  padding: 0.5rem;
+	}
+	.woocommerce .rollie_products_md-4 .product{
+	  -ms-flex: 0 0 25%;
+	  flex: 0 0 25%;
+	  max-width: 25%;
+	  padding: 0.5rem;
+	}
+}
+/*Archive shop end */
 /*Woo myaccout nav */
 
 
@@ -130,8 +206,7 @@ padding: 0;
 		margin:auto;
 		position: relative;
 		width: 100%;
-		padding-right: 15px;
-		padding-left: 15px;
+
 	}
 	.rollie_my_acc_dashboard>nav>ul>.rollie_my_acc_nav_big_tiles  :before
 	{

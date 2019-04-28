@@ -122,17 +122,14 @@
 					}
 			
 			  get_template_part( 'template-parts/special/content', 'pagination_single' );
-	if ( comments_open() || get_comments_number() ) {
-
-		?>
-						 <div class='col-12 col-md-8 offset-md-2 '>	
-						 <?php
-							comments_template();
-							?>
-						 </div>	
-						 <?php
-	}
-	?>
+	if ( comments_open() || get_comments_number() ) {?>
+				 <div class='col-12 col-md-8 offset-md-2 '>	
+			
+				 <?php comments_template();?>
+					
+				 </div>				
+ <?php	} ?>
+	
 		</div>
 	</article>
 

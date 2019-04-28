@@ -20,6 +20,46 @@
 				'priority' => 20,
 			)
 		);
+	$wp_customize->add_section(
+			'rollie_woo_l_shop_section',
+			array(
+				'title'    => esc_html__( 'WooCommerce Shop Page', 'Rollie' ),
+				'panel'    => 'rollie_woo_l_panel',
+				'priority' => 20,
+			)
+		);
+
+$wp_customize->get_control( 'woocommerce_shop_page_display' )->section = 'rollie_woo_l_shop_section';
+$wp_customize->get_control( 'woocommerce_category_archive_display' )->section = 'rollie_woo_l_shop_section';
+$wp_customize->get_control( 'woocommerce_default_catalog_orderby' )->section = 'rollie_woo_l_shop_section';
+$wp_customize->get_control( 'woocommerce_catalog_columns' )->section = 'rollie_woo_l_shop_section';
+$wp_customize->get_control( 'woocommerce_catalog_rows' )->section = 'rollie_woo_l_shop_section';
+//$wp_customize->get_control( 'woocommerce_shop_page_display' )->section = 'rollie_woo_l_shop_section';
+//$wp_customize->get_control( 'woocommerce_shop_page_display' )->section = 'rollie_woo_l_shop_section';
+
+	
+	$wp_customize->add_setting(
+			'rollie_woo_l_shop_columns_md', // rollie_one_on_row_design_php_0
+			array(
+				'sanitize_callback' => 'absint',
+				'default'           => 2,
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_woo_l_shop_columns_md', // rollie_one_on_row_design_php_0
+			array(
+				'label'   => esc_html__( 'Products per row on smaller devices', 'Rollie' ),
+				'section' => 'rollie_woo_l_shop_section',
+				'type'        => 'number',
+				'input_attrs' => array(
+					'min' => 0,
+					'max' => 6
+				),
+			)
+		);
+
 
 		$wp_customize->add_setting(
 			'rollie_woo_l_my_account_nav', // rollie_one_on_row_design_php_0

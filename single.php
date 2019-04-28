@@ -22,9 +22,7 @@
 	endif;
 
 	?>	
-	
-		</div> <!--rollie_content_container_padding_bottom-->
-	</main>				
+
 
 
 <?php get_footer(); ?>
