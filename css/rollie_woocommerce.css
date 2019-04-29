@@ -108,6 +108,25 @@ margin-left: auto
 
 /* General End*/
 /*Archive shop*/
+.woocommerce-LoopProduct-link
+{
+	position: relative;
+	display: block;
+}
+.woocommerce ul.products li.product a img{
+	margin: auto;
+}
+.woocommerce-price-suffix{
+	display: block;
+}
+.woocommerce-price-suffix > .amount
+{
+	padding-right:0.3rem;
+}
+.woocommerce ul.products li.product .price{
+margin: 0px;
+
+}
 .woocommerce ul.products{
 list-style:none;
 display: -ms-flexbox;
@@ -116,10 +135,38 @@ display: flex;
 flex-wrap: wrap;
 text-align:center;
 padding: 0;
+width: 100%;
+}
+.rollie_product_img_container .rolle_modern_price,.rollie_product_img_container .rollie_classic_price
+{
+position: absolute;
+bottom: 0px;
+right: 0px;
+}
+.woocommerce ul.products li.product .star-rating
+{
+	margin: auto;
+}
+.rollie_shop_add_to_cart{
+position: absolute;
+top:0;
+left: 0;
+padding:0.5rem;
+font-size:1.3rem;
+}
+.woocommerce ul.products li.product .onsale{
+	border-radius: 0px;
+    padding: 0px;
+    line-height: initial;
+    padding: 2px;
+    min-height: initial;
+    opacity: 0.8;
+    margin: 0px;
 }
 .woocommerce ul.products li.product a img
 {
 	width: initial;
+	max-width: 100%;
 }
 .woocommerce .rollie_products-1 .product{
   -ms-flex: 0 0 100%;

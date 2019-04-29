@@ -33,7 +33,6 @@ function rollie_woo_output_content_wrapper()
 }
 function woo_before_shop_loop_row()
 {
-	echo 'juhuski';
 	if ( wc_get_loop_prop( 'columns' )< 6 && wc_get_loop_prop( 'columns') > 0  ){
 		$rollie_standard_col = wc_get_loop_prop( 'columns' );
 	}else{
@@ -46,10 +45,10 @@ function woo_before_shop_loop_row()
 		$rollie_md_col = 0;
 	}
 		echo '<div class="row rollie_products rollie_products-'.$rollie_standard_col.' rollie_products_md-'.$rollie_md_col.' ">';
-	
-	
-	
 }
+
+
+
 
 add_action('woocommerce_before_main_content','rollie_woo_content_post_page',8);
 add_action('woocommerce_before_main_content','rollie_woo_output_content_wrapper',11);
@@ -59,6 +58,96 @@ remove_action('woocommerce_before_main_content','woocommerce_output_content_wrap
 remove_action('woocommerce_after_main_content','woocommerce_output_content_wrapper_end');
 add_action('woocommerce_before_shop_loop','woo_before_shop_loop_row',9);
 add_action('woocommerce_after_shop_loop','rollie_div_wraper_end',200);
+
+
+
+ function rollie_woo_template_loop_product_title() {
+        echo '<h4 class="  ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . ' m-0 py-1">' . get_the_title() . '</h4>'; 
+ }
+remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title');
+add_action('woocommerce_shop_loop_item_title','rollie_woo_template_loop_product_title',10);
+add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_link_open',100);
+add_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_link_close',100);
+
+function rollie_woo_price_design(){
+	if ( get_theme_mod('rollie_woo_price_design',1)== 1 || get_theme_mod('rollie_woo_price_design',1)== 2){
+		
+		add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_price',32);
+
+		remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price');
+		
+			add_action('woocommerce_before_shop_loop_item_title',function(){
+				if (get_theme_mod('rollie_woo_price_design',1)==2){
+					$class='d-block w-100 rollie_modern_price  rollie_post_modern_title_bg_color';
+				}
+				else
+				{
+					$class='d-inline-block rollie_classic_price  rollie_post_classic_title_bg_color';
+				}
+				echo '<div class="'.$class.'"">' ;
+			},31);
+			add_action('woocommerce_before_shop_loop_item_title','rollie_div_wraper_end',33);
+		}
+	}
+
+
+
+function  rollie_woo_add_to_cart_link ( $html, $product, $args ) {
+ 
+
+        $args['class'] .= " rollie_shop_add_to_cart";
+$args['class'] = str_replace("button"," ",$args['class']);
+        $html = sprintf( '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
+		esc_attr( isset( $args['class'] ) ? $args['class'] : 'rollie_shop_add_to_cart' ),
+		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
+		'<i class="fas fa-cart-plus"></i>'/*esc_html( $product->add_to_cart_text() )*/
+	);
+    return $html;
+}
+
+function rollie_add_to_cart_small_icon(){
+	if (get_theme_mod('rollie_woo_add_to_cart_design', 1) == 1){
+	add_filter( "woocommerce_loop_add_to_cart_link", "rollie_woo_add_to_cart_link", 10, 3 );
+	remove_action('woocommerce_after_shop_loop_item','woocommerce_template_loop_add_to_cart');
+	add_action('woocommerce_before_shop_loop_item_title',function(){
+		echo '<div class="d-inline-block position-relative m-auto  rollie_product_img_container">';
+	},9);
+	add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_add_to_cart',20);
+	add_action('woocommerce_before_shop_loop_item_title','rollie_div_wraper_end',50);
+	}
+}
+
+function rollie_woo_customizer_actions(){
+rollie_add_to_cart_small_icon();
+rollie_woo_price_design();
+}
+add_action('customize_preview_init','rollie_woo_customizer_actions');
+add_action('init','rollie_woo_customizer_actions');
+
+function rollie_shop_loop_sku (){
+	global $product;
+	if (get_theme_mod('rollie_woo_l_shop_display_sku',true)){
+		 echo '<div class="rollie_shop_sku rollie_subtitle_text_color rollie_f_excerpt_s py-1">' .__('SKU:','woocommerce').' '.$product->get_sku().'</div>'; 
+	}
+}
+add_action('woocommerce_shop_loop_item_title','rollie_shop_loop_sku',5);
+
+add_action('woocommerce_after_shop_loop_item_title',function(){
+	global $product;
+rollie_product_attributes($product);
+
+},4);
+remove_action('woocommerce_after_shop_loop','woocommerce_pagination');
+add_action('woocommerce_after_shop_loop',function () {
+	echo '<div class="col-12">';
+$total   = isset( $total ) ? $total : wc_get_loop_prop( 'total_pages' );
+$current = isset( $current ) ? $current : wc_get_loop_prop( 'current_page' );
+rollie_pagination($total,2,$current,WC()->query->get_current_endpoint());
+echo '</div>';
+},11);
+
 //archive prod end 
 add_filter( 'woocommerce_enqueue_styles', 'rollie_dequeue_styles' );
 function rollie_dequeue_styles( $enqueue_styles ) {// Remove the layout
@@ -943,4 +1032,61 @@ function rollie_get_bacs_account_details_html( $echo = true ) {
         echo $output;
     else
         return $output;
+}
+function rollie_product_attributes( $product ,$limit = 1) {
+    $product_attributes = array();
+$limit_incr = 0;
+    // Display weight and dimensions before attribute list.
+    $display_dimensions = apply_filters( 'wc_product_enable_dimensions_display', $product->has_weight() || $product->has_dimensions() );
+
+    if ( $display_dimensions && $product->has_weight() ) {
+        $product_attributes['weight'] = array(
+            'label' => __( 'Weight', 'woocommerce' ),
+            'value' => wc_format_weight( $product->get_weight() ),
+        );
+    }
+
+    if ( $display_dimensions && $product->has_dimensions() ) {
+        $product_attributes['dimensions'] = array(
+            'label' => __( 'Dimensions', 'woocommerce' ),
+            'value' => wc_format_dimensions( $product->get_dimensions( false ) ),
+        );
+    }
+
+    // Add product attributes to list.
+    $attributes = array_filter( $product->get_attributes(), 'wc_attributes_array_filter_visible' );
+
+    foreach ( $attributes as $attribute ) {
+
+    	if ($limit <= $limit_incr) break;
+        $values = array();
+
+        if ( $attribute->is_taxonomy() ) {
+            $attribute_taxonomy = $attribute->get_taxonomy_object();
+            $attribute_values   = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+
+            foreach ( $attribute_values as $attribute_value ) {
+                $value_name = esc_html( $attribute_value->name );
+                if $value_name
+                if ( $attribute_taxonomy->attribute_public ) {
+                    $values[] = '<a href="' . esc_url( get_term_link( $attribute_value->term_id, $attribute->get_name() ) ) . '" rel="tag">' . $value_name . '</a>';
+                } else {
+                    $values[] = $value_name;
+                }
+            }
+        } else {
+            $values = $attribute->get_options();
+
+            foreach ( $values as $value ) {
+                $value = make_clickable( esc_html( $value ) );
+            }
+        }
+    
+   		
+    foreach ($values as $key => $value) {
+    	echo $value." ";
+    }	
+    $limit_incr++;
+    }
+
 }
