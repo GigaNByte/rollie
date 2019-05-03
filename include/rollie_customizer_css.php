@@ -625,15 +625,15 @@ wp_add_inline_style( 'rollie_stylesheet'," .rollie_subtitle_text_color { color: 
 
 		wp_add_inline_style( 'rollie_stylesheet',".quantity:active,.quantity-button:hover,.quantity-button :focus-within,.input-text:active,.input-text:hover,.input-text:focus-within,.rollie_form_input:active, .rollie_form_input:hover,[type='radio']:checked:hover + label::after,[type='radio']:not(:checked):hover + span::before,[type='checkbox']:checked:hover + span::after,[type='checkbox']:not(:checked):hover + label::before,.rollie_form_input:focus-within { background: ".rgba2rgb($rollie_form_input_color_backg)."; }");
 		
-		wp_add_inline_style( 'rollie_stylesheet',"[type='checkbox']:checked + span::before,[type='checkbox']:not(:checked) + span::before,[type='radio']:checked + label::before,[type='radio']:not(:checked) + label::before,.quantity ,.input-text,.rollie_form_input{ \n border-width:".get_theme_mod('rollie_form_input_b_width',1)."px; \n color: ".get_theme_mod('rollie_form_input_text_color','	#212529').";\n border-style:solid; \n border-radius: ".get_theme_mod('rollie_form_input_radius',2)."px ;	\n border-color: ".  $rollie_form_input_border_color     ." !important; \n background: ". $rollie_form_input_color_backg ."; }");
+		wp_add_inline_style( 'rollie_stylesheet',"select,[type='checkbox']:checked + span::before,[type='checkbox']:not(:checked) + span::before,[type='radio']:checked + label::before,[type='radio']:not(:checked) + label::before,.quantity ,.input-text,.rollie_form_input{ \n border-width:".get_theme_mod('rollie_form_input_b_width',1)."px; \n color: ".get_theme_mod('rollie_form_input_text_color','	#212529').";\n border-style:solid; \n border-radius: ".get_theme_mod('rollie_form_input_radius',2)."px ;	\n border-color: ".  $rollie_form_input_border_color     ." !important; \n background: ". $rollie_form_input_color_backg ."; }");
 wp_add_inline_style('rollie_stylesheet','.rollie_form_input button { border-style:none; }');
 			
-		wp_add_inline_style( 'rollie_stylesheet',"[type='radio']:checked + label:after,[type='radio']:not(:checked) + label:after,[type='checkbox']:checked + span:after,[type='checkbox']:not(:checked) + span:after{\n  background:".$rollie_form_input_border_color .";\n }");
+		wp_add_inline_style( 'rollie_stylesheet'," , [type='radio']:checked + label:after,[type='radio']:not(:checked) + label:after,[type='checkbox']:checked + span:after,[type='checkbox']:not(:checked) + span:after{\n  background:".$rollie_form_input_border_color .";\n }");
 
 
 
 
-		wp_add_inline_style( 'rollie_stylesheet'," label:hover::before  , .quantity:focus-within,.input-text:focus-within,	.rollie_search_form_shadow:focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_form_input_border_color     ."; }");
+		wp_add_inline_style( 'rollie_stylesheet'," label:hover::before  ,select:focus-within ,.quantity:focus-within,.input-text:focus-within,	.rollie_search_form_shadow:focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_form_input_border_color     ."; }");
 		
 		wp_add_inline_style( 'rollie_stylesheet'," 	.swiper-pagination-bullet{		background:	". $rollie_darker_main_theme_color->rgb_gr_1 .";}");
 		

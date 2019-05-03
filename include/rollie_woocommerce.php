@@ -2,7 +2,9 @@
 /*
 1.General
 2.Archive product 
+2.Single product
 2.MyAccount
+
 3.Orders Table
 4.Orders table Query Snipets
 5.Cart
@@ -77,7 +79,7 @@ function rollie_woo_price_design(){
 		remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price');
 		
 			add_action('woocommerce_before_shop_loop_item_title',function(){
-				if (get_theme_mod('rollie_woo_price_design',1)==2){
+				if (get_theme_mod('rollie_woo_price_design',1) == 2){
 					$class='d-block w-100 rollie_modern_price  rollie_post_modern_title_bg_color';
 				}
 				else
@@ -123,7 +125,7 @@ function rollie_woo_customizer_actions(){
 rollie_add_to_cart_small_icon();
 rollie_woo_price_design();
 }
-add_action('customize_preview_init','rollie_woo_customizer_actions');
+
 add_action('init','rollie_woo_customizer_actions');
 
 function rollie_shop_loop_sku (){
@@ -136,7 +138,13 @@ add_action('woocommerce_shop_loop_item_title','rollie_shop_loop_sku',5);
 
 add_action('woocommerce_after_shop_loop_item_title',function(){
 	global $product;
-rollie_product_attributes($product);
+	if (get_theme_mod('rollie_woo_l_shop_display_attr') != 1 )
+	{
+		if (get_theme_mod('rollie_woo_l_shop_display_attr')==2) $rollie_p_a_b = true;
+		else $rollie_p_a_b = false;
+		rollie_product_attributes($product,get_theme_mod('rollie_woo_l_shop_display_attr_max',2),$rollie_p_a_b);		
+	}
+
 
 },4);
 remove_action('woocommerce_after_shop_loop','woocommerce_pagination');
@@ -149,11 +157,243 @@ echo '</div>';
 },11);
 
 //archive prod end 
+//single product
+add_action('woocommerce_before_single_product',function(){
+	echo '<div class="rollie_single_product_page col-12">';
+});
+
+remove_action('woocommerce_before_single_product_summary','woocommerce_show_product_images',20);
+add_action('woocommerce_after_single_product','rollie_div_wraper_end');
+add_action('woocommerce_before_single_product_summary','rollie_single_product_gallery');
+function rollie_single_product_gallery (){
+	global $product;
+
+$columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+$post_thumbnail_id = $product->get_image_id();
+$wrapper_classes   = apply_filters( 'woocommerce_single_product_image_gallery_classes', array(
+	'woocommerce-product-gallery',
+	'woocommerce-product-gallery--' . ( $product->get_image_id() ? 'with-images' : 'without-images' ),
+	'woocommerce-product-gallery--columns-' . absint( $columns ),
+	'images',
+	'col-md-'.get_theme_mod('rollie_woo_l_single_w',8),
+	'col-'.get_theme_mod('rollie_woo_l_single_w_md',12),
+	'rollie_single_product_image_c'
+) );
+
+
+
+?>
+
+<div class="  <?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', $wrapper_classes ) ) ); ?>" data-columns="<?php echo esc_attr( $columns ); ?>" style="opacity: 0; transition: opacity .25s ease-in-out;">
+	<figure class="woocommerce-product-gallery__wrapper">
+		<?php 
+		if ( $product->get_image_id() ) {
+			$html = rollie_get_gallery_image_html( $post_thumbnail_id, true );
+		} else {
+			$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
+			$html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image rollie_single_product_image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+			$html .= '</div>';
+		}
+echo $html;
+		//echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id ); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
+		remove_action('woocommerce_product_thumbnails','woocommerce_show_product_thumbnails',20);
+		do_action( 'woocommerce_product_thumbnails' );
+		?>
+	</figure>
+</div>
+<?php
+}
+
+function rollie_get_gallery_image_html( $attachment_id, $main_image = false ) {
+	global $product;
+$html='';
+$slides = '';
+  $flexslider        = (bool) apply_filters( 'woocommerce_single_product_flexslider_enabled', get_theme_support( 'wc-product-gallery-slider' ) );
+  $gallery_thumbnail = wc_get_image_size( 'gallery_thumbnail' );
+  $gallery_thumbnail = wc_get_image_size( 'gallery_thumbnail' );
+  $thumbnail_size    = apply_filters( 'woocommerce_gallery_thumbnail_size', array( $gallery_thumbnail['width'], $gallery_thumbnail['height'] ) );
+ 
+  $attachment_ids = $product->get_gallery_image_ids();
+
+$variations = $product->get_available_variations();
+
+// Outside the product loop:
+$product = new WC_Product_Variable( $product->get_id() );
+$variations = $product->get_available_variations();
+
+
+ 	$attachment_ids[] = $product->get_image_id();
+
+foreach ( $variations as $variation ) {
+   if ( $variation['image_id']){
+   	$attachment_ids[] = $variation['image_id'];
+
+   }
+}
+
+
+
+	if ( $attachment_ids ) {
+		foreach ( $attachment_ids as $attachment_id ) {
+  $image_size        = apply_filters( 'woocommerce_gallery_image_size', $flexslider || $main_image ? 'woocommerce_single' : $thumbnail_size );
+  $full_size         = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
+  $thumbnail_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
+  $full_src          = wp_get_attachment_image_src( $attachment_id, $full_size );
+  $image             = wp_get_attachment_image(
+    $attachment_id,
+    $image_size,
+    false,
+    apply_filters(
+      'woocommerce_gallery_image_html_attachment_image_params',
+      array(
+        'title'                   => get_post_field( 'post_title', $attachment_id ),
+        'data-caption'            => get_post_field( 'post_excerpt', $attachment_id ),
+        'data-src'                => $full_src[0],
+        'data-large_image'        => $full_src[0],
+        'data-large_image_width'  => $full_src[1],
+        'data-large_image_height' => $full_src[2],
+        
+        'src'=>$full_src[0],
+        'class'                   => $main_image ? 'wp-post-image rollie_single_product_image  ' : '',
+      ),
+      $attachment_id,
+      $image_size,
+      $main_image
+    )
+  );
+  $slides .= '<a rollie_gallery_image_id='.esc_attr($attachment_id).' class=" swiper-slide " href="' . esc_url( $full_src[0] ) . '"><div  class="rollie_zoom_image" data-thumb="' . esc_url( $thumbnail_src[0] ) . '" class="woocommerce-product-gallery__image ">' . $image . '</div></a>';
+		}
+	$html .= "<div class='rollie_single_product_swiper_container rollie_swiper swiper-container'>";
+  $html .= '  <div class="swiper-button-prev"></div>';
+
+	$html .= "<div class='swiper-wrapper '>";
+	$html.=$slides;
+
+$html .= "</div>";
+   $html .= '<div class="swiper-button-next"></div>';
+$html .='<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>';
+$html .= "</div>";
+
+
+
+	}elseif ($product->get_image_id() ){
+		$attachment_id = $product->get_image_id();
+		  $image_size        = apply_filters( 'woocommerce_gallery_image_size', $flexslider || $main_image ? 'woocommerce_single' : $thumbnail_size );
+  $full_size         = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
+  $thumbnail_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
+  $full_src          = wp_get_attachment_image_src( $attachment_id, $full_size );
+  $image             = wp_get_attachment_image(
+    $attachment_id,
+    $image_size,
+    false,
+    apply_filters(
+      'woocommerce_gallery_image_html_attachment_image_params',
+      array(
+        'title'                   => get_post_field( 'post_title', $attachment_id ),
+        'data-caption'            => get_post_field( 'post_excerpt', $attachment_id ),
+        'data-src'                => $full_src[0],
+        'data-large_image'        => $full_src[0],
+        'data-large_image_width'  => $full_src[1],
+        'data-large_image_height' => $full_src[2],
+        
+        'src'=>$full_src[0],
+        'class'                   => $main_image ? 'wp-post-image rollie_single_product_image  ' : '',
+      ),
+      $attachment_id,
+      $image_size,
+      $main_image
+    )
+  );
+
+  $html .= '<div class="rollie_single_product_swiper_container rollie_swiper swiper-container swiper-container-horizontal"><a class="rollie_swiper swiper-slide  " href="' . esc_url( $full_src[0] ) . '"><div  class="rollie_zoom_image" data-thumb="' . esc_url( $thumbnail_src[0] ) . '" class="woocommerce-product-gallery__image ">' . $image . '</div></a></div>';
+	}else{
+				$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
+			$html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+			$html .= '</div>';
+		}
+ 
+
+  return $html;
+}
+
+add_action('woocommerce_before_single_product_summary',function(){
+	$md =  (12 - get_theme_mod('rollie_woo_l_single_w',8));
+	$col = (12 - get_theme_mod('rollie_woo_l_single_w_md',12)) ;
+	if ($md <= 0) $md = 12;
+	if ($col <= 0) $col = 12;
+	$classes = 'col-md-'.$md;
+	$classes .= ' col-'.$col;
+	
+		
+	
+	echo '<div class="rollie_single_product_summary '.$classes.' ">';
+		},50);
+
+add_action('woocommerce_after_single_product_summary','rollie_div_wraper_end',1);
+
+function rollie_single_product_meta(){
+	global $product;
+echo '<div class="product_meta">';
+echo wc_get_product_category_list( $product->get_id(), ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', count( $product->get_category_ids() ), 'woocommerce' ) . ' ', '</span>' ); 
+the_title( '<h3 class="product_title entry-title">', '</h3>' );
+	
+	 do_action( 'woocommerce_product_meta_start' );
+if ( wc_product_sku_enabled() && ( $product->get_sku() || $product->is_type( 'variable' ) ) ) : ?>
+
+		<span class="sku_wrapper"><?php esc_html_e( 'SKU:', 'woocommerce' ); ?> <span class="sku"><?php echo ( $sku = $product->get_sku() ) ? $sku : esc_html__( 'N/A', 'woocommerce' ); ?></span></span>
+
+<?php endif; 
+ echo wc_get_product_tag_list( $product->get_id(), ', ', '<span class="tagged_as">' . _n( 'Tag:', 'Tags:', count( $product->get_tag_ids() ), 'woocommerce' ) . ' ', '</span>' ); 
+echo '</div>';
+}
+
+
+
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_title',5);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
+add_action('woocommerce_single_product_summary','rollie_single_product_meta',5);
+add_action('woocommerce_after_single_product_summary','rollie_single_product_content',10);
+remove_action('woocommerce_after_single_product_summary','woocommerce_output_product_data_tabs',10);
+function rollie_single_product_content(){
+$tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+if ( ! empty( $tabs ) ) : ?>
+
+
+	<div class="woocommerce-tabs rollie_woo_tabs  wc-tabs-wrapper">
+			<?php foreach ( $tabs as $key => $tab ) : ?>
+	<?php /*
+		<div class="tabs wc-tabs " role="tablist">
+				<li class=" <?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
+					<a href="#tab-<?php echo esc_attr( $key ); ?>"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', esc_html( $tab['title'] ), $key ); ?></a>
+				</li>
+
+		</div>
+ */?>
+			<div class="woocommerce-Tabs-panel  <?php if (esc_attr( $key ) == 'description'|| esc_attr( $key ) == 'additional_information'||esc_attr( $key ) == 'reviews') echo 'rollie_woo_tab_panel_toogle'?> rollie_woo_tab_panel  woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
+				<?php if ( isset( $tab['callback'] ) ) { call_user_func( $tab['callback'], $key, $tab ); } ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
+
+<?php endif; 
+
+}
+	 do_action( 'woocommerce_product_meta_end' ); 
+
+
+
+
+
+
+
+//single product end 
+
 add_filter( 'woocommerce_enqueue_styles', 'rollie_dequeue_styles' );
 function rollie_dequeue_styles( $enqueue_styles ) {// Remove the layout
 	unset( $enqueue_styles['woocommerce-smallscreen'] );	// Remove the smallscreen optimisation
 	unset( $enqueue_styles['woocommerce-layout'] );	// Remove the layout
-	unset( $enqueue_styles['woocommerce'] );	// will be added manualy 
+	unset( $enqueue_styles['woocommerce-general'] );	// will be added manualy 
 	return $enqueue_styles;
 }
 
@@ -1033,7 +1273,7 @@ function rollie_get_bacs_account_details_html( $echo = true ) {
     else
         return $output;
 }
-function rollie_product_attributes( $product ,$limit = 1) {
+function rollie_product_attributes( $product ,$limit = 1,$display_key = true) {
     $product_attributes = array();
 $limit_incr = 0;
     // Display weight and dimensions before attribute list.
@@ -1067,7 +1307,7 @@ $limit_incr = 0;
 
             foreach ( $attribute_values as $attribute_value ) {
                 $value_name = esc_html( $attribute_value->name );
-                if $value_name
+         
                 if ( $attribute_taxonomy->attribute_public ) {
                     $values[] = '<a href="' . esc_url( get_term_link( $attribute_value->term_id, $attribute->get_name() ) ) . '" rel="tag">' . $value_name . '</a>';
                 } else {
@@ -1082,10 +1322,43 @@ $limit_incr = 0;
             }
         }
     
-   		
+   		$i = 0;
+   		$len = count($values);
+if ($display_key)   {
+	echo '<div class="rollie_product_attr_mini">';
+}else{
+	echo '<span class="rollie_product_attr_mini">';
+}
+   	
+   		if ($display_key){
+   			echo '<span class="rollie_product_attr_key">';
+    		echo wc_attribute_label( $attribute->get_name() ).": " ;
+    	
+    	}
+    echo '</span>';
+    echo '<span class="rollie_product_attr_mini_val">';
     foreach ($values as $key => $value) {
-    	echo $value." ";
+    
+     if ($i == $len - 1) {
+        // last
+    	echo $value;
+    }
+    else{
+    	echo $value.", ";
+    }
+    // …
+    $i++;
+
+
+    	
     }	
+    echo '</span>';
+   if ($display_key){
+	echo '</div>';
+	}else{
+		echo '</span>';
+	}
+	    
     $limit_incr++;
     }
 

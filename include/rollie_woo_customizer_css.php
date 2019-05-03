@@ -9,7 +9,7 @@ if (get_theme_mod('rollie_woo_l_shop_img',true)){
 wp_add_inline_style( 'rollie_woo_stylesheet', " .woocommerce ul.products li.product a img \n{\n max-height:".get_theme_mod('rollie_woo_l_shop_img_max_h',200)."px\n}");
 }
 
-
+wp_add_inline_style('rollie_woo_stylesheet',".rollie_single_product_image\n{\n max-height:".get_theme_mod('rollie_woo_l_single_img_max_h','600')."px;\n}");
 
 
 
