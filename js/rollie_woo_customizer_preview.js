@@ -9,7 +9,6 @@ var rollie_universal_controls = [
  new  RollieCustomizerObj('rollie_woo_success_border_color', '.rollie_woo_success_color,woocommerce-message', Array('border-color')),
  new  RollieCustomizerObj('rollie_woo_error_border_color', '.rollie_woo_error_color,.woocommerce-error', Array('border-color')),
  new  RollieCustomizerObj('rollie_muted_color', '.rollie_muted_color', Array('background','color')),
-rollie_muted_color
  ];
 
 

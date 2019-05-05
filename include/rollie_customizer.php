@@ -53,9 +53,6 @@ $wp_customize->add_setting(	$setting_name.'_label');
 				)
 			);
 
-
-
-
 	$wp_customize->add_setting(
 		$setting_name.'_gr_1',
 		array(

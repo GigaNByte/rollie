@@ -4,7 +4,7 @@
 2.Archive product 
 2.Single product
 2.MyAccount
-
+2.login
 3.Orders Table
 4.Orders table Query Snipets
 5.Cart
@@ -55,9 +55,9 @@ function woo_before_shop_loop_row()
 add_action('woocommerce_before_main_content','rollie_woo_content_post_page',8);
 add_action('woocommerce_before_main_content','rollie_woo_output_content_wrapper',11);
 add_action('woocommerce_after_main_content','rollie_div_wraper_end',11);
-remove_action('woocommerce_before_main_content','woocommerce_output_content_wrapper');
+remove_action('woocommerce_before_main_content','woocommerce_output_content_wrapper',10);
 
-remove_action('woocommerce_after_main_content','woocommerce_output_content_wrapper_end');
+remove_action('woocommerce_after_main_content','woocommerce_output_content_wrapper_end',10);
 add_action('woocommerce_before_shop_loop','woo_before_shop_loop_row',9);
 add_action('woocommerce_after_shop_loop','rollie_div_wraper_end',200);
 
@@ -215,7 +215,7 @@ $slides = '';
  
   $attachment_ids = $product->get_gallery_image_ids();
 
-$variations = $product->get_available_variations();
+
 
 // Outside the product loop:
 $product = new WC_Product_Variable( $product->get_id() );
@@ -388,7 +388,22 @@ if ( ! empty( $tabs ) ) : ?>
 
 
 //single product end 
+	 //login
+	 function rollie_woo_login_form_site_icon (){
+	 if (get_theme_mod( 'rollie_footer_menu_logo' ));
+	 {
+	 	echo '<img class="rollie_login_form_site_icon d-block m-auto" src="'.esc_url(get_theme_mod( 'rollie_footer_menu_logo' )).'"/>';
 
+	 	if (get_theme_mod( 'rollie_footer_logo_desc_text' )){
+	 		echo '<div class="rollie_f_footer_sub m-1 rollie_subtitle_text_color">'.get_theme_mod( 'rollie_footer_logo_desc_text' ).'</div>';
+	 	}
+	 }
+
+	 }
+	 add_action('woocommerce_login_form_start','rollie_woo_login_form_site_icon',5);
+
+//
+//loginend
 add_filter( 'woocommerce_enqueue_styles', 'rollie_dequeue_styles' );
 function rollie_dequeue_styles( $enqueue_styles ) {// Remove the layout
 	unset( $enqueue_styles['woocommerce-smallscreen'] );	// Remove the smallscreen optimisation

@@ -1,6 +1,12 @@
   jQuery( document ).ready(function($) {
   "use strict";
 
+
+//login container
+$('#username.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_login"></div>');
+$('#password.woocommerce-Input, #reg_password.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_password"></div>');
+$(' #reg_email.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_email"></div>');
+
     var rollie_single_product_gallery_swiper = new Swiper ('.rollie_single_product_swiper_container', {
       // Optional parameters
 
