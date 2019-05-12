@@ -65,6 +65,7 @@ font-weight:900;
 .woocommerce form .form-row
 {
 	width: 100%;
+	margin: auto;
 }
 .woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register{
 	margin:auto;
@@ -338,7 +339,9 @@ padding: 0;
 		display: block;
 		margin-bottom:2rem;
 	}
-			
+			.rollie_my_acc_nav_wide_c{
+				border:solid;
+			}
 .rollie_my_acc_nav_big_tiles_c > .woocommerce-MyAccount-navigation /*  COL-12*/
 	{
 		-ms-flex: 0 0 100%;
@@ -612,13 +615,11 @@ border:none;
 {
 	border:none;
 }
-.rollie_woo_border_custom_column_rad,address,.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register
+.rollie_table,.rollie_woo_border_custom_column_rad,address,.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register
 {
-
-border-style: solid !important;
-border-radius: 3px !important;
-border-width: 1px !important;
+border-style: solid;
 }
+
 .woocommerce-orders-table__row
 {
 	padding-bottom: 2rem;
@@ -929,7 +930,7 @@ max-width: 50%;
 /* Cart TOOTALS*/
 
 
-.rollie_woo_border_color_custom_column  *
+.rollie_table  *
 {
 	border-color: inherit;
 }
@@ -1035,21 +1036,35 @@ width: 75%;
 width: 100%;
 text-align: center;
 }
-
-
+.rollie_woo_cart_total_c > strong{
+display: block;
+text-align: right;
+}
+.rollie_woo_order_table_banner
+{
+	border:solid;
+	border-left:none;
+	border-right:none;
+	border-color: inherit;
+}
 /*cARRCD TOOTALS ENMD*/
 
 /*login*/		
 
-.woocommerce form .form-row
+.woocommerce-form-login .woocommerce form .form-row
 {
 	display:block; 
-}
-
-.woocommerce form.login, .woocommerce form.register{
 
 }
-.woocommerce .woocommerce-LostPassword
+.woocommerce-LostPassword > a 
+{
+margin: auto;
+}
+.woocommerce .woocommerce-form-login .woocommerce-form-login__rememberme{
+	display: initial;
+}
+
+.woocommerce .woocommerce-LostPassword,form > p
 {
 	display: flex;
 }
@@ -1073,13 +1088,20 @@ padding-right:0.5rem;
 border-top-right-radius: 0;
 border-bottom-right-radius: 0;
 border-right: none;
-
 }
 
+.woocommerce-form-register > p > label, .woocommerce-form-login > p > label {
+width: 100%;
+}
+ .woocommerce-form-register >.form-row,.woocommerce-form-login > .form-row{
+	width: max-content !important;
+display: block;
+
+}
 .rollie_login_icons_c
 {
 display: flex;	
-
+max-width: 300px;
 }
 .rollie_login_icons_c.rollie_login:before
 {
@@ -1097,12 +1119,9 @@ content:"\f084";
 
 }
 .woocommerce  #customer_login{
-		display: -ms-flexbox;
-
+display: -ms-flexbox;
 display: flex;
-
 -ms-flex-wrap: wrap;
-
 flex-wrap: wrap;
 
 }
@@ -1110,6 +1129,9 @@ flex-wrap: wrap;
 	ms-flex: 0 0 50%;
 flex: 0 0 50%;
 max-width: 50%;
+
+  flex-direction: column;
+  justify-content: center;
 }
 
 /*login end*/
@@ -1154,9 +1176,6 @@ max-width: 100%;
 }
 
 }
-
-
-
 
 
 input[type=number]::-webkit-inner-spin-button,

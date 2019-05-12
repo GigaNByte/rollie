@@ -101,7 +101,7 @@ if ( function_exists( 'icl_t' ) ) {
 				'class_submit'         => 'submit d-block rollie_button  mx-auto my-2 rollie_f_b_f btn  btn-lg rollie_button_submit ',
 				'label_submit'         => $rollie_s_and_c_str,
 				'comment_field'        =>
-					'<div class="rollie_font_first "> <span class="required"></span><textarea id="comment" placeholder="' . $rollie_c_placeholder_str . '  " class="form-control rollie_form_control" name="comment" rows="1" required="required"></textarea></p></div>',
+					'<div class="rollie_font_first "> <span class="required"></span><textarea id="comment" placeholder="' . $rollie_c_placeholder_str . '  " class="form-control rollie_form_control rollie_form_input" name="comment" rows="1" required="required"></textarea></p></div>',
 				'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
 				'title_reply'          => $rollie_reply_str,
 				'logged_in_as'         => '<p class="logged-in-as m-1  ">' . sprintf( __( $rollie_logged_str . ' <a href="%1$s " class="">%2$s</a>. <a  class="rollie_text_color_3 " href="%3$s" title="Log out of this account">' . $rollie_logout_str . '</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '</p>',

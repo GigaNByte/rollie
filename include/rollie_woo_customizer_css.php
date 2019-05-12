@@ -17,7 +17,7 @@ wp_add_inline_style('rollie_woo_stylesheet',".rollie_single_product_image\n{\n m
 
 
 
-wp_add_inline_style( 'rollie_woo_stylesheet', ".woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register,.rollie_woo_border_color_custom_column,.woocommerce .woocommerce-customer-details address \n {border-color:".$rollie_third_theme_color->css_snippet(true)."}" );
+wp_add_inline_style( 'rollie_woo_stylesheet', ".rollie_my_acc_nav_wide_c,.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register,.rollie_woo_border_color_custom_column,.woocommerce .woocommerce-customer-details address \n {border-color:".$rollie_third_theme_color->rgb."}" );
 
 
 $rollie_woo_notice_color = new Rollie_Gradient ('rollie_woo_notice_color','#ccedfd' ,'.woocommerce-info ', array('background'));

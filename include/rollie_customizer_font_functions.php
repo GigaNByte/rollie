@@ -225,35 +225,7 @@
 							)
 						);
 
-						$wp_customize->add_section(
-							'rollie_font_website_s_section',
-							array(
-								'panel'    => 'rollie_font_panel',
-								'title'    => esc_html__( ' Website sections ', 'rollie' ),
-								'priority' => 20,
-							)
-						);
-						$wp_customize->add_setting(
-							'rollie_font_website_s_i',
-							array(
-								'default'           => '',
-								'transport'         => 'refresh',
-								'sanitize_callback' => 'rollie_sanitize_class_html',
-							)
-						);
-
-						$wp_customize->add_control(
-							new Skyrocket_Simple_Notice_Custom_control(
-								$wp_customize,
-								'rollie_font_website_s_i',
-								array(
-									'label'       => __( 'Font options for website sections headings like Comments or Contact form' ),
-									'description' => __( ' <span>This options are saved to css class called :<span class="rollie_info_c"><b> <strong>rollie_f_website_s </strong> </b></span></span><br> <br> <strong> <span class="rollie_warn_c ">Important! </span>Using many different Google Fonts and weights in theme may slow down loading of your site! </strong><br><a href="https://fonts.google.com/" target="_blank">More information about Google Fonts</a>' ),
-									'section'     => 'rollie_font_website_s_section',
-								)
-							)
-						);
-
+					
 								$wp_customize->add_section(
 									'rollie_font_b_f_section',
 									array(

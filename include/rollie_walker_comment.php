@@ -57,7 +57,7 @@ class Rollie_Comment_Walker extends Walker_Comment {
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'has-children media' : ' media' ); ?>>
 			
 
-			<div class="media-body card mt-3 rollie_comment  " id="div-comment-<?php comment_ID(); ?>">
+			<div class="media-body card mt-3 rollie_comment rollie_darker_main_color " id="div-comment-<?php comment_ID(); ?>">
 				<div class="card-header rollie_card_header hoverable ">
 					<div class="flex-center rollie_font_first">
 						<?php if ( $args['avatar_size'] != 0 ) : ?>

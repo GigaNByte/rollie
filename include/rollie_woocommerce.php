@@ -8,6 +8,8 @@
 3.Orders Table
 4.Orders table Query Snipets
 5.Cart
+7.notices
+
 6.Functions 
 */
 /* My orders Table*/
@@ -594,7 +596,7 @@ function rollie_woo_order_custom_column( $order ) {
 		} 
 ?>
 
-<div class='rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad '>
+<div class='rollie_woo_order_table rollie_table rollie_woo_border_custom_column_rad '>
 	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
 	<div class='  rollie_woo_order_table_banner    '>		
 
@@ -607,7 +609,7 @@ function rollie_woo_order_custom_column( $order ) {
 		
 	</div>
 	</a>
-	<div class=' row  m-0 p-0 rollie_woo_order_table  rollie_woo_border_color_custom_column '>
+	<div class=' row  m-0 p-0 rollie_woo_order_table   '>
 	
 			<div class='col-12'>
 					<div class='<?php echo $rollie_line;?>'>
@@ -615,7 +617,7 @@ function rollie_woo_order_custom_column( $order ) {
 					$product = $item->get_product(); 
 			?>
 	
-				<div class='row rollie_woo_order_item_row  rollie_woo_border_color_custom_column '>
+				<div class='row rollie_woo_order_item_row  '>
 				
 					<div class='col-4 col-md-2  rollie_woo_order_table_thumbnail'><?php echo $product->get_image('woocommerce_gallery_thumbnail');?></div>
 					<div class='col-8 col-md-10'>
@@ -630,7 +632,7 @@ function rollie_woo_order_custom_column( $order ) {
 				</div>
 			<?php } ?>
 				</div>
-				<div class='row rollie_woo_order_summary_row  rollie_woo_border_color_custom_column <?php echo $rollie_line_r;?>'>		
+				<div class='row rollie_woo_order_summary_row   <?php echo $rollie_line_r;?>'>		
 						<div class='col-4 small text-center rollie_flex_text_center'> 
 							<div> 	
 
@@ -953,11 +955,11 @@ add_filter( 'the_title', 'rollie_endpoint_titles', 10, 2 );
 
 function rollie_woo_cart_total_content()
 {
-	echo "<div class='rollie_woo_cart_total rollie_woo_border_color_custom_column rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad col-12'>";
+	echo "<div class='rollie_woo_cart_total rollie_table rollie_table rollie_woo_border_custom_column_rad col-12'>";
 }
 function rollie_woo_cart_content()
 {
-echo "<div class='rollie_woo_cart_content rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
+echo "<div class='rollie_woo_cart_content rollie_table rollie_woo_border_custom_column_rad'>";
 }
 function rollie_div_wraper_end()
 {
@@ -966,7 +968,7 @@ echo "</div>";
 }
 function rollie_woo_order_review_content()
 {
-echo "<div class='rollie_woo_order_review_content rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>";
+echo "<div class='rollie_woo_order_review_content rollie_table rollie_woo_border_custom_column_rad'>";
 }
 
 add_action('woocommerce_before_cart_table','rollie_woo_cart_content',1);
@@ -977,7 +979,7 @@ add_action('woocommerce_after_cart_totals','rollie_div_wraper_end',200);
     add_action( 'woocommerce_checkout_after_order_review','rollie_div_wraper_end',200);
 function rollie_woo_cart_totals_order_total_html( $value)
 {
-	$value="<h4 class='rollie_f_subtitles_h4 '>".$value.'</h4>';
+	$value="<h4 class='rollie_f_subtitles_h4 rollie_woo_cart_total_c'>".$value.'</h4>';
 return  $value;
 }
 add_filter( 'woocommerce_cart_totals_order_total_html', 'rollie_woo_cart_totals_order_total_html', 10, 1 ); 
@@ -1192,7 +1194,7 @@ if ($order->has_downloadable_item() &&  !$status =='refunded') $step_2_i = rolli
 		</div>
 	</div>
 
-<div class="rollie_woo_order_table rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad ">
+<div class="rollie_woo_order_table rollie_table rollie_woo_border_custom_column_rad ">
 
 
 <?php
@@ -1205,6 +1207,17 @@ add_action('woocommerce_order_details_before_order_table','rollie_order_details'
 add_action('woocommerce_order_details_after_order_table','rollie_div_wraper_end');
 add_filter( 'woocommerce_order_item_name', 'rollie_product_thumbnail_order_details', 20, 3 );
     // define the woocommerce_thankyou_order_received_text callback 
+
+
+//notices
+
+
+
+
+
+
+
+
 
 function rollie_get_bacs_account_details_order(){
 	
@@ -1254,7 +1267,7 @@ function rollie_get_bacs_account_details_html( $echo = true ) {
     ?>
     <div class="woocommerce-bacs-bank-details m-2">
     <h2 class="wc-bacs-bank-details-heading"><?php _e('Our bank details'); ?></h2>
-   	 <div class=' rollie_woo_border_color_custom_column rollie_woo_border_custom_column_rad'>
+   	 <div class=' rollie_table rollie_woo_border_custom_column_rad'>
     <?php
 
     if ( $bacs_info ) : foreach ( $bacs_info as $account ) :

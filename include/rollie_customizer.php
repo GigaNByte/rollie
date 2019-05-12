@@ -4777,134 +4777,68 @@ $wp_customize->add_section(
 		);
 
 	$wp_customize->add_section(
-		'rollie_comments_section',
+		'rollie_tables_section',
 		array(
-			'title'    => esc_html__( 'Comments', 'Rollie' ),
+			'title'    => esc_html__( 'Page Sections, Tables, Comments', 'Rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
 
 			$wp_customize->add_setting(
-				'rollie_comment_section_shadow',
-				array(
-					'default'           => true,
-					'sanitize_callback' => 'rollie_sanitize_checkbox',
-				)
-			);
-
-			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_comment_section_shadow',
-					array(
-						'label'   => esc_html__( 'Enable shadow comment section style instead solid', 'Rollie' ),
-						'section' => 'rollie_comments_section',
-
-					)
-				)
-			);
-
-									$wp_customize->add_setting(
-										'rollie_comment_s_s_color',
-										array(
-											'default'   => '#212121',
-											'transport' => 'refresh',
-										)
-									);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_comment_s_s_color',
+			'rollie_tables_border_w',
 			array(
-				'label'             => __( 'Comment section border color', 'Rollie' ),
-				'section'           => 'rollie_comments_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-									$wp_customize->add_setting(
-										'rollie_comment_f_s_color',
-										array(
-											'default'   => '#212121',
-											'transport' => 'refresh',
-										)
-									);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_comment_f_s_color',
-			array(
-				'label'             => __( 'Comment form border color', 'Rollie' ),
-				'section'           => 'rollie_comments_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-									$wp_customize->add_setting(
-										'rollie_icon_comment_color',
-										array(
-											'default'   => '#818181;',
-											'transport' => 'refresh',
-										)
-									);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_icon_comment_color',
-			array(
-				'label'             => __( 'Comment icons color', 'Rollie' ),
-				'section'           => 'rollie_comments_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-			$wp_customize->add_setting(
-				'rollie_icon_comment_shadow',
-				array(
-					'default'   => '#ffffff',
-					'transport' => 'refresh',
-				)
-			);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_icon_comment_shadow',
-			array(
-				'label'             => __( 'Comment icons shadow color', 'Rollie' ),
-				'section'           => 'rollie_comments_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-		$wp_customize->add_setting(
-			'rollie_icon_comment_color_h',
-			array(
-				'default'   => '#212121',
-				'transport' => 'refresh',
+				'default'           => 2,
+				'transport' =>'postMessage',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
 			)
 		);
 
 	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
+		new Skyrocket_Slider_Custom_Control(
 			$wp_customize,
-			'rollie_icon_comment_color_h',
+			'rollie_tables_border_w',
 			array(
-				'label'             => __( 'Comment icons color when hover', 'Rollie' ),
-				'section'           => 'rollie_comments_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'       => esc_html__( 'Border width (px) ' ),
+				'section'     => 'rollie_tables_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 10,
+					'step' => 1,
+				),
 			)
 		)
 	);
+		
 
+			$wp_customize->add_setting(
+			'rollie_tables_border_rad',
+			array(
+				'default'           => 2,
+				'transport' =>'postMessage',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Slider_Custom_Control(
+			$wp_customize,
+			'rollie_tables_border_rad',
+			array(
+				'label'       => esc_html__( 'Border radius (px) ' ),
+				'section'     => 'rollie_tables_section',
+				'input_attrs' => array(
+					'min'  => 0,
+					'max'  => 10,
+					'step' => 1,
+				),
+			)
+		)
+	);
+		
+	
+
+				
 	$wp_customize->add_section(
 		'rollie_buttons_section',
 		array(
@@ -5047,65 +4981,6 @@ $wp_customize->add_section(
 		)
 	);
 
-								$wp_customize->add_setting(
-									'rollie_icon_color_second',
-									array(
-										'default'   => '#212121',
-										'transport' => 'refresh',
-									)
-								);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_icon_color_second',
-			array(
-				'label'             => __( 'Icon second color', 'Rollie' ),
-				'section'           => 'rollie_icons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-				$wp_customize->add_setting(
-					'rollie_icon_color_second_shadow',
-					array(
-						'default'   => '#a37e2c',
-						'transport' => 'refresh',
-					)
-				);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_icon_color_second_shadow',
-			array(
-				'label'             => __( 'Icon second shadow color', 'Rollie' ),
-				'section'           => 'rollie_icons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-							$wp_customize->add_setting(
-								'rollie_icon_color_second_h',
-								array(
-									'default'   => '#ffffff',
-									'transport' => 'refresh',
-								)
-							);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_icon_color_second_h',
-			array(
-				'label'             => __( 'Icon second color when hover', 'Rollie' ),
-				'section'           => 'rollie_icons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
 
 	$wp_customize->add_section(
 		'rollie_forms_inputs_section',
