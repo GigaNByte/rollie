@@ -119,27 +119,13 @@ if ( function_exists( 'icl_t' ) ) {
 
 
 
-	$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_subtitles' ,1) == 1){
-								$rollie_line='  rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_subtitles' ,1) == 2){
-								$rollie_line=' rollie_fancy_line  rollie_fancy_line_horizontal rollie_fancy_line_n ';
-							} 
-
 
 
 				?>
 			
 		
-		<h3 class="comment-title col-12 <?Php echo $rollie_line?> ">
-				<?php
-
-
-					echo '<span>' . $rollie_c_and_r_str . ' <span> (' . get_comments_number() . ') </span>';
-
-
-				?>
+		<h3 class="comment-title col-12 <?Php echo rollie_embl_subtitles(); ?> ">
+				<?php echo '<span>' . $rollie_c_and_r_str . ' <span> (' . get_comments_number() . ') </span>';?>
 			
 		</h2>
 	

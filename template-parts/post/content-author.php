@@ -4,27 +4,18 @@
 
 					<div class="row m-0  ">
 
-						<?php 
-						$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t';
-							} ?>
-							<?php if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
-								$rollie_line='rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
-							} ?>
+				
 						<div class="col-4 col-md-2 ">
 							
 				<?PHP	echo get_avatar( $rollie_author->ID, '', '', '', array( 'class' => 'float-right' ) ); ?>
 						</div>
 				
-						<div class=" <?php echo $rollie_line ?> col-8  col-md-4   rollie_f_headings rollie_f_headings_h2 rollie_title_text_color ">
+						<div class=" <?php echo rollie_embl_titles();?> col-8  col-md-4   rollie_f_headings rollie_f_headings_h2 rollie_title_text_color ">
 						<?php
-							
-
+		
 						$rollie_arch_title = rollie_get_translated_archive_title();
 							echo $rollie_arch_title;
-
-						?>
+							?>
 							
 						</div>
 						<div class="col-6  rollie_f_excerpt_s   rollie_subtitle_text_color">
@@ -38,8 +29,9 @@
 		</header>
 </div><!-- closing page head from header.php-->
 <div class="rollie_content_container_padding_bottom"><!-- tag will be closed in index.php-->
+	<?php	rollie_breadcrumb();?>
 	<main id="<?php echo 'page-' . get_the_ID(); ?>">
-	  <div class="rollie_text_content_align ">
+	
 	  
 			
 		 <div class=" row m-0">
@@ -52,7 +44,7 @@
 		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' );
 
 		if ( $rollie_is_active_sidebar_left ) {
-			echo "<aside class='rollie_sidebar_left    col-2 '>";
+			echo "<aside class='rollie_sidebar_left  ".$rollie_sidebar_col." '>";
 			dynamic_sidebar( 'sidebar_left' );
 			echo '</aside>';
 			$rollie_offset_var = ' col-md-8 col-12 offset-md-0';
@@ -63,7 +55,7 @@
 				$rollie_offset_var = 'offset-1  col-md-8 offset-md-2';
 		}
 
-		echo "<div class='rollie_text_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_offset_var . " '>";
+		echo "<div class='rollie_main_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_main_col . " '>";
 
 
 

@@ -106,14 +106,9 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
 
-	$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_footer' ,2 ) == 1){
-								$rollie_line='  rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_footer' ,2) == 2){
-								$rollie_line=' rollie_fancy_line  rollie_fancy_line_horizontal rollie_fancy_line_n ';
-							} 
-				$attributes .= ' class="nav-link rollie_second_text_color rollie_footer_nav_link dropdown-toggle '.$rollie_line.'"';
+
+						
+				$attributes .= ' class="nav-link rollie_second_text_color rollie_footer_nav_link dropdown-toggle '.rollie_embl_footer().'"';
 			
 
 			$attributes .= ' data-target="#" data-toggle="dropdown"';
@@ -213,14 +208,8 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_footer' ,2 ) == 1){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_footer' ,2) == 2){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_horizontal rollie_fancy_line_n ';
-							} 
-			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_footer_nav_link'.$rollie_line.'"';
+
+			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_footer_nav_link'.rollie_embl_footer().'"';
 
 			/*
 			 -----------------------------------------------

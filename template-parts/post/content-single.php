@@ -1,8 +1,4 @@
-<?php require locate_template( 'include/rollie_single_pages_bootstrap_class_variables.php' ); ?>	
 	
-
-
-			
 		<header class="container-fluid rollie_title_container rollie_title_bg_color">
 		<?php
 		
@@ -23,14 +19,7 @@
 		{
 			$rollie_below ="";
 		}
-			$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
-							} 
-	
+		
 		?>
 			
 			<div class="titles">
@@ -45,12 +34,12 @@
 				}
 			}
 			if ( is_page() && $post->post_parent && ( ! $rollie_alt_cat_title ) ) {
-				echo '<div class="rollie_f_headings rollie_f_headings_h2 rollie_parent_title '.$rollie_below.$rollie_line.'  rollie_category_title_text_color   ">' . $parent_title . '</div>';
+				echo '<div class="rollie_f_headings rollie_f_headings_h2 rollie_parent_title '.$rollie_below.rollie_embl_titles().'  rollie_category_title_text_color   ">' . $parent_title . '</div>';
 			} elseif ( $rollie_alt_cat_title ) {
-					  echo '<div class=" rollie_f_headings rollie_f_headings_h2 rollie_parent_title '.$rollie_below.$rollie_line.' rollie_category_title_text_color">' . $rollie_alt_cat_title . '</div>';
+					  echo '<div class=" rollie_f_headings rollie_f_headings_h2 rollie_parent_title '.$rollie_below.rollie_embl_titles().' rollie_category_title_text_color">' . $rollie_alt_cat_title . '</div>';
 			}
 
-?> <div class="  rollie_f_headings <?php echo $rollie_line ?> rollie_title_text_color">
+?> <div class="  rollie_f_headings <?php echo rollie_embl_titles();?> rollie_title_text_color">
 
 		
 			<?php	
@@ -86,6 +75,7 @@
 		</header>
 </div><!-- closing page head from header.php-->		
 <div class="rollie_content_container_padding_bottom"><!-- tag will be closed in single.php-->
+<?php	rollie_breadcrumb();?>
 	<main id="<?php echo 'page-' . get_the_ID(); ?>">
 	  <article  id="<?php echo 'post-content-' . get_the_ID(); ?> " class="rollie_text_content_align   ">
 	  
@@ -97,7 +87,7 @@
 
 
 		if ( is_active_sidebar( 'sidebar_left' )&& $rollie_allow_sidebars ){
-			echo "<aside class='rollie_sidebar_left   ".$rollie_single_page_display_style_classes  [$rollie_display_index]['sidebar_l_offset'].$rollie_single_page_sidebar_width."  '>";
+			echo "<aside class='rollie_sidebar_left   ".$rollie_sidebar_col."  '>";
 			dynamic_sidebar( 'sidebar_left' );
 			echo '</aside>';
 		}		
@@ -107,7 +97,7 @@
 
 
 
-		echo "<div class='rollie_text_post_content rollie_f_pp_content  rollie_main_theme_text_color " .$rollie_single_page_display_style_classes[$rollie_display_index]['content_col_width']. $rollie_single_page_display_style_classes[$rollie_display_index]['content_offset'] . " '>";
+		echo "<div class='rollie_main_post_content rollie_f_pp_content  rollie_main_theme_text_color'>";
 
 
 		?>
@@ -127,14 +117,7 @@
 			?>
 		
 			</div>
-					<?php
-
-					if ( is_active_sidebar( 'sidebar_right' ) && $rollie_allow_sidebars ) {
-						echo "<div class='rollie_sidebar_right   ".$rollie_single_page_display_style_classes  [$rollie_display_index]['sidebar_r_offset'].$rollie_single_page_sidebar_width."'>";
-							dynamic_sidebar( 'sidebar_right' );
-						echo '</div>';
-					}
-					?>
+				
 
 					<?php
 					get_template_part( 'template-parts/special/content', 'pagination_single' );

@@ -423,7 +423,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -820,7 +820,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -1490,7 +1490,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -1814,7 +1814,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -2173,7 +2173,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -2495,7 +2495,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -2523,7 +2523,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -2840,7 +2840,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -3138,7 +3138,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -3452,7 +3452,7 @@
 											'type'    => 'radio',
 											'choices' => array(
 												1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-												2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+												2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 												3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 												4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -4114,7 +4114,7 @@
 															'type' => 'radio',
 															'choices' => array(
 																1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-																2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+																2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 																3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 																4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 
@@ -4474,7 +4474,7 @@
 															'type' => 'radio',
 															'choices' => array(
 																1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-																2 => esc_html__( ' fa-align-center Center ', 'rollie' ),
+																2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
 																3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
 																4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
 

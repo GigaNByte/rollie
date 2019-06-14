@@ -51,9 +51,27 @@ function woo_before_shop_loop_row()
 		echo '<div class="row rollie_products rollie_products-'.$rollie_standard_col.' rollie_products_md-'.$rollie_md_col.' ">';
 }
 
+/**
+ * Change the breadcrumb separator
+ */
 
+add_filter( 'woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs' );
+function jk_woocommerce_breadcrumbs() {
+    return array(
+            'delimiter'   => ' &gt; ',
+            'wrap_before' => '<nav class="woocommerce-breadcrumb rollie_subtitle_text_color rollie_f_excerpt_s">',
+            'wrap_after'  => '</nav>',
+            'before'      => '<span class="rollie_category_title_text_color">',
+            'after'       => '</span>',
+            'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+        );
+}
 
+function rollie_woocommerce_sale_flash( $onsale, $post, $product ) { 
+    return "<div class='rollie_f_meta rollie_d_contents rollie_second_text_color'>".$onsale."</div>"; 
+}; 
 
+add_filter( 'woocommerce_sale_flash', 'rollie_woocommerce_sale_flash', 10, 3 ); 
 add_action('woocommerce_before_main_content','rollie_woo_content_post_page',8);
 add_action('woocommerce_before_main_content','rollie_woo_output_content_wrapper',11);
 add_action('woocommerce_after_main_content','rollie_div_wraper_end',11);
@@ -71,6 +89,7 @@ add_action('woocommerce_after_shop_loop','rollie_div_wraper_end',200);
 remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title');
 add_action('woocommerce_shop_loop_item_title','rollie_woo_template_loop_product_title',10);
 add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_link_open',100);
+
 add_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_link_close',100);
 
 function rollie_woo_price_design(){
@@ -82,11 +101,11 @@ function rollie_woo_price_design(){
 		
 			add_action('woocommerce_before_shop_loop_item_title',function(){
 				if (get_theme_mod('rollie_woo_price_design',1) == 2){
-					$class='d-block w-100 rollie_modern_price  rollie_post_modern_title_bg_color';
+					$class='d-block w-100 rollie_modern_price rollie_category_title_text_color rollie_post_modern_title_bg_color';
 				}
 				else
 				{
-					$class='d-inline-block rollie_classic_price  rollie_post_classic_title_bg_color';
+					$class='d-inline-block rollie_classic_price rollie_category_title_text_color rollie_post_classic_title_bg_color';
 				}
 				echo '<div class="'.$class.'"">' ;
 			},31);
@@ -569,8 +588,7 @@ function rollie_woo_order_status_icon($rollie_woo_order_status,$rollie_is_downlo
 
 function rollie_woo_orders_custom_column( $columns ) {
 
-	$rollie_line='';
-	$rollie_line_r='';
+
 
 
 	    unset( $columns['order-number'] );
@@ -586,14 +604,7 @@ function rollie_woo_orders_custom_column( $columns ) {
 add_filter( 'woocommerce_my_account_my_orders_columns', 'rollie_woo_orders_custom_column' );
 
 function rollie_woo_order_custom_column( $order ) {
-       	if ( get_theme_mod ('rollie_embl_subtitles' ,1 ) == 1){
-			$rollie_line='  rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
-			$rollie_line_r ='rollie_fancy_line rollie_fancy_line_vertical_r'  ;
-		} 
-		 if ( get_theme_mod ('rollie_embl_subtitles' ,1) == 2){
-			$rollie_line=' rollie_fancy_line  rollie_fancy_line_horizontal rollie_fancy_line_n ';
 
-		} 
 ?>
 
 <div class='rollie_woo_order_table rollie_table rollie_woo_border_custom_column_rad '>
@@ -609,10 +620,10 @@ function rollie_woo_order_custom_column( $order ) {
 		
 	</div>
 	</a>
-	<div class=' row  m-0 p-0 rollie_woo_order_table   '>
+	<div class=' row  m-0 p-0 rollie_woo_order_table  rollie_darker_main_color '>
 	
 			<div class='col-12'>
-					<div class='<?php echo $rollie_line;?>'>
+					<div class='<?php rollie_embl_subtitles() ;?>'>
 			<?Php	foreach( $order->get_items() as $item_id => $item ){
 					$product = $item->get_product(); 
 			?>
@@ -632,7 +643,7 @@ function rollie_woo_order_custom_column( $order ) {
 				</div>
 			<?php } ?>
 				</div>
-				<div class='row rollie_woo_order_summary_row   <?php echo $rollie_line_r;?>'>		
+				<div class='row rollie_woo_order_summary_row   <?php echo  rollie_embl_subtitles(true);?>'>		
 						<div class='col-4 small text-center rollie_flex_text_center'> 
 							<div> 	
 
@@ -696,9 +707,9 @@ function rollie_woo_order_custom_column( $order ) {
 function rollie_woo_orders_table_sort_menu ()
 {
 	?>
-<div class='row rollie_orders_sort_menu text-center mb-3'>
+<div class='row rollie_orders_sort_menu rollie_darker_main_color  rollie_menus_shadow text-center mb-3'>
 
-	<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current';?>'  >	 
+	<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current  rollie_menus_shadow';?>'  >	 
 		<a href='<?php  echo wc_get_account_endpoint_url('orders') ; ?>'>
 			<div class='rollie_sort_orders_counter m-auto'>
 				<h3>
@@ -821,21 +832,21 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 
 		if (get_theme_mod('rollie_woo_l_my_account_nav',1) == 1){
 	$rollie_class_c = ' rollie_my_acc_nav_big_tiles_c ';
-	$rollie_class_c .= ' rollie_darker_main_color_h ';
+	$rollie_class_c .= ' rollie_darker_main_color ';
 	$rollie_user_info_class = " col-12 col-lg-3 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 2){
 	$rollie_class_c = " rollie_my_acc_nav_side_c ";
 	$rollie_class_c .= " col-5  ";
 	$rollie_class_c .= " col-lg-4  ";
-	$rollie_class_c .= ' rollie_darker_main_color_h ';
+	$rollie_class_c .= ' rollie_darker_main_color ';
 	$rollie_user_info_class = " col-12 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 3){
-	$rollie_class_c = " rollie_my_acc_nav_wide_c ";
+	$rollie_class_c = " rollie_my_acc_nav_wide_c  ";
 	}
-		echo "<div class='".$rollie_class_c.$rollie_dash_class."  rollie_my_acc_container rollie_f_b_f '>";
-		echo 	"<figure class=' ".$rollie_user_info_class."  '>";
+		echo "<div class='".$rollie_class_c.$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow rollie_f_b_f '>";
+		echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner    rollie_menus_shadow'>";
 		echo 		"<img class='mx-auto d-block' src=".get_avatar_url( get_current_user_id()).">";
 		echo 		"<figcaption class='pt-1'>";
 
@@ -870,16 +881,8 @@ function rollie_action_woo_account_content()
 {
 
 echo  "<div class='row p-0 m-0 h-100'>";
-		$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
-								$rollie_line=' rollie_fancy_line  rollie_fancy_line_vertical rollie_fancy_line_t ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
-							} 
-	
 
-	echo "<div class='p-0 col-12 ".$rollie_line." rollie_f_headings rollie_title_text_color rollie_account_title' >";
+	echo "<div class='p-0 col-12 ". rollie_embl_subtitles()." rollie_f_headings rollie_title_text_color rollie_account_title' >";
 
 	echo get_the_title();
 	
@@ -1194,7 +1197,7 @@ if ($order->has_downloadable_item() &&  !$status =='refunded') $step_2_i = rolli
 		</div>
 	</div>
 
-<div class="rollie_woo_order_table rollie_table rollie_woo_border_custom_column_rad ">
+<div class="rollie_woo_order_table rollie_table rollie_darker_main_color rollie_woo_border_custom_column_rad ">
 
 
 <?php
@@ -1267,7 +1270,7 @@ function rollie_get_bacs_account_details_html( $echo = true ) {
     ?>
     <div class="woocommerce-bacs-bank-details m-2">
     <h2 class="wc-bacs-bank-details-heading"><?php _e('Our bank details'); ?></h2>
-   	 <div class=' rollie_table rollie_woo_border_custom_column_rad'>
+   	 <div class=' rollie_table rollie_woo_border_custom_column_rad rollie_darker_main_color'>
     <?php
 
     if ( $bacs_info ) : foreach ( $bacs_info as $account ) :
@@ -1353,9 +1356,9 @@ $limit_incr = 0;
    		$i = 0;
    		$len = count($values);
 if ($display_key)   {
-	echo '<div class="rollie_product_attr_mini">';
+	echo '<div class="rollie_product_attr_mini rollie_f_excerpt ">';
 }else{
-	echo '<span class="rollie_product_attr_mini">';
+	echo '<span class="rollie_product_attr_mini rollie_f_excerpt ">';
 }
    	
    		if ($display_key){
@@ -1364,7 +1367,7 @@ if ($display_key)   {
     	
     	}
     echo '</span>';
-    echo '<span class="rollie_product_attr_mini_val">';
+    echo '<span class="rollie_product_attr_mini_val rollie_f_excerpt ">';
     foreach ($values as $key => $value) {
     
      if ($i == $len - 1) {

@@ -14,7 +14,11 @@
 	iNPUT SPINERS
 	6.coupon
 	thanktou table + payment infos 
+	woo widgets 
 	5.Disable some styles
+
+	Notices
+
 4.animations
 
 
@@ -39,6 +43,10 @@ content: "\f2bb";
 
 .woocommerce button.button.alt.disabled{
 	background-color: none;
+}
+.woocommerce .woocommerce-breadcrumb{
+	margin-left: 2rem;
+	margin-bottom: 0.5rem;
 }
  ul.wc-bacs-bank-details.order_details:after,address:after
 }
@@ -113,6 +121,13 @@ margin-left: auto
 
 /* General End*/
 /*Archive shop*/
+.woocommerce-result-count ,.woocommerce-ordering{
+-ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+}
 .woocommerce-LoopProduct-link
 {
 	position: relative;
@@ -148,7 +163,19 @@ position: absolute;
 bottom: 0px;
 right: 0px;
 }
+.woocommerce ul.products li.product .price{
+	color:inherit;
+	font-weight: inherit;
+}
 .woocommerce ul.products li.product .star-rating
+{
+	margin: auto;
+}
+.woocommerce p.return-to-shop{
+	width: 100%;
+	text-align: center;
+}
+.woocommerce p.cart-empty
 {
 	margin: auto;
 }
@@ -159,14 +186,30 @@ left: 0;
 padding:0.5rem;
 font-size:1.3rem;
 }
-.woocommerce ul.products li.product .onsale{
+.woocommerce .rollie_single_product_page .onsale{
+display: block;
+position: initial;
+margin-left: 60%;
+width: 100%;
+max-width: 800px;
+margin:auto;
+}
+.woocommerce span.onsale{
+font-size: inherit;
+background-color: inherit;
+color:inherit;
+}
+
+.woocommerce .rollie_single_product_page .onsale,.woocommerce ul.products li.product .onsale{
 	border-radius: 0px;
     padding: 0px;
     line-height: initial;
     padding: 2px;
     min-height: initial;
     opacity: 0.8;
-    margin: 0px;
+}
+.woocommerce ul.products li.product .onsale{
+  margin: 0px;
 }
 .woocommerce ul.products li.product a img
 {
@@ -392,6 +435,14 @@ display: block;
 
 
 }
+
+.rollie_my_acc_nav_side_c > figure {
+border: none;
+}
+.rollie_my_acc_nav_side_c  {
+	height: max-content;
+	padding: 0;
+}
 @media screen and (min-width: 768px) /* AT BOOTSTRAP md*/
 {
 	.rollie_my_acc_nav_side :after{
@@ -425,29 +476,18 @@ border-right-style:solid;
 {
 	text-align:left;
 	display: block;
-line-height:2rem;	
+		padding: 1rem;
 	width: 100%;
 }
-.rollie_my_acc_nav_side
+.rollie_my_acc_nav_side 
 {
-	padding: 0.5rem;
-border-style: solid;
-border-width: 1px;
-	border-left-width:2px;
-		border-right-width:2px;
-	width: 100%
+	padding: 0;
+	width: 100%;
 
 }
-
-.rollie_my_acc_nav_side_c > nav > ul :first-child 
-{
-	border-top-width:2px;
-}
-.rollie_my_acc_nav_side_c > nav > ul :last-child 
-{
-	border-bottom-width:2px;
-	clear: both
-}
+ .rollie_my_acc_nav_side + .is-active{
+ 	border-left: 
+ }
 
 .rollie_my_acc_nav_side_c + .woocommerce-MyAccount-content
 {
@@ -668,7 +708,7 @@ margin: auto;
 	font-size: initial;
 display: block;
 }
-.woocommerce-cart-form,.woocommerce .cart-collaterals  .cart_totals
+.woocommerce-cart-form,.woocommerce .cart-collaterals  .cart_totals,.woocommerce .cart-collaterals  
 {
 	width: 100%;
 }
@@ -1088,6 +1128,7 @@ padding-right:0.5rem;
 border-top-right-radius: 0;
 border-bottom-right-radius: 0;
 border-right: none;
+background: inherit;
 }
 
 .woocommerce-form-register > p > label, .woocommerce-form-login > p > label {
@@ -1423,6 +1464,21 @@ padding-top:0;
   .woocommerce-table--order-details  tfoot > tr:last-child > td > span {
   	font-size: xx-large;
   }
+
+
+
+/*Notices*/
+.woocommerce-error, .woocommerce-info, .woocommerce-message{
+	border:none; 
+}
+/*Notices End*/
+/*woo widgets*/
+section {
+	margin:auto;
+}
+
+/*woo widgets end */
+ 
 /*
 Animations
 */

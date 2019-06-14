@@ -35,7 +35,7 @@ while ( $child_query->have_posts() ) :
 											
 										</div>
 									
-										<div class='rollie_child_pages_thumbnail_ex rollie_f_excerpt_s w-100 '>
+										<div class='rollie_child_pages_thumbnail_ex rollie_f_excerpt_s w-50 m-auto p-1'>
 											<?php
 
 											if ( function_exists( 'get_field' ) && get_field( 'rollie_excerpt' ) ) {

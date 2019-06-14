@@ -10,7 +10,6 @@
 	text-align: center;
 }
 
-
 .rollie_info_c
 {
 	color: #17a2b8;
@@ -22,7 +21,7 @@
 .rollie_customizer_icon_single input
 {
 display:block;
-margin:0px;
+margin:auto;
  width:30px;
 
 }

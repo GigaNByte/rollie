@@ -81,7 +81,7 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 						}
 						?>
 						
-							<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0  <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_meta_c_div_col']; ?>">		
+							<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0  <?php echo col-12 ?>">		
 						
 									<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
 							

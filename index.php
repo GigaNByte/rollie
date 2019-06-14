@@ -1,8 +1,7 @@
-<?php get_header(); ?>
-		
-
-	<?php
-
+<?php
+require_once get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_variables.php';	
+ get_header();
+	
 
 	// variables for content-post-page and customizer
 	$rollie_row_counter                    = 0;
@@ -22,18 +21,6 @@
 	}
 
 
-
-
-
-	require locate_template( 'include/rollie_posts_pages_bootstrap_class_variables.php' );
-
-
-	// numver says how many words you want to display in excerpt
-	// variables for content-post-page and customizer END
-	?>
-
-<?php
-
 if ( is_home() ) {
 	global $post;
 
@@ -41,28 +28,14 @@ if ( is_home() ) {
 	if ( $page_for_posts_id ) {
 		$post = get_page( $page_for_posts_id );
 		setup_postdata( $post );
-		
-		get_template_part( 'template-parts/post/content-post-page' );
-		rewind_posts();
 	}
-	else
-	{	
-	get_template_part( 'template-parts/post/content-post-page' );
-	}
-} elseif ( is_author() ) {
+	
 
-		get_template_part( 'template-parts/post/content-author' );
-} elseif ( is_archive() ) {
-
-
-	get_template_part( 'template-parts/post/content-archive' );
-
-} else {
 
 	get_template_part( 'template-parts/post/content-post-page' );
+
+rewind_posts();
 }
-
-
 
 
 if ( have_posts() ) :
@@ -70,38 +43,22 @@ if ( have_posts() ) :
 	while ( have_posts() ) :
 		the_post();
 
-
-		// include(locate_template('template-parts/post/content-index.php',true));
 		include locate_template( 'template-parts/post/content-index.php' );
-		// get_template_part( 'template-parts/post/content-index' );
+		
 	endwhile;
-
-		endif;
-
-
-
-
-			rollie_pagination();
-
-
+endif;
 ?>
-		  
+</main>
+	  
 	<?php
 
-	if ( is_active_sidebar( 'sidebar_right' ) && $rollie_allow_sidebars ) {
-		echo "<aside class='rollie_sidebar_right col-2 '>";// offset-1
+	if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
+		 $rollie_sidebar_col = 'col-'.get_theme_mod('rollie_posts_page_l_sidebar_size',2);
+		echo "<aside class='rollie_sidebar_right ".$rollie_sidebar_col." '>";
 		dynamic_sidebar( 'sidebar_right' );
-		echo '</aside >';
+		echo '</aside>';
 	}
-
-	?>
-			
-		
-	
-				
-		
-			
-	<?php
+	rollie_pagination();
 	get_sidebar( 'bottom_1' );
 	if ( is_archive() ) {
 		if ( is_active_sidebar( 'sidebar_bottom_archive' ) ) {
@@ -110,6 +67,7 @@ if ( have_posts() ) :
 			echo '</section >';
 		}
 	}
-	?>
 
+	?>
+</div>
 	<?php get_footer(); ?>

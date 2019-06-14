@@ -22,8 +22,9 @@
 		</header>
 </div><!-- closing page head from header.php-->
 <div class="rollie_content_container_padding_bottom"><!-- tag will be closed in index.php-->
+	<?php	rollie_breadcrumb();?>
 	<main id="<?php echo 'page-' . get_the_ID(); ?>">
-	  <div class="rollie_text_content_align   ">
+	 
 		 <div class=" row m-0">
 		 	
 		<?php
@@ -32,7 +33,7 @@
 		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' ) && $rollie_allow_sidebars ;
 
 		if ( $rollie_is_active_sidebar_left && $rollie_allow_sidebars ) {
-			echo "<aside class='rollie_sidebar_left   col-2 '>";
+			echo "<aside class='rollie_sidebar_left   ".$rollie_sidebar_col." '>";
 			dynamic_sidebar( 'sidebar_left' );
 			echo '</aside >';
 			$rollie_offset_var = ' col-md-8 col-12 offset-md-0';
@@ -43,7 +44,7 @@
 				$rollie_offset_var = 'offset-1  col-md-8 offset-md-2';
 		}
 
-		echo "<div class='rollie_text_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_offset_var . " '>";
+		echo "<div class='rollie_main_post_content rollie_f_pp_content rollie_main_theme_text_color   " . $rollie_main_col . " '>";
 
 
 

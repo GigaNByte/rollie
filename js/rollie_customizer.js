@@ -132,7 +132,7 @@ if (tr)
 
 function rollie_collapse_label_toggle ()
 {	
-
+    
 //on docuemtn ready
 
 //on docuemtn ready
@@ -761,13 +761,13 @@ function rollie_add_panel_icon(rollie_panel_slug,dashicon_classes)
 $("li[aria-owns='sub-accordion-"+rollie_panel_slug+"']>h3").prepend('<span class="dashicons '+dashicon_classes+'"></span>')	;
 }
 
-rollie_add_panel_icon ('panel-rollie_layout_panel','dashicons-layout');
+rollie_add_panel_icon ('panel-rollie_grid_meta_panel','dashicons-layout');
 rollie_add_panel_icon ('panel-rollie_font_panel','dashicons-editor-textcolor');
 rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
 rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
 rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
 
-rollie_add_panel_icon ('section-rollie_widget_section','dashicons-exerpt-view');
+rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
 rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
 rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
 rollie_add_panel_icon ('section-rollie_search_form_section','dashicons-search');

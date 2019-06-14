@@ -18,7 +18,7 @@ if ( ! $rollie_format_icon ) {
 							?>
 				<div class="rollie_icon_first  rollie_icon_aside_custom_colors  p-1">	<i class=" fas fa-1x  d-flex  <?php echo $rollie_format_icon; ?>"></i> </div>	
 		<?php	} ?>
-							<div class=" rollie_meta_c_modern <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_meta_c_div_col']; ?>">		
+							<div class=" rollie_meta_c_modern col-12">		
 					
 								<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
 										

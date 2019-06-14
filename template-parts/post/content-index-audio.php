@@ -16,7 +16,7 @@ if ( ! $rollie_format_icon ) {
 							?>
 			<div class="rollie_icon_first   rollie_icon_audio_custom_colors  p-1">	<i class=" fas fa-2x  <?php echo $rollie_format_icon; ?>"></i> </div>	
 	<?php	} ?>
-							<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0  <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_meta_c_div_col']; ?>">		
+							<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0  <?php echo col-12 ?>">		
 					
 						<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
 													

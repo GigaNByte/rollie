@@ -198,14 +198,9 @@ class Rollie_Walker_Cat_Swap extends Walker_Nav_Menu {
 
 		$item_output          = $args->before;
 
-			$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_navbar' ,2 ) == 1){
-								$rollie_line =' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_n ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_navbar' ,2) == 2){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_n rollie_fancy_line_horizontal';
-							} 
-		$attributes .=' class=" '.$rollie_line.'" '; 
+		
+						
+		$attributes .=' class=" '.rollie_embl_navbar().'" '; 
 		$item_output         .= '<a' . $attributes . '>';
 		$item_output         .= $args->link_before . $title . $args->link_after;		
 

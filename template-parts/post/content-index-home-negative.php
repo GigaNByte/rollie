@@ -48,7 +48,7 @@
 		</header>
 
 
-	  <div class="rollie_text_content_align   ">
+
 	  
 		<?php
 		if ( rollie_page_has_children() ) {
@@ -78,7 +78,7 @@
 
 
 
-		echo "<div class='rollie_text_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_offset_var . " '>";
+		echo "<div class='rollie_main_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_offset_var . " '>";
 
 
 

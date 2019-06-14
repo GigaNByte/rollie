@@ -19,16 +19,10 @@ else{
 		
 			$rollie_below ="";
 		}
-				$rollie_line='';
-						if ( get_theme_mod ('rollie_embl_titles' ,0 ) == 1){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_vertical rollie_fancy_line_t ';
-							} 
-							 if ( get_theme_mod ('rollie_embl_titles' ,0) == 2){
-								$rollie_line=' rollie_fancy_line rollie_fancy_line_t rollie_fancy_line_horizontal';
-							} 
+			
 		?>
 
-						<div class=" offset-1 col-5 rollie_title <?php echo 	$rollie_line ?>rollie_f_headings rollie_title_text_color ">
+						<div class=" offset-1 col-5 rollie_title <?php echo rollie_embl_titles();?>rollie_f_headings rollie_title_text_color ">
 
 
 						<?php
@@ -57,7 +51,7 @@ else{
 
 <div class="rollie_content_container_padding_bottom"><!-- tag will be closed in category.php--->
 	<main id="<?php echo 'page-' . get_the_ID(); ?>">
-	  <div class="rollie_text_content_align   ">
+	
 		 <div class=" row m-0">
 		<?php
 
@@ -65,7 +59,7 @@ else{
 		$rollie_is_active_sidebar_right = is_active_sidebar( 'sidebar_right' );
 
 		if ( $rollie_is_active_sidebar_left ) {
-			echo "<aside class='rollie_sidebar_left    col-2 '>";
+			echo "<aside class='rollie_sidebar_left ".$rollie_sidebar_col." '>";
 			dynamic_sidebar( 'sidebar_left' );
 			echo '</aside >';
 			$rollie_offset_var = ' col-md-8 col-12 offset-md-0';
@@ -76,7 +70,7 @@ else{
 				$rollie_offset_var = 'offset-1  col-md-8 offset-md-2';
 		}
 
-		echo "<div class='rollie_text_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_offset_var . " '>";
+		echo "<div class='rollie_main_post_content rollie_f_pp_content rollie_main_theme_text_color col-10   " . $rollie_offset_var . " '>";
 
 
 

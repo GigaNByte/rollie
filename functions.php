@@ -100,23 +100,11 @@ add_filter('wp_check_filetype_and_ext','wph_disable_mime_check',10,4);
 
 }
 
+         
+
+add_filter( 'rollie_is_active_sidebar', 'is_active_sidebar', 10, 2 ); 
 function rollie_widget_setup() {
-/*	register_sidebar(
-		array(
 
-			'name'          => 'Cookie_popup',
-			'id'            => 'cookie_popup',
-			'class'         => 'custom-cookie-popup',
-			'descripton'    => 'Its a cookie popup message',
-
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<div class="custom-widget-cookie-popup "> <div class=" col-8 col-lg-10 custom-widget-cookie-popup-title"><div class="custom-widget-cookie-popup-title-container">  ',
-			'after_title'   => ' <span class="rollie_fancy_line"><span/></div></div> <div class="col-4 col-lg-2 custom-widget-cookie-popup-button-container" ><button class="custom-widget-cookie-popup-button">Roger!</button></div></div>',
-
-		)
-	);
-	*/
 	register_sidebar(
 		array(
 
@@ -234,6 +222,7 @@ require get_template_directory() . '/include/rollie_sanitization_functions.php';
 require get_template_directory() . '/include/rollie_walker_cat_swap.php';
 require get_template_directory() . '/include/rollie_walker_footer.php';
 require get_template_directory() . '/include/rollie_walker_comment.php';
+require get_template_directory() . '/include/rollie_breadcrumb.php';
 require get_template_directory() . '/include/rollie_customizer.php';
 require get_template_directory() . '/include/rollie_special_functions.php';
 require get_template_directory() . '/include/rollie_walker_nav_top_toggle.php';
@@ -244,6 +233,9 @@ require get_template_directory() . '/include/rollie_pagination.php';
 require get_template_directory() . '/include/rollie_register_strings_polylang.php';
 require get_template_directory() . '/include/rollie_woocommerce.php';
 require get_template_directory() . '/include/pe-customizer.php';
+
+
+
 
 add_action( 'customize_register', 'rollie_customizer_register' );
 add_action( 'after_setup_theme', 'custom_setup' );
@@ -260,6 +252,6 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 
 add_action( 'customize_controls_print_styles', 'rollie_customizer_stylesheet' );
 add_action( 'customize_controls_enqueue_scripts', 'rollie_customizer_scripts' );
-
+$juhuski='tad';
 
 

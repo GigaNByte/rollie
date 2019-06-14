@@ -1,6 +1,6 @@
 	
 		</div> <!--rollie_content_container_padding_bottom-->
-	</main>				
+				
 <?php 
 wp_footer();
 
@@ -15,13 +15,13 @@ if ( has_nav_menu( 'Footer_Menu' )){
 
 
 
-		<div class= "rollie_padding_footer_measure rollie_footer rollie_second_color" id="rollie_footer">
+		<div class= "rollie_menus_shadow rollie_padding_footer_measure rollie_footer rollie_second_color" id="rollie_footer">
 
 
 
 
 
-							<nav class="navbar navbar-expand-sm p-0 rollie_f_footer justify-content-center rollie_footer_nav">
+				<nav class="navbar navbar-expand-sm p-0 rollie_f_footer justify-content-center rollie_footer_nav">
 
 				<?php
 				wp_nav_menu(
@@ -41,7 +41,7 @@ if ( has_nav_menu( 'Footer_Menu' )){
 				);
 				?>
 									
-							</nav>
+				</nav>
 												
 
 

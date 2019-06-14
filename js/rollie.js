@@ -35,8 +35,7 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 
 			$( ".rollie_navbar_toggler" ).click(
 				function() {
-				//	$( '.rollie_search_button_standalone' ).insertBefore( ".rollie_navbar_top_container" );
-				
+					
 					$( '.rollie_collapse_side_js' ).css( 'visibility','visible' );
 				
 					if ($( '.rollie_collapse_side_js' ).length ) {
@@ -103,18 +102,19 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 
 				 $( container ).removeClass( ' navbar-expand invisible' );
 
-				var rollie_backgroundc = $( container ).css( "background-color" );
+				var rollie_backgroundc = $( '.rollie_navbar_color' ).css( "background-color" );
 
 				 var rollie_backgroundcmod = rgb2hex( rollie_backgroundc );
 				 rollie_backgroundcmod     = hexToRgbA( rollie_backgroundcmod ,'0.92' );
 
 				$( containerid ).on(
 					'show.bs.collapse',
-					function () {															
+					function () {		
+																		
 						$('ul' ).addClass( 'm-0' );
 					
 						$( '.rollie_collapse_side_overlay' ).css('display','block').css( "opacity","1" );
-						$( '.rollie_navbar_color ' ).css( "background-color",rollie_backgroundcmod );
+						$( container ).css( "background-color",rollie_backgroundcmod );
 						if (rollie_collapse_side) {
 
 							$( '.rollie_top_navbar_b_color' ).css( "background-color",rollie_backgroundcmod );
@@ -122,9 +122,9 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 				$( document ).mouseup(
 					function(e)
 					{
-						if ( ! $( "#rollie_insert_form_between_js" ).is( e.target ) && $( "#rollie_insert_form_between_js" ).has( e.target ).length === 0  ) {
+						if ( ! $( "#rollie_insert_search_form_between_js" ).is( e.target ) && $( "#rollie_insert_search_form_between_js" ).has( e.target ).length === 0  ) {
 						
-							$( '#rollie_insert_form_between_js > #rollie_search_input_menu_top' ).removeClass( "rollie_search_input_menu_top_mobile" ).css( 'display','none' ).css( 'visibility','hidden' );
+							$( '#rollie_insert_search_form_between_js > #rollie_search_input_menu_top' ).removeClass( "rollie_search_input_menu_top_mobile" ).css( 'display','none' ).css( 'visibility','hidden' );
 								$(".rollie_navbar_top_container").collapse("hide");
 						}
 					}
@@ -136,7 +136,7 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 					'hidden.bs.collapse',
 					function () {					
 						$( '.rollie_collapse_side_overlay' ).css('display','none').css( "opacity","0" );
-						$( '.rollie_navbar_color ' ).css( "background-color",rollie_backgroundc );
+						$( '.rollie_navbar_color' ).css( "background-color",rollie_backgroundc );
 						$( ul ).removeClass( 'm-0' );
 
 					}
@@ -151,6 +151,23 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 				);
 			}
 
+			
+	$(".rollie_search_button_standalone").on('click',function(){
+		if ($('#rollie_search_input_menu_top').css("display") == 'none'){
+			$('#rollie_search_input_menu_top').css("display",'block');
+	}else{
+	$('#rollie_search_input_menu_top').css("display",'none');
+	}	
+
+	});
+
+	/*$(".rollie_search_input_menu_top.rollie_search_button ").on('click',function(){
+				$(this).next('.rollie_form_input').css('visibility','hidden');
+			$(this).addClass('rollie_search_button_standalone');
+	}):
+*/
+
+/*
 			$( ".rollie_search_button_standalone" ).on(
 								"click",
 								function() {
@@ -182,7 +199,7 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 					$( '#rollie_search_input_menu_top' ).css( 'visibility','hidden' );
 	 				 $( '#rollie_search_input_menu_top' ).insertAfter( "#rollie_navbar_top" );
 
-					$( '.rollie_search_button_m_1:first' ).clone().addClass( "rollie_search_button_standalone" ).attr( 'form','' ).insertBefore( ".rollie_navbar_top_container" );
+					$( '.rollie_search_button:first' ).clone().addClass( "rollie_search_button_standalone" ).attr( 'form','' ).insertBefore( ".rollie_navbar_top_container" );
 					$( '#rollie_search_input_menu_top' ).css( 'display','none' );
 								if 	('none' == $('.rollie_navbar_toggler').css('display') ){
 				$( ".rollie_search_button_standalone" ).appendTo( "#rollie_navbar_top" );
@@ -190,60 +207,16 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 
 				}
 
+			*/	  
 
-				  
-
-				
-
-				$( window ).resize(
+			
 
 
-					function() {
-						
-	if 	('none' == $('.rollie_navbar_toggler').css('display') ){
-				$( ".rollie_search_button_standalone" ).appendTo( "#rollie_navbar_top" );
-							}
-
-						if ( $( window ).width() <= rollie_search_breakpoint_w ) {
-							if ( ! $( '.rollie_search_button_standalone' ).length) {
-								$( '.rollie_search_button_m_1:first' ).clone().addClass( "rollie_search_button_standalone" ).attr( 'form','' ).insertBefore( ".rollie_navbar_top_container" );
-
-								$( '#rollie_search_input_menu_top' ).insertAfter( "#rollie_navbar_top" );
-								$( '#rollie_search_input_menu_top' ).css( 'display','none' );
-								$( ".rollie_search_button_standalone" ).on(
-									"click",
-									function() {
-										$( "#rollie_search_input_menu_top" ).css( "display","block" );
-										$( '#rollie_search_input_menu_top' ).css( 'visibility','visible' );
-									}
-								);
-				
-							}
-
-						} else if ($( window ).width() > rollie_search_breakpoint_w) {
-
-							$( '.rollie_search_button_standalone' ).remove();
-							$( '#rollie_search_input_menu_top' ).prop( "disabled", false ).css( 'visibility','visible' ).css( 'display','block' ).appendTo( "#rollie_navbar_top" );
-						
-						}
-					}
-				);
-
-			}
-				setTimeout(
-					function(){
-							$( '.rollie_collapse_side_js' ).css( 'visibility','visible' );
-					},
-					500
-				);
-		}
-	);
-
+});
 }
 
-
-
 jQuery(
+
 
 
 
@@ -253,21 +226,14 @@ jQuery(
 		$('.rollie_parent_title').insertAfter($('.rollie_parent_title').next());
 
 		}
+	
+		
 		
 
-		
 
- $( ".rollie_search_input" ).on(
-								"click",
-								function() { 
-									$(this).next(".rollie_search_button_m_1").attr("disabled", false);
-								}
-							);
-
-
-				   $( '.rollie_content_container_padding_bottom' ).css( "padding-bottom",$( '#rollie_footer' ).outerHeight() + "px" );
-					   $( '#rollie_footer' ).removeClass( "rollie_padding_footer_measure" );
-							  $( '#rollie_footer' ).addClass( "footer" );
+		 $( '.rollie_content_container_padding_bottom' ).css( "padding-bottom",$( '#rollie_footer' ).outerHeight() + "px" );
+	   $( '#rollie_footer' ).removeClass( "rollie_padding_footer_measure" );
+	 $( '#rollie_footer' ).addClass( "footer" );
 
 			$( window ).scroll(
 				function() {
@@ -277,14 +243,13 @@ jQuery(
 						  $( '#rollie_footer' ).addClass( "show" );
 						 $( '#rollie_footer' ).css( "opacity","100" );
 					} else {
-
 						$( '#rollie_footer' ).removeClass( "show" );
 					}
 
 				}
 			);
 
-		$( ".collapse" ).on(
+		/*$( ".collapse" ).on(
 			'hidden.bs.collapse',
 			function(){
 				setTimeout(
@@ -296,18 +261,18 @@ jQuery(
 
 			}
 		);
-
-		$( '.rollie_search_input_m_1' ).siblings().prop( 'disabled',true );
+*/
+		/*//$( '.rollie_search_input_m_1' ).siblings().prop( 'disabled',true );
 		$( '.rollie_search_input_m_1' ).keyup(
 			function(){
 				$( '.rollie_search_input_m_1' ).siblings().prop( 'disabled', this.value == "" ? true : false );
 			}
 		)
-
+*/
 		rollie_nav_handler( ".rollie_nav_top_2_nav_js", '.rollie_nav_top_2_js','.rollie_nav_form' , '#rollie_nav_top_2',true );
-		rollie_nav_handler( ".rollie_nav_top_1_nav_js", '.rollie_nav_top_1_js','.rollie_nav_form' , '#rollie_nav_top_1',false );
+		
 
-		$( '.rollie_collapse_side_js.collapse > ul' ).css( "display","flex" );
+		$( '.rollie_collapse_side_js.collapse > ul' ).css( "display","flex" );		
 
 		if ($( 'div.rollie_gallery_post_format' ).length) {
 
@@ -417,7 +382,7 @@ jQuery(
 			$( '.comment-respond' ).insertAfter( $( rollie_reply_id ).children().first() );
 			
 		}
-		
+		/*
 		var siblingwidth = $(".rollie_content_container_padding_bottom").width();      // fixes footer width in chrome  
 		$(".rollie_footer").width(siblingwidth); 
 
@@ -428,6 +393,7 @@ jQuery(
 			var siblingwidth = $(".rollie_content_container_padding_bottom").width();    		
 			$(".rollie_footer").width(siblingwidth); 
 					});
+					*/
 	}
 	 
 

@@ -69,7 +69,7 @@ if ( ! has_post_thumbnail( get_the_ID() ) ) {
 							}
 						}
 						?>
-						<div class=" rollie_meta_c_modern <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_meta_c_div_col']; ?>">		
+						<div class=" rollie_meta_c_modern <?php echo col-12 ?>">		
 					
 					
 						<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>

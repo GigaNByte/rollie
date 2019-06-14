@@ -68,8 +68,8 @@ if ( has_nav_menu( 'Rollie_Top_Menu' ) ) {
 	
 		<div class="overlay rollie_overlay rollie_collapse_side_overlay"></div>
 	<?php } ?>
-		<div id="rollie_insert_form_between_js">			
-			<nav id="rollie_navbar_top"class="navbar  rollie_navbar_color rollie_navbar  rollie_nav_top_2_nav_js rollie_f_navbar    navbar-expand invisible " >
+		<div id="rollie_insert_search_form_between_js " class='position-relative '> 			
+			<nav id="rollie_navbar_top"class="navbar rollie_navbar rollie_navbar_color rollie_nav_top_2_nav_js rollie_f_navbar    navbar-expand invisible " >
 				
 				
 
@@ -79,8 +79,8 @@ if ( has_nav_menu( 'Rollie_Top_Menu' ) ) {
 		   </button>
 		  <?php
 			if ( ! empty( get_theme_mod( 'rollie_menu_top_logo' ) ) ) {
-							echo     '<a href="'.esc_url( home_url( '/' ) ).'">';
-				echo "<img class='p-1 rollie_nav_top_logo rollie_menu_top_logo_w rollie_menu_top_logo_h' src='" . get_theme_mod( 'rollie_menu_top_logo' ) . "'>";
+							echo     '<a class="rollie_nav_top_logom-auto" href="'.esc_url( home_url( '/' ) ).'">';
+				echo "<img class='p-1  rollie_menu_top_logo_w rollie_menu_top_logo_h' src='" . get_theme_mod( 'rollie_menu_top_logo' ) . "'>";
 				echo '</a>';
 			}
 
@@ -119,26 +119,24 @@ if ( has_nav_menu( 'Rollie_Top_Menu' ) ) {
 			'container_class' => 'collapse   navbar-collapse rollie_navbar_top_container  ' . $rollie_side_active_c , // if rollie_collapse is already abort
 			'menu_id'         => false,
 			'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap rollie_nav_top_2_js ' . $rollie_navbar_align,
-
-
-
 			'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
 			'depth'           => '10',
 
 
 		)
 	);
- 				if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {
+	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {	?>
+ 			<button class="rollie_search_button_standalone    btn "><i class="fas fa-search"></i></button>	
+			<?php }?>						
+									</nav>
+<?php if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {?>
 
-		?>
-											  <div id="rollie_search_input_menu_top" class="rollie_nav_form  py-1 mx-auto r ">
+			
+											  <div id="rollie_search_input_menu_top" class="rollie_nav_form rollie_navbar_color py-1   ">
 							<?Php get_search_form(); ?>
 											</div>
 					
-<?php }
-			?>						
-									</nav>
-
+<?php } ?>
 			</div>
 					
 <?php } ?>

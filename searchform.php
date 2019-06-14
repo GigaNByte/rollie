@@ -1,4 +1,4 @@
-<?php $unique_id = esc_attr( uniqid( 'search-form-' ) );
+<?php  
 
 
 
@@ -21,16 +21,18 @@ if ( empty( $rollie_id ) ) {
 
 
 
-	
-	
-		<form id="rollie_form_<?php echo esc_html( $rollie_id ); ?>" role="search" method="get" required="required" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<div class=" rollie_search_form_shadow  ">
-   <input required form="rollie_form_<?php echo esc_html( $rollie_id ); ?>" id="<?php echo $unique_id; ?>" name="s"  type="text" autocomplete="off" class="input-group form-control rollie_search_input_m_1 rollie_form_input form-control-default rollie_f_b_f  rollie_search_input" >
-	<button form="rollie_form_<?php echo esc_html( $rollie_id ); ?>" class="btn rollie_search_button_m_1  "  type="submit">
-		<?Php echo $rollie_search_icon; ?>
-	</button>
 
-</div>
+
+<form id="rollie_form_<?php echo esc_html( $rollie_id ); ?>" role="search" method="get" required="required" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+	<div class=" rollie_search_form_shadow d-flex  ">
+		<input form="rollie_form_<?php echo esc_html( $rollie_id ); ?>"  name="s"  type="text" autocomplete="off" value="<?php echo get_search_query(); ?>" class="rollie_search_input  rollie_form_input form-control-default rollie_f_b_f  " >
+		<button form="rollie_form_<?php echo esc_html( $rollie_id ); ?>" class="rollie_search_button rollie_form_input btn   "  type="submit">
+			<?Php echo $rollie_search_icon; ?>
+		</button>
+
+	</div>
+
+
 </form>
-
-<?php $rollie_id++; ?>
+<?php $rollie_id++; 
+?>

@@ -289,7 +289,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 
 class Rollie_Icon_Customize_Control extends WP_Customize_Control {
 
-
+public $type = 'image_radio_button';
 
 	public function render_content() {
 
@@ -311,38 +311,29 @@ class Rollie_Icon_Customize_Control extends WP_Customize_Control {
 					<span id="<?php echo esc_attr( $description_id ); ?>" class="description customize-control-description"><?php echo $this->description; ?></span>
 				<?php endif; ?>
 						<div class="rollie_center">
-				<?php
-				foreach ( $this->choices as $value => $label ) :
-					$rollie_split = explode( 'split', $label );
 
-					?>
+				<?php
+				foreach ( $this->choices as $key => $value ):  
+		
+					$rollie_split = explode(' ', $value, 2);?>
+
+					
 					<div class="customize-inside-control-row  rollie_customizer_icon_single">
 						<div class="rollie_margin_auto_c">
-							<label for="<?php echo esc_attr( $input_id . '-radio-' . $value ); ?>"class='d-inline-block '><i class="rollie_dash  fab fa-2x   <?php echo ( esc_html( $rollie_split[0] ) ); ?> "></i> </label>
+							<label for="<?php echo esc_attr( $name . '-radio-' . $value ); ?>"class='d-inline-block '>
+							<?php if ( isset($this->input_attrs['icon_type']) && $this->input_attrs['icon_type']=='png') { ?>
+								<img class="rollie_dash rollie_icon_customize_control_img"   src="<?php echo get_template_directory_uri().'/images/'.esc_html( $rollie_split[0] ).'.png'  ;?>"></img>
+							<?php }else{?>
+									<i class="rollie_dash  fab fa-2x   <?php echo ( esc_html( $rollie_split[0] ) ); ?> "></i>
+							<?php }?>
+							 </label>
 						
-						<input
+					<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
+
 							
-							id="<?php echo esc_attr( $input_id . '-radio-' . $value ); ?>"
-							type="radio"
-							
-							value="<?php echo esc_attr( $value ); ?>"
-							name="<?php echo esc_attr( $name ); ?>"
-							<?php $this->link(); ?>
-							<?php checked( $this->value(), $value ); ?>
-							/
-							>
 									</div>
 							<p>
-						<?php
-							$x = 0;
-						foreach ( $rollie_split as $split ) {
-
-							if ( $x == 1 ) {
-								 echo esc_html( $split );
-							}
-							$x++;
-						}
-						?>
+						<?php echo  $rollie_split[1];?>
 						
 							</p>
 					
@@ -618,50 +609,7 @@ class Customize_Alpha_Color_Control extends WP_Customize_Control {
 
 		if (isset($this->input_attrs['rollie_multiple_switch_cc']) ) $rollie_mscc_attrs = esc_attr( $this->input_attrs['rollie_multiple_switch_cc'] );
 				 
-		
-/* This html attributes inserted in first html tag of rendered content of control allows Rollie_Multiple_Switch_Customizer_Control to decide when display this custom control
-	Atribbute strings should be declared in array called input_attrs
-	Attribute string structure: customizer_control_name.'-'.$Customizer_control_choice_number
-'rollie_multiple_switch_cc'=>'rollie_elements-1'
 
-
-	example:
-##################################################	
-#'rollie_multiple_switch_cc'=>'rollie_elements-1'#
-##################################################
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_footer_logo_h',
-			array(
-				'label'       => esc_html__( 'Height of logo (px) ' ),
-				'section'     => 'rollie_footer_section',
-				'input_attrs' => array(
-					'min'  => 30,
-					'max'  => 400,
-					'step' => 10,
-	!!!!!!!!!!!!	'rollie_multiple_switch_cc'=>'rollie_elements-1'!!!!!!!!!!!!
-				),
-			)
-		)
-	);
-$wp_customize->add_control(
-				new Rollie_Multiple_Switch_Customizer_Control(
-					$wp_customize,
-!!!!!!!!!!! 'rollie_elements',    !!!!!!!!!!!!
-					array(					
-						'section' => 'rollie_theme_colors_section',
-						'choices' => array(
-	!!!!!!!!!!!!		1 => esc_html__( ' Footer ', 'rollie' ),!!!!!!!!!!!!
-						2 => esc_html__( ' Header ', 'rollie' ),
-						
-						
-					),
-					)
-				)
-			);
-*/
 
 		if ( is_array( $this->palette ) ) {
 			$palette = implode( '|', $this->palette );
@@ -714,6 +662,10 @@ public $type = 'toogle-label';
             <?php endif; ?>
             <?php if ( ! empty( $this->description ) ) : ?>
                 <span id="<?php echo esc_attr( $description_id ); ?>" class="description customize-control-description"><?php echo $this->description; ?></span>
-            <?php endif; ?>
-<?php      }
+            <?php endif; 
 }
+  
+}
+
+
+
