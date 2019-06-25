@@ -42,14 +42,14 @@ $('.rollie_multiple_switch_row_js').find( 'input[name='+rollie_input_name+']').e
 	 rollie_mscc_id = $(this).closest('.rollie_mscc_js').attr('rollie_mscc_attrs');
 
 	  if ($(this).is(":checked") ==  true) {
- $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().attr('rollie_mscc_active','active');
-	   $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
-  $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().last().addClass('rollie_multiple_switch_bb');
+ $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','active');
+	   $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
+  $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().addClass('rollie_multiple_switch_bb');
 	  } else {
-	  	 $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().attr('rollie_mscc_active','disactive');
- $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
+	  	 $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','disactive');
+ $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
 
-	  $(this).closest('li').nextAll().children("[rollie_mscc_attrs = " + rollie_mscc_id + "]").parent().last().removeClass('rollie_multiple_switch_bb');
+	  $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().removeClass('rollie_multiple_switch_bb');
 	  }
 
 	});
@@ -90,11 +90,12 @@ var	value = $(selector_name).attr('rollie_collapse_elements');
 			$(selector_name).parent().css('margin-bottom','0');
 			$(selector_name).children().first().css('margin-top','0');
 				$(selector_name).parent().nextAll().eq(parseInt(value)-1).addClass('rollie_collapse_bb');
+
 		}
 
 
 
-	$(selector_name).parent().nextAll().each(function( index ) {
+	$(selector_name).parent().nextAll('li').each(function( index ) {
 		var tr = true;
 if(!on_doc_ready)
 {

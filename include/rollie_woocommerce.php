@@ -29,7 +29,7 @@ add_action('woocommerce_sidebar','rollie_div_wraper_end');
 */
 function rollie_woo_content_post_page()
 {
-get_template_part( 'template-parts/post/content-post-page' );
+     require locate_template( 'template-parts/post/content-post-page.php' );
 }
 function rollie_woo_output_content_wrapper()
 {
@@ -832,21 +832,21 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 
 		if (get_theme_mod('rollie_woo_l_my_account_nav',1) == 1){
 	$rollie_class_c = ' rollie_my_acc_nav_big_tiles_c ';
-	$rollie_class_c .= ' rollie_darker_main_color ';
 	$rollie_user_info_class = " col-12 col-lg-3 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 2){
-	$rollie_class_c = " rollie_my_acc_nav_side_c ";
+	$rollie_class_c = " rollie_my_acc_nav_side_c position-sticky";
 	$rollie_class_c .= " col-5  ";
 	$rollie_class_c .= " col-lg-4  ";
-	$rollie_class_c .= ' rollie_darker_main_color ';
+	$rollie_class_c .= '  ';
 	$rollie_user_info_class = " col-12 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 3){
 	$rollie_class_c = " rollie_my_acc_nav_wide_c  ";
 	}
-		echo "<div class='".$rollie_class_c.$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow rollie_f_b_f '>";
-		echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner    rollie_menus_shadow'>";
+	echo "<div class=' ".$rollie_class_c." '>";
+		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow rollie_f_b_f '>";
+		echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner   border-0  rollie_menus_shadow'>";
 		echo 		"<img class='mx-auto d-block' src=".get_avatar_url( get_current_user_id()).">";
 		echo 		"<figcaption class='pt-1'>";
 
@@ -871,6 +871,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
  add_action('woocommerce_before_account_navigation','rollie_action_woo_before_account_navigation');
  function rollie_action_woo_after_account_navigation ()
 {
+	echo "</div>";
 	echo "</div>";
 }   
 

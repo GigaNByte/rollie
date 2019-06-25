@@ -29,7 +29,9 @@ if ( ( ! empty( the_content() ) || ( function_exists( 'get_field' ) && get_field
 		<?php	} ?>		
 				
 				<div class="position-relative">
-					<div  onclick="window.location='<?php echo get_page_link(); ?>'" class=' rollie_post_thumbnail_modern rollie_post_thumbnail_height_m rollie_link_js' style='background-image: url(<?php echo $rollie_thumbnail_url_escaped; ?>);' > </div>	
+						<a href="<?php echo $rollie_post_link(); ?>">	</a>
+		
+					<div   class=' rollie_post_thumbnail_modern rollie_post_thumbnail_height_m rollie_link_js' style='background-image: url(<?php echo $rollie_thumbnail_url_escaped; ?>);' > </div>	
 	
 		
 		
@@ -48,7 +50,7 @@ if ( ( ! empty( the_content() ) || ( function_exists( 'get_field' ) && get_field
 					?>
 					" >
 						
-							<div class="rollie_meta_c_modern <?php echo col-12 ?>">		
+							<div class="rollie_meta_c_modern  col-12 ">		
 									
 									<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
 						

@@ -8,9 +8,9 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 
 
 ?>
-			<article id="<?php echo 'post-' . get_the_ID(); ?>" class="rollie_posts_shadow rollie_d_root">
+			<article id="<?php echo 'post-' . get_the_ID(); ?>" class="rollie_posts_shadow ">
 				<div class="position-relative">
-					<div  onclick="window.location='<?php echo get_page_link(); ?>'" class=' rollie_post_thumbnail_modern rollie_post_thumbnail_height_m rollie_link_js' style='background-image: url(<?php echo $rollie_thumbnail_url_escaped; ?>);' > </div>	
+					<div " class=' rollie_post_thumbnail_modern rollie_post_thumbnail_height_m rollie_link_js' style='background-image: url(<?php echo $rollie_thumbnail_url_escaped; ?>);' > </div>	
 					
 				</div>
 					
@@ -27,11 +27,13 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 					?>
 						" >
 						
-							<div class="rollie_meta_c_modern <?php echo col-12 ?>">		
+							<div class="rollie_meta_c_modern  col-12 ">		
 				
 									<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
 													
-							<div onclick="window.location='<?php echo get_page_link(); ?>'" class=" rollie_link_js text-center rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </div>				
+							<a href='<?php echo get_page_link(); ?>'>						
+								<h2 class=" rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </h2>				
+							</a>					
 							<div class="rollie_post_metadata rollie_subtitle_text_color <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_metadata_div']; ?> m-0 row">
 								<?php require locate_template( 'template-parts/special/content-postmeta.php' ); ?>
 							</div>	
@@ -51,15 +53,7 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 
 								?>
 								<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt   <?php echo $rollie_post_display_style_classes [ $rollie_current_style ]['post_excerpt_div_col_modern']; ?> "> 
-																																			<?php
-
-																																			if ( function_exists( 'get_field' ) && get_field( 'rollie_excerpt' ) ) {
-																																											  echo get_field( 'rollie_excerpt' );
-																																			} else {
-																																													  the_excerpt();
-
-																																			}
-																																			?>
+																																			>
 										</div>	
 										<?php
 							}

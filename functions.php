@@ -10,6 +10,7 @@ function rollie_script_start() {
 
 	wp_enqueue_script( 'swiper_lib_js', get_template_directory_uri() . '/js/swiper.min.js', array(), '4.3.4', 'true' );
 	wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '4.2.1', 'true' );
+		wp_enqueue_script( 'masonry_js', get_template_directory_uri() . '/js/masonry.min.js', array(), '1.00', 'true' );
 	wp_enqueue_script( 'rollie_js', get_template_directory_uri() . '/js/rollie.js', array(), '1.00', 'true' );
 	if (class_exists('WooCommerce')) {
 		wp_enqueue_script( 'rollie_woo_js', get_template_directory_uri() . '/js/rollie_woocommerce.js', array(), '1.00', 'true' );
@@ -142,7 +143,7 @@ function rollie_widget_setup() {
 					'class'         => 'rollie_sidebar_bottom',
 					'descripton'    => 'Its a widget area at bottom of page',
 
-					'before_widget' => '<div id="%1$s" class="widget %2$s rollie_widget rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
+					'before_widget' => '<div id="%1$s" class="widget %2$s p-0 m-0 rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
 					'after_widget'  => '</div>',
 					'before_title'  => '<h1 class="widget-title">',
 					'after_title'   => '</h1>',
@@ -155,7 +156,7 @@ function rollie_widget_setup() {
 						'id'            => 'sidebar_bottom_archive',
 						'class'         => 'rollie_sidebar_bottom',
 						'descripton'    => 'Its a widget area for archive page at bottom of page',
-						'before_widget' => '<div id="%1$s" class="widget %2$s rollie_widget  rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
+						'before_widget' => '<div id="%1$s" class="widget %2$s  p-0 m-0   rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
 						'after_widget'  => '</div>',
 						'before_title'  => '<h1 class="widget-title">',
 						'after_title'   => '</h1>',
@@ -232,7 +233,8 @@ require get_template_directory() . '/presets/rollie-presets.php';
 require get_template_directory() . '/include/rollie_pagination.php';
 require get_template_directory() . '/include/rollie_register_strings_polylang.php';
 require get_template_directory() . '/include/rollie_woocommerce.php';
-require get_template_directory() . '/include/pe-customizer.php';
+require get_template_directory() . '/include/rollie_smart_widget.php';
+	
 
 
 

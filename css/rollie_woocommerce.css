@@ -319,6 +319,10 @@ transform: rotate(180deg);
 }
 /*single product end */
 /*Woo myaccout nav */
+.rollie_my_acc_nav_side_c{
+	top:10%;
+	left:0;
+}
 .rollie_zoom_image{
 width: max-content;
 }

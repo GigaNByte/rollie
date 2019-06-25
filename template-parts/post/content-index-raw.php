@@ -4,11 +4,13 @@
 				
 					<article id="<?php echo 'post-' . get_the_ID(); ?>"  class=" p-0 rollie_posts_shadow ">
 						
-							<div class=" rollie_meta_c_modern <?php echo col-12 ?>">		
+							<div class=" rollie_meta_c_modern  col-12 ">		
 									
 								
 													
-							<div onclick="window.location='<?php echo get_page_link(); ?>'" class=" rollie_link_js text-center  rollie_first_post_title rollie_title_text_color rollie_f_subtitles"><?php the_title(); ?> </div>				
+							<a href='<?php echo get_page_link(); ?>'>						
+								<h2 class=" rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </h2>				
+							</a>				
 							
 							<div class="rollie_post_metadata rollie_subtitle_text_color <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_metadata_div']; ?> m-0 row">
 							<?php require locate_template( 'template-parts/special/content-postmeta.php' ); ?>

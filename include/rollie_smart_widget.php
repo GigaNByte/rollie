@@ -131,8 +131,8 @@ $rollie_center = false;
 			$rollie_height = $instance['rollie_height'] ;
 		}else{
 			$rollie_height = 20;
-		
-}		if ($instance['rollie_query'] == 'child_pages'){
+		}
+		if ($instance['rollie_query'] == 'child_pages'){
 			global $post;
 			$args = array(
 				'post_parent' => $post->ID,

@@ -214,14 +214,20 @@ function rollie_nav_handler( container ,ul, list , containerid ,executing_first)
 
 });
 }
+//Adds support for masonry post grid
+jQuery(function($){
+		//hides image broken Icon 
 
-jQuery(
+$(window).load(function() {
+	if ($('.rollie_grid').length){
+	$('.rollie_grid').masonry({
+	  itemSelector: '.rollie_grid_item',
+	columnWidth: '.rollie_grid_size',
+	percentPosition: true
+	});
+}
+});
 
-
-
-
-
-	function($){
 		if( $('.rollie_parent_title').hasClass('rollie_below_js')){
 		$('.rollie_parent_title').insertAfter($('.rollie_parent_title').next());
 

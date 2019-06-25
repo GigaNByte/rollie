@@ -16,12 +16,12 @@ if ( ! $rollie_format_icon ) {
 							?>
 			<div class="rollie_icon_first   rollie_icon_audio_custom_colors  p-1">	<i class=" fas fa-2x  <?php echo $rollie_format_icon; ?>"></i> </div>	
 	<?php	} ?>
-							<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0  <?php echo col-12 ?>">		
+							<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0   col-12 ">		
 					
 						<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
-													
-							<div onclick="window.location='<?php echo get_page_link(); ?>'" class=" text-center rollie_link_js rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </div>				
-								
+							<a href='<?php echo get_page_link(); ?>'>						
+								<h2 class=" rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </h2>				
+							</a>	
 			
 							<div class="rollie_post_metadata rollie_subtitle_text_color <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_metadata_div']; ?> m-0 row">
 								<?php require locate_template( 'template-parts/special/content-postmeta.php' ); ?>

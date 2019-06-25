@@ -372,11 +372,11 @@ class Skyrocket_Slider_Custom_Control extends WP_Customize_Control {
 /* This attributes  allows Rollie_Multiple_Switch_Customizer_Control to decide when display this custom control
 
 */
-	if (isset($this->input_attrs['rollie_multiple_switch_cc']) ) $rollie_mscc_attrs = esc_attr( $this->input_attrs['rollie_multiple_switch_cc'] );
+
 		?>
 
 
-			<div class="slider-custom-control" rollie_mscc_attrs="<?php if ( isset( $rollie_mscc_attrs) ) echo $rollie_mscc_attrs ;?>">
+			<div class="slider-custom-control" >
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span><input type="number" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-slider-value" <?php $this->link(); ?> />
 				<div class="slider" slider-min-value="<?php echo esc_attr( $this->input_attrs['min'] ); ?>" slider-max-value="<?php echo esc_attr( $this->input_attrs['max'] ); ?>" slider-step-value="<?php echo esc_attr( $this->input_attrs['step'] ); ?>"></div><span class="slider-reset dashicons dashicons-image-rotate" slider-reset-value="<?php echo esc_attr( $this->value() ); ?>"></span>
 			</div>
@@ -461,6 +461,7 @@ class Skyrocket_Toggle_Switch_Custom_control extends WP_Customize_Control {
 			$rollie_alt_toogle   = '';
 			$rollie_alt_toogle_l = '';
 			$rollie_alt_toogle_c = '';
+			$rollie_alt_toogle_i ='';
 		}
 		?>
 			<div class="toggle-switch-control <?php echo esc_html( $rollie_alt_toogle_c ); ?>">
@@ -576,6 +577,18 @@ class Rollie_Text_Custom_Control extends WP_Customize_Control {
 	}
 
 }
+
+function action_customize_render_control( $instance ) { 
+	if (isset($instance->input_attrs['rollie_multiple_switch_cc']) ){ $rollie_mscc_attrs = esc_attr( $instance->input_attrs['rollie_multiple_switch_cc'] );?>
+	<div  rollie_mscc_attrs="<?php if (isset($rollie_mscc_attrs) ) echo esc_attr($rollie_mscc_attrs) ;?>"></div>
+<?php 
+}
+}; 
+    
+// add the action 
+add_action( 'customize_render_control', 'action_customize_render_control', 1, 1 ); 
+
+//class Rollie_Number_Control extends WP_Customize_Control{}
 class Customize_Alpha_Color_Control extends WP_Customize_Control {
 	/**
 	 * Official control name.
@@ -620,7 +633,7 @@ class Customize_Alpha_Color_Control extends WP_Customize_Control {
 		// Support passing show_opacity as string or boolean. Default to true.
 		$show_opacity = ( false === $this->show_opacity || 'false' === $this->show_opacity ) ? 'false' : 'true';
 		// Begin the output. ?>
-		<div class="rollie_single_gradient_c rollie_single_gradient_padding " rollie_mscc_attrs="<?php if (isset($rollie_mscc_attrs) ) echo esc_attr($rollie_mscc_attrs) ;?>"> 
+		
 			<?php // Output the label and description if they were passed in.
 			if ( isset( $this->label ) && '' !== $this->label ) {
 				echo '<span class="customize-control-title">' . sanitize_text_field( $this->label ) . '</span>';

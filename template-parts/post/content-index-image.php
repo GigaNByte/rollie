@@ -34,11 +34,13 @@ if ( ( ! empty( get_the_content() ) || ( function_exists( 'get_field' ) && get_f
 						?>
 								<div  onclick="window.location='<?php echo get_page_link(); ?>'" class=' rollie_post_thumbnail rollie_post_thumbnail_height_m rollie_link_js' style='background-image: url(<?php echo $rollie_thumbnail_url_escaped; ?>);' > </div>	
 					<?php	} ?>
-								<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0  <?php echo col-12 ?>">		
+								<div class=" rollie_first_post_title_c_raw rollie_meta_c_modern rollie_force_m_h_0   col-12 ">		
 					
 								<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>							
 														
-							<div onclick="window.location='<?php echo get_page_link(); ?>'" class=" text-center rollie_link_js rollie_title_text_color rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </div>				
+							<a href='<?php echo get_page_link(); ?>'>						
+								<h2 class=" rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </h2>				
+							</a>				
 							<div class="rollie_post_metadata rollie_subtitle_text_color <?php echo $rollie_post_display_style_classes[ $rollie_current_style ]['post_metadata_div']; ?> m-0 row">
 								<?php require locate_template( 'template-parts/special/content-postmeta.php' ); ?>
 							</div>	

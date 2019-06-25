@@ -47,7 +47,7 @@ get_header( 'shop' );
 ?>
 
 <?php
-	get_template_part( 'template-parts/post/content-post-page' );
+     require locate_template( 'template-parts/post/content-post-page.php' );
 	do_action( 'woocommerce_before_main_content' );
 if ( woocommerce_product_loop() ) {
 

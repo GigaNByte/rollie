@@ -434,6 +434,7 @@ input:checked{
  .rollie_multiple_switch_group_js
 {
 	margin: 0px ;
+	padding: 0.4rem;	
 	border-width: 2px;
 	border-color: #cccccc;
 	box-sizing: border-box;
@@ -497,6 +498,15 @@ padding:0.7rem !important;
 max-width: 100%;
 
 }
+li {
+    margin-bottom: 0px;
+}
+.customize-control{
+	margin-bottom: 0px;
+}
+.customize-control-radio {
+    padding: 0px;	
+    }
 .rollie_single_gradient_c  > span
 {
 padding: 0.4rem;
