@@ -3,7 +3,7 @@
 </div><!-- closing page head from header.php-->	
 
 	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in page.php-->
-	<?php rollie_breadcrumb();?>
+
 	<div class=" row m-0">
  	
 <?php
@@ -37,9 +37,9 @@ if ( $rollie_is_active_sidebar_left && $rollie_is_active_sidebar_right) {
 
 ?>
 
-		<main  id="<?php echo 'page-' . get_the_ID(); ?>" class=' <?php echo $disable_paddings; ?> rollie_f_pp_content rollie_single_page_content rollie_main_theme_text_color    <?php echo $rollie_main_col ?> '>
-			
-		  	<article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align ">
+		<main  id="<?php echo 'page-' . get_the_ID(); ?>" class=' <?php echo $disable_paddings; ?> rollie_f_pp_content  rollie_main_theme_text_color    <?php echo $rollie_main_col ?> '>
+			<?php rollie_breadcrumb();?>	
+		  	<article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align rollie_single_page_content">
 			<?php
 			require locate_template('/template-parts/special/content-singlemeta.php');
 
@@ -47,18 +47,20 @@ if ( $rollie_is_active_sidebar_left && $rollie_is_active_sidebar_right) {
 			the_content(); 
 			
 			?> <!-- Page Content -->
-			</article>
+		
+		
 						<?php
 				
 				  get_template_part( 'template-parts/special/content', 'pagination_single' );
-					if ( comments_open() || get_comments_number() ) {?>
-					 <section class='col-12 col-md-8 offset-md-2 '>	
-				
-					 <?php comments_template();?>
-						
-					 </section>
-		</main>		 				
-					 <?php	} ?>
+			
+			
+				 	
+					comments_template();
+			
+
+					?>
+					</article>					 
+			</main>		 
 	</div>
 		
 	

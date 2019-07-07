@@ -13,7 +13,7 @@ require get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_v
 </div><!-- closing page head from header.php-->	
 
 <div class="rollie_content_container_padding_bottom"><!-- tag will be colosed in FOOTER.php if its woocomerce shop page you need to remowe sum hook -->
-<?php	rollie_breadcrumb();?>
+
  <div class=" row m-0">
  	<?php
 
@@ -38,23 +38,24 @@ require get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_v
 		}
 ?>
 	<main  id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_main_post_content rollie_f_pp_content rollie_main_theme_text_color   <?php echo $rollie_main_col ?> '>
-			<div class='entry-content-page <?php if ( ! empty( $rollie_entry_offset_lg ) ) echo $rollie_entry_offset_lg;?>'>  
+		<?php	rollie_breadcrumb();?>
+			<article class='<?php if ( ! empty( $rollie_entry_offset_lg ) ) echo $rollie_entry_offset_lg;?>'>  
 				<div class="row">
 					<div class="col-10 offset-1 col-lg-8 offset-lg-2  ">
 		
 			<?php
-			//if ( $page_for_posts_id ) { 
+		
 				if ( is_category() ) {
  						echo category_description();
 				} elseif (is_home()){
 					the_content();
 				}
 			
-		//	}?>
+			?>
 				
-				  <!-- Page Content -->
+				 
 					</div>
 				</div>
-			</div><!-- .entry-content-page -->
+			</article>
 
 		

@@ -44,7 +44,7 @@ if ( get_theme_mod( 'rollie_pagination_enable', true ) ) {
 			}
 			get_post_type_archive_link( 'post' );
 			if ( get_post_type_archive_link( 'post' ) ) {
-				echo '<li class="rollie_pagination_item page-item"> <a href="' . $rollie_home_link . '"><span class="page-link rollie_pagination_link"><i class="fas fa-home align-text-top"></i></span></a></li>';
+				echo '<li class="rollie_pagination_item page-item "> <a href="' . $rollie_home_link . '"><span class="page-link rollie_flex_text_center rollie_pagination_link"><i class="fas fa-home align-text-top"></i></span></a></li>';
 			}
 
 			if ( get_next_post_link() ) {

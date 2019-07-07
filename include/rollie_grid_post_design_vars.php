@@ -2,8 +2,7 @@
 
 $rollie_template =  rollie_post_page_template_prefix();
 $rollie_m_a ='';
-if (get_theme_mod( 'rollie_post_margin_auto'.$rollie_template ,true))
-{
+if (get_theme_mod( 'rollie_post_margin_auto'.$rollie_template ,true)){
 	$rollie_m_a = 'm-auto';
 }
 $rollie_post_display_style_classes                      = [];
@@ -23,13 +22,13 @@ if (get_theme_mod('rollie_grid_type',1)==2){
 
 
 
-$rollie_post_display_style_classes [0]['second_div_col'] = ' col-5 ';
-$rollie_post_display_style_classes [1]['second_div_col'] = ' col-lg-5 col-6 ';
-$rollie_post_display_style_classes [2]['second_div_col'] = ' col-12 col-md-7 col-lg-6 ';
+$rollie_post_display_style_classes [0]['second_div_col_classic'] = ' col-5 ';
+$rollie_post_display_style_classes [1]['second_div_col_classic'] = ' col-lg-5 col-6 ';
+$rollie_post_display_style_classes [2]['second_div_col_classic'] = ' col-12 col-md-7 col-lg-6 ';
 
-$rollie_post_display_style_classes [0]['post_metadata_div'] = '';
-$rollie_post_display_style_classes [1]['post_metadata_div'] = ' p-0 ';
-$rollie_post_display_style_classes [2]['post_metadata_div'] = ' p-0 p-lg-2 rollie_force_p_0 ';
+
+
+
 
 $rollie_post_display_style_classes [0]['post_author_date_div'] = '';
 $rollie_post_display_style_classes [1]['post_author_date_div'] = ' p-0 ';
@@ -59,4 +58,12 @@ $rollie_post_page_two_on_row         = get_theme_mod( 'rollie_post_page_two_on_r
 $rollie_post_page_raw_enable = get_theme_mod( 'rollie_post_page_raw_enable' . $rollie_template ,false );
 
 
+$rollie_link_disabled = '';
 
+function rollie_filter_page_link_link( $link, $post_id, $sample ) { 
+  if (has_post_format('link') &&  function_exists( 'get_field' )){ 
+     $link = get_field('rollie_external_link');
+ }
+ return $link;
+}  
+add_filter( 'page_link', 'rollie_filter_page_link_link', 30, 3 ); 	

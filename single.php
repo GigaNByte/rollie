@@ -1,5 +1,7 @@
 <?php
-	require_once get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_variables.php';	
+
+require 'page.php';
+/*	require get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_variables.php';	
  get_header();?>
 
 
@@ -14,11 +16,6 @@
 			get_template_part( 'template-parts/post/content', 'single' );
 
 
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			// if ( comments_open() || get_comments_number() ) :
-			// comments_template();
-			// endif;
 		endwhile;
 	endif;
 
@@ -27,3 +24,4 @@
 
 
 <?php get_footer(); ?>
+*/

@@ -1,4 +1,104 @@
 <?php
+function rollie_thumbnail_url(){
+ if ( has_post_thumbnail( get_the_ID() ) ) {
+	$rollie_thumbnail_url_escaped = get_the_post_thumbnail_url();
+	
+}else{
+	if ( ! empty( get_theme_mod( 'rollie_alt_thumbnail' . $rollie_template  ) ) ) {
+		$rollie_thumbnail_url_escaped = get_theme_mod( 'rollie_alt_thumbnail' . $rollie_template  );
+	} else {
+		$rollie_thumbnail_url_escaped = '';
+	}
+}
+return $rollie_thumbnail_url_escaped;
+}
+function rollie_thumbnail_alt(){
+	$rollie_thumbnail_alt =  esc_html ( get_the_post_thumbnail_caption() ) ;
+	if (empty($rollie_thumbnail_alt))   $rollie_thumbnail_alt = get_the_title();
+	return $rollie_thumbnail_alt;
+}
+
+function rollie_post_foreground () {
+		$html='';
+
+		if (get_post_format()=='video'){
+
+			$html .= "<div class='rollie_embed  rollie_post_thumbnail  rollie_post_thumbnail_height_m  embed-responsive embed-responsive-16by9'>";
+			$html .= rollie_get_embedded_media( array( 'video', 'iframe' ) ); 
+			$html .= "</div>";	
+			
+		}elseif(get_post_format()=='audio'){
+
+			$html .= "<div class='rollie_embed  rollie_post_thumbnail  rollie_post_thumbnail_height_m '>";
+			$html .= rollie_get_embedded_media( array( 'audio', 'iframe' ) ); 
+			$html .= "</div>";	
+
+		}elseif(get_post_format()=='gallery' &&  get_post_gallery()){
+			$rollie_gallery    = get_post_gallery( get_the_ID(), false );
+			$rollie_galleryIDS = $rollie_gallery['ids'];
+			$rollie_parts      = explode( ',', $rollie_galleryIDS );
+
+			if (get_theme_mod('rollie_post_format_gallery_static',true)){
+				$html .= "<div class='rollie_gallery_post_format rollie_post_thumbnail_height_m row'>";	
+					$html .= "<div class='col-6 h-50'>";
+					if (isset($rollie_parts[0])){
+						$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[0], 'full' );
+						$html .=  "<img class=' h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[0])."'/>";
+					}
+
+					$html .= "</div>"; 
+					$html .= "<div class='col-6  h-50'>";
+					
+					if (isset($rollie_parts[1])){
+						$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[1], 'full' );
+						$html .=  "<img class=' h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[1])."'/>";
+					}
+
+					$html .= "</div>"; 
+					$html .= "<div class='col-12 h-50'>";	
+					
+					if (isset($rollie_parts[2])){
+						$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[2], 'full' );
+						$html .=  "<img class='h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[2])."'/>";
+					}
+
+					$html .= "</div>";
+				$html .= "</div>";
+			}else{
+
+			
+			$html .= "<div class='rollie_gallery_post_format '>";	
+			$html .= "<div class='swiper-container rollie_gallery_1_swiper'>";
+			$html .= "<div class='swiper-wrapper'>";
+							
+			foreach ( $rollie_parts  as $key => $attach_id ) {
+
+				$rollie_attachment = wp_get_attachment_image_src( $attach_id, 'full' );
+											
+				$html .= "<div class='swiper-slide rollie_post_thumbnail_img'>";
+				$html .=  "<img src='".$rollie_attachment[0]."' alt='".get_the_title($attach_id)."'/>";
+				$html .= "</div>";
+			} 
+
+				$html .= "</div>";
+				$html .= "<div class='swiper-pagination'></div>";
+				$html .= "</div>";
+				$html .= "</div>";
+			
+			}
+			
+		}elseif(has_post_thumbnail()){
+	
+		$html .= "<img class=' rollie_post_thumbnail  rollie_post_thumbnail_height_m' src='".rollie_thumbnail_url() ."' alt='".rollie_thumbnail_alt()."'>";	
+		}
+		$html = apply_filters('rollie_post_foreground_filter',$html);
+
+		if (!empty($html)){
+			$html = "<a href='".get_page_link()."'>".$html."</a>";	
+		}
+		
+		return  $html;
+}
 function rollie_post_page_template_prefix(){
 	if ( is_category() ) {
 		return  '_ct';
@@ -36,7 +136,7 @@ function rollie_subtitle(){
 	} elseif ( is_tax() ) {
 		$tax = get_taxonomy( get_queried_object()->taxonomy );
 		echo $tax->labels->singular_name;
-	}elseif( isset( $post->post_parent) &&  get_the_title( $post->post_parent ) ){
+	}elseif(  $post->post_parent &&  get_the_title( $post->post_parent ) ){
 		echo get_the_title( $post->post_parent); 
 	}else{
 		echo get_bloginfo('name');
@@ -44,7 +144,7 @@ function rollie_subtitle(){
 }
 
 function rollie_title(){
-
+		
 	if (class_exists('Woocommerce') && is_woocommerce() && apply_filters( 'woocommerce_show_page_title', true ) ){
 	woocommerce_page_title();
 	}

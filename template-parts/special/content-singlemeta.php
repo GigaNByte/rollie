@@ -17,13 +17,17 @@ elseif(is_page())
 				}	?> 
 		<?php	if (get_theme_mod('rollie_display_author'.$rollie_template,true)){		
 			?>
-					<a class="rollie_author" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>"><?php echo $rollie_author_str . '' . get_the_author(); ?></a>
+			<?php echo  __('Author').': '; ?>
+					<a class="rollie_author" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>">
+						<?php the_author(); ?>
+						
+					</a>
 		<?php }?>			
 				</div>
 			</div>	
 			<div class="rollie_categories  text-center " >  
 				<?php
-				if( has_category())	echo $rollie_categories_str . ': ';
+				if( has_category())	echo __('Categories') . ': ';
 				the_category( ', ' );
 				?>
 			</div>
