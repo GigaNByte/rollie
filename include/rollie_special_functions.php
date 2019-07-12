@@ -17,6 +17,45 @@ function rollie_thumbnail_alt(){
 	if (empty($rollie_thumbnail_alt))   $rollie_thumbnail_alt = get_the_title();
 	return $rollie_thumbnail_alt;
 }
+function rollie_header_image_source($image_id){
+	$img_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true ); 
+	$image_srcset = "<picture>";
+	if (wp_get_attachment_image_url($image_id,'rollie_xs')){
+	$retina = '';
+  	if (wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_l') )){
+  	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_xs')).' 2x';
+  	}
+
+  $image_srcset .=  "<source media='(max-width: 414px)' srcset='". wp_get_attachment_image_url($image_id,'rollie_xs').$retina."'>";
+	}
+if (wp_get_attachment_image_url($image_id,'rollie_s')){	
+
+  	$retina = '';
+  	if (wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s') )){
+  	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s')).' 2x';
+  	}
+
+  $image_srcset .=  "<source media='(max-width: 1024px) ' srcset='".wp_get_attachment_image_url($image_id,'rollie_s') .$retina."'>";
+  }
+  if (wp_get_attachment_image_url($image_id,'rollie_m')){
+
+  	$retina = '';
+  	if (wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_m') )){
+  	$retina = ', '. ( wp_get_attachment_image_url($image_id,'rollie_m')).' 2x';
+  	}
+
+  $image_srcset .=  "<source media='(max-width: 1336px) ' srcset='".wp_get_attachment_image_url($image_id,'rollie_m') .$retina."'>";
+
+  }
+  if (wp_get_attachment_image_url($image_id,'rollie_l')){
+  	  	$retina=', '.wp_get_attachment_image_url($image_id,'full').' 2x';
+  $image_srcset .=  "<source media='(max-width: 1920px)' srcset='".wp_get_attachment_image_url($image_id,'rollie_l').$retina."'>";
+  }
+  $image_srcset .=  "<img sizes='100vh'; class='rollie_header_image' alt='".$img_alt ."'src='".wp_get_attachment_image_url($image_id,'full')."'>";
+
+  $image_srcset .=  "</picture";
+return $image_srcset;
+}
 
 function rollie_post_foreground () {
 		$html='';

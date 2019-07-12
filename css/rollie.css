@@ -8,6 +8,7 @@ a, a:hover {
 }
 .rollie_link_disabled{
 	pointer-events: none;
+	color: inherit;
 }
 .rollie_line_h_1
 {
@@ -87,9 +88,7 @@ body
 	font-family: 'Rokkitt', serif,'Helvetica Neue','Helvetica',Arial,Verdana;
 }
 img{
-
-
-object-fit: contain;
+object-fit: cover;
 }
 
 
@@ -109,7 +108,7 @@ overflow: visible;
 	display:block;
 	width:100%;
 		height:70vh; /*CUSTO*/
-min-height: 600px;
+
 }
 
 
@@ -144,14 +143,11 @@ border:solid;
 }
 .rollie_header_image
 {
-height: 100%;
-	 background-position:center;
+	height: 100%;
 	position:absolute;
 	left:0;
 	top:0;
 	width:100%;
-	background-size: cover;
-	size: cover;
 
 }
 
@@ -166,13 +162,7 @@ position:relative;
 overflow:hidden;
 }
 */
-.rollie_header_container
-{
-	background-position:center-center;
-	background-size:cover;
-background-repeat:no-repeat;
 
-}
 .rollie_navbar
 {
 z-index:1000;

@@ -1,7 +1,7 @@
 <?php
 $is_post_page_title_single_row = get_theme_mod( 'rollie_posts_page_title_single_row' );
 $rollie_bb_h1 = 'offset-0 col-6 offset-md-1 col-md-5';
-$rollie_bb_ex = 'col-10 offset-1 offset-md-0 col-md-6'; 
+$rollie_bb_ex = 'col-6 offset-md-0 col-md-6'; 
 if(is_author()){
 $rollie_author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 }

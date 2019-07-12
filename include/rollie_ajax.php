@@ -1,10 +1,15 @@
 <?php 
 function rollie_post_ajax_request() {
- 
+
     // The $_REQUEST contains all the data sent via ajax
     if ( isset($_REQUEST) ) {
-     
-      $rollie_post_id = $_REQUEST['post_id'];
+
+    $nonce = $_REQUEST['nonce'];
+    if ( ! check_ajax_referer( 'rollieNoNce_post_status', 'security' ) ) {
+        wp_send_json_error( 'Invalid security token sent.' );
+        wp_die();
+      }
+      $rollie_post_id = absint($_REQUEST['post_id']);
 
      if (! empty($rollie_post_id) ) {  
         global $withcomments;

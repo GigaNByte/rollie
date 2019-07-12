@@ -67,7 +67,7 @@ if ( comments_open() || ( get_the_tags() || ( $rollie_c_format && get_theme_mod(
 					 $rollie_post_format_str = __('Video');
 					break;
 				case 'quote':
-					 $rollie_post_format_str = __('Quote');
+					 $rollie_post_format_str = __('Quotes');
 					break;
 				case 'status':
 					$rollie_post_format_str =__('Status');
@@ -97,10 +97,10 @@ if ( comments_open() || ( get_the_tags() || ( $rollie_c_format && get_theme_mod(
 		<?php }else{ ?>
 			<a class=" d-block" href="'<?php echo get_comments_link(); ?>'">	 
 		<?php } ?>
-				<div class='m-auto d-inline-block '><?php  _e('Comments')?></div>
-				<span class=' d-inline-block rollie_icon_first fa-stack fa-1x'>
+				<div class='m-auto d-inline-block rollie_fourth_text_color'><?php  _e('Comments')?></div>
+				<span class=' d-inline-block rollie_icon_first fa-stack  fa-1x'>
 					<i class='far <?php echo $rollie_comments_icon ?> fa-stack-2x'></i>
-					<strong class='fa-stack-1x fa-stack-text rollie_text_color_3 rollie_t_shadow_0 '><?php echo get_comments_number()?></strong>
+					<strong class='fa-stack-1x fa-stack-text   rollie_t_shadow_0 '><?php echo get_comments_number()?></strong>
 				</span>
 		<?php
 		 if (has_post_format(array('status','aside'))){ ?>		

@@ -66,9 +66,6 @@ return;
 
 		comment_form( $args );
 
-if (!have_comments()){
-	echo "juhuski";
-}
 		if ( have_comments() ){
 		?>
 			
