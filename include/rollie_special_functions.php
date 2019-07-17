@@ -1,4 +1,19 @@
 <?php
+function rollie_nav_top_search_button(){
+	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {	?>
+		<button data-toggle="collapse" data-target="#rollie_search_input_menu_top" aria-expanded="false" aria-controls="rollie_search_input_menu_top" id='rollie_search_button_standalone' class=" btn ">
+			<i class="fas fa-search"></i>
+		</button>	
+	<?php }	
+}
+function rollie_nav_top_search_button_colapsed(){
+	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) { ?>
+		<div id="rollie_search_input_menu_top" class="collapse rollie_navbar_color py-1" >
+			<?Php get_search_form(); ?>
+		</div>
+<?php } 
+	}
+
 function rollie_thumbnail_url(){
  if ( has_post_thumbnail( get_the_ID() ) ) {
 	$rollie_thumbnail_url_escaped = get_the_post_thumbnail_url();
@@ -17,12 +32,14 @@ function rollie_thumbnail_alt(){
 	if (empty($rollie_thumbnail_alt))   $rollie_thumbnail_alt = get_the_title();
 	return $rollie_thumbnail_alt;
 }
-function rollie_header_image_source($image_id){
-	$img_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true ); 
+function rollie_header_image_source($image_id,$image_alt){
+	$image_alt = (!empty($image_alt)) ? "alt='".$image_alt ."'" : "alt='".get_the_title()."_thumbnail'";
+
 	$image_srcset = "<picture>";
+
 	if (wp_get_attachment_image_url($image_id,'rollie_xs')){
 	$retina = '';
-  	if (wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_l') )){
+  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_l') )){
   	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_xs')).' 2x';
   	}
 
@@ -31,7 +48,7 @@ function rollie_header_image_source($image_id){
 if (wp_get_attachment_image_url($image_id,'rollie_s')){	
 
   	$retina = '';
-  	if (wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s') )){
+  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s') )){
   	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s')).' 2x';
   	}
 
@@ -40,7 +57,7 @@ if (wp_get_attachment_image_url($image_id,'rollie_s')){
   if (wp_get_attachment_image_url($image_id,'rollie_m')){
 
   	$retina = '';
-  	if (wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_m') )){
+  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_m') )){
   	$retina = ', '. ( wp_get_attachment_image_url($image_id,'rollie_m')).' 2x';
   	}
 
@@ -51,7 +68,7 @@ if (wp_get_attachment_image_url($image_id,'rollie_s')){
   	  	$retina=', '.wp_get_attachment_image_url($image_id,'full').' 2x';
   $image_srcset .=  "<source media='(max-width: 1920px)' srcset='".wp_get_attachment_image_url($image_id,'rollie_l').$retina."'>";
   }
-  $image_srcset .=  "<img sizes='100vh'; class='rollie_header_image' alt='".$img_alt ."'src='".wp_get_attachment_image_url($image_id,'full')."'>";
+  $image_srcset .=  "<img sizes='100vh' class='rollie_header_image '".$image_alt."src='".wp_get_attachment_image_url($image_id,'full')."'>";
 
   $image_srcset .=  "</picture";
 return $image_srcset;

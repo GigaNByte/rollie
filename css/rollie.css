@@ -599,10 +599,7 @@ margin-bottom:0.5rem;
 }
 
 /*ROLLIE smart baner*/
-.rollie_smart_banner_img
-{
 
-}
 .rollie_smart_banner_img
 {
 width: 100%;
@@ -1127,7 +1124,7 @@ font-family:'Rokkitt';
 }
 #rollie_insert_search_form_between_js   
 {
-	z-index: 10001;
+	z-index: 80;
 }
 	/*.rollie_posts_shadow
 				{
@@ -1177,7 +1174,7 @@ text-shadow:0px;
 
 .rollie_search_input
 {
-	border-right-style:none;
+border-right-style:none;
 border-top-right-radius: 0px !important;
 border-bottom-right-radius: 0px !important ;
 }
@@ -1200,14 +1197,8 @@ max-width: 800px;
 margin: auto;
 padding: 1rem;
 }
-#rollie_search_input_menu_top .rollie_search_button_standalone
-{
-	background:transparent !important;
-	border:none  !important;
-}
-#rollie_search_input_menu_top{
-	display: none;
-}
+
+
 #rollie_search_input_menu_top .rollie_search_input, #rollie_search_input_menu_top  {
 	width: 100%;
 }
@@ -1274,7 +1265,7 @@ margin: 50vh auto 0;
 		 transition:  all .30s linear;
 	visibility:hidden;
 		}
-	.rollie_collapse_xs.collapse,
+	.rollie_collapse_xs.collapse
 	.collapsing {
 
 		margin-left: 0 !important;
@@ -1338,7 +1329,7 @@ margin: 50vh auto 0;
 
 	 transition:  all .30s linear;
 }
-	.rollie_collapse_sm.collapse,
+	.rollie_collapse_sm.collapse
 	.collapsing {
 
 		margin-left: 0 !important;
@@ -1402,7 +1393,7 @@ margin: 50vh auto 0;
 	visibility:hidden;
 	 transition:  all .30s linear;
 		}
-	.rollie_collapse_md.collapse,
+	.rollie_collapse_md.collapse
 	.collapsing {
 
 		margin-left: 0 !important;
@@ -1469,7 +1460,7 @@ margin: 50vh auto 0;
 	visibility:hidden;
 	 transition:  all .30s linear;
 		}
-	.rollie_collapse_lg.collapse,
+	.rollie_collapse_lg.collapse
 	.collapsing {
 
 		margin-left: 0 !important;
@@ -1533,7 +1524,7 @@ margin: 50vh auto 0;
  } 
 
 	.rollie_collapse_xl.collapse,
-	.collapsing {
+	.rollie_collapse_xl.collapsing {
 
 		margin-left: 0 !important;
 		left: 0 !important;
@@ -1567,17 +1558,17 @@ margin: 50vh auto 0;
 	}
 
 	.rollie_collapse_xl.collapsing {
-
 		margin-left: 0 !important;
-
-
 		position: fixed;
 		z-index: 1050;
 		min-width: initial;
 	}
 
 
-
+#rollie_nav_user_info.#rollie_nav_user_info *{
+padding: 0 !important;
+margin: 0  !important;
+}
 
 .rollie_overlay
 {

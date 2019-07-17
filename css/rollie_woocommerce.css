@@ -6,6 +6,7 @@
 	1.General
 	2.shop archibe
 	icons
+	3.rollie_nav_top icons and colapses
 	2.MyAccount Navigation
 	3.My Orders Table
 	4cART
@@ -537,6 +538,96 @@ padding-left: 15px;
 	}
 }
 
+
+/*rollie_nav_top icons and colapses*/
+#rollie_nav_user_info,#rollie_nav_cart_info{
+z-index: 100;
+position: absolute;
+right: 0;
+clear: both;
+}
+#rollie_nav_user_info .rollie_my_acc_nav_side_c{
+	top:0;
+	left: 0;
+}
+
+ #rollie_nav_user_info .rollie_my_acc_nav_side > a,#rollie_nav_cart_info .mini_cart_item a ,#rollie_nav_cart_info .mini_cart_item .quantity {
+padding: 0rem;
+display: flex;
+align-items: center;
+}
+#rollie_nav_user_info .rollie_my_acc_nav_side > a{
+justify-content: center;
+}
+#rollie_nav_user_info .rollie_woo_order_table_banner > img{
+	height: 36px;
+	width: 36px;
+} 
+#rollie_nav_user_info .rollie_my_acc_nav_name,#rollie_nav_user_info .rollie_my_acc_nav_email{
+	display: none;
+}
+#rollie_nav_user_info .rollie_my_acc_nav_side_c {
+flex: 0 0 100%;
+max-width: 100%;
+padding: 0;
+}
+
+#rollie_nav_cart_info .widget_shopping_cart_content
+{
+margin: 0.5rem;
+width: 100%;
+}
+#rollie_nav_cart_info .mini_cart_item
+{
+display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+}
+
+
+.rollie_my_acc_nav_email,#rollie_nav_user_info .woocommerce-MyAccount-navigation  ,#rollie_nav_user_info .rollie_my_acc_nav_logout{
+	font-size:1.1rem;
+ }
+ .rollie_my_acc_nav_login{
+ 	font-size: inherit;
+ }
+#rollie_nav_user_info .rollie_my_acc_container  ,#rollie_nav_user_info .rollie_woo_order_table_banner {
+	box-shadow:none;
+}
+
+/*Cart Mini*/
+
+#rollie_nav_cart_info .woocommerce-mini-cart__buttons
+{
+	text-align: center;
+margin: auto;
+}
+
+#rollie_nav_cart_info .quantity{
+	all:unset;
+display: flex;
+margin-left: auto;
+}
+#rollie_nav_cart_info .woocommerce_gallery_thumbnail
+{
+display: inline-block;
+padding-right:1rem;
+}
+#rollie_nav_cart_info .woocommerce.widget_shopping_cart .total{
+	border-top:none;
+	padding-top:0;
+	margin-top:0.5rem;
+	padding-right:0.5rem; 
+}
+#rollie_nav_cart_info .woocommerce-mini-cart__total .woocommerce-Price-amount {
+	padding-left: 0.5rem;
+}
+.woocommerce-mini-cart__empty-message{
+	text-align: center;
+	height: 50px;
+}
+
 /*!!!!!!!inset 50px 0 15px -1px rgb(255, 255, 255) ,inset -50px 0 15px -1px rgb(255, 255, 255)
 
 	/*inset 0 19px 0px 0px rgba(0,0,0,0),inset 0 -9px 0px 0px rgba(0,0,0,0),inset 30px 0 15px -4px rgba(255, 255, 255, 1), inset -30px 0 15px -4px rgba(255, 255, 255, 1)
@@ -1002,7 +1093,7 @@ max-width: 50%;
 {
 display: grid;
 }
-.rollie_woo_cart_total  .cart-subtotal ,.woocommerce-checkout-review-order-table   .cart-subtotal
+.rollie_woo_cart_total  .cart-subtotal ,.woocommerce-checkout-review-order-table   .cart-subtotal,#rollie_nav_cart_info .woocommerce.widget_shopping_cart .total
 {
 
 

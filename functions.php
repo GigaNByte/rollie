@@ -33,9 +33,9 @@ function rollie_script_start() {
 }
 function rollie_style_start() {
 
-	 wp_enqueue_style( 'swiper_lib_css', get_template_directory_uri() . '/css/swiper.min.css', array(), '4.3.4', 'all' );
+	wp_enqueue_style( 'swiper_lib_css', get_template_directory_uri() . '/css/swiper.min.css', array(), '4.3.4', 'all' );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.2.1', 'all' );
- wp_enqueue_style('woocommerce_stylesheet', WP_PLUGIN_URL. '/woocommerce/assets/css/woocommerce.css',false,'1.0',"all");
+	wp_enqueue_style('woocommerce_stylesheet', WP_PLUGIN_URL. '/woocommerce/assets/css/woocommerce.css',false,'1.0',"all");
 	wp_enqueue_style( 'rollie_stylesheet', get_template_directory_uri() . '/css/rollie.css', array(),  date("h:i:s"), 'all' );
 
 	if ( class_exists( 'WooCommerce' ) ) {
@@ -43,15 +43,13 @@ function rollie_style_start() {
 		wp_enqueue_style( 'rollie_woo_stylesheet', get_template_directory_uri() . '/css/rollie_woocommerce.css', array(), date("h:i:s"), 'all' );
 
 	}
- 
  	require get_template_directory() . '/include/rollie_customizer_css.php';
  		rollie_customizer_css ();
 }
 
+/* Customizer: 
+Enqueue Script */
 
-add_action( 'customize_preview_init', 'rollie_customize_script' );
- 
-/* Customizer: Enqueue Script */
 function rollie_customize_script(){
     wp_enqueue_script( 'rollie_customizer_preview', get_template_directory_uri() . '/js/rollie_customizer_preview.js', array( 'jquery', 'customize-preview' ), date("h:i:s"), true );
     if (class_exists('woocommerce'))
@@ -60,18 +58,60 @@ function rollie_customize_script(){
     }
 }
 
+/**
+ * Cache the customizer styles
+ */
+function rollie_customizer_cache() {
+	global $wp_customize;
 
+	// Check we're not on the Customizer.
+	// If we're on the customizer then DO NOT cache the results.
+	if ( ! isset( $wp_customize ) ) {
+
+		// Get the theme_mod from the database
+		$data = get_theme_mod( 'my_customizer_styles', false );
+
+		// If the theme_mod does not exist, then create it.
+		if ( $data == false ) {
+			// We'll be adding our actual CSS using a filter
+			$data = apply_filters( 'my_styles_filter', null );
+			// Set the theme_mod.
+			set_theme_mod( 'my_customizer_styles', $data );
+		}
+
+	// If we're on the customizer, get all the styles using our filter
+	} else {
+
+		$data = apply_filters( 'my_styles_filter', null );
+
+	}
+
+	// Add the CSS inline.
+	// Please note that you must first enqueue the actual 'my-styles' stylesheet.
+	// See http://codex.wordpress.org/Function_Reference/wp_add_inline_style#Examples
+	wp_add_inline_style( 'my-styles', $data );
+
+}
+add_action( 'wp_enqueue_scripts', ' rollie_customizer_cache', 130 );
+
+/**
+ * Reset the cache when saving the customizer
+ */
+function my_reset_style_cache_on_customizer_save() {
+
+	remove_theme_mod( 'rollie_customizer_styles' );
+
+}
+
+add_action( 'customize_save_after', ' rollie_reset_cache_on_customizer_save' );
 add_action( 'wp_enqueue_scripts', 'rollie_style_start' );
 add_action( 'wp_enqueue_scripts', 'rollie_script_start' );
-function theme_support_rollie() {
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'     => 512,
-			'width'      => 512,
-			'flex-width' => true,
-		)
-	);
+add_action( 'customize_preview_init', 'rollie_customize_script' );
+
+
+
+
+
 ## Disables MIME Types Check ##
 function wph_disable_mime_check($data,$file,$filename,$mimes){
    $wp_filetype = wp_check_filetype($filename,$mimes);
@@ -81,8 +121,18 @@ function wph_disable_mime_check($data,$file,$filename,$mimes){
    return compact('ext','type','proper_filename');
 }
 add_filter('wp_check_filetype_and_ext','wph_disable_mime_check',10,4);
-	add_theme_support( 'automatic-feed-links' );
 
+function rollie_theme_support() {
+	add_theme_support(
+		'custom-logo',
+		array(
+			'height'     => 512,
+			'width'      => 512,
+			'flex-width' => true,
+		)
+	);
+
+	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'custom-header' );
 	add_theme_support( 'custom-background' );
 	add_theme_support( 'menus' );
@@ -261,7 +311,7 @@ require get_template_directory() . '/include/rollie_ajax.php';
 add_action( 'customize_register', 'rollie_customizer_register' );
 add_action( 'after_setup_theme', 'rollie_custom_setup' );
 add_action( 'widgets_init', 'rollie_widget_setup' );
-add_action( 'init', 'theme_support_rollie' );
+add_action( 'init', 'rollie_theme_support' );
 
 add_filter( 'excerpt_more', 'rollie_new_excerpt_more' );
 

@@ -9,8 +9,8 @@
 4.Orders table Query Snipets
 5.Cart
 7.notices
-
-6.Functions 
+6.Functions
+Cart and login icon on navbar 
 */
 /* My orders Table*/
 
@@ -816,6 +816,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 
 	function rollie_action_woo_before_account_navigation ()
 	{
+
 		$rollie_actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	if ( $rollie_actual_link == get_permalink( get_option('woocommerce_myaccount_page_id') )) /*if is displayed dashboard page apply class that creates bigger tiles*/{
 			$rollie_dash_class =" rollie_my_acc_dashboard ";
@@ -851,8 +852,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 		echo 		"<figcaption class='pt-1'>";
 
 					if (!empty($rollie_current_user->user_login)) {
-					echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span>";
-					echo  "<span><a href=".wp_logout_url().">". __( 'Logout', 'woocommerce' )."</a></span></p>";
+					echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span></p";
 					}
 
 					if (! empty($rollie_current_user->user_firstname)||!empty($rollie_current_user->user_lastname)) {
@@ -860,8 +860,12 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 					}
 
 					if (! empty($rollie_current_user->user_email)){
-					echo "<p class='rollie_my_acc_nav_email'>".$rollie_current_user->user_email."</p>";
+					echo "<p class=' rollie_my_acc_nav_email'>".$rollie_current_user->user_email."</p>";
 					} 	
+
+					echo  "<p class=' rollie_my_acc_nav_logout'><a href=".wp_logout_url().">". __( 'Logout', 'woocommerce' )."</a></span>";
+
+
 		echo 		"</figcaption>";
 		
 
@@ -1395,3 +1399,43 @@ if ($display_key)   {
     }
 
 }
+
+function woocomerce_rollie_nav_top_icons(){
+?>
+<button class="btn" data-toggle="collapse" data-target="#rollie_nav_user_info" aria-expanded="false" aria-controls="rollie_nav_user_info">
+	<i class='fas fa-user'></i>
+</button>	
+<button class="btn" data-toggle="collapse" data-target="#rollie_nav_cart_info" aria-expanded="false" aria-controls="rollie_nav_cart_info">
+	<i class='fas fa-shopping-bag'></i>
+</button>	
+<?php	
+}
+add_action('rollie_nav_top_icons_right','woocomerce_rollie_nav_top_icons',20);
+
+function woocomerce_rollie_nav_top_icons_colapsed(){
+?>
+<div class="collapse rollie_navbar_color  " id="rollie_nav_user_info">
+<?php  do_action( 'woocommerce_account_navigation' );  ?>
+</div>
+<div class="collapse rollie_navbar_color " id="rollie_nav_cart_info">
+<?php 
+    $items_count = WC()->cart->get_cart_contents_count();
+    $text_label  =_n( 'item', 'items',$items_count, 'rollie' );
+        $rollie_minicart_count ='<small> '.$text_label.': '.$items_count.'</small>';  
+
+ the_widget('WC_Widget_Cart','',array(
+ 	'before_widget'=>'<div class="widget woocommerce widget_shopping_cart rollie_table ">',
+ 	'after_widget'=>'</div>',
+ 	'before_title'=>'<div class="rollie_woo_order_table_banner border-0 rollie_woo_color rollie_f_navbar col-12 row text-center"><div class="col-9"><i class="fas text-left fa-shopping-bag pl-2 float-left"></i>',
+ 	'after_title'=>'</div><div class="col-3 ">'. $rollie_minicart_count.'</div></div>',
+
+ ));
+
+?> 
+</div>
+<?php
+
+}
+add_action('rollie_nav_top_icons_colapsed_content','woocomerce_rollie_nav_top_icons_colapsed',20);
+
+

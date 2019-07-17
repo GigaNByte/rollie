@@ -488,7 +488,7 @@ wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_item\n {\n padding: ".
 	wp_add_inline_style( 'rollie_stylesheet'," .rollie_main_theme_text_color{ color: ".	$rollie_main_theme_text_color   .";}");
 	wp_add_inline_style( 'rollie_stylesheet'," .rollie_second_text_color{ color: ".	$rollie_second_text_color .";}");
 	wp_add_inline_style( 'rollie_stylesheet'," .rollie_title_text_color{color: ".	 $rollie_title_text_color  .";}");
-	wp_add_inline_style( 'rollie_stylesheet'," .rollie_fourth_text_color, article a { color: ".	 $rollie_fourth_text_color  ." ;}");
+	wp_add_inline_style( 'rollie_stylesheet'," .rollie_fourth_text_color,.rollie_my_acc_nav_side_c  a, article a { color: ".	 $rollie_fourth_text_color  ." ;}");
 	wp_add_inline_style( 'rollie_stylesheet'," .rollie_sort_orders_current,.rollie_my_acc_nav_side_c .is-active > a, .rollie_category_title_text_color,a:hover,.rollie_footer_dropdown_item:hover{ color: ".	$rollie_category_title_text_color   .";}");
 /*hr
 {

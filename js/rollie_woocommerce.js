@@ -1,5 +1,8 @@
   jQuery( document ).ready(function($) {
   "use strict";
+//resizing my account navigation in rollie top navbar
+//$().removeClass('')
+
 
 
 //login container
@@ -7,9 +10,9 @@ $('#username.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_l
 $('#password.woocommerce-Input, #reg_password.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_password"></div>');
 $(' #reg_email.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_email"></div>');
 
-    var rollie_single_product_gallery_swiper = new Swiper ('.rollie_single_product_swiper_container', {
-      // Optional parameters
-
+//simgle product gallery swiper
+    var rollie_single_product_gallery_swiper =
+    new Swiper ('.rollie_single_product_swiper_container', {
       direction: 'horizontal',
       loop: true,
       pagination: {
@@ -23,7 +26,6 @@ $(' #reg_email.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie
 
 
 //image zoom
-
 $(function() {
   $('.rollie_zoom_image').each(function(){
     var originalImagePath = $(this).find('img').data('src');
@@ -33,6 +35,7 @@ $(function() {
     });
   });
 }); 
+
 //variations_form cart
 $('.variations_form').on('change',function(){
 var rollie_current_image = $(this).attr('current-image');
@@ -41,7 +44,7 @@ rollie_single_product_gallery_swiper.slideTo(dataSwiperSlideIndex);
 
 });
 
-// InputSpinners 
+// Input Spinners 
 //bcause ijnput spinners are part of shadow dom  JS code is needed
     $('<div class="quantity-nav_l"><div class="quantity-button quantity-down rollie_flex_text_center">-</div></div>').insertBefore('.quantity input');
     $('<div class="quantity-nav_r"><div class="quantity-button quantity-up rollie_flex_text_center">+</div></div>').insertAfter('.quantity input');
@@ -134,7 +137,6 @@ $(this).addClass('rollie_woo_tab_panel_toogle_disabled');
   }
 });
 $(".woocommerce-Reviews-title").trigger('click'); 
-
 })
 
 

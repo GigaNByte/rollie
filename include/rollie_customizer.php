@@ -8,7 +8,8 @@ $panel name of parent panel to witch will be applied to section and control
   $title -> frontend title of this new section
 */
 
-function rollie_add_post_page_control ($wp_customize,$rollie_panel_name,$rollie_title,$rollie_sufix) {
+function rollie_add_post_page_control ($wp_customize,$rollie_panel_name,$rollie_title,$rollie_sufix) 
+{
 
 	if (!empty($rollie_sufix)){
 $rollie_sufix='_'.$rollie_sufix;

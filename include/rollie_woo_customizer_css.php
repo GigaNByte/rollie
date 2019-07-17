@@ -56,13 +56,13 @@ wp_add_inline_style('rollie_woo_stylesheet' ,".woocommerce-NoticeGroup > ul\n{\n
 
 
 if ( get_theme_mod ('rollie_embl_subtitles' ,1 ) == 1){
-		wp_add_inline_style('rollie_woo_stylesheet' ," .cart-subtotal,  .order-total  \n { border-right-style:solid \n}" );
+		wp_add_inline_style('rollie_woo_stylesheet' ," .cart-subtotal,  .order-total, #rollie_nav_cart_info .woocommerce.widget_shopping_cart .total  \n { border-right-style:solid \n}" );
 
-		wp_add_inline_style('rollie_woo_stylesheet' ,"  .woocommerce-shipping-totals  > th,.rollie_sort_orders_current, .rollie_my_acc_nav_side_c  .is-active , .rollie_checked_payment_method \n { border-left-style:solid \n}" );	
+		wp_add_inline_style('rollie_woo_stylesheet' ,"  .woocommerce-shipping-totals  > th,.rollie_sort_orders_current, .rollie_my_acc_nav_side_c  .is-active  ,.rollie_checked_payment_method \n { border-left-style:solid \n}" );	
 } 
  if ( get_theme_mod ('rollie_embl_subtitles' ,1) == 2){
 	wp_add_inline_style('rollie_woo_stylesheet' ,);
-		wp_add_inline_style('rollie_woo_stylesheet' ,"rollie_sort_orders_current, .woocommerce-shipping-totals  > th ,.rollie_checked_payment_method, .rollie_my_acc_nav_side_c  .is-active ,  .cart-subtotal\n { border-bottom-style:solid \n}" 
+		wp_add_inline_style('rollie_woo_stylesheet' ,"rollie_sort_orders_current, .woocommerce-shipping-totals  > th ,#rollie_nav_cart_info .woocommerce.widget_shopping_cart .total,.rollie_checked_payment_method, .rollie_my_acc_nav_side_c  .is-active ,  .cart-subtotal\n { border-bottom-style:solid \n}" 
 	);
 } 
 
