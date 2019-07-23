@@ -85,13 +85,14 @@
 					
 					 ?>	
 				</nav>
-										
+				<div id='rollie_nav_top_icons_colapsed_content'>						
 				<?php
 				//example of using rollie_nav_top_icons_colapsed_content
+
 				add_action('rollie_nav_top_icons_colapsed_content','rollie_nav_top_search_button_colapsed',10);
 				 do_action('rollie_nav_top_icons_colapsed_content');
 				  ?>
-
+				</div>
 			</div>
 
 		<?php } ?>
@@ -121,7 +122,6 @@
 
 			}
 			?>
-	
 	
 </div>
 

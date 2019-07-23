@@ -320,13 +320,6 @@ $('.rollie_top_menu_icons > button').each(function(){
 	$(this).width($(this).height());
 })
 
-//proper control :focus pseudoclass  for elements in  rollie_top_menu_icons  menu
-$('rollie_top_menu_icons').children().on('show.bs.collapse',function(){
-//$(this).find('*').focus(); 
-})
-$('rollie_top_menu_icons').children().on('hide.bs.collapse',function(){
-$(this).find('*').blur(); 
-})
 
 
 });

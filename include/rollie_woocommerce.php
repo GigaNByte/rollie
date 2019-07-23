@@ -413,11 +413,13 @@ if ( ! empty( $tabs ) ) : ?>
 	 function rollie_woo_login_form_site_icon (){
 	 if (get_theme_mod( 'rollie_footer_menu_logo' ));
 	 {
+	 	echo '<div class="rollie_login_form_site_icon_wrapper">';
 	 	echo '<img class="rollie_login_form_site_icon d-block m-auto" src="'.esc_url(get_theme_mod( 'rollie_footer_menu_logo' )).'"/>';
 
 	 	if (get_theme_mod( 'rollie_footer_logo_desc_text' )){
 	 		echo '<div class="rollie_f_footer_sub m-1 rollie_subtitle_text_color">'.get_theme_mod( 'rollie_footer_logo_desc_text' ).'</div>';
 	 	}
+	 	echo "</div>";
 	 }
 
 	 }
@@ -608,7 +610,7 @@ function rollie_woo_order_custom_column( $order ) {
 ?>
 
 <div class='rollie_woo_order_table rollie_table rollie_woo_border_custom_column_rad '>
-	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
+	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >`
 	<div class='  rollie_woo_order_table_banner    '>		
 
 	
@@ -826,9 +828,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	}	
 
 	$rollie_current_user = wp_get_current_user();
-	   if ( ! $rollie_current_user->exists() ) {
-	       return;
-	   }
+	
 
 
 		if (get_theme_mod('rollie_woo_l_my_account_nav',1) == 1){
@@ -846,30 +846,37 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	$rollie_class_c = " rollie_my_acc_nav_wide_c  ";
 	}
 	echo "<div class=' ".$rollie_class_c." '>";
-		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow rollie_f_b_f '>";
-		echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner   border-0  rollie_menus_shadow'>";
-		echo 		"<img class='mx-auto d-block' src=".get_avatar_url( get_current_user_id()).">";
-		echo 		"<figcaption class='pt-1'>";
+		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow '>";
+		if (is_user_logged_in()){ // if is logged in 
+			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner   border-0  rollie_menus_shadow'>";
+			echo 		"<img class='mx-auto d-block' src=".get_avatar_url( get_current_user_id()).">";
 
-					if (!empty($rollie_current_user->user_login)) {
-					echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span></p";
-					}
+			echo 		"<figcaption class='pt-1'>";
 
-					if (! empty($rollie_current_user->user_firstname)||!empty($rollie_current_user->user_lastname)) {
-					echo "<p class='rollie_my_acc_nav_name'>".$rollie_current_user->user_firstname." ".$rollie_current_user->user_lastname."</p>";
-					}
+						if (!empty($rollie_current_user->user_login)) {
+						echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span></p";
+						}
 
-					if (! empty($rollie_current_user->user_email)){
-					echo "<p class=' rollie_my_acc_nav_email'>".$rollie_current_user->user_email."</p>";
-					} 	
+						if (! empty($rollie_current_user->user_firstname)||!empty($rollie_current_user->user_lastname)) {
+						echo "<p class='rollie_my_acc_nav_name'>".$rollie_current_user->user_firstname." ".$rollie_current_user->user_lastname."</p>";
+						}
 
-					echo  "<p class=' rollie_my_acc_nav_logout'><a href=".wp_logout_url().">". __( 'Logout', 'woocommerce' )."</a></span>";
+						if (! empty($rollie_current_user->user_email)){
+						echo "<p class=' rollie_my_acc_nav_email'>".$rollie_current_user->user_email."</p>";
+						} 	
+
+						echo  "<p class=' rollie_my_acc_nav_logout'><a href=".wp_logout_url().">". __( 'Logout', 'woocommerce' )."</a></span>";
 
 
-		echo 		"</figcaption>";
-		
+			echo 		"</figcaption>";
+			
 
-			echo "</figure>";
+				echo "</figure>";
+		}else{
+			echo "<div class='woocommerce'>";
+			woocommerce_login_form();
+			echo "</div>";	
+		}	
 }
 
  add_action('woocommerce_before_account_navigation','rollie_action_woo_before_account_navigation');
@@ -1415,7 +1422,15 @@ add_action('rollie_nav_top_icons_right','woocomerce_rollie_nav_top_icons',20);
 function woocomerce_rollie_nav_top_icons_colapsed(){
 ?>
 <div class="collapse rollie_navbar_color  " id="rollie_nav_user_info">
-<?php  do_action( 'woocommerce_account_navigation' );  ?>
+<?php	
+if (is_user_logged_in()){
+  do_action( 'woocommerce_account_navigation' );   }else{
+?>	
+
+<?php 
+rollie_action_woo_before_account_navigation();
+rollie_action_woo_after_account_navigation();
+} ?>
 </div>
 <div class="collapse rollie_navbar_color " id="rollie_nav_cart_info">
 <?php 

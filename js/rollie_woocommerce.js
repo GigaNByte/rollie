@@ -1,14 +1,14 @@
   jQuery( document ).ready(function($) {
   "use strict";
 //resizing my account navigation in rollie top navbar
-//$().removeClass('')
+
 
 
 
 //login container
-$('#username.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_login"></div>');
-$('#password.woocommerce-Input, #reg_password.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_password"></div>');
-$(' #reg_email.woocommerce-Input').wrap('<div class="rollie_login_icons_c rollie_email"></div>');
+$('.woocommerce #username').wrap('<div class="rollie_login_icons_c rollie_login"></div>');
+$('.woocommerce #password,.woocommerce #reg_password').wrap('<div class="rollie_login_icons_c rollie_password"></div>');
+$('.woocommerce #reg_email').wrap('<div class="rollie_login_icons_c rollie_email"></div>');
 
 //simgle product gallery swiper
     var rollie_single_product_gallery_swiper =

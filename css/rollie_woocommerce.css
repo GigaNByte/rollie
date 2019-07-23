@@ -597,6 +597,20 @@ flex-wrap: wrap;
 #rollie_nav_user_info .rollie_my_acc_container  ,#rollie_nav_user_info .rollie_woo_order_table_banner {
 	box-shadow:none;
 }
+#rollie_nav_user_info  .woocommerce form.login{
+border:none;
+}
+#rollie_nav_user_info  .woocommerce-form {
+padding:0;
+}
+#rollie_nav_user_info .woocommerce-form p {
+padding-left: 20px;
+padding-right:  20px;
+}
+#rollie_nav_user_info .lost_password a ,#rollie_nav_user_info .rollie_login_form_site_icon_wrapper{
+margin: auto;
+padding: 3px;
+}
 
 /*Cart Mini*/
 
@@ -1187,21 +1201,25 @@ text-align: right;
 /*cARRCD TOOTALS ENMD*/
 
 /*login*/		
-
+.woocommerce form .form-row .woocommerce-form__label-for-checkbox span {
+	display: inline-block;
+}
 .woocommerce-form-login .woocommerce form .form-row
 {
 	display:block; 
-
 }
 .woocommerce-LostPassword > a 
 {
 margin: auto;
 }
-.woocommerce .woocommerce-form-login .woocommerce-form-login__rememberme{
+.woocommerce-LostPassword{
+	width: 100%;
+}
+.woocommerce-form-login .woocommerce-form-login__rememberme{
 	display: initial;
 }
 
-.woocommerce .woocommerce-LostPassword,form > p
+.woocommerce-LostPassword,form > p
 {
 	display: flex;
 }
@@ -1209,7 +1227,7 @@ margin: auto;
 {
 	max-height: 130px;
 }
-.woocommerce .woocommerce-form-login .woocommerce-form-login__submit{
+ .woocommerce-form-login .woocommerce-form-login__submit{
 float:none;
 width: 100%;
 }
