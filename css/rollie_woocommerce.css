@@ -563,9 +563,11 @@ justify-content: center;
 	height: 36px;
 	width: 36px;
 } 
+
 #rollie_nav_user_info .rollie_my_acc_nav_name,#rollie_nav_user_info .rollie_my_acc_nav_email{
 	display: none;
 }
+
 #rollie_nav_user_info .rollie_my_acc_nav_side_c {
 flex: 0 0 100%;
 max-width: 100%;

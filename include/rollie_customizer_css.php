@@ -12,11 +12,7 @@ function rgba2rgb($color) {
 
 
 function rollie_customizer_css () 
-{
-
-
-
-	
+{	
 			//nAVBAR_FONT	
 	$rollie_font_navbar ['U']	= get_theme_mod('rollie_font_navbar_U'	,false);
 	$rollie_font_navbar ['ls']	= get_theme_mod( 'rollie_font_navbar_ls',0.6);
@@ -262,34 +258,6 @@ function rollie_customizer_css ()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	$rollie_main_theme_color = new Rollie_Gradient ("rollie_main_theme_color", "#ffffff",'.rollie_main_color',array('background'));
 
 	wp_add_inline_style( 'rollie_stylesheet', $rollie_main_theme_color->css_snippet());
@@ -330,7 +298,7 @@ function rollie_customizer_css ()
 	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', array('background'));
 
 	wp_add_inline_style( 'rollie_stylesheet', 	 $rollie_navbar_color->css_snippet());
-	$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button ,.woocommerce #respond input#submit, .woocommerce a.button ,.rollie_woo_order_table_banner    ,.woocommerce   .button ,.shop_table > thead', array('background-color'));
+	$rollie_button_b = new Rollie_Gradient ('rollie_button_b_color','#212121' ,'.rollie_button ,.woocommerce button.button ,.woocommerce #respond input#submit, .woocommerce a.button ,.rollie_woo_order_table_banner ,.rollie_top_menu_icons > button[aria-expanded="true"]   ,.woocommerce   .button ,.shop_table > thead', array('background-color'));
 
 	wp_add_inline_style( 'rollie_stylesheet', 	 $rollie_button_b->css_snippet());		
 	$rollie_button_b_h = new Rollie_Gradient ('rollie_button_b_h_color','#ffffff' ,' .rollie_button:hover , .woocommerce #respond input#submit:hover,.rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover', array('background'));
@@ -514,7 +482,7 @@ wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first,.cld-common-wrap,
 
 
 
-wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first:hover,.cld-common-wrap:hover,.fas:hover ,.fal:hover,.fab:hover,.far:hover,button:hover .fas,button:hover .far ,button:hover .fas,button:hover .fal{ color: ". $rollie_icon_color_first_h ." ; }");
+wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first:hover,.cld-common-wrap:hover,.fas:hover ,.fal:hover,.fab:hover,.far:hover,button:hover .fas,button:hover .far ,button:hover .fas,button:hover .fal,	.rollie_icon_first:focus,.cld-common-wrap:focus,.fas:focus ,.fal:focus,.fab:focus,.far:focus,button:focus .fas,button:focus .far ,button:focus .fas,button:focus .fal{ color: ". $rollie_icon_color_first_h ." ; }");
 
 
 
@@ -627,43 +595,8 @@ wp_add_inline_style('rollie_stylesheet',
 
 }
 
-function multi_unique($src){
-	$output = array_map("unserialize",
-		array_unique(array_map("serialize", $src)));
-	return $output;
-}
-function get_string_between($string, $start, $end){
-	$string = ' ' . $string;
-	$ini = strpos($string, $start);
-	if ($ini == 0) return '';
-	$ini += strlen($start);
-	$len = strpos($string, $end, $ini) - $ini;
-	return substr($string, $ini, $len);
-}
-
-
-
-function rollie_text_align_f($align)
-{
-	switch ($align){
-		case 1:
-		return "text-align:left;";
-		break;
-		case 2:
-		return "text-align:center;";
-		break;
-		case 3:
-		return "text-align:justify;";
-		break;
-		case 4:
-		return "text-align:right;"; 
-		break;
-		default:
-		return ""; 
-	}
 	
-	
-}
+
 
 
 
@@ -938,7 +871,7 @@ function rollie_add_google_font_stylesheet($rollie_google_s){
 	if (!empty($rollie_google_s)&& $rollie_google_s != false )
 	{	
 
-		$rollie_google_s = multi_unique($rollie_google_s);
+		$rollie_google_s = rollie_multi_unique($rollie_google_s);
 			//$rollie_google_compressed = [];
 		$rollie_google_compressed  =  array(array('weight','name'));
 

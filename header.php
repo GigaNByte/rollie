@@ -12,33 +12,7 @@
 <body class=" <?php echo 'body_page_id-' . get_queried_object_id(); ?>">
 	<div class='rollie_main_color rollie_background_color_div'></div>
 	<div class="container-fluid position-relative p-0">
-		<div class="rollie_header_container row p-0 ">
-			<?php
-		//HEADER IMAGE
-			$page_for_posts = get_option( 'page_for_posts' );
 
-			if (( is_home() || is_archive() || is_search()) && has_post_thumbnail( $page_for_posts ) ) {
-				$rollie_image_id = get_post_thumbnail_id($page_for_posts); 
-			} elseif ( is_category() && ( function_exists( 'get_field' ) && get_field( 'rollie_cat_img', get_queried_object() ) ) ) {
-				$rollie_image_id = attachment_url_to_postid(get_field( 'rollie_cat_img', get_queried_object()));
-			}
-			elseif(has_post_thumbnail()){
-				$rollie_image_id = get_post_thumbnail_id();
-			}
-			else {
-				$rollie_image_id = attachment_url_to_postid( get_header_image('full') );
-			}
-
-			if (!empty($rollie_image_id)){			
-//echo   "<img src='". wp_get_attachment_image_url($rollie_image_id,'rollie_m')."'>";
-
-				$img_alt = get_post_meta( $rollie_image_id, '_wp_attachment_image_alt', true ); 
-
-				echo rollie_header_image_source($rollie_image_id,$img_alt); 
-
-			}
-			?>
-		</div>
 
 		<?Php
 		if ( has_nav_menu( 'Rollie_Top_Menu' ) ) {
@@ -86,26 +60,28 @@
 					wp_nav_menu( array(
 
 						'theme_location'  => 'Rollie_Top_Menu',
-						'container'       => 'div',
 						'container_id'    => 'rollie_nav_top_2',
 						'container_class' => 'collapse   navbar-collapse rollie_navbar_top_container  ' . $rollie_side_active_c , 
 						'menu_id'         => false,
 						'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap rollie_nav_top_2_js ' . $rollie_navbar_align,
 						'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
-						'depth'           => '10',
+						'depth'           => '3',
+
 					));
 
 					//example of using rollie_nav_top_icons_right action
 					add_action('rollie_nav_top_icons_right','rollie_nav_top_search_button',100);
 					
-					echo "<div class='rollie_navbar_element_left'>";
+					echo "<nav class='rollie_top_menu_icons rollie_flex_text_center '>";
+					wp_nav_menu( array(
+						'theme_location'  => 'rollie_top_menu_icons',				
+						 'items_wrap' => '%3$s',
+						 'container'=>'',			
+						'walker' => new Rollie_Walker_Nav_Top_Icons,
+						'depth'           => '1',
+					));
 					do_action('rollie_nav_top_icons_right');
-					echo "</div>";
-					
-					
-					
-
-
+					echo "</nav>";
 					
 					 ?>	
 				</nav>
@@ -119,9 +95,34 @@
 			</div>
 
 		<?php } ?>
+		<div class="rollie_header_container row p-0 ">
+			<?php
+		//HEADER IMAGE
+			$page_for_posts = get_option( 'page_for_posts' );
 
-	</div>
+			if (( is_home() || is_archive() || is_search()) && has_post_thumbnail( $page_for_posts ) ) {
+				$rollie_image_id = get_post_thumbnail_id($page_for_posts); 
+			} elseif ( is_category() && ( function_exists( 'get_field' ) && get_field( 'rollie_cat_img', get_queried_object() ) ) ) {
+				$rollie_image_id = attachment_url_to_postid(get_field( 'rollie_cat_img', get_queried_object()));
+			}
+			elseif(has_post_thumbnail()){
+				$rollie_image_id = get_post_thumbnail_id();
+			}
+			else {
+				$rollie_image_id = attachment_url_to_postid( get_header_image('full') );
+			}
 
+			if (!empty($rollie_image_id)){			
+//echo   "<img src='". wp_get_attachment_image_url($rollie_image_id,'rollie_m')."'>";
 
+				$img_alt = get_post_meta( $rollie_image_id, '_wp_attachment_image_alt', true ); 
+
+				echo rollie_header_image_source($rollie_image_id,$img_alt); 
+
+			}
+			?>
+	
+	
+</div>
 
 	

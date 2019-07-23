@@ -112,7 +112,7 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 					'show.bs.collapse',
 					function () {		
 	//					$(container).parent().find('.collapse').collapse('hide');	
-						$('.rollie_navbar_element_left').insertBefore(collapsing_container);
+						$('.rollie_top_menu_icons').insertBefore(collapsing_container);
 
 						$('ul' ).addClass( 'm-0' );
 						$( '.rollie_collapse_side_overlay' ).css('display','block').css( "opacity","1" );
@@ -142,7 +142,7 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 						$( '.rollie_collapse_side_overlay' ).css('display','none').css( "opacity","0" );
 						$( '.rollie_navbar_color' ).css( "background-color",rollie_backgroundc );
 						$( ul ).removeClass( 'm-0' );
-						$('.rollie_navbar_element_left').insertAfter(collapsing_container);
+						$('.rollie_top_menu_icons').insertAfter(collapsing_container);
 					});
 
 				$( collapsing_container ).on(
@@ -158,10 +158,16 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 					function(){
 					$(this).parent().find('.collapse').not(this).collapse('hide');	
 			});
+
 		});
 }
 
 jQuery(function($){
+
+	//
+
+
+
 	//Adds support for masonry post grid
 	$(window).load(function() {
 		if ($('.rollie_grid').length){
@@ -199,6 +205,7 @@ jQuery(function($){
 	);
 
 	//top nav handler
+	//top nav icons handler
 	rollie_nav_handler( "#rollie_navbar_top", '.rollie_nav_top_2_js','#rollie_search_input_menu_top' , '#rollie_nav_top_2',true );
 		
 	//swiper for gallery if activated
@@ -303,5 +310,23 @@ jQuery(function($){
 		$( '.comment-respond' ).insertAfter( $( rollie_reply_id ).children().first() );
 		
 	}	
+
+//inherit height of container for rollie_top_menu_icons  
+$('.rollie_top_menu_icons').height($('#rollie_nav_top_2').height());
+
+//set same width/height aspect ratio for elements rollie_top_menu_icons  menu
+
+$('.rollie_top_menu_icons > button').each(function(){
+	$(this).width($(this).height());
+})
+
+//proper control :focus pseudoclass  for elements in  rollie_top_menu_icons  menu
+$('rollie_top_menu_icons').children().on('show.bs.collapse',function(){
+//$(this).find('*').focus(); 
+})
+$('rollie_top_menu_icons').children().on('hide.bs.collapse',function(){
+$(this).find('*').blur(); 
+})
+
 
 });

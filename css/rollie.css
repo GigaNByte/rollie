@@ -1564,6 +1564,10 @@ margin: 50vh auto 0;
 		min-width: initial;
 	}
 
+.rollie_top_menu_icons > button {
+height: 100%;
+padding: 0;
+}
 
 #rollie_nav_user_info.#rollie_nav_user_info *{
 padding: 0 !important;

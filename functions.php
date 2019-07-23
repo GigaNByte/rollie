@@ -69,41 +69,39 @@ function rollie_customizer_cache() {
 	if ( ! isset( $wp_customize ) ) {
 
 		// Get the theme_mod from the database
-		$data = get_theme_mod( 'my_customizer_styles', false );
+		$data = get_theme_mod( 'rollie_customizer_styles', false );
 
 		// If the theme_mod does not exist, then create it.
 		if ( $data == false ) {
 			// We'll be adding our actual CSS using a filter
-			$data = apply_filters( 'my_styles_filter', null );
+			$data = apply_filters( 'rollie_styles_filter', null );
 			// Set the theme_mod.
-			set_theme_mod( 'my_customizer_styles', $data );
+			set_theme_mod( 'rollie_customizer_styles', $data );
 		}
 
 	// If we're on the customizer, get all the styles using our filter
 	} else {
 
-		$data = apply_filters( 'my_styles_filter', null );
+		$data = apply_filters( 'rollie_styles_filter', null );
 
 	}
 
 	// Add the CSS inline.
 	// Please note that you must first enqueue the actual 'my-styles' stylesheet.
 	// See http://codex.wordpress.org/Function_Reference/wp_add_inline_style#Examples
-	wp_add_inline_style( 'my-styles', $data );
-
+	wp_add_inline_style( 'rollie_stylesheet', $data );
 }
-add_action( 'wp_enqueue_scripts', ' rollie_customizer_cache', 130 );
+
+add_action( 'wp_enqueue_scripts', 'rollie_customizer_cache', 130 );
 
 /**
  * Reset the cache when saving the customizer
  */
-function my_reset_style_cache_on_customizer_save() {
-
+function rollie_reset_style_cache_on_customizer_save() {
 	remove_theme_mod( 'rollie_customizer_styles' );
-
 }
 
-add_action( 'customize_save_after', ' rollie_reset_cache_on_customizer_save' );
+add_action( 'customize_save_after', 'rollie_reset_cache_on_customizer_save' );
 add_action( 'wp_enqueue_scripts', 'rollie_style_start' );
 add_action( 'wp_enqueue_scripts', 'rollie_script_start' );
 add_action( 'customize_preview_init', 'rollie_customize_script' );
@@ -159,9 +157,6 @@ function rollie_theme_support() {
 
 	add_theme_support( 'post-formats', array( 'link', 'aside', 'quote', 'status', 'audio', 'video', 'image', 'gallery' ) );
 
-		register_nav_menu( 'Rollie_Top_Menu', 'Rollie_top_menu_nav' );
-		register_nav_menu( 'rollie_cat_swap_menu', 'Rollie category swipe Menu' );
-		register_nav_menu( 'Footer_Menu', 'Footer_Menu_nav' );
 
 }
 
@@ -229,6 +224,12 @@ function rollie_widget_setup() {
 
 }
 function rollie_custom_setup() {
+
+	register_nav_menu( 'Rollie_Top_Menu', 'Rollie Top Menu Nav' );
+	register_nav_menu( 'rollie_top_menu_icons', 'Rollie Top Menu Icon Nav' );
+	register_nav_menu( 'rollie_cat_swap_menu', 'Rollie Category Swipe Menu' );
+	register_nav_menu( 'Footer_Menu', 'Rollie Footer Menu Nav' );
+
 	add_image_size( 'rollie_xs', 414,736,true); 
 	add_image_size( 'rollie_s', 1024,768  ,true); 
 	add_image_size( 'rollie_m', 1336,768 ,true ); 
@@ -295,6 +296,7 @@ require get_template_directory() . '/include/rollie_breadcrumb.php';
 require get_template_directory() . '/include/rollie_customizer.php';
 require get_template_directory() . '/include/rollie_special_functions.php';
 require get_template_directory() . '/include/rollie_walker_nav_top_toggle.php';
+require get_template_directory() . '/include/rollie_walker_nav_top_icons.php';
 require get_template_directory() . '/include/rollie_custom_shortcodes.php';
 require get_template_directory() . '/include/rollie_acf_field_import.php';
 require get_template_directory() . '/presets/rollie-presets.php';

@@ -135,11 +135,10 @@ rollie_color_obj.css_value = rollie_standard_color;
  var customize = wp.customize;
 
  var rollie_gr_controls = [
-   new RollieCustomizerObj('rollie_main_theme_color', '.rollie_main_color', Array('background')),
+  new RollieCustomizerObj('rollie_main_theme_color', '.rollie_main_color', Array('background')),
   new RollieCustomizerObj('rollie_second_theme_color', '.rollie_second_color',Array( 'background')),
   new RollieCustomizerObj('rollie_third_theme_color', '.rollie_third_color,.rollie_fancy_line',Array( 'background')),
   new RollieCustomizerObj('rollie_darker_main_theme_color', '.rollie_darker_main_color',Array('background')),
-
   new RollieCustomizerObj('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',Array( 'background')),
   new RollieCustomizerObj('rollie_title_bg_theme_color', '.rollie_title_bg_color',  Array('background')),
   new RollieCustomizerObj('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', Array('background')),
@@ -149,7 +148,6 @@ rollie_color_obj.css_value = rollie_standard_color;
   new RollieCustomizerObj('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead ,.woocommerce-checkout-review-order-table', Array('background')),
   new RollieCustomizerObj('rollie_button_alt_b_h_color','.rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover',Array('background')),
   new RollieCustomizerObj('rollie_button_alt_b_color','.rollie_button_alt,.woocommerce button.button.alt  ,.woocommerce a.button.alt,.woocommerce .checkout-button' , Array( 'background')),
-
  ];
 
 

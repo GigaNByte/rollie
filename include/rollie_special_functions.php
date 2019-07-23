@@ -446,3 +446,39 @@ function rollie_get_translated_archive_title() {
 	return apply_filters( 'get_the_archive_title', $title );
 	
 }
+
+function rollie_multi_unique($src){
+	$output = array_map("unserialize",
+		array_unique(array_map("serialize", $src)));
+	return $output;
+}
+function get_string_between($string, $start, $end){
+	$string = ' ' . $string;
+	$ini = strpos($string, $start);
+	if ($ini == 0) return '';
+	$ini += strlen($start);
+	$len = strpos($string, $end, $ini) - $ini;
+	return substr($string, $ini, $len);
+}
+
+
+
+function rollie_text_align_f($align)
+{
+	switch ($align){
+		case 1:
+		return "text-align:left;";
+		break;
+		case 2:
+		return "text-align:center;";
+		break;
+		case 3:
+		return "text-align:justify;";
+		break;
+		case 4:
+		return "text-align:right;"; 
+		break;
+		default:
+		return ""; 
+	}
+}	
