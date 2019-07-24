@@ -31,3 +31,4 @@ elseif(is_page())
 				the_category( ', ' );
 				?>
 			</div>
+

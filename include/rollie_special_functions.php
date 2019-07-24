@@ -32,7 +32,7 @@ function rollie_thumbnail_alt(){
 	if (empty($rollie_thumbnail_alt))   $rollie_thumbnail_alt = get_the_title();
 	return $rollie_thumbnail_alt;
 }
-function rollie_header_image_source($image_id,$image_alt){
+function rollie_header_image_responsive($image_id,$image_alt){
 	$image_alt = (!empty($image_alt)) ? "alt='".$image_alt ."'" : "alt='".get_the_title()."_thumbnail'";
 
 	$image_srcset = "<picture>";
@@ -158,6 +158,10 @@ function rollie_post_foreground () {
 function rollie_post_page_template_prefix(){
 	if ( is_category() ) {
 		return  '_ct';
+	}elseif ( is_page() ) {
+		return  '_sp';
+	}  elseif ( is_single() ) {
+		return  '_spp';
 	} elseif ( is_archive() ) {
 		return  '_ar';
 	} elseif ( is_search() ) {

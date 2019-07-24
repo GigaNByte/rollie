@@ -1,29 +1,8 @@
 
-function rgb2hex(rgb){
-	rgb = rgb.match( /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i );
-	return (rgb && rgb.length === 4) ? "#" +
-	("0" + parseInt( rgb[1],10 ).toString( 16 )).slice( -2 ) +
-	("0" + parseInt( rgb[2],10 ).toString( 16 )).slice( -2 ) +
-	("0" + parseInt( rgb[3],10 ).toString( 16 )).slice( -2 ) : '';
-}
-function hexToRgbA(hex,a){
-	var c;
-	if (/^#([A-Fa-f0-9]{3}){1,2}$/.test( hex )) {
-		c = hex.substring( 1 ).split( '' );
-		if (c.length == 3) {
-			c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-		}
-		c = '0x' + c.join( '' );
-		return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join( ',' ) + ',' + a + ')';
-	}
-	throw new Error( 'Bad Hex' );
-}
-
-
 function rollie_nav_handler( container ,ul, search_form , collapsing_container ,executing_first){
 	jQuery(
 		function($){
-			$( '.rollie_collapse_side_js.collapse > ul' ).css( "display","flex" );	
+			
 
 			if ($( '.rollie_collapse_side_js' ).length && ! ($( '.rollie_collapse_side' ).length) ) {
 				var rollie_collapse_side = true;
@@ -34,22 +13,16 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 			}
 
 
-			$( ".rollie_navbar_toggler" ).click(
-				function() {
-					
-					$( '.rollie_collapse_side_js' ).css( 'visibility','visible' );
-
-					if ($( '.rollie_collapse_side_js' ).length ) {
-
-
-						collapse_margin = $( '.rollie_nav_top_2_nav_js ' ).height();
-
-						$( collapsing_container ).css( "top",collapse_margin + "px" );
-
-					}
+			$(window).on('resize',function(){
+				$(collapsing_container).collapse('hide');
+				$(container).find('.rollie_navbar_toggler').blur();
+				if (rollie_collapse_side){
+					$(collapsing_container).insertBefore('.rollie_top_menu_icons');
 				}
-				);
 
+			});	
+
+		
 
 
 			if ($( search_form ).length) {
@@ -68,60 +41,40 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 					$( container ).addClass( 'navbar-expand-sm' );
 					$( search_form ).addClass( 'mx-sm-0' );
 					$( '#rollie_search_input_menu_top' ).addClass( 'rollie_input_collap_xs' );
-					if (rollie_collapse_side) {
-
-						$( '.rollie_collapse_side_js' ).addClass( 'rollie_collapse_xs' );
-
-					}
+					
 				} else if ( (rollie_nav_l <= 768) && (rollie_nav_l > 576) ) {
 
 					$( container ).addClass( 'navbar-expand-md' );
 					$( search_form ).addClass( 'mx-md-0' );
 					$( '#rollie_search_input_menu_top' ).addClass( 'rollie_input_collap_sm' );
-					if (rollie_collapse_side) {
-						$( '.rollie_collapse_side_js' ).addClass( 'rollie_collapse_sm' );
-
-					}
+					
 				} else if ((rollie_nav_l <= 992) && (rollie_nav_l > 768) ) {
 					$( container ).addClass( 'navbar-expand-lg' );
 					$( search_form ).addClass( 'mx-lg-0' );
 					$( '#rollie_search_input_menu_top' ).addClass( 'rollie_input_collap_md' );
-					if (rollie_collapse_side) {
-
-						$( '.rollie_collapse_side_js' ).addClass( 'rollie_collapse_md' );
-
-					}
+					
 				} else if ( (rollie_nav_l > 992 ) ) {
 					$( container ).addClass( 'navbar-expand-xl' );
 					$( search_form ).addClass( 'mx-xl-0' );
 					$( '#rollie_search_input_menu_top' ).addClass( 'rollie_input_collap_lg' );
-					if (rollie_collapse_side) {
-						$( '.rollie_collapse_side_js' ).addClass( 'rollie_collapse_lg' );
-					}
 					
 				}
 
-				$( container ).removeClass( ' navbar-expand invisible' );
+				$( container ).removeClass( 'navbar-expand invisible' );
 
-				var rollie_backgroundc = $( '.rollie_navbar_color' ).css( "background-color" );
-
-				var rollie_backgroundcmod = rgb2hex( rollie_backgroundc );
-				rollie_backgroundcmod     = hexToRgbA( rollie_backgroundcmod ,'0.92' );
 
 		$( collapsing_container ).on(
 					'show.bs.collapse',
-					function () {		
-	//					$(container).parent().find('.collapse').collapse('hide');	
+					function () {	
+					if (rollie_collapse_side){
+						$(collapsing_container).insertAfter(container);
+					}	
+					$(container).parent().find('.collapse.show').collapse('hide');	
 						$('.rollie_top_menu_icons').insertBefore(collapsing_container);
 
 						$('ul' ).addClass( 'm-0' );
 						$( '.rollie_collapse_side_overlay' ).css('display','block').css( "opacity","1" );
-						$( container ).css( "background-color",rollie_backgroundcmod );
-					
-						if (rollie_collapse_side) {
-
-							$( '.rollie_top_navbar_b_color' ).css( "background-color",rollie_backgroundcmod );
-						}
+						
 						$( document ).mouseup(
 							function(e)
 							{
@@ -140,15 +93,21 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 					function () {			
 					
 						$( '.rollie_collapse_side_overlay' ).css('display','none').css( "opacity","0" );
-						$( '.rollie_navbar_color' ).css( "background-color",rollie_backgroundc );
 						$( ul ).removeClass( 'm-0' );
-						$('.rollie_top_menu_icons').insertAfter(collapsing_container);
+						
+						if (rollie_collapse_side){
+							$(collapsing_container).insertBefore('.rollie_top_menu_icons');
+						}else{
+							$('.rollie_top_menu_icons').insertAfter(collapsing_container);
+						}
 					});
 
 				$( collapsing_container ).on(
 					'hide.bs.collapse',
-					function () {					
+					function () {		
+					$(container).find('.rollie_navbar_toggler').blur();			
 						$( '.rollie_collapse_side_overlay' ).css('display','none').css( "opacity","0" );
+
 				});
 			}
 
@@ -156,7 +115,8 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 			$(container).parent().find('.collapse').on(
 					'show.bs.collapse',
 					function(){
-					$(this).parent().find('.collapse').not(this).collapse('hide');	
+					$(this).parent().find('.collapse.show').not(this).collapse('hide');	
+			
 			});
 
 		});
@@ -310,15 +270,6 @@ jQuery(function($){
 		$( '.comment-respond' ).insertAfter( $( rollie_reply_id ).children().first() );
 		
 	}	
-
-//inherit height of container for rollie_top_menu_icons  
-$('.rollie_top_menu_icons').height($('#rollie_nav_top_2').height());
-
-//set same width/height aspect ratio for elements rollie_top_menu_icons  menu
-
-$('.rollie_top_menu_icons > button').each(function(){
-	$(this).width($(this).height());
-})
 
 
 

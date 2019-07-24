@@ -519,7 +519,7 @@ wp_add_inline_style( 'rollie_stylesheet'," .rollie_chevron_menu { color: ".	 $ro
 
 wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_chevron_menu:hover{ color: ".	$rollie_navbar_hover_chevron   ."!important;}");
 
-wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_menu_top_logo_h { height: ".	get_theme_mod("rollie_menu_top_logo_h",40)."px" .";}");
+wp_add_inline_style( 'rollie_stylesheet'," .rollie_nav_top_logo img \n{\n max-height:".get_theme_mod("rollie_navbar_logo_h",40)."px;\n }\n");
 wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_footer_logo_h>img { height: ".	get_theme_mod("rollie_footer_logo_h",100)."px" ."; }");
 
 
