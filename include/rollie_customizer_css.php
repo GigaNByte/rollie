@@ -420,8 +420,8 @@ function rollie_customizer_css ()
 //masonry sizes
 
 if (get_theme_mod('rollie_grid_type',1)==2){
-wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_size ,.rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size_m'.rollie_post_page_template_prefix(),33)."%;\n}\n@media (min-width: 768px) {\n.rollie_grid_size ,.rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size'.rollie_post_page_template_prefix(),50)."%;\n}\n}");
-wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_item\n {\n padding: ".get_theme_mod('rollie_post_page_masonry_ma'.rollie_post_page_template_prefix(),3)."px;\n}");
+wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_size ,.rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size_m'.rollie_page_template_sufix(),33)."%;\n}\n@media (min-width: 768px) {\n.rollie_grid_size ,.rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size'.rollie_page_template_sufix(),50)."%;\n}\n}");
+wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_item\n {\n padding: ".get_theme_mod('rollie_post_page_masonry_ma'.rollie_page_template_sufix(),3)."px;\n}");
 }
 
 
@@ -591,6 +591,10 @@ wp_add_inline_style('rollie_stylesheet',
 	".rollie_main_post_content\n{ padding-right:".get_theme_mod('rollie_posts_page_l_padding',3)."%;\n padding-left:".get_theme_mod('rollie_posts_page_l_padding',3)."%;\n\n}\n");
 wp_add_inline_style('rollie_stylesheet',
 	".rollie_single_page_content\n{ padding-right:".get_theme_mod('rollie_single_page_l_padding',3)."%;\n padding-left:".get_theme_mod('rollie_single_page_l_padding',3)."%;\n\n}\n");
+
+foreach (rollie_page_template_sufix_array() as  $sufix) {
+	wp_add_inline_style('rollie_stylesheet','.rollie_header_wrapper'.$sufix."\n{\n height:".get_theme_mod('rollie_header_height'.$sufix,60)."vh;\n}");
+}
 
 
 }
@@ -864,8 +868,6 @@ function rollie_add_font ($font_obj,$font_array,$font_str,$font_class_a)
 	}	
 
 }
-
-
 
 function rollie_add_google_font_stylesheet($rollie_google_s){
 	if (!empty($rollie_google_s)&& $rollie_google_s != false )

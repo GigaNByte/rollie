@@ -155,7 +155,7 @@ function rollie_post_foreground () {
 		
 		return  $html;
 }
-function rollie_post_page_template_prefix(){
+function rollie_page_template_sufix(){
 	if ( is_category() ) {
 		return  '_ct';
 	}elseif ( is_page() ) {
@@ -167,9 +167,12 @@ function rollie_post_page_template_prefix(){
 	} elseif ( is_search() ) {
 		return  '_se';
 	} else {
-		return '';
+		return '_pp';
 	}
 }
+function rollie_page_template_sufix_array(){
+	return array('_ct','_sp','_spp','_ar','_se','_pp');
+	}
 function rollie_subtitle(){
 	global $post;
 	if ( class_exists('get_field') && get_field( 'rollie_alternate_subtitle', get_the_ID() )){

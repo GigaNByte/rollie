@@ -11,13 +11,17 @@
 
 <body class=" <?php echo 'body_page_id-' . get_queried_object_id(); ?>">
 	<div class='rollie_main_color rollie_background_color_div'></div>
-	<div class="container-fluid position-relative p-0">
+	<?php
+		if (get_theme_mod('rollie_menu_position',false)){
+				require get_template_directory().'/include/rollie_navbar.php' ;
+		} 
+	?>
 	<div class="rollie_header_container row p-0 ">
-		<?php require get_template_directory().'/include/rollie_navbar.php' ?>
+		<?php 
+		if (!get_theme_mod('rollie_menu_position',false)){
+			require get_template_directory().'/include/rollie_navbar.php' ;
+		}
 
-
-	
-			<?php
 		//HEADER IMAGE
 			$page_for_posts = get_option( 'page_for_posts' );
 
@@ -36,7 +40,7 @@
 			
 			//check if there is default image for this type of page
 			if( empty($rollie_image_id)){
-				$rollie_image_id = get_theme_mod('rollie_header'.rollie_post_page_template_prefix());
+				$rollie_image_id = get_theme_mod('rollie_header'.rollie_page_template_sufix());
 			}
 
 			if (!empty($rollie_image_id)){						

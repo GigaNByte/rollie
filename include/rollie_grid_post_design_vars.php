@@ -1,6 +1,6 @@
 <?php
 
-$rollie_template =  rollie_post_page_template_prefix();
+$rollie_template =  rollie_page_template_sufix();
 $rollie_m_a ='';
 if (get_theme_mod( 'rollie_post_margin_auto'.$rollie_template ,true)){
 	$rollie_m_a = 'm-auto';

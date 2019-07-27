@@ -2,7 +2,12 @@
 function rollie_nav_handler( container ,ul, search_form , collapsing_container ,executing_first){
 	jQuery(
 		function($){
-			
+
+			if($('.rollie_header_container').find(container).length ){
+
+				console.log($('.rollie_header_wrapper').height() - $(container).parent().height());
+			$('.rollie_header_wrapper').height($('.rollie_header_wrapper').height() - $(container).parent().height());
+			}
 
 			if ($( '.rollie_collapse_side_js' ).length && ! ($( '.rollie_collapse_side' ).length) ) {
 				var rollie_collapse_side = true;
@@ -11,13 +16,15 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 				var rollie_collapse_side = false;
 
 			}
-
+			
 
 			$(window).on('resize',function(){
 				$(collapsing_container).collapse('hide');
 				$(container).find('.rollie_navbar_toggler').blur();
 				if (rollie_collapse_side){
 					$(collapsing_container).insertBefore('.rollie_top_menu_icons');
+
+			
 				}
 
 			});	
@@ -68,9 +75,10 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 					function () {	
 					if (rollie_collapse_side){
 						$(collapsing_container).insertAfter(container);
+						$('.rollie_collapse_side_js').css('margin-top',$('#rollie_insert_search_form_between_js').height()+"px");
 					}	
 					$(container).parent().find('.collapse.show').collapse('hide');	
-						$('.rollie_top_menu_icons').insertBefore(collapsing_container);
+						$('.rollie_top_menu_icons').appendTo(container);
 
 						$('ul' ).addClass( 'm-0' );
 						$( '.rollie_collapse_side_overlay' ).css('display','block').css( "opacity","1" );
@@ -91,11 +99,12 @@ function rollie_nav_handler( container ,ul, search_form , collapsing_container ,
 				$( collapsing_container ).on(
 					'hidden.bs.collapse',
 					function () {			
-					
+		
 						$( '.rollie_collapse_side_overlay' ).css('display','none').css( "opacity","0" );
 						$( ul ).removeClass( 'm-0' );
 						
 						if (rollie_collapse_side){
+									$('.rollie_collapse_side_js').css('margin-top','0');
 							$(collapsing_container).insertBefore('.rollie_top_menu_icons');
 						}else{
 							$('.rollie_top_menu_icons').insertAfter(collapsing_container);

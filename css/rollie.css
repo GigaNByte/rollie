@@ -107,28 +107,26 @@ overflow: visible;
 	position:relative;
 	display:block;
 	width:100%;
-		height:70vh; /*CUSTO*/
+		height:100%;
 z-index: 1;
 }
-.rollie_h_top{
-  top: 0px;
-}
-.rollie_h_center{
-  top: 50%;
-  transform: translateY(-50%);
-}
-.rollie_h_bottom{
-  bottom: 0px;
-}
-.rollie_v_left{
-  top: 0px;
+.rollie_v_top{
+align-items:flex-start;
 }
 .rollie_v_center{
-  top: 50%;
-  transform: translateY(-50%);
+align-items: center;
 }
-.rollie_v_right{
-  left: 0px;
+.rollie_v_bottom{
+align-items:flex-end;
+}
+.rollie_h_left{
+justify-content:left;
+}
+.rollie_h_center{
+justify-content: center;
+}
+.rollie_h_right{
+justify-content: right;
 }
 
 .rollie_w_0
@@ -157,11 +155,11 @@ border:solid;
 }
 .rollie_header_image
 {
-	height: 100%;
-	position:absolute;
-	left:0;
-	top:0;
-	width:100%;
+height: 100%;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
 z-index: -1;
 }
 
@@ -187,8 +185,9 @@ padding-bottom:0px;
 	}
 .rollie_collapse_side_js{
 	width:0px;
-height: 100% !important;
 display: block;
+transition: width 200ms ease-in-out;
+
 }
 
 .rollie_navbar_color > .rollie_navbar_color {
@@ -199,15 +198,21 @@ display: block;
 {
 	padding-left:2rem;
 	padding-right:2rem;
-		transition: width 200ms ease-in-out;
-}
 
+transition: width 200ms ease-in-out;
+}
+.rollie_collapse_side_js.collapsing,.rollie_collapse_side_js.collapse{
+transition: width 200ms ease-in-out;
+height: initial !important;
+}
+.rollie_collapse_side_js.collapse{
+	width: 0px;
+}
 .rollie_collapse_side_js.collapse.show
 {
 width: 300px;
-height: 100%;
 overflow: hidden;
-	}
+}
 
 .rollie_nav_link:hover,.rollie_nav_link
 {
@@ -215,18 +220,20 @@ overflow: hidden;
  padding-left:0px !important;
  padding-right:0px !important;
 }
-.rollie_collapse_side_js.collapsing,.rollie_collapse_side_js.collapse{
-transition: width 200ms ease-in-out;
+.rollie_collapse_side_js{
+
+}
+.rollie_collapse_side_js.collapse.show,.rollie_collapse_side_js.collapsing{
+
+top:0;
+left: 0;
+position: absolute;
 }
 .rollie_dropdown_menu
 {
 	white-space: normal;
 	display: table-column;
   opacity:0;
--webkit-transition: all 200ms ease-in;
--moz-transition: all 200ms ease-in;
--ms-transition: all 200ms ease-in;
--o-transition: all 200ms ease-in;
 transition: all 200ms ease-in;
    max-height: 400px;
 margin-top:0px !important;
@@ -1157,11 +1164,18 @@ font-family:'Rokkitt';
 }
 #rollie_insert_search_form_between_js   
 {
-	z-index: 80;
-	position: relative;
-	top:0;
-	left: 0;
-	width: 100%;
+z-index: 80;
+position: relative;
+top: 0;
+left: 0;
+width: 100%;
+}
+.header_wraper{
+	display: flex;
+}
+.header_wraper > header
+{
+	height: max-content;
 }
 	/*.rollie_posts_shadow
 				{

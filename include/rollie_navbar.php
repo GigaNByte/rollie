@@ -21,7 +21,7 @@
 
 
 					if ( 'side' == get_theme_mod( 'rollie_menu_design' ) ) {
-						$rollie_side_active_c  = ' rollie_collapse_side_js  rollie_navbar_color';
+						$rollie_side_active_c  = ' rollie_collapse_side_js rollie_navbar_color ';
 						$rollie_side_c         = 'rollie_navbar_color';
 
 					} else {

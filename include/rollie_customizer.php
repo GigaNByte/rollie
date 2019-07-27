@@ -96,7 +96,7 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 				'label'   =>__( 'Header Image', 'rollie' ),
 				'section'       => $rollie_section_prefix.$rollie_sufix,
 				'input_attrs'=> array (
-				'rollie_collapse_elements_number'=> 7,
+				'rollie_collapse_elements_number'=> 6,
 			'rollie_open_close_auto'=>true,
 							)
 			)
@@ -141,9 +141,11 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 				'type'    => 'select',
 				'choices' => array(
 					1 =>__( 'Classic', 'rollie' ),
-					2 =>__( 'Modern', 'rollie' ),
-					3 =>__( 'Clean', 'rollie' ),
-					4 =>__('Transparent','rollie')					
+					2 =>__('Classic Transparent','rollie')	,
+					3 =>__( 'Modern', 'rollie' ),
+					4 =>__( 'Modern Transparent', 'rollie' ),
+					5 =>__( 'Clean', 'rollie' ),
+								
 				),
 				
 			)
@@ -152,7 +154,7 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 		$wp_customize->add_setting(
 			'rollie_header_height'.$rollie_sufix,
 			array(
-				'default'           => 33,
+				'default'           => 65,
 				'transport' =>'refresh',
 				'sanitize_callback' => 'skyrocket_sanitize_integer',
 			)
@@ -164,33 +166,17 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 			'rollie_header_height'.$rollie_sufix,
 			array(
 				'label'       =>__( 'Header Image size (vh)' ,'rollie'),
+				
 				'section'     => $rollie_section_prefix.$rollie_sufix,
 				'input_attrs' => array(
 					'min'  => 20,
-					'max'  => 100,
+					'max'  => 120,
 					'step' => 1,
 				),							
 			))	
 	);
 
-			$wp_customize->add_setting(
-			'rollie_header_full_width'.$rollie_sufix,
-			array(
-				'default' => true,
-				'sanitize_callback' => 'rollie_sanitize_checkbox',
-			)
-		);
 
-		$wp_customize->add_control(
-			new Skyrocket_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_header_full_width'.$rollie_sufix,
-				array(
-					'label'       =>__( 'Full Width Header', 'rollie' ),
-					'section'     => $rollie_section_prefix.$rollie_sufix,
-				)
-			)
-		);
 
 
 		$wp_customize->add_setting(
@@ -1191,25 +1177,6 @@ function rollie_customizer_register( $wp_customize ) {
 				)
 			);
 
-							$wp_customize->add_setting(
-								'rollie_search_form_menu_top_type',
-								array(
-									'default'           => true,
-									'sanitize_callback' => 'rollie_sanitize_checkbox',
-								)
-							);
-
-			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_search_form_menu_top_type',
-					array(
-						'label'   => __( 'Display search icon only ', 'rollie' ),
-						'section' => 'rollie_menu_top_section',
-
-					)
-				)
-			);
 
 	$wp_customize->add_section(
 		'rollie_pagination_section',
@@ -3025,6 +2992,27 @@ $wp_customize->add_section(
 			)
 		);
 
+			$wp_customize->add_setting(
+			'rollie_menu_position',
+			array(
+				'default'           => false,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_menu_position',
+				array(
+					'label'   =>__( 'Navbar over Image', 'rollie' ),
+					'section' => 'rollie_navbar_section',
+			)
+			)
+		);
+
+
+
 					$wp_customize->add_setting(
 						'rollie_menu_overlay',
 						array(
@@ -3065,26 +3053,7 @@ $wp_customize->add_section(
 				)
 			);
 
-							$wp_customize->add_setting(
-								'rollie_search_form_menu_top_type',
-								array(
-									'default'           => true,
-									'sanitize_callback' => 'rollie_sanitize_checkbox',
-								)
-							);
-
-			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_search_form_menu_top_type',
-					array(
-						'label'   => esc_html__( 'Display search icon only ', 'Rollie' ),
-						'section' => 'rollie_navbar_section',
-
-					)
-				)
-			);
-
+	
 
 
 
