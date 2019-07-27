@@ -1,4 +1,21 @@
 <?php
+add_shortcode( 'rollie_header_video', function( $atts, $content = null ) {
+	global $content_width;
+	extract( shortcode_atts( array(
+		"src" => '',
+		"width" => '',
+		"height" => '',
+	), $atts ) );
+	// Sanitize a bit
+	$width = (int) $width !== 0 ? $width : $content_width;
+	$height = (int) $height !== 0 ? $height : (int) ( $width / 16 ) * 9;
+	// Validate the link and return the output
+	if ( filter_var( $src, FILTER_VALIDATE_URL ) ) 
+		return '<video  autoplay  loop muted class="rollie_header_image rollie_header_shortcode rollie_header_video
+" src="'.$src.'"></video>';
+});
+
+
 function rollie_nav_top_search_button(){
 	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {	?>
 		<button data-toggle="collapse" data-target="#rollie_search_input_menu_top" aria-expanded="false" aria-controls="rollie_search_input_menu_top" id='rollie_search_button_standalone' class=" btn ">
@@ -33,6 +50,7 @@ function rollie_thumbnail_alt(){
 	return $rollie_thumbnail_alt;
 }
 function rollie_header_image_responsive($image_id,$image_alt){
+
 	$image_alt = (!empty($image_alt)) ? "alt='".$image_alt ."'" : "alt='".get_the_title()."_thumbnail'";
 
 	$image_srcset = "<picture>";
@@ -70,7 +88,9 @@ if (wp_get_attachment_image_url($image_id,'rollie_s')){
   }
   $image_srcset .=  "<img sizes='100vh' class='rollie_header_image '".$image_alt."src='".wp_get_attachment_image_url($image_id,'full')."'>";
 
-  $image_srcset .=  "</picture";
+  $image_srcset .=  "</picture>";
+
+
 return $image_srcset;
 }
 

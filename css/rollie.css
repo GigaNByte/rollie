@@ -110,6 +110,11 @@ overflow: visible;
 		height:100%;
 z-index: 1;
 }
+
+.rollie_header_shortcode{
+width: 100%;
+object-fit:cover;
+}
 .rollie_v_top{
 align-items:flex-start;
 }

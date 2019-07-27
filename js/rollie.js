@@ -279,7 +279,11 @@ jQuery(function($){
 		$( '.comment-respond' ).insertAfter( $( rollie_reply_id ).children().first() );
 		
 	}	
-
-
+//prevent video loop to stop
+$('.rollie_header_video').on('ended', function () {
+  this.load();
+  this.play();
+});
+$("video[autoplay]").each(function(){ this.play(); });
 
 });

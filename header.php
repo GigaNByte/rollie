@@ -22,7 +22,16 @@
 			require get_template_directory().'/include/rollie_navbar.php' ;
 		}
 
+
+
+
+		if ( esc_url_raw(get_field('rollie_header_video_src'))){
+			echo	do_shortcode('[rollie_header_video src="'. esc_url_raw(get_field('rollie_header_video_src')).'"]');
+		}elseif(get_field('rollie_header_shortcode_src')){
+				echo	do_shortcode(sanitaze_text_field(get_field('rollie_header_shortcode_src')));
+		}else{
 		//HEADER IMAGE
+		
 			$page_for_posts = get_option( 'page_for_posts' );
 
 			//get id of image 
@@ -47,8 +56,10 @@
 				$img_alt = get_post_meta( $rollie_image_id, '_wp_attachment_image_alt', true ); 
 				echo rollie_header_image_responsive($rollie_image_id,$img_alt); 
 			}
+		}
+
+
+
+		//	
 			?>
-
-		</div>
-
-
+		
