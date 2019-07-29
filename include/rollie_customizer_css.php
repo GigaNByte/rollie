@@ -291,9 +291,6 @@ function rollie_customizer_css ()
 
 	wp_add_inline_style( 'rollie_stylesheet', 	 $rollie_post_classic_title_bg->css_snippet());
 
-	$rollie_post_modern_title_bg= new Rollie_Gradient ("rollie_post_modern_title_bg_theme_color", "#ffffff",'.rollie_post_modern_title_bg_color',array('background'));
-
-	wp_add_inline_style( 'rollie_stylesheet', 	 $rollie_post_modern_title_bg->css_snippet());
 
 	$rollie_navbar_color = new Rollie_Gradient ('rollie_navbar_color','rgba(255,255,255,0.8)' ,'.rollie_navbar_color', array('background'));
 

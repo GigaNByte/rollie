@@ -3,12 +3,11 @@ add_shortcode( 'rollie_header_video', function( $atts, $content = null ) {
 	global $content_width;
 	extract( shortcode_atts( array(
 		"src" => '',
-		"width" => '',
-		"height" => '',
+
 	), $atts ) );
-	// Sanitize a bit
-	$width = (int) $width !== 0 ? $width : $content_width;
-	$height = (int) $height !== 0 ? $height : (int) ( $width / 16 ) * 9;
+
+$src = esc_url_raw($src);
+
 	// Validate the link and return the output
 	if ( filter_var( $src, FILTER_VALIDATE_URL ) ) 
 		return '<video  autoplay  loop muted class="rollie_header_image rollie_header_shortcode rollie_header_video

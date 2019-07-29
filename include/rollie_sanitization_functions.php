@@ -1,4 +1,14 @@
 <?php
+function rollie_sanitize_shortcode() {
+		return array (
+			'a' => array (
+				'href' => array(),
+				'class' => array(),
+			),
+			
+		);
+	}
+
 function rollie_sanitize_hex_color( $hex_color, $setting ) {
 
 	// Sanitize $input as a hex value without the hash prefix.

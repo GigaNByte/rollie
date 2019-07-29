@@ -26,9 +26,13 @@
 
 
 		if ( esc_url_raw(get_field('rollie_header_video_src'))){
-			echo	do_shortcode('[rollie_header_video src="'. esc_url_raw(get_field('rollie_header_video_src')).'"]');
+			//url is sanitased in shortocde funct
+			echo	do_shortcode('[rollie_header_video src="'. get_field('rollie_header_video_src').'"]');
+	
 		}elseif(get_field('rollie_header_shortcode_src')){
-				echo	do_shortcode(sanitaze_text_field(get_field('rollie_header_shortcode_src')));
+			
+			echo do_shortcode(wp_kses(get_field("rollie_header_shortcode_src"), rollie_sanitize_shortcode()));
+
 		}else{
 		//HEADER IMAGE
 		

@@ -26,7 +26,7 @@ function hexToRgbA_2(hex) {
 
 }
 
-function rollieRangeSanitaze(number, from, to) {
+function rollieRangeSanitize(number, from, to) {
  if (from <= number && number <= to) {
   return number;
  } else {
@@ -64,16 +64,16 @@ function rollieGradientControl(rollie_gradient_obj) {
    rollie_gr_3 = hexToRgbA_2(setting.get());
   });
   wp.customize(rollie_gradient_obj.control_name + '_stop_gr_1', function(setting) {
-   rollie_stop_gr_1 = rollieRangeSanitaze(setting.get(), 0, 100);
+   rollie_stop_gr_1 = rollieRangeSanitize(setting.get(), 0, 100);
   });
   wp.customize(rollie_gradient_obj.control_name + '_stop_gr_2', function(setting) {
-   rollie_stop_gr_2 = rollieRangeSanitaze(setting.get(), 0, 100);
+   rollie_stop_gr_2 = rollieRangeSanitize(setting.get(), 0, 100);
   });
   wp.customize(rollie_gradient_obj.control_name + '_stop_gr_3', function(setting) {
-   rollie_stop_gr_3 = rollieRangeSanitaze(setting.get(), 0, 100);
+   rollie_stop_gr_3 = rollieRangeSanitize(setting.get(), 0, 100);
   });
   wp.customize(rollie_gradient_obj.control_name + '_angle_gr', function(setting) {
-   rollie_angle_gr = rollieRangeSanitaze(setting.get(), 0, 360);
+   rollie_angle_gr = rollieRangeSanitize(setting.get(), 0, 360);
   });
 
 
@@ -142,7 +142,6 @@ rollie_color_obj.css_value = rollie_standard_color;
   new RollieCustomizerObj('rollie_sidebar_theme_color', '.rollie_sidebar_color,.rollie_sidebar_left , .rollie_sidebar_right',Array( 'background')),
   new RollieCustomizerObj('rollie_title_bg_theme_color', '.rollie_title_bg_color',  Array('background')),
   new RollieCustomizerObj('rollie_post_classic_title_bg_theme_color', '.rollie_post_classic_title_bg_color', Array('background')),
-  new RollieCustomizerObj('rollie_post_modern_title_bg_theme_color', '.rollie_post_modern_title_bg_color',Array( 'background')),
   new RollieCustomizerObj('rollie_navbar_color', '.rollie_navbar_color ', Array( 'background')),
   new RollieCustomizerObj('rollie_button_b_h_color','.rollie_button:hover',  Array('background')),
   new RollieCustomizerObj('rollie_button_b_color','.rollie_button ,.woocommerce-cart-form__contents > thead ,.woocommerce-checkout-review-order-table', Array('background')),

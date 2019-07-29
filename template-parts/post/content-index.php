@@ -92,7 +92,7 @@ if ($rollie_current_design == 1){
 	$rollie_post_wraper = $rollie_post_display_style_classes[ $rollie_current_style ]['second_div_col_classic'].' rollie_classic rollie_post_classic_title_bg_color  position-absolute';
 	$rollie_article_wrapper = 'position-relative rollie_post_thumbnail_height_m';
 }elseif($rollie_current_design == 2){
-	$rollie_post_wraper = 'col-12 rollie_modern rollie_post_modern_title_bg_color  position-absolute';
+	$rollie_post_wraper = 'col-12 rollie_modern rollie_post_classic_title_bg_color  position-absolute';
 	$rollie_article_wrapper = 'position-relative rollie_post_thumbnail_height_m';
 }elseif($rollie_current_design == 3 ){
 	$rollie_post_wraper = 'col-12 rollie_clean';

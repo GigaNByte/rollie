@@ -101,7 +101,7 @@ function rollie_woo_price_design(){
 		
 			add_action('woocommerce_before_shop_loop_item_title',function(){
 				if (get_theme_mod('rollie_woo_price_design',1) == 2){
-					$class='d-block w-100 rollie_modern_price rollie_category_title_text_color rollie_post_modern_title_bg_color';
+					$class='d-block w-100 rollie_modern_price rollie_category_title_text_color rollie_post_classic_title_bg_color';
 				}
 				else
 				{
