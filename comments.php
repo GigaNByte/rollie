@@ -16,7 +16,7 @@ return;
 				?>
 				<div class=" media-body card mt-3 rollie_comment  " id="div-comment-<?php echo  esc_html($rollie_reply_id); ?>">
 					<div class="card-header rollie_card_header hoverable ">
-						<div class="flex-center rollie_font_first">
+						<div class="flex-center rollie_f_main">
 
 							<a href="" class="media-object float-left">
 								<?php echo get_avatar( $rollie_reply->user_id, 32, '', '', array( 'class' => 'comment_avatar mr-2 ' ) ); ?>
@@ -53,11 +53,11 @@ return;
 			'class_submit'         => 'submit d-block rollie_button  mx-auto my-2 rollie_f_b_f btn  btn-lg rollie_button_submit ',
 			'label_submit'         => __('Submit','rollie'),
 			'comment_field'        =>
-			'<div class="rollie_font_first "> <span class="required"></span><textarea id="comment" placeholder="' . __('Share your thoughts','rollie') . '  " class="form-control rollie_form_control rollie_form_input" name="comment" rows="1" required="required"></textarea></p></div>',
+			'<div class="rollie_f_main "> <span class="required"></span><textarea id="comment" placeholder="' . __('Share your thoughts','rollie') . '  " class="form-control rollie_form_control rollie_form_input" name="comment" rows="1" required="required"></textarea></p></div>',
 			'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
 			'title_reply'          => "<h3 class='comment-title col-12".rollie_embl_subtitles()."'>".__('Reply')."</h3>",
 			'logged_in_as'         => '<p class="logged-in-as m-1  ">' . sprintf(  __( 'Logged in as','rollie'). ' <a href="%1$s " class=""> &#160;%2$s </a>.&#160; <a  class="rollie_text_color_3 " href="%3$s" title="Log out of this account">' . __('Logout','rollie') . '</a>' , admin_url( 'profile.php' ), " ".$user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '</p>',
-			'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title rollie_font_first">',
+			'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title rollie_f_main">',
 			'title_reply_after'    => '</h3>',
 			'comment_notes_before' => '<p class="comment-notes">' .
 			__('Your email address will not be published') . ( $req ? __('Required fields are marked *') : '' ) .

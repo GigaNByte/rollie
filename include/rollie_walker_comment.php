@@ -22,7 +22,7 @@ class Rollie_Comment_Walker extends Walker_Comment {
 
 			<div class="media-body card mt-3 rollie_comment rollie_darker_main_color " id="div-comment-<?php comment_ID(); ?>">
 				<div class="card-header rollie_card_header hoverable ">
-					<div class="flex-center rollie_font_first">
+					<div class="flex-center rollie_f_main">
 						<?php if ( $args['avatar_size'] != 0 ) : ?>
 						<a href="<?php echo get_comment_author_url(); ?>" class="media-object float-left">
 							<?php echo get_avatar( $comment, $args['avatar_size'], 'mm', '', array( 'class' => 'comment_avatar mr-2 ' ) ); ?>

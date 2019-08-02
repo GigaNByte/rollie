@@ -2,422 +2,161 @@ jQuery( document ).ready(function($) {
 	"use strict";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function rollie_multiple_switch_underline()
-{
+	function rollie_multiple_switch_underline()
+	{
 		$('.rollie_multiple_switch > input').each(function(){
 			
-	   if ($(this).prop('checked')){
-	 	 $( this ).parent().addClass( "rollie_checked_style" );
-	 	 $(this).addClass( "rollie_checked" );
-	  }
-	  else{
-	  	 $( this ).parent().removeClass( "rollie_checked_style" );
-	  	 $(this).removeClass( "rollie_checked" );
-	  }
-	});
-}
-function rollie_multiple_switch_hide_show_controler(rollie_input_name)
-{
+			if ($(this).prop('checked')){
+				$( this ).parent().addClass( "rollie_checked_style" );
+				$(this).addClass( "rollie_checked" );
+			}
+			else{
+				$( this ).parent().removeClass( "rollie_checked_style" );
+				$(this).removeClass( "rollie_checked" );
+			}
+		});
+	}
+	function rollie_multiple_switch_hide_show_controler(rollie_input_name)
+	{
 
 
-var rollie_mscc_id = '';
+		var rollie_mscc_id = '';
 
-$('.rollie_multiple_switch_row_js').find( 'input[name='+rollie_input_name+']').each(function(index){
+		$('.rollie_multiple_switch_row_js').find( 'input[name='+rollie_input_name+']').each(function(index){
 
-	 rollie_mscc_id = '';
-	 rollie_mscc_id = $(this).closest('.rollie_mscc_js').attr('rollie_mscc_attrs');
+			rollie_mscc_id = '';
+			rollie_mscc_id = $(this).closest('.rollie_mscc_js').attr('rollie_mscc_attrs');
 
-	  if ($(this).is(":checked") ==  true) {
- $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','active');
-	   $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
-  $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().addClass('rollie_multiple_switch_bb');
-	  } else {
-	  	 $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','disactive');
- $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
+			if ($(this).is(":checked") ==  true) {
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','active');
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().addClass('rollie_multiple_switch_bb');
+			} else {
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','disactive');
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
 
-	  $(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().removeClass('rollie_multiple_switch_bb');
-	  }
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().removeClass('rollie_multiple_switch_bb');
+			}
 
-	});
+		});
 
 
-}
-function rollie_multiple_switch()
-{
-rollie_multiple_switch_underline();
+	}
+	function rollie_multiple_switch()
+	{
+		rollie_multiple_switch_underline();
 
-$(".rollie_multiple_switch > input").on("change", rollie_multiple_switch_underline);
+		$(".rollie_multiple_switch > input").on("change", rollie_multiple_switch_underline);
 
-var rollie_input_name = '';
+		var rollie_input_name = '';
 
-	$('.rollie_multiple_switch_row_js').each(function() {
-	
-rollie_input_name = '';
-		 rollie_input_name = $(this).find('input').attr('name');
+		$('.rollie_multiple_switch_row_js').each(function() {
+			
+			rollie_input_name = '';
+			rollie_input_name = $(this).find('input').attr('name');
 
 
 	rollie_multiple_switch_hide_show_controler(rollie_input_name); //on document ready
 	 $(this).find('input').on("change",function(){//on change
-	 		 rollie_input_name = $(this).attr('name');
+	 	rollie_input_name = $(this).attr('name');
 	 	rollie_multiple_switch_hide_show_controler(rollie_input_name);
 	 });
 
-});
+	});
 
 
-}
+	}
 
-function rollie_collapse_label_toggle_controler (selector_name,on_doc_ready)
-{
-var	value = $(selector_name).attr('rollie_collapse_elements');
+	function rollie_collapse_label_toggle_controler (selector_name,on_doc_ready)
+	{
+		var	value = $(selector_name).attr('rollie_collapse_elements');
 
 		if ($(selector_name).attr('rollie_open_close_auto') == 'true'){
 			$(selector_name).parent().next().css('margin-top','0');
 			$(selector_name).parent().css('margin-bottom','0');
 			$(selector_name).children().first().css('margin-top','0');
-				$(selector_name).parent().nextAll().eq(parseInt(value)-1).addClass('rollie_collapse_bb');
+			$(selector_name).parent().nextAll().eq(parseInt(value)-1).addClass('rollie_collapse_bb');
 
 		}
 
 
 
-	$(selector_name).parent().nextAll('li').each(function( index ) {
-		var tr = true;
-if(!on_doc_ready)
-{
+		$(selector_name).parent().nextAll('li').each(function( index ) {
+			var tr = true;
+			if(!on_doc_ready)
+			{
 
 
-	if (($(this).attr('rollie_mscc_active') == 'disactive'))
-	{
-	tr=false;
-	}
+				if (($(this).attr('rollie_mscc_active') == 'disactive'))
+				{
+					tr=false;
+				}
 
-}
-					 if (value  !== 'undefined'  && index <  value){
+			}
+			if (value  !== 'undefined'  && index <  value){
+				
+				
+				
+				if( ! $( this ).hasClass('rollie_collapse_label_show_flag')  )   {	
+
 					
-					
-	
-			if( ! $( this ).hasClass('rollie_collapse_label_show_flag')  )   {	
-
-	
-$(this).addClass('rollie_collapse_label_show_flag');
-if (tr)
-{
+					$(this).addClass('rollie_collapse_label_show_flag');
+					if (tr)
+					{
 			$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
 		}
 
-			}
-			else{
+	}
+	else{
 
-					
+		
 		$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
-			}
+	}
 
-		}	
-	});
-}
-
-function rollie_collapse_label_toggle ()
-{	
-    
-//on docuemtn ready
-
-//on docuemtn ready
-$('.rollie_collapse_label_toggle').each(function(){
-
-rollie_collapse_label_toggle_controler(this,true);
-	});
-
-$( '.rollie_collapse_label_toggle' ).on( "click", function() { //on click
-
-rollie_collapse_label_toggle_controler(this,false);
-
-/*
-$('.rollie_multiple_switch_row_js').each(function() {
-
-var rrollie_input_name = '';
-		 rrollie_input_name = $(this).find('input').attr('name');
-		 rollie_multiple_switch_hide_show_controler(rrollie_input_name);
+}	
 });
-*/
-});
+	}
 
-}
-
-rollie_collapse_label_toggle ();
-rollie_multiple_switch();
-$('.rollie_collapse_label_toggle').each(function(){
-rollie_collapse_label_toggle_controler(this,true);
-	});
-
-
-
-
-
-
-wp.customize( 'rollie_font_headings_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_headings_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_headings_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_headings_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_headings_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_headings_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-wp.customize( 'rollie_font_subtitles_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_subtitles_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_subtitles_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_subtitles_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_subtitles_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_subtitles_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_navbar_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_navbar_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_navbar_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_navbar_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-
-		if ( true === va ) {
-				$("#customize-control-rollie_font_navbar_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_navbar_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_excerpt_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_excerpt_alt_enable' ).get()  ) {
-	$("#customize-control-rollie_font_excerpt_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_excerpt_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_excerpt_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_excerpt_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_pp_content_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_pp_content_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_pp_content_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_pp_content_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_pp_content_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_pp_content_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_excerpt_s_alt_enable', function( value ) {
-		if ( true ===  wp.customize( 'rollie_font_excerpt_s_alt_enable' ).get()) {
-	$("#customize-control-rollie_font_excerpt_s_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_excerpt_s_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-	
-		if ( true === va ) {
-				$("#customize-control-rollie_font_excerpt_s_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_excerpt_s_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_website_s_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_website_s_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_website_s_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_website_s_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_website_s_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_website_s_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_b_f_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_b_f_alt_enable' ).get()) {
-	$("#customize-control-rollie_font_b_f_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_b_f_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_b_f_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_b_f_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_comment_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_comment_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_comment_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_comment_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_comment_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_comment_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_widget_alt_enable', function( value ) {
-		if ( true ===  wp.customize( 'rollie_font_widget_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_widget_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_widget_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_widget_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_widget_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_metainfo_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_metainfo_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_metainfo_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_metainfo_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_metainfo_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_metainfo_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_footer_sub_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_footer_sub_alt_enable' ).get()) {
-	$("#customize-control-rollie_font_footer_sub_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_footer_sub_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_footer_sub_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_footer_sub_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-wp.customize( 'rollie_font_footer_alt_enable', function( value ) {
-		if ( true === wp.customize( 'rollie_font_footer_alt_enable' ).get() ) {
-	$("#customize-control-rollie_font_footer_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_footer_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-value.bind( function( va ) {
-		if ( true === va ) {
-				$("#customize-control-rollie_font_footer_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		} else {
-			$("#customize-control-rollie_font_footer_alt_enable").nextAll(':lt(4)').css('display','none');
-		}
-});
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-});
-
-
-		$( ".rollie_font_reset" ).on( "click", function() {
- var rollie_object_name = $(this).attr("object_name");
-
-
-
- var rollie_object_frontend_class = rollie_object_name.replace("_obj", "");
-
-
-
-		if ($("#"+rollie_object_frontend_class+"_alt_enable").attr("reset-value") == 1 && wp.customize( rollie_object_frontend_class+"_alt_enable" ).get() ==0 )
-		{
-			$("#"+rollie_object_frontend_class+"_alt_enable").trigger("click");
-			
-			//$("#customize-control-"+rollie_object_frontend_class+"_alt_enable").nextAll(':lt(4)').css('display','list-item');
-		}
+	function rollie_collapse_label_toggle ()
+	{	
 		
-		if ($("#"+rollie_object_frontend_class+"_alt").attr("reset-value"))
-		{
-			wp.customize( rollie_object_frontend_class+"_alt" ).set($("#"+rollie_object_frontend_class+"_alt").attr("reset-value"));	
-		}
-		
- wp.customize( rollie_object_name ).set( '{"font":"Rokkitt","regularweight":"300","italicweight":"italic","boldweight":"700","category":"monotype"}' );	
-	
-	
-		  var rollie_font= $(".rollie_fonts_list").attr("slider-reset-value");
-  var rollie_regularweight= $(".rollie_regularweight").attr("slider-reset-value");
- var rollie_italicweight = $(".rollie_italicweight").attr("slider-reset-value");
- var rollie_boldweight = $(".rollie_boldweight").attr("slider-reset-value");
- var rollie_subsets = $(".rollie_subsets").attr("slider-reset-value");
-  var rollie_category = $(".rollie_font_category").attr("slider-reset-value");
- $(".rollie_fonts_list").val(rollie_font);
- $('.select2-selection__rendered').text(rollie_font);
 
-})
+		$('.rollie_collapse_label_toggle').each(function(){
+			rollie_collapse_label_toggle_controler(this,true);
+		});
+		$( '.rollie_collapse_label_toggle' ).on( "click", function() { 
+			rollie_collapse_label_toggle_controler(this,false);
+		});
+	}
+
+	rollie_collapse_label_toggle ();
+	rollie_multiple_switch();
+	$('.rollie_collapse_label_toggle').each(function(){
+		rollie_collapse_label_toggle_controler(this,true);
+	});
+
+
+
+
+
+	$( ".rollie_font_reset" ).on( "click", function() {
+		var rollie_object_name = $(this).attr("object_name");
+		var rollie_def = $(this).attr('default');
+		console.log(rollie_def);
+		var rollie_object_frontend_class = rollie_object_name.replace("_obj", "");
+
+		
+		wp.customize( rollie_object_name ).set(rollie_def);	
+
+		$(".rollie_fonts_list").val($(".rollie_fonts_list").attr("rollie-reset-value"));
+
+		$(".rollie_regularweight").val($(".rollie_regularweight").attr("rollie-reset-value"));
+		$(".rollie_italicweight").val($(".rollie_italicweight").attr("rollie-reset-value"));
+		$(".rollie_boldweight").val($(".rollie_boldweight").attr("rollie-reset-value"));
+		$(".rollie_subsets").val($(".rollie_subsets").attr("rollie-reset-value"));
+		$(".rollie_font_category").val($(".rollie_font_category").attr("rollie-reset-value"));
+		$(".rollie_fonts_list,.rollie_regularweight,.rollie_italicweight,.rollie_boldweight,.rollie_subsets,.rollie_font_category").trigger('change');
+	})
 
 
 	/**
@@ -428,7 +167,7 @@ value.bind( function( va ) {
 	 * @link https://github.com/maddisondesigns
 	 */
 
-	$('.customize-control-tinymce-editor').each(function(){
+	 $('.customize-control-tinymce-editor').each(function(){
 		// Get the toolbar strings that were passed from the PHP Class
 		var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].skyrockettinymcetoolbar1;
 		var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].skyrockettinymcetoolbar2;
@@ -442,12 +181,12 @@ value.bind( function( va ) {
 			quicktags: true
 		});
 	});
-	$(document).on( 'tinymce-editor-init', function( event, editor ) {
-		editor.on('change', function(e) {
-			tinyMCE.triggerSave();
-			$('#'+editor.id).trigger('change');
-		});
-});
+	 $(document).on( 'tinymce-editor-init', function( event, editor ) {
+	 	editor.on('change', function(e) {
+	 		tinyMCE.triggerSave();
+	 		$('#'+editor.id).trigger('change');
+	 	});
+	 });
 	/**
 	 * Googe Font Select Custom Control
 	 *
@@ -456,26 +195,26 @@ value.bind( function( va ) {
 	 * @link https://github.com/maddisondesigns
 	 */
 
-$('.google-fonts-list').each(function (i, obj) {
-		if (!$(obj).hasClass('select2-hidden-accessible')) {
-			$(obj).select2();
-		}
-	});
-	$('.rollie_font_reset').on('click', function (){
-		$('.google-fonts-list').each(function (i, obj) {
-				if (!$(obj).hasClass('select2-hidden-accessible')) {
-					$(obj).select2();
-				}
-			});
-	});
-	$('.google-fonts-list').on('change', function() {
+	 $('.google-fonts-list').each(function (i, obj) {
+	 	if (!$(obj).hasClass('select2-hidden-accessible')) {
+	 		$(obj).select2();
+	 	}
+	 });
+	 $('.rollie_font_reset').on('click', function (){
+	 	$('.google-fonts-list').each(function (i, obj) {
+	 		if (!$(obj).hasClass('select2-hidden-accessible')) {
+	 			$(obj).select2();
+	 		}
+	 	});
+	 });
+	 $('.google-fonts-list').on('change', function() {
 		/*		if (data.isreset==true)
 		{
-			var rollie_regularweight= $(".rollie_regularweight").attr("slider-reset-value");
-		 var rollie_italicweight = $(".rollie_italicweight").attr("slider-reset-value");
-		 var rollie_boldweight = $(".rollie_boldweight").attr("slider-reset-value");
-		 var rollie_subsets = $(".rollie_subsets").attr("slider-reset-value");
-		  var rollie_category = $(".rollie_font_category").attr("slider-reset-value");
+			var rollie_regularweight= $(".rollie_regularweight").attr("rollie-reset-value");
+		 var rollie_italicweight = $(".rollie_italicweight").attr("rollie-reset-value");
+		 var rollie_boldweight = $(".rollie_boldweight").attr("rollie-reset-value");
+		 var rollie_subsets = $(".rollie_subsets").attr("rollie-reset-value");
+		  var rollie_category = $(".rollie_font_category").attr("rollie-reset-value");
 
 		 $(".rollie_regularweight").val(rollie_regularweight);
 		 $(".rollie_italicweight").val(rollie_italicweight);
@@ -521,16 +260,16 @@ $('.google-fonts-list').each(function (i, obj) {
 		$.each(bodyfontcontrol.skyrocketfontslist[index].variants, function(val, text) {
 			elementRegularWeight.append(
 				$('<option></option>').val(text).html(text)
-			);
+				);
 			if (text.indexOf("italic") >= 0) {
 				elementItalicWeight.append(
 					$('<option></option>').val(text).html(text)
-				);
+					);
 				elementItalicWeightCount++;
 			} else {
 				elementBoldWeight.append(
 					$('<option></option>').val(text).html(text)
-				);
+					);
 				elementBoldWeightCount++;
 			}
 		});
@@ -538,20 +277,20 @@ $('.google-fonts-list').each(function (i, obj) {
 		if(elementItalicWeightCount == 0) {
 			elementItalicWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-			);
+				);
 			elementItalicWeight.prop('disabled', 'disabled');
 		}
 		if(elementBoldWeightCount == 0) {
 			elementBoldWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-			);
+				);
 			elementBoldWeight.prop('disabled', 'disabled');
 		}
 		
-$.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
+		$.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 			elementSubsetsWeight.append(
 				$('<option></option>').val(text).html(text)
-			);
+				);
 		});
 		
 		// Update the font category based on the selected font
@@ -561,23 +300,23 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 
 	});
 
-	
-	
-	
-	
-		$('.rollie_font_reset').on('click', function() {
-		
-		var ul_class=$(this).parent().parent().parent();
+	 
+	 
+	 
+	 
+	 $('.rollie_font_reset').on('click', function() {
+	 	
+	 	var ul_class=$(this).parent().parent().parent();
 
-		var font_list = $( ul_class ).find($(".google-fonts-list"));
-		var elementRegularWeight = $(font_list).parent().parent().find('.google-fonts-regularweight-style');
-		var elementItalicWeight = $(font_list).parent().parent().find('.google-fonts-italicweight-style');
-		var elementBoldWeight = $(font_list).parent().parent().find('.google-fonts-boldweight-style');
-		var elementSubsetsWeight = $(font_list).parent().parent().find('.google-fonts-subsets-style');
-		var selectedFont = $(font_list).val();
-		var customizerControlName = $(font_list).attr('control-name');
-		var elementItalicWeightCount = 0;
-		var elementBoldWeightCount = 0;
+	 	var font_list = $( ul_class ).find($(".google-fonts-list"));
+	 	var elementRegularWeight = $(font_list).parent().parent().find('.google-fonts-regularweight-style');
+	 	var elementItalicWeight = $(font_list).parent().parent().find('.google-fonts-italicweight-style');
+	 	var elementBoldWeight = $(font_list).parent().parent().find('.google-fonts-boldweight-style');
+	 	var elementSubsetsWeight = $(font_list).parent().parent().find('.google-fonts-subsets-style');
+	 	var selectedFont = $(font_list).val();
+	 	var customizerControlName = $(font_list).attr('control-name');
+	 	var elementItalicWeightCount = 0;
+	 	var elementBoldWeightCount = 0;
 
 		// Clear Weight/Style dropdowns
 		elementRegularWeight.empty();
@@ -604,16 +343,16 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 		$.each(bodyfontcontrol.skyrocketfontslist[index].variants, function(val, text) {
 			elementRegularWeight.append(
 				$('<option></option>').val(text).html(text)
-			);
+				);
 			if (text.indexOf("italic") >= 0) {
 				elementItalicWeight.append(
 					$('<option></option>').val(text).html(text)
-				);
+					);
 				elementItalicWeightCount++;
 			} else {
 				elementBoldWeight.append(
 					$('<option></option>').val(text).html(text)
-				);
+					);
 				elementBoldWeightCount++;
 			}
 		});
@@ -621,61 +360,61 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 		if(elementItalicWeightCount == 0) {
 			elementItalicWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-			);
+				);
 			elementItalicWeight.prop('disabled', 'disabled');
 		}
 		if(elementBoldWeightCount == 0) {
 			elementBoldWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-			);
+				);
 			elementBoldWeight.prop('disabled', 'disabled');
 		}
 		
-$.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
+		$.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 			elementSubsetsWeight.append(
 				$('<option></option>').val(text).html(text)
-			);
+				);
 		});
 		
 		// Update the font category based on the selected font
 
 		skyrocketGetAllSelects($(this).parent().parent());
 		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.skyrocketfontslist[index].category);
-			var rollie_regularweight= $(ul_class).find(".rollie_regularweight").attr("slider-reset-value");
-		 var rollie_italicweight = $(ul_class).find(".rollie_italicweight").attr("slider-reset-value");
-		 var rollie_boldweight = $(ul_class).find(".rollie_boldweight").attr("slider-reset-value");
-		 var rollie_subsets = $(ul_class).find(".rollie_subsets").attr("slider-reset-value");
-		  var rollie_category = $(ul_class).find(".rollie_font_category").attr("slider-reset-value");
+		var rollie_regularweight= $(ul_class).find(".rollie_regularweight").attr("rollie-reset-value");
+		var rollie_italicweight = $(ul_class).find(".rollie_italicweight").attr("rollie-reset-value");
+		var rollie_boldweight = $(ul_class).find(".rollie_boldweight").attr("rollie-reset-value");
+		var rollie_subsets = $(ul_class).find(".rollie_subsets").attr("rollie-reset-value");
+		var rollie_category = $(ul_class).find(".rollie_font_category").attr("rollie-reset-value");
 
-		 $(ul_class).find(".rollie_regularweight").val(rollie_regularweight);
-		 $(ul_class).find(".rollie_italicweight").val(rollie_italicweight);
-		 $(ul_class).find(".rollie_boldweight").val(rollie_boldweight);
-		 $(ul_class).find(".rollie_subsets").val(rollie_subsets);
-		 $(ul_class).find(".rollie_font_category").val(rollie_category);
-		 $(ul_class).find(".rollie_regularweight option[value="+rollie_regularweight+"]").attr('selected', 'selected');
-		 $(ul_class).find(".rollie_italicweight option[value="+rollie_italicweight+"]").attr('selected', 'selected');
-		 $(ul_class).find(".rollie_boldweight option[value="+rollie_boldweight+"]").attr('selected', 'selected');
-		 $(ul_class).find(".rollie_subsets option[value="+rollie_subsets+"]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_regularweight").val(rollie_regularweight);
+		$(ul_class).find(".rollie_italicweight").val(rollie_italicweight);
+		$(ul_class).find(".rollie_boldweight").val(rollie_boldweight);
+		$(ul_class).find(".rollie_subsets").val(rollie_subsets);
+		$(ul_class).find(".rollie_font_category").val(rollie_category);
+		$(ul_class).find(".rollie_regularweight option[value="+rollie_regularweight+"]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_italicweight option[value="+rollie_italicweight+"]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_boldweight option[value="+rollie_boldweight+"]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_subsets option[value="+rollie_subsets+"]").attr('selected', 'selected');
 	});
-		$('.google_fonts_select_control select').on('change', function() {
-		skyrocketGetAllSelects($(this).parent().parent());
-	});
-				$('.rollie_font_reset').on('click', function() {
-		skyrocketGetAllSelectsreset($(this).parent().parent().parent());		
-	});
-	
+	 $('.google_fonts_select_control select').on('change', function() {
+	 	skyrocketGetAllSelects($(this).parent().parent());
+	 });
+	 $('.rollie_font_reset').on('click', function() {
+	 	skyrocketGetAllSelectsreset($(this).parent().parent().parent());		
+	 });
+	 
 
 
-	function skyrocketGetAllSelects($element) {
-		var selectedFont = {
-			font: $element.find('.google-fonts-list').val(),
-			regularweight: $element.find('.google-fonts-regularweight-style').val(),
-			italicweight: $element.find('.google-fonts-italicweight-style').val(),
-			boldweight: $element.find('.google-fonts-boldweight-style').val(),
-			subsets: $element.find('.google-fonts-subsets-style').val(),
-			category: $element.find('.google-fonts-category').val()
-		};
-		
+	 function skyrocketGetAllSelects($element) {
+	 	var selectedFont = {
+	 		font: $element.find('.google-fonts-list').val(),
+	 		regularweight: $element.find('.google-fonts-regularweight-style').val(),
+	 		italicweight: $element.find('.google-fonts-italicweight-style').val(),
+	 		boldweight: $element.find('.google-fonts-boldweight-style').val(),
+	 		subsets: $element.find('.google-fonts-subsets-style').val(),
+	 		category: $element.find('.google-fonts-category').val()
+	 	};
+	 	
 
 		// Important! Make sure to trigger change event so Customizer knows it has to save the field
 		$element.find('.customize-control-google-font-selection').val(JSON.stringify(selectedFont)).trigger('change');
@@ -683,11 +422,11 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 	function skyrocketGetAllSelectsreset($element) {
 
 		var selectedFont = {
-			font: $element.find(".rollie_fonts_list").attr("slider-reset-value"),
-			regularweight: $element.find(".rollie_regularweight").attr("slider-reset-value"),
-			italicweight:  $element.find(".rollie_italicweight").attr("slider-reset-value"),
-			boldweight: $element.find(".rollie_boldweight").attr("slider-reset-value"),
-			subsets:  $element.find(".rollie_subsets").attr("slider-reset-value"),
+			font: $element.find(".rollie_fonts_list").attr("rollie-reset-value"),
+			regularweight: $element.find(".rollie_regularweight").attr("rollie-reset-value"),
+			italicweight:  $element.find(".rollie_italicweight").attr("rollie-reset-value"),
+			boldweight: $element.find(".rollie_boldweight").attr("rollie-reset-value"),
+			subsets:  $element.find(".rollie_subsets").attr("rollie-reset-value"),
 			category: $element.find('.google-fonts-category').val(),
 		};
 
@@ -719,7 +458,7 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 			change: function(e,ui){
 				// Important! When slider stops moving make sure to trigger change event so Customizer knows it has to save the field
 				$(this).parent().find('.customize-control-slider-value').trigger('change');
-	      }
+			}
 		});
 	});
 
@@ -730,10 +469,10 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 
 	// Reset slider and input field back to the default value
 	$('.slider-reset').on('click', function() {
-		var resetValue = $(this).attr('slider-reset-value');
+		var resetValue = $(this).attr('rollie-reset-value');
 		$(this).parent().find('.customize-control-slider-value').val(resetValue);
 		$(this).parent().find('.slider').slider('value', resetValue);
-			
+		
 	});
 
 	// Update slider if the input field loses focus as it's most likely changed
@@ -757,23 +496,23 @@ $.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
 	
 
 
-function rollie_add_panel_icon(rollie_panel_slug,dashicon_classes)
-{
-$("li[aria-owns='sub-accordion-"+rollie_panel_slug+"']>h3").prepend('<span class="dashicons '+dashicon_classes+'"></span>')	;
-}
+	function rollie_add_panel_icon(rollie_panel_slug,dashicon_classes)
+	{
+		$("li[aria-owns='sub-accordion-"+rollie_panel_slug+"']>h3").prepend('<span class="dashicons '+dashicon_classes+'"></span>')	;
+	}
 
-rollie_add_panel_icon ('panel-rollie_grid_meta_panel','dashicons-layout');
-rollie_add_panel_icon ('panel-rollie_font_panel','dashicons-editor-textcolor');
-rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
-rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
-rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
+	rollie_add_panel_icon ('panel-rollie_grid_meta_panel','dashicons-layout');
+	rollie_add_panel_icon ('panel-rollie_font_panel','dashicons-editor-textcolor');
+	rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
+	rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
+	rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
 
-rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
-rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
-rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
-rollie_add_panel_icon ('section-rollie_search_form_section','dashicons-search');
-rollie_add_panel_icon ('section-rollie_icons_section','dashicons-menu');
-rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-customizer');
+	rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
+	rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
+	rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
+	rollie_add_panel_icon ('section-rollie_search_form_section','dashicons-search');
+	rollie_add_panel_icon ('section-rollie_icons_section','dashicons-menu');
+	rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-customizer');
 
 
 
@@ -783,7 +522,7 @@ rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-cu
 
 		// Scope the vars.
 		var $control, startingColor, paletteInput, showOpacity, defaultColor, palette,
-			colorPickerOptions, $container, $alphaSlider, alphaVal, sliderOptions;
+		colorPickerOptions, $container, $alphaSlider, alphaVal, sliderOptions;
 
 		// Store the control instance.
 		$control = $( this );
@@ -839,10 +578,10 @@ rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-cu
 
 		// Insert our opacity slider.
 		$( '<div class="alpha-color-picker-container">' +
-				'<div class="min-click-zone click-zone"></div>' +
-				'<div class="max-click-zone click-zone"></div>' +
-				'<div class="alpha-slider"></div>' +
-				'<div class="transparency"></div>' +
+			'<div class="min-click-zone click-zone"></div>' +
+			'<div class="max-click-zone click-zone"></div>' +
+			'<div class="alpha-slider"></div>' +
+			'<div class="transparency"></div>' +
 			'</div>' ).appendTo( $container.find( '.wp-picker-holder' ) );
 
 		$alphaSlider = $container.find( '.alpha-slider' );
@@ -965,7 +704,7 @@ rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-cu
  * Override the stock color.js toString() method to add support for
  * outputting RGBa or Hex.
  */
-Color.prototype.toString = function( flag ) {
+ Color.prototype.toString = function( flag ) {
 
 	// If our no-alpha flag has been passed in, output RGBa value with 100% opacity.
 	// This is used to set the background color on the opacity slider during color changes.
@@ -993,8 +732,8 @@ Color.prototype.toString = function( flag ) {
 /**
  * Given an RGBa, RGB, or hex color value, return the alpha channel value.
  */
-function acp_get_alpha_value_from_color( value ) {
-	var alphaVal;
+ function acp_get_alpha_value_from_color( value ) {
+ 	var alphaVal;
 
 	// Remove all spaces from the passed in value to help our RGBa regex.
 	value = value.replace( / /g, '' );
@@ -1013,10 +752,10 @@ function acp_get_alpha_value_from_color( value ) {
  * Force update the alpha value of the color picker object and maybe the alpha slider.
  */
  function acp_update_alpha_value_on_color_control( alpha, $control, $alphaSlider, update_slider ) {
-	var iris, colorPicker, color;
+ 	var iris, colorPicker, color;
 
-	iris = $control.data( 'a8cIris' );
-	colorPicker = $control.data( 'wpWpColorPicker' );
+ 	iris = $control.data( 'a8cIris' );
+ 	colorPicker = $control.data( 'wpWpColorPicker' );
 
 	// Set the alpha value on the Iris object.
 	iris._color._alpha = alpha;
@@ -1044,8 +783,8 @@ function acp_get_alpha_value_from_color( value ) {
 /**
  * Update the slider handle position and label.
  */
-function acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider ) {
-	$alphaSlider.slider( 'value', alpha );
-	$alphaSlider.find( '.ui-slider-handle' ).text( alpha.toString() );
-}
+ function acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider ) {
+ 	$alphaSlider.slider( 'value', alpha );
+ 	$alphaSlider.find( '.ui-slider-handle' ).text( alpha.toString() );
+ }
 

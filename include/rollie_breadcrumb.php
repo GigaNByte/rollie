@@ -9,7 +9,7 @@ if ( class_exists( 'WooCommerce' ) ) {
     if (!is_front_page() && !$is_woo_page ) {
 	
 	// Start the breadcrumb with a link to your homepage
-        echo '<nav class="pl-5 text-left  rollie_subtitle_text_color rollie_f_excerpt_s rollie_breadcrumb col-12">';
+        echo '<nav class="pl-5 text-left  rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb col-12">';
         echo '<a href="';
         echo get_option('home');
         echo '">';

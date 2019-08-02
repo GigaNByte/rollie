@@ -127,7 +127,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 					<?php } ?>
 					<input type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-google-font-selection" <?php $this->link(); ?> />
 					<div class="google-fonts">
-						<select class="google-fonts-list rollie_fonts_list" control-name="<?php echo esc_attr( $this->id ); ?>" slider-reset-value="<?php echo esc_attr( $this->input_attrs['rfont'] ); ?>">
+						<select class="google-fonts-list rollie_fonts_list" control-name="<?php echo esc_attr( $this->id ); ?>" rollie-reset-value="<?php echo esc_attr($this->fontValues->font ); ?>">
 						<?php
 						foreach ( $this->fontList as $key => $value ) {
 							$fontCounter++;
@@ -150,7 +150,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 					</div>
 					<div class="customize-control-description">Select weight &amp; style for regular text</div>
 					<div class="weight-style">
-						<select class="google-fonts-regularweight-style rollie_regularweight"   slider-reset-value="<?php echo esc_attr( $this->input_attrs['rregularweight'] ); ?>">
+						<select class="google-fonts-regularweight-style rollie_regularweight"   rollie-reset-value="<?php echo esc_attr($this->fontValues->regularweight); ?>">
 							<?php
 							foreach ( $this->fontList[ $this->fontListIndex ]->variants as $key => $value ) {
 								echo '<option value="' . $value . '" ' . selected( $this->fontValues->regularweight, $value, false ) . '>' . $value . '</option>';
@@ -159,7 +159,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 						</select>
 					</div>
 								<?php
-								if ( isset( $this->input_attrs['disable_bold_italic'] ) && $this->input_attrs['disable_bold_italic'] == 'true' ) {
+								if ($this->input_attrs['disable_bold_italic']  ) {
 										$rollie_d_class = 'rollie_d_none';
 								} else {
 										$rollie_d_class = '';
@@ -168,7 +168,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 				
 						<div class="customize-control-description <?php echo $rollie_d_class; ?>">Select weight for <italic>italic text</italic></div>
 						<div class="weight-style <?php echo $rollie_d_class; ?>">
-							<select class="google-fonts-italicweight-style rollie_italicweight" <?php disabled( in_array( 'italic', $this->fontList[ $this->fontListIndex ]->variants ), false ); ?> slider-reset-value="<?php echo esc_attr( $this->input_attrs['ritalicweight'] ); ?>">
+							<select class="google-fonts-italicweight-style rollie_italicweight" <?php disabled( in_array( 'italic', $this->fontList[ $this->fontListIndex ]->variants ), false ); ?> rollie-reset-value="<?php echo esc_attr( $this->fontValues->italicweight ); ?>">
 								<?php
 								$optionCount = 0;
 								foreach ( $this->fontList[ $this->fontListIndex ]->variants as $key => $value ) {
@@ -186,7 +186,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 						</div>
 						<div class="customize-control-description <?php echo $rollie_d_class; ?>">Select weight for <strong>bold text</strong></div>
 						<div class="weight-style <?php echo $rollie_d_class; ?>">
-							<select class="google-fonts-boldweight-style rollie_boldweight" slider-reset-value="<?php echo esc_attr( $this->input_attrs['rboldweight'] ); ?>">
+							<select class="google-fonts-boldweight-style rollie_boldweight" rollie-reset-value="<?php echo esc_attr(  $this->fontValues->boldweight ); ?>">
 								<?php
 								$optionCount = 0;
 								foreach ( $this->fontList[ $this->fontListIndex ]->variants as $key => $value ) {
@@ -206,7 +206,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 					
 					<div class="customize-control-description">Select subset </div>
 					<div class="weight-style">
-						<select class="google-fonts-subsets-style rollie_subsets " slider-reset-value="<?php echo esc_attr( $this->input_attrs['rsubsets'] ); ?>">
+						<select class="google-fonts-subsets-style rollie_subsets " rollie-reset-value="<?php echo esc_attr( $this->fontValues->subsets); ?>">
 							<?php
 							$optionCountr = 0;
 							foreach ( $this->fontList[ $this->fontListIndex ]->subsets as $key => $value ) {
@@ -222,9 +222,11 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 						</select>
 
 					</div>
-					<input type="hidden" class="google-fonts-category rollie_font_category" value="<?php echo $this->fontValues->category; ?>" slider-reset-value="<?php echo esc_attr( $this->input_attrs['rcategory'] ); ?>">
-				<span>Reset to default font type settings </span> <span object_name="<?php echo esc_attr( $this->input_attrs['object_name'] ); ?>" class=" rollie_font_reset dashicons dashicons-image-rotate"></span>
-				</div>
+					<input type="hidden" class="google-fonts-category rollie_font_category" value="<?php echo $this->fontValues->category; ?>" rollie-reset-value="<?php echo esc_attr( $this->fontValues->category ); ?>">
+					
+						<span> <?php _e('Reset to previous settings','rollie')?> </span>
+						<span default="<?php echo esc_attr( $this->value() ); ?>" object_name="<?php echo esc_attr( $this->input_attrs['object_name'] ); ?>" class=" rollie_font_reset dashicons dashicons-image-rotate"></span>
+
 				<?php
 		}
 	}
@@ -302,6 +304,7 @@ public $type = 'image_radio_button';
 			}
 
 			$name = '_customize-radio-' . $this->id;
+			$description_id   = '_customize-description-' . $this->id;
 			?>
 			<div class="rollie_customizer_icon_container">
 			<?php if ( ! empty( $this->label ) ) : ?>
@@ -378,7 +381,7 @@ class Skyrocket_Slider_Custom_Control extends WP_Customize_Control {
 
 			<div class="slider-custom-control" >
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span><input type="number" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-slider-value" <?php $this->link(); ?> />
-				<div class="slider" slider-min-value="<?php echo esc_attr( $this->input_attrs['min'] ); ?>" slider-max-value="<?php echo esc_attr( $this->input_attrs['max'] ); ?>" slider-step-value="<?php echo esc_attr( $this->input_attrs['step'] ); ?>"></div><span class="slider-reset dashicons dashicons-image-rotate" slider-reset-value="<?php echo esc_attr( $this->value() ); ?>"></span>
+				<div class="slider" slider-min-value="<?php echo esc_attr( $this->input_attrs['min'] ); ?>" slider-max-value="<?php echo esc_attr( $this->input_attrs['max'] ); ?>" slider-step-value="<?php echo esc_attr( $this->input_attrs['step'] ); ?>"></div><span class="slider-reset dashicons dashicons-image-rotate" rollie-reset-value="<?php echo esc_attr( $this->value() ); ?>"></span>
 			</div>
 			<?php
 	}
@@ -449,36 +452,17 @@ class Skyrocket_Toggle_Switch_Custom_control extends WP_Customize_Control {
 	 * Render the control in the customizer
 	 */
 	public function render_content() {
-		if ( isset( $this->input_attrs['customclass'] ) && $this->input_attrs['customclass'] == 'rollie_alt_toogle' ) {
-			$rollie_alt_toogle   = $this->input_attrs['customclass'];
-			$rollie_alt_toogle_i = $this->input_attrs['customclass'] . '_inner';
-			$rollie_alt_toogle_l = $this->input_attrs['customclass'] . '_label';
-			$rollie_alt_toogle_c = $this->input_attrs['customclass'] . '_control';
-			if ( ! empty( $this->input_attrs['default'] ) ) {
-				$rollie_alt_toogle_def = "reset-value ='" . $this->input_attrs['default'] . "'";
-			}
-		} else {
-			$rollie_alt_toogle   = '';
-			$rollie_alt_toogle_l = '';
-			$rollie_alt_toogle_c = '';
-			$rollie_alt_toogle_i ='';
-		}
 		?>
-			<div class="toggle-switch-control <?php echo esc_html( $rollie_alt_toogle_c ); ?>">
+			<div class="toggle-switch-control">
 				<div class="toggle-switch">
-					<input type="checkbox" 
+					<input type="checkbox" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" class="toggle-switch-checkbox" value="<?php echo esc_attr( $this->value() ); ?>" 
 					<?php
-					if ( ! empty( $rollie_alt_toogle_def ) ) {
-						echo $rollie_alt_toogle_def;}
-					?>
-					 id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" class="toggle-switch-checkbox <?php echo esc_html( $rollie_alt_toogle ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" 
-		<?php
 					$this->link();
 					checked( $this->value() );
-		?>
+					?>
 					 >
-					<label class="toggle-switch-label <?php echo esc_html( $rollie_alt_toogle_l ); ?>" for="<?php echo esc_attr( $this->id ); ?>">
-						<span class="toggle-switch-inner <?php echo esc_html( $rollie_alt_toogle_i ); ?>"></span>
+					<label class="toggle-switch-label" for="<?php echo esc_attr( $this->id ); ?>">
+						<span class="toggle-switch-inner "></span>
 						<span class="toggle-switch-switch"></span>
 					</label>
 				</div>
@@ -495,8 +479,20 @@ class Rollie_Multiple_Switch_Customizer_Control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
+
+	//support for font reseting
+
 	public $type = 'multiple-switch';
 	public function render_content() {	
+		$rollie_font_reset_toogle_class   = '';
+		$rollie_font_reset_toogle_arg   = '';
+		if ( isset( $this->input_attrs['rollie_font_reset_toogle'] ) && $this->input_attrs['rollie_font_reset_toogle'] == 'rollie_font_reset_toogle' ) {
+			$rollie_font_reset_toogle_class   = $this->input_attrs['rollie_font_reset_toogle'];
+			if ( ! empty( $this->input_attrs['defaults'] ) ) {
+				$rollie_font_reset_toogle_arg = "reset-value ='" . $this->input_attrs['defaults']. "'";
+			}
+		} 
+
 		  $input_id         = '_customize-input-' . $this->id;
     $description_id   = '_customize-description-' . $this->id;
     $describedby_attr = ( ! empty( $this->description ) ) ? ' aria-describedby="' . esc_attr( $description_id ) . '" ' : '';
@@ -507,14 +503,14 @@ class Rollie_Multiple_Switch_Customizer_Control extends WP_Customize_Control {
 			 
             $name = '_customize-radio-' . $this->id;
             ?>
-<div class="rollie_single_gradient_c "> 
+<div class="rollie_multiple_switch_c "> 
             <?php if ( ! empty( $this->label ) ) : ?>
                 <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
             <?php endif; ?>
             <?php if ( ! empty( $this->description ) ) : ?>
                 <span id="<?php echo esc_attr( $description_id ); ?>" class="description customize-control-description"><?php echo $this->description; ?></span>
             <?php endif; ?>
-	 <div class="rollie_multiple_switch_row rollie_multiple_switch_row_js">
+	 <div class="rollie_multiple_switch_row rollie_multiple_switch_row_js <?Php echo $rollie_font_reset_toogle_class;?>" <?php echo $rollie_font_reset_toogle_arg;?>>
             <?php foreach ( $this->choices as $value => $label ) : ?>
              <div id="<?Php echo $this->id.'-'.$value ?>"   rollie_mscc_attrs="<?Php echo $this->id.'-'.$value ?>"  class="rollie_multiple_switch_c rollie_mscc_js  rollie_col  ">	
                 <span class=" customize-inside-control-row rollie_multiple_switch">

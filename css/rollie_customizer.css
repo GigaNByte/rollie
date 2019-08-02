@@ -478,7 +478,7 @@ color: #72777c;
 	margin: 0.4rem;
 }
 
-.rollie_single_gradient_c
+.rollie_multiple_switch_c
 { 	
 overflow: hidden; 	
 width: 100%;
@@ -507,11 +507,11 @@ li {
 .customize-control-radio {
     padding: 0px;	
     }
-.rollie_single_gradient_c  > span
+.rollie_multiple_switch_c  > span
 {
 padding: 0.4rem;
 }
-.rollie_single_gradient_c > .wp-picker-container > .wp-color-result 
+.rollie_multiple_switch_c > .wp-picker-container > .wp-color-result 
 {
 	margin-left : 0.4rem;
 }
@@ -527,12 +527,16 @@ display: none;
   justify-content: center;
   align-items: center;
 }
+.google-fonts .select2 {
+	width: 100% !important;
+}
 .rollie_multiple_switch_bb,.rollie_collapse_bb
 {
 border-bottom: solid;
 border-width: 2px;
 border-color: #cccccc;
 margin-bottom: 12px;
+display: block;
 } 
 
 .rollie_multiple_switch 

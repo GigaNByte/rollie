@@ -31,22 +31,23 @@ function rollie_script_start() {
 		wp_enqueue_script( 'zoom_js', get_template_directory_uri() . '/js/zoom.js', array(), '1.37', 'true' );
 	}
 }
-function rollie_style_start() {
 
+function rollie_style_start( ) {
+global $rollie_font_data;
 	wp_enqueue_style( 'swiper_lib_css', get_template_directory_uri() . '/css/swiper.min.css', array(), '4.3.4', 'all' );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.2.1', 'all' );
 	wp_enqueue_style('woocommerce_stylesheet', WP_PLUGIN_URL. '/woocommerce/assets/css/woocommerce.css',false,'1.0',"all");
 	wp_enqueue_style( 'rollie_stylesheet', get_template_directory_uri() . '/css/rollie.css', array(),  date("h:i:s"), 'all' );
-
+    
 	if ( class_exists( 'WooCommerce' ) ) {
-		
 		wp_enqueue_style( 'rollie_woo_stylesheet', get_template_directory_uri() . '/css/rollie_woocommerce.css', array(), date("h:i:s"), 'all' );
-
 	}
- 	require get_template_directory() . '/include/rollie_customizer_css.php';
- 		rollie_customizer_css ();
+	
+ 		rollie_customizer_css($rollie_font_data);
+
 }
 
+add_action('wp_enqueue_scripts', 'rollie_style_start');
 /* Customizer: 
 Enqueue Script */
 
@@ -102,7 +103,7 @@ function rollie_reset_style_cache_on_customizer_save() {
 }
 
 add_action( 'customize_save_after', 'rollie_reset_cache_on_customizer_save' );
-add_action( 'wp_enqueue_scripts', 'rollie_style_start' );
+
 add_action( 'wp_enqueue_scripts', 'rollie_script_start' );
 add_action( 'customize_preview_init', 'rollie_customize_script' );
 
@@ -305,8 +306,9 @@ require get_template_directory() . '/include/rollie_register_strings_polylang.ph
 require get_template_directory() . '/include/rollie_woocommerce.php';
 require get_template_directory() . '/include/rollie_smart_widget.php';
 require get_template_directory() . '/include/rollie_ajax.php';
-	
-
+require get_template_directory() . '/include/rollie_customizer_css.php';	
+require get_template_directory() . '/include/rollie_customizer_classes.php';	
+require get_template_directory() . '/include/rollie_customizer_font_functions.php';
 
 
 
@@ -323,3 +325,54 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 
 add_action( 'customize_controls_print_styles', 'rollie_customizer_stylesheet' );
 add_action( 'customize_controls_enqueue_scripts', 'rollie_customizer_scripts' );
+
+
+
+
+
+
+class ProxyFunc {
+    public $args = null;
+    public $func = null;
+    public $location = null;
+    public $func_args = null;
+    function __construct($func, $args, $location='after', $action='', $priority = 10, $accepted_args = 1) {
+        $this->func = $func;
+        $this->args = is_array($args) ? $args : array($args);
+        $this->location = $location;
+        if( ! empty($action) ){
+            // (optional) pass action in constructor to automatically subscribe
+            add_action($action, $this, $priority, $accepted_args );
+        }
+    }
+    function __invoke() {
+        // current arguments passed to invoke
+        $this->func_args = func_get_args();
+
+        // position of stored arguments
+        switch($this->location){
+            case 'after':
+                $args = array_merge($this->func_args, $this->args );
+                break;
+            case 'before':
+                $args = array_merge($this->args, $this->func_args );
+                break;
+            case 'replace':
+                $args = $this->args;
+                break;
+            case 'reference':
+                // only pass reference to this object
+                $args = array($this);
+                break;
+            default:
+                // ignore stored args
+                $args = $this->func_args;
+        }
+
+        // trigger the callback
+        call_user_func_array( $this->func, $args );
+
+        // clear current args
+        $this->func_args = null;
+    }
+}

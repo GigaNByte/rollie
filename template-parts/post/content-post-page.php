@@ -37,7 +37,7 @@ require get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_v
 				$rollie_offset_var = 'col-12';
 		}
 ?>
-	<main  id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_main_post_content rollie_f_pp_content rollie_main_theme_text_color   <?php echo $rollie_main_col ?> '>
+	<main  id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_main_post_content rollie_f_main rollie_main_theme_text_color   <?php echo $rollie_main_col ?> '>
 		<?php	rollie_breadcrumb();?>
 			<article class='<?php if ( ! empty( $rollie_entry_offset_lg ) ) echo $rollie_entry_offset_lg;?>'>  
 				<div class="row">

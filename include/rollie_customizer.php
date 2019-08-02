@@ -288,8 +288,7 @@ $rollie_sufix='_'.$rollie_sufix;
 }
 
 
-function rollie_add_post_page_control ($wp_customize,$rollie_panel_name,$rollie_title,$rollie_sufix) 
-{
+function rollie_add_post_page_control ($wp_customize,$rollie_panel_name,$rollie_title,$rollie_sufix) {
 
 	if (!empty($rollie_sufix)){
 $rollie_sufix='_'.$rollie_sufix;
@@ -980,6 +979,13 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 		$wp_customize->add_panel(
+		'rollie_font_panel',
+		array(
+			'title'    => __( 'Rollie font options' ),
+			'priority' => 20,
+		)
+	);
+		$wp_customize->add_panel(
 		'rollie_layout_panel',
 		array(
 			'title'    => __( 'Rollie Sidebars Layout' ),
@@ -1007,7 +1013,7 @@ function rollie_customizer_register( $wp_customize ) {
 			'priority' => 20,
 		)
 	);
-		require get_template_directory() . '/include/rollie_customizer_font_functions.php';
+	
 		
 	$wp_customize->add_panel(
 		'rollie_misc_panel',
@@ -1808,9 +1814,75 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
+$wp_customize->add_section(
+		'rollie_font_breakpoints',
+		array(
+			'title'    => __( 'Advanced Responsiveness Settings', 'Rollie' ),
+			'panel'    => 'rollie_font_panel',
+			'priority' => 1,
+		)
+	);
+
+
+
+$wp_customize->add_setting(
+			'rollie_font_vw_min',
+			array(
+				'default'   => 400,
+				'transport' => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Skyrocket_Slider_Custom_Control(
+				$wp_customize,
+				'rollie_font_vw_min',
+				array(
+					'label'       => __( 'Select vievport width when font stops downsizing (px)' , 'rollie'),
+					'description' => __( 'Breakpoint should be less than','rollie').' max '.__('vievport width otherwise sets default values', 'rollie' ),
+					'section'     => 'rollie_font_breakpoints',
+					'input_attrs' => array(
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 100,
+					),
+				)
+			)
+		);
+
+
+		$wp_customize->add_setting(
+			'rollie_font_vw_max',
+			array(
+				'default'   =>  1200,
+				'transport' => 'refresh',
+				'sanitize_callback' => 'skyrocket_sanitize_integer',
+			)
+		);
+		$wp_customize->add_control(
+			new Skyrocket_Slider_Custom_Control(
+				$wp_customize,
+				'rollie_font_vw_max',
+				array(
+					'label'       =>__( 'Select vievport width when font starts downsizing (px)', 'rollie' ),
+					'description' =>__( 'Breakpoint should be greater than','rollie').	' min '.__('vievport width otherwise sets default values', 'rollie' ),
+						'section'     => 'rollie_font_breakpoints',
+					'input_attrs' => array(
+						'min'  => 200,
+						'max'  => 1900,
+						'step' => 100,
+					),
+				)
+			)
+		);
+global $rollie_font_data;
+foreach ($rollie_font_data as $font_data) {
+	$font_data->add_customizer_controls();
+}
+
 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_main_theme_color','Main Theme Color','#ffffff'); 
-
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_darker_main_theme_color','Darker/Contrast Theme Color','#e3e6e8'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_second_theme_color','Second Theme Color','#212121'); 
 	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_third_theme_color','Third Theme Color','#a37e2c'); 

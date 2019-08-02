@@ -15,7 +15,8 @@
 					<?php
 					if ( ! empty( get_theme_mod( 'rollie_menu_top_logo' ) ) ) {
 						echo     '<a class="rollie_nav_top_logo m-auto" href="'.esc_url( home_url( '/' ) ).'">';
-						echo "<img class='p-1' src='" . get_theme_mod( 'rollie_menu_top_logo' ) . "'>";
+						$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' ))) ;
+						echo "<img class='p-1' src='" .esc_url(get_theme_mod( 'rollie_menu_top_logo' )). "' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
 						echo '</a>';
 					}
 

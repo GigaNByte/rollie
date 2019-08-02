@@ -208,21 +208,25 @@ public function template ($rollie_class,$rollie_height,$rollie_center,$rollie_pa
 						
 							
 						<?php	
+
+						if ($rollie_thumbnail_url){
+							$rollie_thumbnail_url="src='".esc_url($rollie_thumbnail_url)."' alt='".esc_attr($rollie_alt_thumbnail)."'";
+						}
 					
-							echo "<img style='height:".$rollie_height."vh;' class='rollie_smart_banner_img  rollie_smart_banner_fade img-responsive  w-100' src=".$rollie_thumbnail_url." alt='".esc_attr($rollie_alt_thumbnail)."'>";
+							echo "<img style='height:".$rollie_height."vh;' class='rollie_smart_banner_img  d-block rollie_smart_banner_fade img-responsive  w-100' ".$rollie_thumbnail_url.">";
 							
 							if ($rollie_smart_content_display){
 						?>
 							
-								<div <?php echo "style='height:".$rollie_height."vh;'"?>class=' rollie_smart_banner_content  rollie_flex_text_center  w-100 rollie_second_text_color'>
-									<div class='rollie_f_headings_h2'>
+								<div <?php echo "style='height:".$rollie_height."vh;'"?>class=' rollie_smart_banner_content  row rollie_flex_text_center  w-100 rollie_second_text_color'>
+									<div class='rollie_f_headings_h2 col-12'>
 										<?php echo $rollie_smart_content_title; ?>	
 									</div>
-									
-									<div class='rollie_f_excerpt_s'>
-									<?php echo $rollie_smart_content;	?>
-									
+									<?php if (!empty($rollie_smart_content)){ ?>
+									<div class='rollie_f_excerpt col-12'>
+									<?php echo $rollie_smart_content;?>
 									</div>
+									<?php }?>
 								</div>
 						<?php } ?>	
 						</div>

@@ -37,7 +37,7 @@ if ( $rollie_is_active_sidebar_left && $rollie_is_active_sidebar_right) {
 
 ?>
 
-		<main  id="<?php echo 'page-' . get_the_ID(); ?>" class=' <?php echo $disable_paddings; ?> rollie_f_pp_content  rollie_main_theme_text_color    <?php echo $rollie_main_col ?> '>
+		<main  id="<?php echo 'page-' . get_the_ID(); ?>" class=' <?php echo $disable_paddings; ?> rollie_f_main  rollie_main_theme_text_color    <?php echo $rollie_main_col ?> '>
 			<?php rollie_breadcrumb();?>	
 		  	<article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align rollie_single_page_content">
 			<?php
