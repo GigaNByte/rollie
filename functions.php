@@ -291,13 +291,13 @@ function my_acf_json_load_point( $paths ) {
 require get_template_directory() . '/include/rollie_required_plugins_TGMPA.php';
 require get_template_directory() . '/include/rollie_sanitization_functions.php';
 require get_template_directory() . '/include/rollie_walker_cat_swap.php';
-require get_template_directory() . '/include/rollie_walker_footer.php';
 require get_template_directory() . '/include/rollie_walker_comment.php';
 require get_template_directory() . '/include/rollie_breadcrumb.php';
 require get_template_directory() . '/include/rollie_customizer.php';
 require get_template_directory() . '/include/rollie_special_functions.php';
 require get_template_directory() . '/include/rollie_walker_nav_top_toggle.php';
 require get_template_directory() . '/include/rollie_walker_nav_top_icons.php';
+require get_template_directory() . '/include/rollie_walker_footer.php';
 require get_template_directory() . '/include/rollie_custom_shortcodes.php';
 require get_template_directory() . '/include/rollie_acf_field_import.php';
 require get_template_directory() . '/presets/rollie-presets.php';

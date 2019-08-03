@@ -26,17 +26,11 @@ if ( has_nav_menu( 'Footer_Menu' )){
 				<?php
 				wp_nav_menu(
 					array(
-
+						'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',
 						'theme_location' => 'Footer_Menu',
-
 						'container'      => false,
-
 						'menu_class'     => 'navbar-nav  row footer-row',
-
 						'walker'         => new Rollie_Walker_Footer(),
-
-
-
 					)
 				);
 				?>

@@ -60,7 +60,7 @@
 					echo "<nav class='rollie_top_menu_icons rollie_flex_text_center '>";
 					wp_nav_menu( array(
 						'theme_location'  => 'rollie_top_menu_icons',				
-						 'items_wrap' => '%3$s',
+						 'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',
 						 'container'=>'',			
 						'walker' => new Rollie_Walker_Nav_Top_Icons,
 						'depth'           => '1',

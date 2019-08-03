@@ -136,7 +136,7 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 		$wp_customize->add_control(
 			'rollie_header_style'.$rollie_sufix, 
 			array(
-				'label'   => __( 'Design of posts displayed as one in one row', 'rollie' ),
+				'label'   => __( 'Header Style', 'rollie' ),
 				'section' => $rollie_section_prefix.$rollie_sufix,
 				'type'    => 'select',
 				'choices' => array(
@@ -150,6 +150,9 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 				
 			)
 		);
+
+
+
 
 		$wp_customize->add_setting(
 			'rollie_header_height'.$rollie_sufix,
