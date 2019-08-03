@@ -23,12 +23,13 @@ class Rollie_Smart_Widget extends WP_Widget {
 	if ( empty( $instance[ 'rollie_columns' ] ) ) {
 	 $instance[ 'rollie_columns' ] = 1;
 	}
+	if ( empty( $instance[ 'rollie_img_size' ] ) ) {
+	 $instance[ 'rollie_img_size' ] = "medium";
+	}
 	if ( empty( $instance[ 'rollie_content' ] ) ) {
 	 $instance[ 'rollie_content' ] = '';
 	}
-	if ( empty( $instance[ 'rollie_height' ] ) ) {
-	 $instance[ 'rollie_height' ] = '400';
-	}
+
 	if ( empty( $instance[ 'rollie_center' ] ) ) {
 	 $instance[ 'rollie_center' ] = '';
 	}
@@ -66,10 +67,29 @@ class Rollie_Smart_Widget extends WP_Widget {
 	</div>
 </br>
 	<div>
-		<label for="<?php echo $this->get_field_id( 'rollie_height' ); ?>"><?php _e('Height of image (vh)','rollie')?></label>
-	<input class="range" type="range"  min="0" max="100"  <?php checked( $instance[ 'rollie_height' ], 'on' ); ?> id="<?php echo $this->get_field_id( 'rollie_height' ); ?>" name="<?php echo $this->get_field_name( 'rollie_height' ); ?>" /> 
-    </div>
-</p>
+		<select id="<?php echo $this->get_field_id('rollie_img_size'); ?>" name="<?php echo $this->get_field_name('rollie_img_size'); ?>" id=""style="width:100%;">
+	<?php 
+	global $_wp_additional_image_sizes;
+	foreach ( get_intermediate_image_sizes() as $_size ) {
+		if ( in_array( $_size, array('thumbnail', 'medium', 'medium_large', 'large') ) ) {
+			 $_size_w  = get_option( "{$_size}_size_w" );
+			 $_size_h=  "x ".get_option( "{$_size}_size_h" );
+		} elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
+			$sizes[ $_size ] = array(
+				$_size_w = $_wp_additional_image_sizes[ $_size ]['width'],
+				$_size_h = "x ".$_wp_additional_image_sizes[ $_size ]['height'],
+			);
+		}
+	?>
+		 <option <?php selected( $instance['rollie_img_size'], $_size); ?> value="<?php echo $_size ?>"><?php echo $_size."( ".$_size_w ." ".$_size_h." )";?></option>
+	<?php
+
+	}
+			?>
+			
+		</select>
+	</div>
+
     <?php }    
 	
 public function update( $new_instance, $old_instance ) {
@@ -80,7 +100,8 @@ public function update( $new_instance, $old_instance ) {
 	//$instance['rollie_query'] = array_map( 'sanitize_option', 'rollie_query' );
 
 	$instance['rollie_columns'] = ( ! empty( absint($new_instance['rollie_columns']) ) ) ? strip_tags( $new_instance['rollie_columns'] ) : '';		
-	$instance['rollie_height'] = ( ! empty( absint($new_instance['rollie_height']) ) ) ? strip_tags( $new_instance['rollie_height'] ) : '';		
+	$instance['rollie_img_size'] = ( ! empty( sanitize_text_field($new_instance['rollie_img_size']) ) ) ? strip_tags( $new_instance['rollie_img_size'] ) : 'medium';		
+	
 
  	
 	   $instance[ 'rollie_content' ]  = $new_instance[ 'rollie_content' ] ? 'on' : '';
@@ -127,11 +148,12 @@ $rollie_center = false;
 
 			<div class="rollie_smart_banner row">	
 			<?php	
-		if (isset($instance['rollie_height']) && ($instance['rollie_height'] > 0 || $instance['rollie_height'] < 100)){
-			$rollie_height = $instance['rollie_height'] ;
-		}else{
-			$rollie_height = 20;
+
+		$rollie_img_size = 'medium';
+		if (isset($instance['rollie_img_size'])){
+			$rollie_img_size = $instance['rollie_img_size'];
 		}
+	
 		if ($instance['rollie_query'] == 'child_pages'){
 			global $post;
 			$args = array(
@@ -162,7 +184,7 @@ $rollie_center = false;
 		$rollie_smart_main_subtitle =  get_the_title() ;
 
 
-			$this->template($rollie_class,$rollie_height,$rollie_center,get_page_link(),$rollie_thumbnail_url,$rollie_alt_thumbnail,$rollie_smart_content_display,$rollie_smart_content_title,$rollie_smart_content,$rollie_smart_main_title,$rollie_smart_main_subtitle);
+			$this->template($rollie_class,$rollie_img_size,$rollie_center,get_page_link(),$rollie_thumbnail_url,$rollie_alt_thumbnail,$rollie_smart_content_display,$rollie_smart_content_title,$rollie_smart_content,$rollie_smart_main_title,$rollie_smart_main_subtitle);
 
 		endwhile; 
 		wp_reset_postdata();
@@ -176,7 +198,7 @@ $rollie_center = false;
 	
 				$rollie_smart_content = get_field('rollie_category_excerpt',$category );
 	
-				$this->template($rollie_class,$rollie_height,$rollie_center,get_term_link($category),$rollie_thumbnail_url,$category->name,$rollie_smart_content_display,$category->name,$rollie_smart_content,$category->name,'');
+				$this->template($rollie_class,$rollie_img_size,$rollie_center,get_term_link($category),$rollie_thumbnail_url,$category->name,$rollie_smart_content_display,$category->name,$rollie_smart_content,$category->name,'');
 				}
 			}
 			}elseif($instance['rollie_query'] ==  'woo_categories' &&  class_exists('WooCommerce')){
@@ -186,7 +208,7 @@ $rollie_center = false;
 				foreach($categories as $category) {
 				$thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
 				$rollie_thumbnail_url = wp_get_attachment_url( $thumbnail_id );
-					$this->template($rollie_class,$rollie_height,$rollie_center,get_term_link($category),$rollie_thumbnail_url,$category->name,$rollie_smart_content_display, $category->name,wp_trim_words( $category->description, 30, '...' ),$category->name,'');
+					$this->template($rollie_class,$rollie_img_size,$rollie_center,get_term_link($category),$rollie_thumbnail_url,$category->name,$rollie_smart_content_display, $category->name,wp_trim_words( $category->description, 30, '...' ),$category->name,'');
 				}
 			}
 		?>
@@ -197,7 +219,7 @@ $rollie_center = false;
 	}
 
 
-public function template ($rollie_class,$rollie_height,$rollie_center,$rollie_page_link,$rollie_thumbnail_url,$rollie_alt_thumbnail,$rollie_smart_content_display,$rollie_smart_content_title,$rollie_smart_content,$rollie_smart_main_title,$rollie_smart_main_subtitle){
+public function template ($rollie_class,$rollie_img_size,$rollie_center,$rollie_page_link,$rollie_thumbnail_url,$rollie_alt_thumbnail,$rollie_smart_content_display,$rollie_smart_content_title,$rollie_smart_content,$rollie_smart_main_title,$rollie_smart_main_subtitle){
 		?>
 		
 		
@@ -210,15 +232,18 @@ public function template ($rollie_class,$rollie_height,$rollie_center,$rollie_pa
 						<?php	
 
 						if ($rollie_thumbnail_url){
-							$rollie_thumbnail_url="src='".esc_url($rollie_thumbnail_url)."' alt='".esc_attr($rollie_alt_thumbnail)."'";
+							$img_srcset = wp_get_attachment_image_srcset(attachment_url_to_postid($rollie_thumbnail_url),$rollie_img_size );
+							$rollie_thumbnail_url = wp_get_attachment_image_url(attachment_url_to_postid($rollie_thumbnail_url), $rollie_img_size );
+							$rollie_thumbnail_url="src='".esc_url($rollie_thumbnail_url)."' alt='".esc_attr($rollie_alt_thumbnail)."' srcset='".esc_attr($img_srcset)."'  sizes='100%'";
 						}
+						//rollie_img_size
 					
-							echo "<img style='height:".$rollie_height."vh;' class='rollie_smart_banner_img  d-block rollie_smart_banner_fade img-responsive  w-100' ".$rollie_thumbnail_url.">";
+							echo "<img  class='rollie_smart_banner_img  d-block rollie_smart_banner_fade img-responsive  w-100' ".$rollie_thumbnail_url.">";
 							
 							if ($rollie_smart_content_display){
 						?>
 							
-								<div <?php echo "style='height:".$rollie_height."vh;'"?>class=' rollie_smart_banner_content  row rollie_flex_text_center  w-100 rollie_second_text_color'>
+								<div class=' rollie_smart_banner_content  row rollie_flex_text_center  w-100 rollie_second_text_color'>
 									<div class='rollie_f_headings_h2 col-12'>
 										<?php echo $rollie_smart_content_title; ?>	
 									</div>
@@ -252,4 +277,6 @@ public function template ($rollie_class,$rollie_height,$rollie_center,$rollie_pa
 	<?php
 }
 }
+
+
 ?>

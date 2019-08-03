@@ -45,7 +45,7 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 		// li a span
 		$menu = wp_get_nav_menu_object( $args->menu );
 
-		$rollie_is_logo = get_theme_mod( 'rollie_footer_menu_logo' );
+		$rollie_footer_logo = get_theme_mod( 'rollie_footer_menu_logo' );
 
 		$rollie_caption_1 = get_theme_mod( 'rollie_footer_logo_desc_text' );
 
@@ -54,13 +54,13 @@ class Rollie_Walker_Footer extends Walker_Nav_Menu {
 		$theme_location = 'Footer_Menu';
 
 
-		if ( $this->isfirstrow && $rollie_is_logo ) {
+		if ( $this->isfirstrow && $rollie_footer_logo ) {
 
 
 			$output     .= '<div class=" col-lg-4 col-md-6 p-0  rollie_footer_col  align-middle rollie_subtitle_text_color rollie_f_footer_sub  rollie_logo_footer_menu">';
 			$output     .= '<a  href="'.esc_url( home_url( '/' ) ).'">';
 			$output     .= '<div class= rollie_footer_logo_h >';
-			$output     .= '<img src="' . $rollie_is_logo . '">';
+			$output     .= '<img alt="'.get_the_title(attachment_url_to_postid($rollie_footer_logo)).'" src="' . $rollie_footer_logo . '">';
 			$output .= '</div>';
 			$output		.= '</a>';
 			if ( $rollie_caption_1 ) {

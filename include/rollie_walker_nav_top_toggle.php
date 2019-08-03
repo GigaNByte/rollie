@@ -1,7 +1,5 @@
 <?php
 class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu {
-
-
 	public $dropdownsibling = false;
 	public $rollie_count    = 0;
 	function start_lvl( &$output, $depth = 0, $args = array() ) {

@@ -51,7 +51,7 @@ jQuery( document ).ready(function($) {
 		var rollie_input_name = '';
 
 		$('.rollie_multiple_switch_row_js').each(function() {
-			
+
 			rollie_input_name = '';
 			rollie_input_name = $(this).find('input').attr('name');
 
@@ -94,12 +94,12 @@ jQuery( document ).ready(function($) {
 
 			}
 			if (value  !== 'undefined'  && index <  value){
-				
-				
-				
+
+
+
 				if( ! $( this ).hasClass('rollie_collapse_label_show_flag')  )   {	
 
-					
+
 					$(this).addClass('rollie_collapse_label_show_flag');
 					if (tr)
 					{
@@ -109,7 +109,7 @@ jQuery( document ).ready(function($) {
 	}
 	else{
 
-		
+
 		$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
 	}
 
@@ -119,7 +119,7 @@ jQuery( document ).ready(function($) {
 
 	function rollie_collapse_label_toggle ()
 	{	
-		
+
 
 		$('.rollie_collapse_label_toggle').each(function(){
 			rollie_collapse_label_toggle_controler(this,true);
@@ -145,11 +145,10 @@ jQuery( document ).ready(function($) {
 		console.log(rollie_def);
 		var rollie_object_frontend_class = rollie_object_name.replace("_obj", "");
 
-		
+
 		wp.customize( rollie_object_name ).set(rollie_def);	
 
 		$(".rollie_fonts_list").val($(".rollie_fonts_list").attr("rollie-reset-value"));
-
 		$(".rollie_regularweight").val($(".rollie_regularweight").attr("rollie-reset-value"));
 		$(".rollie_italicweight").val($(".rollie_italicweight").attr("rollie-reset-value"));
 		$(".rollie_boldweight").val($(".rollie_boldweight").attr("rollie-reset-value"));
@@ -300,12 +299,12 @@ jQuery( document ).ready(function($) {
 
 	});
 
-	 
-	 
-	 
-	 
+
+
+
+
 	 $('.rollie_font_reset').on('click', function() {
-	 	
+
 	 	var ul_class=$(this).parent().parent().parent();
 
 	 	var font_list = $( ul_class ).find($(".google-fonts-list"));
@@ -402,7 +401,7 @@ jQuery( document ).ready(function($) {
 	 $('.rollie_font_reset').on('click', function() {
 	 	skyrocketGetAllSelectsreset($(this).parent().parent().parent());		
 	 });
-	 
+
 
 
 	 function skyrocketGetAllSelects($element) {
@@ -414,7 +413,7 @@ jQuery( document ).ready(function($) {
 	 		subsets: $element.find('.google-fonts-subsets-style').val(),
 	 		category: $element.find('.google-fonts-category').val()
 	 	};
-	 	
+
 
 		// Important! Make sure to trigger change event so Customizer knows it has to save the field
 		$element.find('.customize-control-google-font-selection').val(JSON.stringify(selectedFont)).trigger('change');
@@ -472,7 +471,7 @@ jQuery( document ).ready(function($) {
 		var resetValue = $(this).attr('rollie-reset-value');
 		$(this).parent().find('.customize-control-slider-value').val(resetValue);
 		$(this).parent().find('.slider').slider('value', resetValue);
-		
+
 	});
 
 	// Update slider if the input field loses focus as it's most likely changed

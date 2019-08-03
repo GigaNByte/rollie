@@ -35,7 +35,6 @@ new Rollie_Font('excerpt', __( 'Page and post excerpts','rollie'), array('.rolli
 	"align" => array( "default" => "center"),
 	"disable_bold_italic" => array( "default" => false),
 )),
-
 new Rollie_Font('b_f',__( 'Buttons and forms', 'rollie' ), array('.rollie_f_b_f'), array(
 	"U" => array( "ignore"=>false,'default'=>true),
 	"align" => array( "default" => "center"),

@@ -59,7 +59,7 @@ add_filter( 'woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs' );
 function jk_woocommerce_breadcrumbs() {
     return array(
             'delimiter'   => ' &gt; ',
-            'wrap_before' => '<nav class="woocommerce-breadcrumb rollie_subtitle_text_color rollie_f_excerpt_s">',
+            'wrap_before' => '<nav class="woocommerce-breadcrumb rollie_subtitle_text_color rollie_f_excerpt">',
             'wrap_after'  => '</nav>',
             'before'      => '<span class="rollie_category_title_text_color">',
             'after'       => '</span>',
@@ -152,7 +152,7 @@ add_action('init','rollie_woo_customizer_actions');
 function rollie_shop_loop_sku (){
 	global $product;
 	if (get_theme_mod('rollie_woo_l_shop_display_sku',true)){
-		 echo '<div class="rollie_shop_sku rollie_subtitle_text_color rollie_f_excerpt_s py-1">' .__('SKU:','woocommerce').' '.$product->get_sku().'</div>'; 
+		 echo '<div class="rollie_shop_sku rollie_subtitle_text_color rollie_f_excerpt py-1">' .__('SKU:','woocommerce').' '.$product->get_sku().'</div>'; 
 	}
 }
 add_action('woocommerce_shop_loop_item_title','rollie_shop_loop_sku',5);
@@ -212,7 +212,7 @@ $wrapper_classes   = apply_filters( 'woocommerce_single_product_image_gallery_cl
 			$html = rollie_get_gallery_image_html( $post_thumbnail_id, true );
 		} else {
 			$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
-			$html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image rollie_single_product_image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+			$html .= sprintf( '<img src="%s" alt="%s" class=" rollie_single_product_image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
 			$html .= '</div>';
 		}
 echo $html;
@@ -328,7 +328,7 @@ $html .= "</div>";
 
   $html .= '<div class="rollie_single_product_swiper_container rollie_swiper swiper-container swiper-container-horizontal"><a class="rollie_swiper swiper-slide  " href="' . esc_url( $full_src[0] ) . '"><div  class="rollie_zoom_image" data-thumb="' . esc_url( $thumbnail_src[0] ) . '" class="woocommerce-product-gallery__image ">' . $image . '</div></a></div>';
 	}else{
-				$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
+			$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
 			$html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
 			$html .= '</div>';
 		}
@@ -411,14 +411,14 @@ if ( ! empty( $tabs ) ) : ?>
 //single product end 
 	 //login
 	 function rollie_woo_login_form_site_icon (){
-	 if (get_theme_mod( 'rollie_footer_menu_logo' ));
+	 if (get_theme_mod( 'rollie_menu_top_logo' ));
 	 {
 	 	echo '<div class="rollie_login_form_site_icon_wrapper">';
-	 	echo '<img class="rollie_login_form_site_icon d-block m-auto" src="'.esc_url(get_theme_mod( 'rollie_footer_menu_logo' )).'"/>';
+	 	echo '<img class="rollie_login_form_site_icon d-block m-auto" alt="'.get_the_title(attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' )))).'" src="'.esc_url(get_theme_mod( 'rollie_menu_top_logo' )).'"/>';
 
 	 	if (get_theme_mod( 'rollie_footer_logo_desc_text' )){
 	 		echo '<div class="rollie_f_footer_sub m-1 rollie_subtitle_text_color">'.get_theme_mod( 'rollie_footer_logo_desc_text' ).'</div>';
-	 	}
+		 }
 	 	echo "</div>";
 	 }
 
@@ -849,7 +849,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow '>";
 		if (is_user_logged_in()){ // if is logged in 
 			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner   border-0  rollie_menus_shadow'>";
-			echo 		"<img class='mx-auto d-block' src=".get_avatar_url( get_current_user_id()).">";
+			echo 		"<img class='mx-auto d-block' alt='".$rollie_current_user->display_name."' src='".get_avatar_url( get_current_user_id())."''>";
 
 			echo 		"<figcaption class='pt-1'>";
 
