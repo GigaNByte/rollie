@@ -237,9 +237,9 @@ public function template ($rollie_class,$rollie_img_size,$rollie_center,$rollie_
 							$rollie_thumbnail_url="src='".esc_url($rollie_thumbnail_url)."' alt='".esc_attr($rollie_alt_thumbnail)."' srcset='".esc_attr($img_srcset)."'  sizes='100%'";
 						}
 						//rollie_img_size
-					
+					if ($rollie_thumbnail_url){
 							echo "<img  class='rollie_smart_banner_img  d-block rollie_smart_banner_fade img-responsive  w-100' ".$rollie_thumbnail_url.">";
-							
+					}		
 							if ($rollie_smart_content_display){
 						?>
 							

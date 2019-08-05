@@ -13,7 +13,7 @@ if(has_post_format(array('aside','status'))){
 	<div  class=" <?php echo $rollie_article_wrapper; ?>" >
 		<?php
 		if (!has_post_format('status')){
-		 echo rollie_post_foreground();
+		 echo rollie_post_foreground($rollie_current_style);
 		}
 		 ?>
 		<div class=" <?php echo $rollie_post_wraper; ?> m-0 p-1" >

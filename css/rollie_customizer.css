@@ -538,7 +538,10 @@ border-color: #cccccc;
 margin-bottom: 12px;
 display: block;
 } 
-
+.rollie_device_control_c
+{
+	float: right;
+}
 .rollie_multiple_switch 
 {
 

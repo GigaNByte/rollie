@@ -50,52 +50,39 @@ function rollie_thumbnail_alt(){
 	if (empty($rollie_thumbnail_alt))  $rollie_thumbnail_alt = get_the_title();
 	return $rollie_thumbnail_alt;
 }
-function rollie_header_image_responsive($image_id,$image_alt) {
 
+function rollie_header_image_responsive($image_id,$image_alt,$class,$rollie_sizes,$limit='full') {
+global $_wp_additional_image_sizes;
+$i=1;
 	$image_alt = (!empty($image_alt)) ? "alt='".$image_alt ."'" : "alt='".get_the_title()."_thumbnail'";
 
 	$image_srcset = "<picture>";
-
-	if (wp_get_attachment_image_url($image_id,'rollie_xs')){
+foreach ($rollie_sizes as $size) {
+	if (isset($_wp_additional_image_sizes[$size]) &&wp_get_attachment_image_url($image_id,$size)){
 	$retina = '';
-  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_l') )){
-  	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_xs')).' 2x';
-  	}
+	  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,$size) )){
+	  	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,$size)).' 2x';
+	  	}
+	  	
 
-  $image_srcset .=  "<source media='(max-width: 414px)' srcset='". wp_get_attachment_image_url($image_id,'rollie_xs').$retina."'>";
+	 /* 	if ($i==1 && $limit){
+			 $image_srcset .=  "<source srcset='".wp_get_attachment_image_url($image_id,$size) .$retina."'>";
+	  	}else{*/
+			 $image_srcset .=  "<source media='(max-width:".$_wp_additional_image_sizes[$size]['width']."px)' srcset='".wp_get_attachment_image_url($image_id,$size) .$retina."'>";
+	//	}
+		$i++;
 	}
-if (wp_get_attachment_image_url($image_id,'rollie_s')){	
 
-  	$retina = '';
-  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s') )){
-  	$retina = ', '.wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_s')).' 2x';
-  	}
-
-  $image_srcset .=  "<source media='(max-width: 1024px) ' srcset='".wp_get_attachment_image_url($image_id,'rollie_s') .$retina."'>";
-  }
-  if (wp_get_attachment_image_url($image_id,'rollie_m')){
-
-  	$retina = '';
-  	if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url( wp_get_attachment_image_url($image_id,'rollie_m') )){
-  	$retina = ', '. ( wp_get_attachment_image_url($image_id,'rollie_m')).' 2x';
-  	}
-
-  $image_srcset .=  "<source media='(max-width: 1336px) ' srcset='".wp_get_attachment_image_url($image_id,'rollie_m') .$retina."'>";
-
-  }
-  if (wp_get_attachment_image_url($image_id,'rollie_l')){
-  	  	$retina=', '.wp_get_attachment_image_url($image_id,'full').' 2x';
-  $image_srcset .=  "<source media='(max-width: 1920px)' srcset='".wp_get_attachment_image_url($image_id,'rollie_l').$retina."'>";
-  }
-  $image_srcset .=  "<img sizes='100vh' class='rollie_header_image '".$image_alt."src='".wp_get_attachment_image_url($image_id,'full')."'>";
-
+}
+  $image_srcset .=  "<img sizes='100%' class='".$class."'".$image_alt."src='".wp_get_attachment_image_url($image_id,$limit)."'>";
   $image_srcset .=  "</picture>";
 
 
 return $image_srcset;
+
 }
 
-function rollie_post_foreground () {
+function rollie_post_foreground ($rollie_current_style) {
 		$html='';
 
 		if (get_post_format()=='video'){
@@ -166,9 +153,11 @@ function rollie_post_foreground () {
 			
 		}elseif(has_post_thumbnail()){
 	
-			
-		$img_srcset = wp_get_attachment_image_srcset(attachment_url_to_postid(rollie_thumbnail_url()),'full' );
-		$html .= "<img class=' rollie_post_thumbnail' src='".rollie_thumbnail_url()."' alt='".rollie_thumbnail_alt()."' srcset='".$img_srcset."'  sizes='100%'>";	
+	
+	//	$img_srcset = wp_get_attachment_image_srcset(attachment_url_to_postid(rollie_thumbnail_url()),'rollie_l_thumb' );
+		 $rollie_header_limit = ($rollie_current_style == 0) ? 'rollie_l_thumb': 'rollie_m_thumb';
+		$html .= rollie_header_image_responsive(attachment_url_to_postid(rollie_thumbnail_url()),rollie_thumbnail_alt(),'rollie_post_thumbnail',array('rollie_xs_thumb','rollie_s_thumb','rollie_m_thumb','rollie_l_thumb'),$rollie_header_limit);
+	//	$html .= "<img class=' rollie_post_thumbnail' src='".rollie_thumbnail_url()."' alt='".rollie_thumbnail_alt()."' srcset='".$img_srcset."'   sizes='(max-width: 1080px) 50vw,1080px'>";	
 		}
 		//rollie_post_thumbnail_height_m
 		$html = apply_filters('rollie_post_foreground_filter',$html);
@@ -179,6 +168,7 @@ function rollie_post_foreground () {
 		
 		return  $html;
 }
+
 function rollie_page_template_sufix(){
 	if ( is_category() ) {
 		return  '_ct';

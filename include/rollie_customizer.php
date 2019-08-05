@@ -150,7 +150,7 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 				
 			)
 		);
-
+		
 
 
 
@@ -995,13 +995,21 @@ function rollie_customizer_register( $wp_customize ) {
 			'priority' => 20,
 		)
 	);
-		$wp_customize->add_panel(
-		'rollie_grid_meta_panel',
+	$wp_customize->add_panel(
+	'rollie_grid_meta_panel',
+	array(
+		'title'    => __( 'Rollie Post Grids and Post Metainfos ' ),
+		'priority' => 20,
+	)
+	);
+	$wp_customize->add_panel(
+		'rollie_img_panel',
 		array(
-			'title'    => __( 'Rollie Post Grids and Post Metainfos ' ),
+			'title'    => __( 'Rollie Image Sizes ' ),
 			'priority' => 20,
 		)
 	);
+
 	rollie_add_page_control($wp_customize,'rollie_grid_meta_panel','Single Page','sp');
 	rollie_add_page_control($wp_customize,'rollie_grid_meta_panel','Single Post Page','spp');
 	rollie_add_post_page_control($wp_customize,'rollie_grid_meta_panel','Main Blog Page','');
@@ -3099,9 +3107,13 @@ $wp_customize->add_section(
 			)
 		)
 	);
+		global $rollie_img_data;
+foreach ($rollie_img_data as $img_data) {
+	$img_data->add_customizer_controls();
+}
 
 
-			
+	
 	if (class_exists('WooCommerce')){
 	require get_template_directory() . '/include/rollie_customizer_woo.php';
 		}

@@ -868,9 +868,10 @@ cursor: pointer;
 }
 	.rollie_post_thumbnail
 	{
-	width:100%;
-	object-fit: cover;
-	object-position: center;
+
+max-width: 100%;
+display: block;
+margin: auto;
 	}
 	.rollie_post_thumbnail_img
 	{
@@ -890,11 +891,8 @@ cursor: pointer;
 	}
 .rollie_post_thumbnail_height_m
 {
-	height:40vh;
+/*	height:40vh;*/
 }
-
-
-
 [class*="col-"]
 {
 		padding:0.5rem;

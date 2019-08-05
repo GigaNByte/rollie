@@ -65,4 +65,19 @@ new Rollie_Font('metainfo',__( 'Post metainfos', 'rollie' ),array('.rollie_f_met
 )),
 );
 
+$rollie_img_data = array(
+new Rollie_Image_Size('header',__('Header Images Sizes','rollie'),'',array(
+	'lg'=>array('w'=>1920,'h'=>1080,'crop'=>true),
+	'md'=>array('w'=>1336,'h'=>768,'crop'=>true),
+	'sm'=>array('w'=>1024,'h'=>768,'crop'=>true),
+	'xs'=>array('w'=>414,'h'=>736,'crop'=>true),
+)), 
+
+new Rollie_Image_Size('thumbnail',__('Thumbnail Images Sizes','rollie'),'',array(
+	'lg'=>array('w'=>768,'h'=>0,'crop'=>true),
+	'md'=>array('w'=>1080,'h'=>0,'crop'=>true),
+	'sm'=>array('w'=>414,'h'=>0,'crop'=>true),
+)),
+);
+
 

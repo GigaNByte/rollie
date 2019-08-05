@@ -11,7 +11,15 @@
 			'priority' => 20,
 		)
 	);
-
+	$wp_customize->add_section(
+		'rollie_img_thumbnail',
+		array(
+			'title'    =>__( 'Product Image Sizes', 'Rollie' ),
+			'priority' => 20,
+			'panel'    => 'rollie_img_panel',
+		)
+	);
+	
 	$wp_customize->add_section(
 			'rollie_woo_l_my_account_section',
 			array(

@@ -231,10 +231,14 @@ function rollie_custom_setup() {
 	register_nav_menu( 'rollie_cat_swap_menu', 'Rollie Category Swipe Menu' );
 	register_nav_menu( 'Footer_Menu', 'Rollie Footer Menu Nav' );
 
+	add_image_size( 'rollie_m_thumb', 768,0,true); 
+	add_image_size( 'rollie_l_thumb', 1080,0,true); 
+	add_image_size( 'rollie_s_thumb', 414,0,true ); 
+
 	add_image_size( 'rollie_xs', 414,736,true); 
-	add_image_size( 'rollie_s', 1024,768  ,true); 
-	add_image_size( 'rollie_m', 1336,768 ,true ); 
-	add_image_size( 'rollie_l', 1920,1080 ,true); 
+	add_image_size( 'rollie_s', 1024,768,true); 
+	add_image_size( 'rollie_m', 1336,768,true ); 
+	add_image_size( 'rollie_l', 1920,1080,true); 
 	add_editor_style();
 	add_theme_support( 'woocommerce' );
 }

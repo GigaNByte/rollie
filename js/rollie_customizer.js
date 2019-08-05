@@ -1,7 +1,36 @@
 jQuery( document ).ready(function($) {
 	"use strict";
-
-
+	function rollie_device_control()
+	{
+		$('.rollie_device_control').each(function(){
+			if ($(this).attr('aria-expanded')=='false'){
+				$($(this).attr('data-target')).css('display','none');
+			}	
+		});
+		$('.rollie_device_control').on('click',function(){
+			var all = '';
+			 $(this).siblings('.rollie_device_control').each(function(){
+             all += $(this).attr('data-target')+',';
+			 }); 
+			 all = all.slice(0, -1);
+		
+				if ($(this).attr('aria-expanded')=='false'){
+						console.log($(this).attr('data-target'));
+					$($(this).attr('data-target')).each(function(){
+						$(this).css('display','block');						
+					});	
+					console.log(all);
+					$(all).not($(this).attr('data-target')).each(function(){
+						$(this).css('display','none');						
+					});	
+					$(this).attr('aria-expanded','true');
+				
+				
+					$(this).siblings().not(this).attr('aria-expanded','false');
+				}				
+			});
+	}
+	
 	function rollie_multiple_switch_underline()
 	{
 		$('.rollie_multiple_switch > input').each(function(){
@@ -131,6 +160,7 @@ jQuery( document ).ready(function($) {
 
 	rollie_collapse_label_toggle ();
 	rollie_multiple_switch();
+	rollie_device_control();
 	$('.rollie_collapse_label_toggle').each(function(){
 		rollie_collapse_label_toggle_controler(this,true);
 	});

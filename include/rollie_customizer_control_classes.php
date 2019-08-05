@@ -324,8 +324,8 @@ public $type = 'image_radio_button';
 					<div class="customize-inside-control-row  rollie_customizer_icon_single">
 						<div class="rollie_margin_auto_c">
 							<label for="<?php echo esc_attr( $name . '-radio-' . $value ); ?>"class='d-inline-block '>
-							<?php if ( isset($this->input_attrs['icon_type']) && $this->input_attrs['icon_type']=='png') { ?>
-								<img class="rollie_dash rollie_icon_customize_control_img"   src="<?php echo get_template_directory_uri().'/images/'.esc_html( $rollie_split[0] ).'.png'  ;?>"></img>
+							<?php if ( isset($this->input_attrs['icon_type']) && $this->input_attrs['icon_type']=='png') { ?>	
+							<img class="rollie_dash rollie_icon_customize_control_img"   src="<?php echo get_template_directory_uri().'/images/'.esc_html( $rollie_split[0] ).'.png'  ;?>"></img>
 							<?php }else{?>
 									<i class="rollie_dash  fab fa-2x   <?php echo ( esc_html( $rollie_split[0] ) ); ?> "></i>
 							<?php }?>
@@ -565,7 +565,7 @@ class Rollie_Text_Custom_Control extends WP_Customize_Control {
 						value="<?php echo esc_attr( $this->value() ); ?>"
 					<?php endif; ?>
 					<?php $this->link(); ?>
-/>
+				/>
 				<?php
 		} else {
 			return;
@@ -580,16 +580,39 @@ function action_customize_render_control( $instance ) {
 <?php 
 }
 }; 
-    
-// add the action 
-add_action( 'customize_render_control', 'action_customize_render_control', 1, 1 ); 
 
-//class Rollie_Number_Control extends WP_Customize_Control{}
+add_action( 'customize_render_control', 'action_customize_render_control', 1, 1 ); 
+class Rollie_Device_Control extends WP_Customize_Control{
+	public $type = 'rollie-device';
+	public function render_content() {
+	if ( ! empty( $this->label ) ){
+	?>
+	<label for="<?php echo esc_attr( $this->id ); ?>" class="customize-control-title rollie-device-title"><?php echo esc_html( $this->label ); ?></label>
+	<?php }?>
+
+		<div class='rollie_device_control_c p-1'>	
+		<?php if(isset($this->input_attrs['collapse_target_lg'])){?>	
+			<span class='rollie_device_control dashicons dashicons-desktop' data-toggle="collapse" role="button" aria-expanded="true" data-target="<?php echo esc_attr($this->input_attrs['collapse_target_lg'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_lg'] )?>" ></span>
+		<?php } ?>
+		<?php if (isset($this->input_attrs['md']) &&  isset($this->input_attrs['collapse_target_md'])){?>
+			<span class='rollie_device_control dashicons dashicons-laptop' data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_md'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_md'] )?>" ></span>
+		<?php }?>
+		<?php if (isset($this->input_attrs['sm']) &&  isset($this->input_attrs['collapse_target_sm'])){?>
+			<span class='rollie_device_control  dashicons dashicons-tablet'data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_sm'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_sm'] )?>"></span>
+		<?php }?>
+		<?php if (isset($this->input_attrs['xs']) && isset($this->input_attrs['collapse_target_xs']) ){?>
+			<span class='rollie_device_control dashicons dashicons-smartphone'data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_xs'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_xs'] )?>"></span>
+		<?php }?>
+		</div>
+<?php
+	}	
+}
+
 class Customize_Alpha_Color_Control extends WP_Customize_Control {
 	/**
 	 * Official control name.
 	 */
-	public $type = 'alpha-color';
+	public $type = 'rollie-alpha-color';
 	/**
 	 * Add support for palettes to be passed in.
 	 *

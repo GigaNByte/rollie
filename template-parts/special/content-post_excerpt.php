@@ -24,7 +24,7 @@ if (has_post_format(array('status'))) $rollie_post_format_css = 'rollie_f_subtit
 	}
 	?>
 <?php if (has_post_format('status')){
-		echo rollie_post_foreground();
+		echo rollie_post_foreground($rollie_current_style);
 	}
 
 

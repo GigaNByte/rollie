@@ -1,4 +1,107 @@
 <?php 
+class Rollie_Image_Size {
+public $img_sizes_data;
+public  $customizer_section_description;
+public  $customizer_section_title;
+private  $img_set_name;
+private $customizer_section;
+
+public function __construct($img_set_name,$customizer_section_title,$customizer_section_description,$img_sizes_data){     
+	$this->img_sizes_data = $img_sizes_data ;
+	$this->img_set_name = 'rollie'.$img_set_name ;
+	$this->customizer_section_title = $customizer_section_title ;
+	$this->customizer_section_description = $customizer_section_description ;
+	$this->customizer_section = 'rollie_img_'.$img_set_name.'_section';
+	
+}
+
+public function add_customizer_controls(){
+
+global $wp_customize;
+		$wp_customize->add_section(
+		$this->customizer_section,
+		array(
+			'panel'    => 'rollie_img_panel',
+			'title'    => $this->customizer_section_title,
+			'description' => $this->customizer_section_description,
+			'priority' => 20,
+		)
+	);
+		$wp_customize->add_setting(
+			    $this->img_set_name.'_device',
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);	
+
+  		$input_attrs_device = array();
+		foreach ($this->img_sizes_data as $key => $size) {
+			$input_attrs_device[$key] = true;
+			$input_attrs_device['collapse_target_'.$key] ='#customize-control-'.$this->img_set_name.'_crop_'.$key.',#customize-control-'.$this->img_set_name.'_w_'.$key.',#customize-control-'.$this->img_set_name.'_h_'.$key;
+		}
+		$wp_customize->add_control(
+	        new Rollie_Device_Control(
+	        $wp_customize,
+	         $this->img_set_name.'_device',
+		        array(
+		        	'label'    => $this->customizer_section_title,
+		       	'section' => $this->customizer_section,
+		    	'input_attrs'=>$input_attrs_device,
+
+		    )));
+
+		foreach ($this->img_sizes_data as $key => $size) {
+
+		$wp_customize->add_setting(
+			$this->img_set_name.'_crop_'. $key,
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rollie_sanitize_checkbox',
+			)
+		);
+
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			$this->img_set_name.'_crop_'.$key,
+			array(
+				'label'   =>__( 'Crop Image ', 'rollie' ),
+				'description'   =>__( 'If true, images will be cropped to the specified dimensions using center positions otherwise will be resized and can vary in size', 'rollie' ),
+				'section' => $this->customizer_section,
+			)
+		)
+	);
+	$wp_customize->add_setting($this->img_set_name.'_w_'.$key, array(
+		 'sanitize_callback' => 'skyrocket_sanitize_integer',
+		 'default'=>'',
+	));		
+	   $wp_customize->add_control( $this->img_set_name.'_w_'.$key, array(
+	  'type' => 'number',
+	  'section' => $this->customizer_section,
+	  'label' => __( 'Image Width (px)' ),
+	));	
+	$wp_customize->add_setting($this->img_set_name.'_h_'.$key, array(
+		 'sanitize_callback' => 'skyrocket_sanitize_integer',
+		 'default'=>'',
+	));		
+	   $wp_customize->add_control( $this->img_set_name.'_h_'.$key, array(
+	  'type' => 'number',
+	  'section' => $this->customizer_section,
+		 'description'   =>__("If height value is zero height will be set automaticaly to match aspect ratio of image" ,'rollie'),
+	  'label' => __( 'Image Height (px)' ),
+
+	));
+
+}
+}
+public function add_image_sizes ()
+{
+	
+}
+
+}
 class Rollie_Font {
 public $font_data;
 private $font_set_name;
