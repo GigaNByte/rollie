@@ -64,19 +64,18 @@ new Rollie_Font('footer_sub',__( 'Footer captions and subitems', 'rollie'), arra
 new Rollie_Font('metainfo',__( 'Post metainfos', 'rollie' ),array('.rollie_f_meta'),array(
 )),
 );
-
 $rollie_img_data = array(
 new Rollie_Image_Size('header',__('Header Images Sizes','rollie'),'',array(
-	'lg'=>array('w'=>1920,'h'=>1080,'crop'=>true),
-	'md'=>array('w'=>1336,'h'=>768,'crop'=>true),
-	'sm'=>array('w'=>1024,'h'=>768,'crop'=>true),
-	'xs'=>array('w'=>414,'h'=>736,'crop'=>true),
+	'lg'=>array('w'=>1920,'h'=>1080,'crop'=>true,'size_label' =>__('Large Sized','rollie'),'size_name'=>'rollie_l'),
+	'md'=>array('w'=>1336,'h'=>768,'crop'=>true,'size_label' =>__('Medium Sized','rollie'),'size_name'=>'rollie_m'),
+	'sm'=>array('w'=>1024,'h'=>768,'crop'=>true,'size_label' =>__('Small Sized','rollie'),'size_name'=>'rollie_s'),
+	'xs'=>array('w'=>414,'h'=>736,'crop'=>true,'size_label' =>__('Tiny Sized','rollie'),'size_name'=>'rollie_xs'),
 )), 
 
 new Rollie_Image_Size('thumbnail',__('Thumbnail Images Sizes','rollie'),'',array(
-	'lg'=>array('w'=>768,'h'=>0,'crop'=>true),
-	'md'=>array('w'=>1080,'h'=>0,'crop'=>true),
-	'sm'=>array('w'=>414,'h'=>0,'crop'=>true),
+	'lg'=>array('w'=>768,'h'=>0,'crop'=>true,'size_label' =>__('Large Sized','rollie'),'size_name'=>'rollie_l_thumb'),
+	'sm'=>array('w'=>1080,'h'=>0,'crop'=>true,'size_label' =>__('Medium Sized','rollie'),'size_name'=>'rollie_m_thumb'),
+	'xs'=>array('w'=>414,'h'=>0,'crop'=>true,'size_label' => __('Small Sized','rollie'),'size_name'=>'rollie_s_thumb'),
 )),
 );
 

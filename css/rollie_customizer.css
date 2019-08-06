@@ -537,10 +537,46 @@ border-width: 2px;
 border-color: #cccccc;
 margin-bottom: 12px;
 display: block;
+
 } 
 .rollie_device_control_c
 {
 	float: right;
+	display:flex;
+	justify-content: center;
+	margin: 4px;
+}
+
+.rollie_device_control_c > div 
+{
+font-size: 1rem;
+width: 1rem;
+padding: 0.3rem;
+height: 1rem;
+border-width: 1px;
+border-top:solid;
+border-bottom:solid;
+}
+.rollie_device_control_c  .rollie_big_device  > div 
+{
+font-size: 2rem;
+width: 2rem;
+padding: 0.5rem;
+height: 2rem;
+}
+.rollie_device_control_c > div:nth-last-child(1){
+	border-right:solid;
+}
+.rollie_device_control_c > div:first-child {
+	border-left:solid;
+}
+.rollie_device_control_c > div[aria-expanded="true"]
+{
+	background: #ffffff;
+	border:solid;
+	color:#2885bb;
+	border-color: #2885bb !important;
+	
 }
 .rollie_multiple_switch 
 {

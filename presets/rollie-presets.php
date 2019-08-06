@@ -33,7 +33,7 @@ function ocdi_after_import_setup() {
 	$footer_menu = get_term_by( 'name', 'footer menu', 'nav_menu' );
 
 	set_theme_mod( 'nav_menu_locations', array(
-			'Rollie_Top_Menu' => $top_menu->term_id,
+			'rollie_top_menu' => $top_menu->term_id,
 			'rollie_cat_swap_menu' => $cat_menu->term_id,
 			'Footer_Menu' => $footer_menu->term_id,
 		)

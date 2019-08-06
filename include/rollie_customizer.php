@@ -1728,7 +1728,7 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			'rollie_embl_navbar',
 			array(
-				'label'   => esc_html__( ' Embellishments', 'Rollie' ),
+				'label'   => esc_html__( 'Navbar Embellishments', 'Rollie' ),
 				'section' => 'rollie_embl_section',
 				'type'    => 'select',
 				'choices' => array(
@@ -2495,6 +2495,50 @@ $wp_customize->add_section(
 			array(
 				'label'   => __( 'Top menu logo', 'rollie' ),
 				'section' => 'rollie_navbar_section',
+			)
+		)
+	);
+
+		$wp_customize->add_setting(
+			'rollie_menu_top_logo_positon',
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
+
+			)
+		);
+ 
+		$wp_customize->add_control(
+				'rollie_menu_top_logo_positon',
+				array(
+					'label'   => esc_html__( 'Menu Logo Position', 'Rollie' ),
+					'section' => 'rollie_navbar_section',
+					'type'    => 'select',
+					'choices' => array(
+						1 => esc_html__( 'Main Menu Navigation', 'rollie' ),
+						2 => esc_html__( 'Small Top Menu Navigation', 'rollie' ),
+
+					),
+				)
+			);
+					$wp_customize->add_setting(
+		'rollie_menu_top_logo_title',
+		array(
+			'default'           => false,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+
+		)
+	);
+	
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_menu_top_logo_title',
+			array(
+				'label'   =>__( 'Display Site Title', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+					
 			)
 		)
 	);

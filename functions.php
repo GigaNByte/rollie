@@ -122,6 +122,25 @@ function wph_disable_mime_check($data,$file,$filename,$mimes){
 add_filter('wp_check_filetype_and_ext','wph_disable_mime_check',10,4);
 
 function rollie_theme_support() {
+
+global $rollie_img_data;
+
+foreach ($rollie_img_data as  $rollie_img_set_data) {
+	$rollie_img_set_data->add_image_sizes();
+
+}
+	/*
+	add_image_size( 'rollie_m_thumb', 768,0,true); 
+	add_image_size( 'rollie_l_thumb', 1080,0,true); 
+	add_image_size( 'rollie_s_thumb', 414,0,true ); 
+
+	add_image_size( 'rollie_xs', 414,736,true); 
+	add_image_size( 'rollie_s', 1024,768,true); 
+	add_image_size( 'rollie_m', 1336,768,true ); 
+	add_image_size( 'rollie_l', 1920,1080,true); 
+*/
+
+
 	add_theme_support(
 		'custom-logo',
 		array(
@@ -226,19 +245,13 @@ function rollie_widget_setup() {
 }
 function rollie_custom_setup() {
 
-	register_nav_menu( 'Rollie_Top_Menu', 'Rollie Top Menu Nav' );
-	register_nav_menu( 'rollie_top_menu_icons', 'Rollie Top Menu Icon Nav' );
-	register_nav_menu( 'rollie_cat_swap_menu', 'Rollie Category Swipe Menu' );
-	register_nav_menu( 'Footer_Menu', 'Rollie Footer Menu Nav' );
+	register_nav_menu( 'rollie_top_menu', __('Rollie Top Navbar: Main Menu Navigation','rollie') );
+	register_nav_menu( 'rollie_top_menu_icons', __('Rollie Top Navbar: Icon Menu Navigation','rollie') );
+	register_nav_menu( 'rollie_top_menu_small_top_bar', __('Rollie Top Navbar: Small top menu Navigation','rollie') );
+	register_nav_menu( 'rollie_cat_swap_menu', __('Rollie Category Swipe Menu','rollie') );
+	register_nav_menu( 'Footer_Menu', __('Rollie Footer Menu: Main Navigation','rollie') );
 
-	add_image_size( 'rollie_m_thumb', 768,0,true); 
-	add_image_size( 'rollie_l_thumb', 1080,0,true); 
-	add_image_size( 'rollie_s_thumb', 414,0,true ); 
 
-	add_image_size( 'rollie_xs', 414,736,true); 
-	add_image_size( 'rollie_s', 1024,768,true); 
-	add_image_size( 'rollie_m', 1336,768,true ); 
-	add_image_size( 'rollie_l', 1920,1080,true); 
 	add_editor_style();
 	add_theme_support( 'woocommerce' );
 }
@@ -335,48 +348,3 @@ add_action( 'customize_controls_enqueue_scripts', 'rollie_customizer_scripts' );
 
 
 
-class ProxyFunc {
-    public $args = null;
-    public $func = null;
-    public $location = null;
-    public $func_args = null;
-    function __construct($func, $args, $location='after', $action='', $priority = 10, $accepted_args = 1) {
-        $this->func = $func;
-        $this->args = is_array($args) ? $args : array($args);
-        $this->location = $location;
-        if( ! empty($action) ){
-            // (optional) pass action in constructor to automatically subscribe
-            add_action($action, $this, $priority, $accepted_args );
-        }
-    }
-    function __invoke() {
-        // current arguments passed to invoke
-        $this->func_args = func_get_args();
-
-        // position of stored arguments
-        switch($this->location){
-            case 'after':
-                $args = array_merge($this->func_args, $this->args );
-                break;
-            case 'before':
-                $args = array_merge($this->args, $this->func_args );
-                break;
-            case 'replace':
-                $args = $this->args;
-                break;
-            case 'reference':
-                // only pass reference to this object
-                $args = array($this);
-                break;
-            default:
-                // ignore stored args
-                $args = $this->func_args;
-        }
-
-        // trigger the callback
-        call_user_func_array( $this->func, $args );
-
-        // clear current args
-        $this->func_args = null;
-    }
-}

@@ -6,16 +6,18 @@ public  $customizer_section_title;
 private  $img_set_name;
 private $customizer_section;
 
-public function __construct($img_set_name,$customizer_section_title,$customizer_section_description,$img_sizes_data){     
+public function __construct($img_set_name,$customizer_section_title,$customizer_section_description,$img_sizes_data){    
+
 	$this->img_sizes_data = $img_sizes_data ;
-	$this->img_set_name = 'rollie'.$img_set_name ;
+	$this->img_set_name ='rollie_img_'.$img_set_name ;
 	$this->customizer_section_title = $customizer_section_title ;
 	$this->customizer_section_description = $customizer_section_description ;
-	$this->customizer_section = 'rollie_img_'.$img_set_name.'_section';
-	
+	$this->customizer_section = $this->img_set_name.'_section';
+
+
 }
 
-public function add_customizer_controls(){
+public function add_customizer_controls() {
 
 global $wp_customize;
 		$wp_customize->add_section(
@@ -36,7 +38,7 @@ global $wp_customize;
 			)
 		);	
 
-  		$input_attrs_device = array();
+  		$input_attrs_device = array('switch_size'=>'big');
 		foreach ($this->img_sizes_data as $key => $size) {
 			$input_attrs_device[$key] = true;
 			$input_attrs_device['collapse_target_'.$key] ='#customize-control-'.$this->img_set_name.'_crop_'.$key.',#customize-control-'.$this->img_set_name.'_w_'.$key.',#customize-control-'.$this->img_set_name.'_h_'.$key;
@@ -46,7 +48,7 @@ global $wp_customize;
 	        $wp_customize,
 	         $this->img_set_name.'_device',
 		        array(
-		        	'label'    => $this->customizer_section_title,
+		        
 		       	'section' => $this->customizer_section,
 		    	'input_attrs'=>$input_attrs_device,
 
@@ -57,8 +59,9 @@ global $wp_customize;
 		$wp_customize->add_setting(
 			$this->img_set_name.'_crop_'. $key,
 			array(
-				'default'           => true,
+				'default'           => $size['crop'],
 				'sanitize_callback' => 'rollie_sanitize_checkbox',
+
 			)
 		);
 
@@ -67,7 +70,7 @@ global $wp_customize;
 			$wp_customize,
 			$this->img_set_name.'_crop_'.$key,
 			array(
-				'label'   =>__( 'Crop Image ', 'rollie' ),
+				'label'   =>__( 'Crop Image: ', 'rollie' ).$size['size_label'],
 				'description'   =>__( 'If true, images will be cropped to the specified dimensions using center positions otherwise will be resized and can vary in size', 'rollie' ),
 				'section' => $this->customizer_section,
 			)
@@ -75,32 +78,33 @@ global $wp_customize;
 	);
 	$wp_customize->add_setting($this->img_set_name.'_w_'.$key, array(
 		 'sanitize_callback' => 'skyrocket_sanitize_integer',
-		 'default'=>'',
+		 'default'=>$size['w'],
 	));		
 	   $wp_customize->add_control( $this->img_set_name.'_w_'.$key, array(
 	  'type' => 'number',
 	  'section' => $this->customizer_section,
-	  'label' => __( 'Image Width (px)' ),
+	  'label' => __( 'Image Width (px): ','rollie' ).$size['size_label'],
 	));	
 	$wp_customize->add_setting($this->img_set_name.'_h_'.$key, array(
 		 'sanitize_callback' => 'skyrocket_sanitize_integer',
-		 'default'=>'',
+		 'default'=>$size['h'],
 	));		
 	   $wp_customize->add_control( $this->img_set_name.'_h_'.$key, array(
 	  'type' => 'number',
 	  'section' => $this->customizer_section,
 		 'description'   =>__("If height value is zero height will be set automaticaly to match aspect ratio of image" ,'rollie'),
-	  'label' => __( 'Image Height (px)' ),
-
+	  'label' => __( 'Image Height (px): ','rollie' ).$size['size_label'],
 	));
 
+	}
 }
-}
-public function add_image_sizes ()
-{
-	
-}
+public function add_image_sizes (){
+	foreach ($this->img_sizes_data  as $key => $size) {
 
+	add_image_size($size['size_name'],get_theme_mod($this->img_set_name.'_w_'.$key,$size['w']),get_theme_mod($this->img_set_name.'_h_'.$key,$size['h']),get_theme_mod($this->img_set_name.'_crop_'.$key,$size['crop']));
+	
+	}
+	}
 }
 class Rollie_Font {
 public $font_data;

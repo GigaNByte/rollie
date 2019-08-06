@@ -590,18 +590,18 @@ class Rollie_Device_Control extends WP_Customize_Control{
 	<label for="<?php echo esc_attr( $this->id ); ?>" class="customize-control-title rollie-device-title"><?php echo esc_html( $this->label ); ?></label>
 	<?php }?>
 
-		<div class='rollie_device_control_c p-1'>	
+		<div class='rollie_device_control_c p-1 customize-control  <?php if (isset($this->input_attrs['switch_size']) && $this->input_attrs['switch_size']== 'big') echo 'rollie_big_device'; ?> '>	
 		<?php if(isset($this->input_attrs['collapse_target_lg'])){?>	
-			<span class='rollie_device_control dashicons dashicons-desktop' data-toggle="collapse" role="button" aria-expanded="true" data-target="<?php echo esc_attr($this->input_attrs['collapse_target_lg'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_lg'] )?>" ></span>
+			<div class='rollie_device_control dashicons dashicons-desktop' data-toggle="collapse" role="button" aria-expanded="true" data-target="<?php echo esc_attr($this->input_attrs['collapse_target_lg'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_lg'] )?>" ></div>
 		<?php } ?>
 		<?php if (isset($this->input_attrs['md']) &&  isset($this->input_attrs['collapse_target_md'])){?>
-			<span class='rollie_device_control dashicons dashicons-laptop' data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_md'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_md'] )?>" ></span>
+			<div class='rollie_device_control dashicons dashicons-laptop' data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_md'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_md'] )?>" ></div>
 		<?php }?>
 		<?php if (isset($this->input_attrs['sm']) &&  isset($this->input_attrs['collapse_target_sm'])){?>
-			<span class='rollie_device_control  dashicons dashicons-tablet'data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_sm'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_sm'] )?>"></span>
+			<div class='rollie_device_control  dashicons dashicons-tablet'data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_sm'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_sm'] )?>"></div>
 		<?php }?>
 		<?php if (isset($this->input_attrs['xs']) && isset($this->input_attrs['collapse_target_xs']) ){?>
-			<span class='rollie_device_control dashicons dashicons-smartphone'data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_xs'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_xs'] )?>"></span>
+			<div class='rollie_device_control dashicons dashicons-smartphone'data-toggle="collapse" role="button" aria-expanded="false"  data-target="<?php echo esc_attr($this->input_attrs['collapse_target_xs'] )?>" aria-controls="<?php echo esc_attr($this->input_attrs['collapse_target_xs'] )?>"></div>
 		<?php }?>
 		</div>
 <?php

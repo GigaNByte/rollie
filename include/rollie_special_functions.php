@@ -13,8 +13,15 @@ $src = esc_url_raw($src);
 		return '<video  autoplay  loop muted class="rollie_header_image rollie_header_shortcode rollie_header_video
 " src="'.$src.'"></video>';
 });
-
-
+function rollie_navbar_icon(){
+	echo     '<a class="rollie_nav_top_logo m-auto" href="'.esc_url( home_url( '/' ) ).'">';
+	$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' ))) ;
+	echo "<img class='p-1  m-auto d-block' src='" .esc_url(get_theme_mod( 'rollie_menu_top_logo' )). "' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
+	if(get_theme_mod('rollie_menu_top_logo_title',false)){
+		echo '<div class="rollie_f_header_h2">'.get_bloginfo('name')."</div>";
+	}
+	echo '</a>';
+}
 function rollie_nav_top_search_button(){
 	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {	?>
 		<button data-toggle="collapse" data-target="#rollie_search_input_menu_top" aria-expanded="false" aria-controls="rollie_search_input_menu_top" id='rollie_search_button_standalone' class=" btn ">

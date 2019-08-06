@@ -184,9 +184,13 @@ overflow:hidden;
 {
 z-index:1000;
 white-space:normal;
-
+flex-flow: wrap;
 padding-top:0px;
 padding-bottom:0px;
+	}
+	.rollie_navbar_top_container 
+	{
+		width: min-content;
 	}
 .rollie_collapse_side_js{
 	width:0px;
