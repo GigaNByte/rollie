@@ -1,4 +1,12 @@
 <?php
+function rollie_sanitize_css_ruler( $input){
+	$input = explode(',',$input,4); 
+foreach ($input as $key => $input_single) {
+	$input_single =  skyrocket_sanitize_integer($input_single);
+}
+	$input = implode(',',$input);
+	return  $input ;
+}
 function rollie_sanitize_shortcode() {
 		return array (
 			'a' => array (
@@ -69,7 +77,7 @@ function rollie_sanitize_checkbox( $input ) {
 	 * @param  string   JSON string to be sanitized
 	 * @return string   Sanitized input
 	 */
-if ( ! function_exists( 'skyrocket_google_font_sanitization' ) ) {
+
 	function skyrocket_google_font_sanitization( $input ) {
 		$val = json_decode( $input, true );
 		if ( is_array( $val ) ) {
@@ -82,14 +90,14 @@ if ( ! function_exists( 'skyrocket_google_font_sanitization' ) ) {
 		}
 		return $input;
 	}
-}
+
 		/**
 	 * Slider sanitization
 	 *
 	 * @param  string   Slider value to be sanitized
 	 * @return string   Sanitized input
 	 */
-if ( ! function_exists( 'skyrocket_range_sanitization' ) ) {
+
 	function skyrocket_range_sanitization( $input, $setting ) {
 		$attrs  = $setting->manager->get_control( $setting->id )->input_attrs;
 		$min    = ( isset( $attrs['min'] ) ? $attrs['min'] : $input );
@@ -98,7 +106,7 @@ if ( ! function_exists( 'skyrocket_range_sanitization' ) ) {
 		$number = floor( $input / $attrs['step'] ) * $attrs['step'];
 		return skyrocket_in_range( $number, $min, $max );
 	}
-}
+
 
 function skyrocket_sanitize_integer( $input ) {
 		return (int) $input;
@@ -125,7 +133,7 @@ function rollie_sanitize_float( $input ) {
 	return filter_var( $input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 }
 
-if ( ! function_exists( 'skyrocket_text_sanitization' ) ) {
+
 	function skyrocket_text_sanitization( $input ) {
 		if ( strpos( $input, ',' ) !== false ) {
 			$input = explode( ',', $input );
@@ -140,7 +148,7 @@ if ( ! function_exists( 'skyrocket_text_sanitization' ) ) {
 		}
 		return $input;
 	}
-}
+
 
 function rollie_sanitize_class_html( $input ) {
 	 $allowed_html = array(

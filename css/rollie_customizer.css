@@ -3,7 +3,10 @@
 	display: flex;
 	justify-content: center;
 }
-
+.d-block
+{
+	display: block;
+}
 
 .customize-control-description  strong
 {
@@ -539,6 +542,13 @@ margin-bottom: 12px;
 display: block;
 
 } 
+.rollie_css_ruler_c{
+	display: flex;
+}
+.rollie_css_ruler_c >span{
+margin: 2px;
+text-align: center;
+}
 .rollie_device_control_c
 {
 	float: right;

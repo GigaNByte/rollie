@@ -50,11 +50,12 @@ class Skyrocket_TinyMCE_Custom_control extends WP_Customize_Control {
 	 * @link https://github.com/maddisondesigns
 	 */
 
+
 class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
-	public $type = 'google_fonts';
+	public $type = 'rollie_google_fonts';
 	public $nut  = 0;
 	/**
 	 * The list of Google Fonts
@@ -675,7 +676,7 @@ class Rollie_Customizer_Collapse_Label_Control extends WP_Customize_Control {
 	 * Displays title and description
 	 */
 
-public $type = 'toogle-label';
+public $type = 'rollie_toogle_label';
 	public function render_content() {	
 		 if (isset($this->input_attrs['rollie_open_close_auto']) && $this->input_attrs['rollie_open_close_auto']){
 		 	 $rollie_open_close_auto ='true';
@@ -698,6 +699,50 @@ public $type = 'toogle-label';
 }
   
 }
+class Rollie_Css_Ruler_Control extends WP_Customize_Control {
+	public $type = 'rollie_css_ruler';
+		public function render_content() {	
 
+?>
+<h3 class='rollie_css_ruler_label'><?php echo esc_html( $this->label ); ?></h3>
+<div class='rollie_css_ruler_label'><?php echo esc_html( $this->description ); ?></div>
+<div class='rollie_css_ruler_c'>
+	<?php 
+	if (!empty($this->value())) {
+		$rollie_css_ruler_defaults = explode(',',$this->value(),4);
+	}else{
+		$rollie_css_ruler_defaults = array_fill(false,4,0);
+	}
+
+
+	
+	?>
+	<span>
+		<input class='rollie_css_ruler_item rollie_css_ruler_item_l' type='number' value='<?php echo esc_attr($rollie_css_ruler_defaults[0])?>'></input>
+		<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Top Left','rollie')?></label>
+	</span>
+	<span>
+		<input type='number' class='rollie_css_ruler_item rollie_css_ruler_item_t'  value='<?php echo esc_attr($rollie_css_ruler_defaults[1])?>'></input>
+			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Top Right','rollie')?></label>
+	</span>
+	<span>
+		<input class='rollie_css_ruler_item rollie_css_ruler_item_b' type='number' value='<?php echo esc_attr($rollie_css_ruler_defaults[2])?>'></input>
+			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Bottom Left','rollie')?></label>
+	</span>	
+	<span>
+		<input class='rollie_css_ruler_item rollie_css_ruler_item_r' type='number' value='<?php echo esc_attr($rollie_css_ruler_defaults[3])?>'></input>
+			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Bottom Right','rollie')?></label>
+	</span>
+	<span class='rollie_css_ruler_link' title='link All Controls'>
+		<b>PX</b><div class="rollie_ruler_link dashicons dashicons-admin-links"></div>
+	</span>
+	<input hidden name="<?php echo esc_attr( $this->id ); ?>" class='rollie_css_ruler_input' value='<?php echo esc_attr( $this->value() ); ?>'data-customize-setting-link="<?php echo esc_attr( $this->id ); ?>" id="<?php echo esc_attr( $this->id ); ?>" ></input>
+</div>	
+
+
+<?php
+
+		}	
+}
 
 

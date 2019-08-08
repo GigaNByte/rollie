@@ -1,5 +1,46 @@
 jQuery( document ).ready(function($) {
 	"use strict";
+
+	function rollie_css_ruler_control(){
+		$('.rollie_css_ruler_link').on('click',function(){
+			if($(this).find('.rollie_ruler_link').hasClass('dashicons-admin-links')){
+				$(this).find('.rollie_ruler_link').removeClass('dashicons-admin-links');
+				$(this).find('.rollie_ruler_link').addClass('dashicons-editor-unlink');
+
+
+			}else{
+
+				$(this).parent().find('.rollie_css_ruler_item').val($(this).parent().find('.rollie_css_ruler_item').first().val());
+				$(this).parent().find('.rollie_css_ruler_item').text($(this).parent().find('.rollie_css_ruler_item').first().val());
+
+				$(this).find('.rollie_ruler_link').addClass('dashicons-admin-links');
+				$(this).find('.rollie_ruler_link').removeClass('dashicons-editor-unlink');
+				$(this).parent().find('.rollie_css_ruler_input').trigger('change');
+			}
+		});
+
+
+
+
+		$( ".rollie_css_ruler_item").on('change',function(){
+		
+			if ($(this).parent().parent().find('.rollie_ruler_link').hasClass('dashicons-admin-links')){
+			
+				$(this).parent().parent().find('.rollie_css_ruler_item').val($(this).val());
+				$(this).parent().parent().find('.rollie_css_ruler_item').text($(this).val());
+			}
+
+			var ruler_val = [
+			$(this).parent().parent().find('.rollie_css_ruler_item_l').val(),
+			$(this).parent().parent().find('.rollie_css_ruler_item_t').val(),
+			$(this).parent().parent().find('.rollie_css_ruler_item_b').val(),
+			$(this).parent().parent().find('.rollie_css_ruler_item_r').val(),
+			]; 
+			
+			$(this).parent().parent().find('.rollie_css_ruler_input').val(ruler_val.join(","));
+	$(this).parent().parent().find('.rollie_css_ruler_input').trigger('change');
+		});
+	}
 	function rollie_device_control()
 	{
 		$('.rollie_device_control').each(function(){
@@ -543,7 +584,7 @@ jQuery( document ).ready(function($) {
 	rollie_add_panel_icon ('section-rollie_icons_section','dashicons-menu');
 	rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-customizer');
 
-
+rollie_css_ruler_control();
 
 
 	// Loop over each control and transform it into our color picker.

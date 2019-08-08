@@ -13,15 +13,24 @@ $src = esc_url_raw($src);
 		return '<video  autoplay  loop muted class="rollie_header_image rollie_header_shortcode rollie_header_video
 " src="'.$src.'"></video>';
 });
+
 function rollie_navbar_icon(){
-	echo     '<a class="rollie_nav_top_logo m-auto" href="'.esc_url( home_url( '/' ) ).'">';
-	$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' ))) ;
-	echo "<img class='p-1  m-auto d-block' src='" .esc_url(get_theme_mod( 'rollie_menu_top_logo' )). "' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
-	if(get_theme_mod('rollie_menu_top_logo_title',false)){
-		echo '<div class="rollie_f_header_h2">'.get_bloginfo('name')."</div>";
-	}
-	echo '</a>';
+	$rollie_retina_navbar = '';
+	if (get_theme_mod( 'rollie_menu_top_logo' )){
+		if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url(get_theme_mod( 'rollie_menu_top_logo' ))){
+			$rollie_retina_navbar = ', '.wr2x_get_retina_from_url( get_theme_mod( 'rollie_menu_top_logo' )).' 2x';
+		}
+
+		echo     '<a class="rollie_nav_top_logo m-auto" href="'.esc_url( home_url( '/' ) ).'">';
+		$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' ))) ;
+		echo "<img class='p-1  m-auto d-block' srcset='" .esc_url(get_theme_mod( 'rollie_menu_top_logo' ))." 1x".$rollie_retina_navbar."' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
+		if(get_theme_mod('rollie_menu_top_logo_title',false)){
+			echo '<div class="rollie_f_header_h2">'.get_bloginfo('name')."</div>";
+		}
+		echo '</a>';
+	}	
 }
+
 function rollie_nav_top_search_button(){
 	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {	?>
 		<button data-toggle="collapse" data-target="#rollie_search_input_menu_top" aria-expanded="false" aria-controls="rollie_search_input_menu_top" id='rollie_search_button_standalone' class=" btn ">

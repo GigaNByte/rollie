@@ -40,26 +40,26 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 	}
 
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-		// li a span
+		
 		$menu = wp_get_nav_menu_object( $args->menu );
-
-		$rollie_footer_logo = get_theme_mod( 'rollie_footer_menu_logo' );
-
+		$rollie_footer_logo = esc_url(get_theme_mod( 'rollie_footer_menu_logo' ));
 		$rollie_caption_1 = get_theme_mod( 'rollie_footer_logo_desc_text' );
-
 		$theme_locations = get_nav_menu_locations();
-
 		$theme_location = 'Footer_Menu';
 
 
 		if ( $this->isfirstrow && $rollie_footer_logo ) {
-
+				$rollie_retina_footer = '';
+		
+			if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url($rollie_footer_logo)){
+			$rollie_retina_footer = ', '.wr2x_get_retina_from_url($rollie_footer_logo).' 2x';
+			}
 
 			$output     .= '<div class=" col-lg-4 col-md-6 p-0  rollie_footer_col  align-middle rollie_subtitle_text_color rollie_f_footer_sub  rollie_logo_footer_menu">';
 			$output     .= '<a  href="'.esc_url( home_url( '/' ) ).'">';
-			$output     .= '<div class= rollie_footer_logo_h >';
-			$output     .= '<img alt="'.get_the_title(attachment_url_to_postid($rollie_footer_logo)).'" src="' . $rollie_footer_logo . '">';
-			$output .= '</div>';
+			
+			$output     .= '<img alt="'.get_the_title(attachment_url_to_postid($rollie_footer_logo)).'" srcset="' .$rollie_footer_logo.' 1x'.$rollie_retina_footer.'">';
+
 			$output		.= '</a>';
 			if ( $rollie_caption_1 ) {
 				$output .= '<p class=" rollie_footer_menu_caption rollie_flex_text_center ">' . $rollie_caption_1 . '</p>';

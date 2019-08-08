@@ -1120,33 +1120,6 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
-		$wp_customize->add_setting(
-			'rollie_footer_logo_h',
-			array(
-				'default'           => 40,
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_footer_logo_h',
-			array(
-				'label'       =>__( 'Height of logo (px) ' ),
-				'section'     => 'rollie_footer_section',
-				'input_attrs' => array(
-					'min'  => 30,
-					'max'  => 400,
-					'step' => 10,
-				),
-			)
-		)
-	);
-
-
-
 
 
 				$wp_customize->add_section(
@@ -1893,17 +1866,17 @@ foreach ($rollie_font_data as $font_data) {
 }
 
 
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_main_theme_color','Main Theme Color','#ffffff'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_darker_main_theme_color','Darker/Contrast Theme Color','#e3e6e8'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_second_theme_color','Second Theme Color','#212121'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_third_theme_color','Third Theme Color','#a37e2c'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_sidebar_theme_color','Sidebars Color','#ffffff'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_color','Button Color','#ffffff'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_h_color','Button Color At Hover','#212121');
-	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_post_classic_title_bg_theme_color','Rollie Post Title in Thumbnail','#ffffff'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_color','Alternate Button Color','#ffffff'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_h_color','Alternate Button Color At Hover','#212121'); 
-	rollie_add_gradient_control ($wp_customize,'rollie_navbar_section','rollie_navbar_color','Navbar Color','rgba(255,255,255,0.8)'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_main_theme_color',__('Main Theme Color','rollie'),'#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_darker_main_theme_color',__('Darker/Contrast Theme Color','rollie'),'#e3e6e8'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_second_theme_color',__('Second Theme Color','rollie'),'#212121'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_third_theme_color',__('Third Theme Color','rollie'),'#a37e2c'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_sidebar_theme_color',__('Sidebars Color','rollie'),'#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_color',__('Button Color','rollie'),'#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_b_h_color',__('Button Color At Hover','rollie'),'#212121');
+	rollie_add_gradient_control ($wp_customize,'rollie_theme_colors_section','rollie_post_classic_title_bg_theme_color',__('Rollie Post Title in Thumbnail','rollie'),'#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_color',__('Alternate Button Color','rollie'),'#ffffff'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_buttons_section','rollie_button_alt_b_h_color',__('Alternate Button Color At Hover','rollie'),'#212121'); 
+	rollie_add_gradient_control ($wp_customize,'rollie_navbar_section','rollie_navbar_color',__('Navbar Color','rollie'),'rgba(255,255,255,0.8)'); 
 
 
 
@@ -2543,30 +2516,7 @@ $wp_customize->add_section(
 		)
 	);
 
-		$wp_customize->add_setting(
-			'rollie_navbar_logo_h',
-			array(
-				'default'           => 40,
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
 
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_navbar_logo_h',
-			array(
-				'label'       => esc_html__( 'Maximum Height of top menu logo' ),
-				'section'     => 'rollie_navbar_section',
-				'input_attrs' => array(
-					'min'  => 30,
-					'max'  => 400,
-					'step' => 10,
-				),
-			)
-		)
-	);
 		$wp_customize->add_setting(
 			'rollie_menu_top_item_align',
 			array(
@@ -2857,17 +2807,42 @@ $wp_customize->add_section(
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
+	
+
+			$wp_customize->add_setting(
+			'rollie_buttons_style', 
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 2
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_buttons_style', 
+			array(
+				'label'   => __( 'Buttons Color Contrast Style', 'rollie' ),
+				'section' => 'rollie_buttons_section',
+				'type'    => 'select',
+				'choices' => array(
+					1 =>__( 'Classic', 'rollie' ),
+					2 =>__( 'Modern ', 'rollie' ),
+				)
+	
+			)
+		);
+
 
 				$wp_customize->add_setting(
-					'rollie_button_rounded',
-					array(
-						'default'           => true,
-						'sanitize_callback' => 'rollie_sanitize_checkbox',
-					)
-				);
+				'rollie_button_rounded',
+				array(
+					'default'           => '2,2,2,2',
+					'sanitize_callback' => 'rollie_sanitize_css_ruler',
+				)
+			);
 
 			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
+				new Rollie_Css_Ruler_Control(
 					$wp_customize,
 					'rollie_button_rounded',
 					array(
@@ -2876,30 +2851,9 @@ $wp_customize->add_section(
 
 					)
 				)
-			);
+			);								
 
-											
-
-			$wp_customize->add_setting(
-				'rollie_button_shadow',
-				array(
-					'default'   => '#a37e2c',
-					'transport' => 'refresh',
-				)
-			);
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'rollie_button_shadow',
-			array(
-				'label'             => __( 'Button border color ', 'Rollie' ),
-				'section'           => 'rollie_buttons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
-			)
-		)
-	);
-
-					
+	
 
 
 

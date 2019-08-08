@@ -6,7 +6,7 @@
 
 			<nav id="rollie_insert_search_form_between_js" class='rollie_f_navbar'> 			
 
-				<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color rollie_nav_top_2_nav_js  rollie_navbar_logo_h    navbar-expand invisible " >
+				<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color rollie_nav_top_2_nav_js navbar-expand invisible " >
 						<?php 
 				if( has_nav_menu( 'rollie_top_menu_small_top_bar' )  ){
 

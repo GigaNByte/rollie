@@ -223,9 +223,9 @@ public function template ($rollie_class,$rollie_img_size,$rollie_center,$rollie_
 		?>
 		
 		
-				<div class="<?php echo $rollie_class?> rollie_smart_banner_single   ">
-					<a href="<?php echo $rollie_page_link ?>" class='d-block'>
-						<div class="position-relative rollie_second_color">
+				<div class="<?php echo $rollie_class?> rollie_smart_banner_single p-2  ">
+					<a href="<?php echo $rollie_page_link ?>" class='d-block rollie_second_color h-100'>
+						<div class="position-relative h-100 rollie_second_color">
 
 						
 							
@@ -235,9 +235,7 @@ public function template ($rollie_class,$rollie_img_size,$rollie_center,$rollie_
 							$img_srcset = wp_get_attachment_image_srcset(attachment_url_to_postid($rollie_thumbnail_url),$rollie_img_size );
 							$rollie_thumbnail_url = wp_get_attachment_image_url(attachment_url_to_postid($rollie_thumbnail_url), $rollie_img_size );
 							$rollie_thumbnail_url="src='".esc_url($rollie_thumbnail_url)."' alt='".esc_attr($rollie_alt_thumbnail)."' srcset='".esc_attr($img_srcset)."'  sizes='100%'";
-						}
-						//rollie_img_size
-					if ($rollie_thumbnail_url){
+
 							echo "<img  class='rollie_smart_banner_img  d-block rollie_smart_banner_fade img-responsive  w-100' ".$rollie_thumbnail_url.">";
 					}		
 							if ($rollie_smart_content_display){
@@ -256,17 +254,7 @@ public function template ($rollie_class,$rollie_img_size,$rollie_center,$rollie_
 						<?php } ?>	
 						</div>
 		
-					<?php
-
-					$rollie_center = ($rollie_center) ? 'text-center' : '';
-					echo "<div class='".$rollie_center."'>";
-					echo "<div class=' rollie_title_text_color d-inline-block '>" .$rollie_smart_main_title. '</div>';
-
-					if (!empty($rollie_smart_main_subtitle)){
-					echo "<div class=' rollie_child_page_a p-2 d-inline-block rollie_subtitle_text_color '>" .$rollie_smart_main_subtitle. '</div>';
-					}
-					echo "</div>";
-					?>
+					
 					
 				
 			</a>	
