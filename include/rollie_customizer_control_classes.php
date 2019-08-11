@@ -704,8 +704,8 @@ class Rollie_Css_Ruler_Control extends WP_Customize_Control {
 		public function render_content() {	
 
 ?>
-<h3 class='rollie_css_ruler_label'><?php echo esc_html( $this->label ); ?></h3>
-<div class='rollie_css_ruler_label'><?php echo esc_html( $this->description ); ?></div>
+<div class='rollie_css_ruler_label customize-control-title'><?php echo esc_html( $this->label ); ?></div>
+<div class='rollie_css_ruler_label customize-control-description'><?php echo esc_html( $this->description ); ?></div>
 <div class='rollie_css_ruler_c'>
 	<?php 
 	if (!empty($this->value())) {
@@ -716,22 +716,37 @@ class Rollie_Css_Ruler_Control extends WP_Customize_Control {
 
 
 	
-	?>
+	
+	if (isset($this->input_attrs['type']) && $this->input_attrs['type']=='b-width'){
+	$label_1 = __('Top','rollie');
+	$label_2 = __('Right','rollie');
+	$label_3 = __('Bottom','rollie');
+	$label_4 = __('left','rollie');
+}else{
+	$label_1 = __('Top Left','rollie');
+	$label_2 = __('Top Right','rollie');
+	$label_3 = __('Bottom Left','rollie');
+	$label_4 = __('Bottom Right','rollie');
+}
+
+?>
+
+
 	<span>
 		<input class='rollie_css_ruler_item rollie_css_ruler_item_l' type='number' value='<?php echo esc_attr($rollie_css_ruler_defaults[0])?>'></input>
-		<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Top Left','rollie')?></label>
+		<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php echo $label_1?></label>
 	</span>
 	<span>
 		<input type='number' class='rollie_css_ruler_item rollie_css_ruler_item_t'  value='<?php echo esc_attr($rollie_css_ruler_defaults[1])?>'></input>
-			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Top Right','rollie')?></label>
+			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php echo $label_2?></label>
 	</span>
 	<span>
 		<input class='rollie_css_ruler_item rollie_css_ruler_item_b' type='number' value='<?php echo esc_attr($rollie_css_ruler_defaults[2])?>'></input>
-			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Bottom Left','rollie')?></label>
+			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php echo $label_3?></label>
 	</span>	
 	<span>
 		<input class='rollie_css_ruler_item rollie_css_ruler_item_r' type='number' value='<?php echo esc_attr($rollie_css_ruler_defaults[3])?>'></input>
-			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php _e('Bottom Right','rollie')?></label>
+			<label class='d-block' for="<?php echo esc_attr( $this->id ); ?>"><?php echo $label_4?></label>
 	</span>
 	<span class='rollie_css_ruler_link' title='link All Controls'>
 		<b>PX</b><div class="rollie_ruler_link dashicons dashicons-admin-links"></div>

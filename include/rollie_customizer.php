@@ -2744,57 +2744,65 @@ $wp_customize->add_section(
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
-
-			$wp_customize->add_setting(
-			'rollie_tables_border_w',
-			array(
-				'default'           => 2,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
-
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+	$wp_customize->add_setting(	'rollie_button_border_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
-			'rollie_tables_border_w',
+			'rollie_button_tables_label',
 			array(
-				'label'       => esc_html__( 'Border width (px) ' ),
-				'section'     => 'rollie_tables_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 10,
-					'step' => 1,
-				),
+				'label'   =>__( 'Border', 'rollie' ),
+				'section' => 'rollie_tables_section',
+				'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 2,
+				'rollie_open_close_auto'=>true,
+				)
 			)
 		)
 	);
+
+	
+				$wp_customize->add_setting(
+				'rollie_table_border_w',
+				array(
+					'default'           => '2,2,2,2',
+					'sanitize_callback' => 'rollie_sanitize_css_ruler',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Rollie_Css_Ruler_Control(
+					$wp_customize,
+					'rollie_table_border_w',
+					array(
+						'label'   => esc_html__( 'Border width:', 'Rollie' ),
+						'section' => 'rollie_tables_section',
+						'input_attrs'=>array(
+							'type'=>'b-width',
+						)
+					)
+				)
+			);	
 		
+				$wp_customize->add_setting(
+				'rollie_table_rounded',
+				array(
+					'default'           => '2,2,2,2',
+					'sanitize_callback' => 'rollie_sanitize_css_ruler',
+				)
+			);
 
-			$wp_customize->add_setting(
-			'rollie_tables_border_rad',
-			array(
-				'default'           => 2,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
+			$wp_customize->add_control(
+				new Rollie_Css_Ruler_Control(
+					$wp_customize,
+					'rollie_table_rounded',
+					array(
+						'label'   => esc_html__( 'Border Radius:', 'Rollie' ),
+						'section' => 'rollie_tables_section',
 
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_tables_border_rad',
-			array(
-				'label'       => esc_html__( 'Border radius (px) ' ),
-				'section'     => 'rollie_tables_section',
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 10,
-					'step' => 1,
-				),
-			)
-		)
-	);
+					)
+				)
+			);	
+		
 		
 	
 
@@ -2809,29 +2817,46 @@ $wp_customize->add_section(
 	);
 	
 
-			$wp_customize->add_setting(
-			'rollie_buttons_style', 
-			array(
-				'sanitize_callback' => 'rollie_sanitize_select',
-				'default'           => 2
 
-			)
-		);
 
+	$wp_customize->add_setting(	'rollie_button_border_label');
 		$wp_customize->add_control(
-			'rollie_buttons_style', 
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_button_border_label',
 			array(
-				'label'   => __( 'Buttons Color Contrast Style', 'rollie' ),
+				'label'   =>__( 'Border', 'rollie' ),
 				'section' => 'rollie_buttons_section',
-				'type'    => 'select',
-				'choices' => array(
-					1 =>__( 'Classic', 'rollie' ),
-					2 =>__( 'Modern ', 'rollie' ),
+				'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 2,
+				'rollie_open_close_auto'=>true,
 				)
-	
 			)
-		);
+		)
+	);
 
+		
+				$wp_customize->add_setting(
+				'rollie_button_border_w',
+				array(
+					'default'           => '2,2,2,2',
+					'sanitize_callback' => 'rollie_sanitize_css_ruler',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Rollie_Css_Ruler_Control(
+					$wp_customize,
+					'rollie_button_border_w',
+					array(
+						'label'   => esc_html__( 'Border width:', 'Rollie' ),
+						'section' => 'rollie_buttons_section',
+						'input_attrs'=>array(
+							'type'=>'b-width',
+						)
+					)
+				)
+			);	
 
 				$wp_customize->add_setting(
 				'rollie_button_rounded',
@@ -2846,37 +2871,13 @@ $wp_customize->add_section(
 					$wp_customize,
 					'rollie_button_rounded',
 					array(
-						'label'   => esc_html__( 'Rounded corners', 'Rollie' ),
+						'label'   => esc_html__( 'Border Radius:', 'Rollie' ),
 						'section' => 'rollie_buttons_section',
 
 					)
 				)
 			);								
 
-	
-
-
-
-
-			$wp_customize->add_setting(
-				'rollie_button_shadow_on',
-				array(
-					'default'           => true,
-					'sanitize_callback' => 'rollie_sanitize_checkbox',
-				)
-			);
-
-			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_button_shadow_on',
-					array(
-						'label'   => esc_html__( 'Enable shadow button border style instead solid', 'Rollie' ),
-						'section' => 'rollie_buttons_section',
-
-					)
-				)
-			);
 
 	$wp_customize->add_section(
 		'rollie_icons_section',
@@ -2887,13 +2888,14 @@ $wp_customize->add_section(
 		)
 	);
 
-								$wp_customize->add_setting(
-									'rollie_icon_color_first',
-									array(
-										'default'   => '#212121',
-										'transport' => 'refresh',
-									)
-								);
+		$wp_customize->add_setting(
+			'rollie_icon_color_first',
+			array(
+				'default'   => '#212121',
+				'transport' => 'refresh',
+			)
+		);
+
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(

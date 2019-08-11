@@ -566,7 +566,6 @@ $wp_customize->add_setting(
 			array(
 				'label'             => __( 'Muted Color ', 'Rollie' ),
 				'section'           => 'rollie_theme_colors_text_section',
-				'settings'          => 'rollie_title_text_color',
 				'sanitize_callback' => 'rollie_sanitize_hex_color',
 			)
 		)

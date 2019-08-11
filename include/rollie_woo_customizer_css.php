@@ -18,7 +18,6 @@ wp_add_inline_style('rollie_woo_stylesheet',".rollie_single_product_image\n{\n m
 
 
 
-
 wp_add_inline_style( 'rollie_woo_stylesheet', ".rollie_sort_orders_current,.rollie_my_acc_nav_side_c .is-active ,.rollie_my_acc_nav_wide_c,.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register,.rollie_woo_border_color_custom_column,.woocommerce .woocommerce-customer-details address \n {border-color:".$rollie_third_theme_color->rgb.";}" );
 wp_add_inline_style('rollie_woo_stylesheet',".woocommerce span.onsale{\n background-color:".$rollie_third_theme_color->rgb.";\n}");
 

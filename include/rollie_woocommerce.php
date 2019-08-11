@@ -839,16 +839,16 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	$rollie_class_c = " rollie_my_acc_nav_side_c position-sticky";
 	$rollie_class_c .= " col-5  ";
 	$rollie_class_c .= " col-lg-4  ";
-	$rollie_class_c .= '  ';
+	$rollie_class_c .= ' rollie_menus_shadow  ';
 	$rollie_user_info_class = " col-12 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 3){
 	$rollie_class_c = " rollie_my_acc_nav_wide_c  ";
 	}
 	echo "<div class=' ".$rollie_class_c." '>";
-		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container  rollie_menus_shadow '>";
+		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container   '>";
 		if (is_user_logged_in()){ // if is logged in 
-			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner   border-0  rollie_menus_shadow'>";
+			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner  m-0 border-0  rollie_menus_shadow'>";
 			echo 		"<img class='mx-auto d-block' alt='".$rollie_current_user->display_name."' src='".get_avatar_url( get_current_user_id())."''>";
 
 			echo 		"<figcaption class='pt-1'>";
