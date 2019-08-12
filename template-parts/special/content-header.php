@@ -13,7 +13,7 @@ $rollie_author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 
 
 
-switch (get_theme_mod('rollie_header_ex_style'.rollie_page_template_sufix(),4)) {
+switch (get_theme_mod('rollie_header_ex_style'.rollie_page_template_sufix(),2)) {
 		case 1:
 		$rollie_bb_h1 .= ' col-12 '; 
   	  case 2:
@@ -35,7 +35,7 @@ $rollie_bb_ex = 'd-flex';
 $rollie_header_class = 'd-inline-block';
 
 }else{
-	$rollie_header_class .= ' row ';
+	$rollie_header_class .= ' row w-100';
 }
 switch (get_theme_mod('rollie_header_h_align'.rollie_page_template_sufix(),3)) {
     case 1://top
@@ -85,13 +85,15 @@ if (get_theme_mod('rollie_header_style'.rollie_page_template_sufix(),1)==2 || ge
 			</div>
 		
 
-			<?php 	if (get_theme_mod('rollie_header_ex_style'.rollie_page_template_sufix(),4) != 1){ ?>
+			<?php 	
+
+			if (get_theme_mod('rollie_header_ex_style'.rollie_page_template_sufix()) != 1){ ?>
 			
 			<div class="<?php echo $rollie_bb_ex ; ?> rollie_f_excerpt  rollie_subtitle_text_color">
 				
 				<?php 
 				if (get_theme_mod('rollie_header_style'.rollie_page_template_sufix(),1) == 3 ||  get_theme_mod('rollie_header_style'.rollie_page_template_sufix(),1) == 4) echo "<div class='rollie_w_0'>";
-				rollie_excerpt();
+					rollie_excerpt();
 				if (get_theme_mod('rollie_header_style'.rollie_page_template_sufix(),1) == 3 ||  get_theme_mod('rollie_header_style'.rollie_page_template_sufix(),1) == 4) echo "</div>";
 				?>	
 			</div>

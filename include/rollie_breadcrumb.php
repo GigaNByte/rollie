@@ -10,7 +10,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 	
 	// Start the breadcrumb with a link to your homepage
         echo '<nav class="pl-5 text-left  rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb col-12">';
-        echo '<a href="';
+        echo '<a class="rollie_category_title_text_color" href="';
         echo get_option('home');
         echo '">';
         bloginfo('name');

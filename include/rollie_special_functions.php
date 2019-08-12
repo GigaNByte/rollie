@@ -186,22 +186,22 @@ function rollie_post_foreground ($rollie_current_style) {
 }
 
 function rollie_page_template_sufix(){
-	if ( is_category() ) {
-		return  '_ct';
-	}elseif ( is_page() ) {
-		return  '_sp';
-	}  elseif ( is_single() ) {
-		return  '_spp';
-	} elseif ( is_archive() ) {
-		return  '_ar';
+	if (class_exists('Woocommerce') && ( is_woocommerce() ||is_cart()|| is_checkout() ) && !(is_product_category()||is_product_tag())) return '_woo'; 
+
+	 if ( is_category()||is_archive() ) {
+		return  '_ctar';
 	} elseif ( is_search() ) {
 		return  '_se';
+	} elseif ( is_page() ) {
+		return  '_sp';
+	} elseif ( is_single() ) {
+		return  '_spp';
 	} else {
 		return '_pp';
 	}
 }
 function rollie_page_template_sufix_array(){
-	return array('_ct','_sp','_spp','_ar','_se','_pp');
+	return array('_ctar','_sp','_spp','_se','_pp');
 	}
 function rollie_subtitle(){
 	global $post;

@@ -854,7 +854,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 			echo 		"<figcaption class='pt-1'>";
 
 						if (!empty($rollie_current_user->user_login)) {
-						echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span></p";
+						echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span></p>";
 						}
 
 						if (! empty($rollie_current_user->user_firstname)||!empty($rollie_current_user->user_lastname)) {
@@ -888,15 +888,15 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 
  add_action('woocommerce_after_account_navigation','rollie_action_woo_after_account_navigation');
 
-
+/*
 function rollie_action_woo_account_content()
 {
 
-echo  "<div class='row p-0 m-0 h-100'>";
+echo  "<div class='row p-0 m-0'>";
 
-	echo "<div class='p-0 col-12 ". rollie_embl_subtitles()." rollie_f_headings rollie_title_text_color rollie_account_title' >";
+	echo "<div class='p-0 col-12 rollie_flex_text_center rollie_f_headings rollie_title_text_color rollie_account_title' >";
 
-	echo get_the_title();
+	echo '<h2>'.get_the_title().'</h2>';
 	
 	echo "</div>";
 
@@ -926,6 +926,14 @@ echo "</div>";
 
   add_action ('woocommerce_account_content','rollie_action_woo_account_content',1);
   add_action ('woocommerce_account_content','rollie_action_woo_account_content_wraper_end',200);
+  */
+
+function rollie_center_my_account_page(){
+echo "<div class='rollie_flex_text_center h-100'>";
+echo "<div>";
+}
+add_action('woocommerce_account_content','rollie_center_my_account_page',1);
+add_action('woocommerce_account_content','rollie_action_woo_after_account_navigation',400);
 
 function rollie_endpoint_titles( $title, $id ) {
 	if ( is_wc_endpoint_url( 'canceled' ) && in_the_loop() ) { // add your endpoint urls
@@ -1421,7 +1429,7 @@ add_action('rollie_nav_top_icons_right','woocomerce_rollie_nav_top_icons',20);
 
 function woocomerce_rollie_nav_top_icons_colapsed(){
 ?>
-<div class="collapse rollie_navbar_color  " id="rollie_nav_user_info">
+<div class="collapse rollie_navbar_color  col-8 col-md-3 p-0" id="rollie_nav_user_info">
 <?php	
 if (is_user_logged_in()){
   do_action( 'woocommerce_account_navigation' );   }else{
@@ -1432,7 +1440,7 @@ rollie_action_woo_before_account_navigation();
 rollie_action_woo_after_account_navigation();
 } ?>
 </div>
-<div class="collapse rollie_navbar_color " id="rollie_nav_cart_info">
+<div class="collapse rollie_navbar_color  col-8 col-md-3 p-0" id="rollie_nav_cart_info">
 <?php 
     $items_count = WC()->cart->get_cart_contents_count();
     $text_label  =_n( 'item', 'items',$items_count, 'rollie' );

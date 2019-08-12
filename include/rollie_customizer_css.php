@@ -91,7 +91,7 @@ rollie_fonts_customizer_css();
 	$rollie_navbar_hover_text_color=get_theme_mod("rollie_navbar_text_hover_color","#212121");
 	$rollie_navbar_chevron =get_theme_mod("rollie_navbar_chevron","#212121");
 	$rollie_navbar_hover_chevron =get_theme_mod("rollie_navbar_hover_chevron","#a37e2c");
-
+global $rollie_border_data ;
 //masonry sizes
 
 	if (get_theme_mod('rollie_grid_type',1)==2){
@@ -108,7 +108,7 @@ rollie_fonts_customizer_css();
 	wp_add_inline_style ( 'rollie_stylesheet'," .rollie_pagination:hover * , .rollie_pagination * ,.page-item , .rollie_fancy_line,.woocommerce h3 ,.woocommerce h2,address\n {border-color: \n ".$rollie_third_theme_color->rgb.";} ");
 
 
-	wp_add_inline_style('rollie_stylesheet',".rollie_table,.rollie_my_acc_nav_side_c  {\n border-style:solid;\n border-width:".str_replace(",","px ",get_theme_mod('rollie_table_border_w','2,2,2,2').',').";\n  border-radius:".str_replace(",","px ",get_theme_mod('rollie_table_rounded','2,2,2,2').',').";\n}"); 
+	wp_add_inline_style('rollie_stylesheet',".rollie_table,.rollie_my_acc_nav_side_c  {\n ".$rollie_border_data['tables']->css_snippet()."\n}"); 
 
 	if ( get_theme_mod ('rollie_embl_subtitles' ,1 ) == 1){
 		wp_add_inline_style ( 'rollie_stylesheet',".woocommerce h3 , .woocommerce h2 \n{\n border-left-style:solid;\n border-width:".get_theme_mod('rollie_embl_subtitles_width',1)."px; \n}");
@@ -146,7 +146,7 @@ wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_icon_first:hover,.cld-common
 
 
 
-wp_add_inline_style('rollie_stylesheet',"\n.rollie_button ,.woocommerce button.button ,.woocommerce #respond input#submit, .woocommerce a.button,.rollie_top_menu_icons > button[aria-expanded='true']   ,.woocommerce   .button,.rollie_button_alt,.woocommerce button.button.alt ,.woocommerce a.button.alt,.woocommerce .checkout-button {\n border-style:solid;\n  border-width:".str_replace(",","px ",get_theme_mod('rollie_button_border_w','2,2,2,2').',').";\n  border-radius:".str_replace(",","px ",get_theme_mod('rollie_button_rounded','2,2,2,2').',').";\n}"); 
+wp_add_inline_style('rollie_stylesheet',"\n.rollie_button ,.woocommerce button.button ,.woocommerce #respond input#submit, .woocommerce a.button,.rollie_top_menu_icons > button[aria-expanded='true']   ,.woocommerce   .button,.rollie_button_alt,.woocommerce button.button.alt ,.woocommerce a.button.alt,.woocommerce .checkout-button {".$rollie_border_data['buttons']->css_snippet()."}"); 
 
 
 
@@ -158,7 +158,7 @@ wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_chevron_menu:hover{ color: "
 
 
 
-wp_add_inline_style( 'rollie_stylesheet'," span  .select2-selection__rendered,.rollie_login_icons_c:before ,select,[type='checkbox']:checked + span::before,[type='checkbox']:not(:checked) + span::before,[type='radio']:checked + label::before,[type='radio']:not(:checked) + label::before,.quantity ,.input-text,.rollie_form_input{ \n border-width:".get_theme_mod('rollie_form_input_b_width',1)."px; \n color: ".get_theme_mod('rollie_form_input_text_color','#212529').";\n border-style:solid; \n border-radius: ".get_theme_mod('rollie_form_input_radius',2)."px ;	\n border-color: ".  $rollie_form_input_border_color     ." !important; \n background: ". $rollie_form_input_color_backg ."; }");
+wp_add_inline_style( 'rollie_stylesheet'," span  .select2-selection__rendered,.rollie_login_icons_c:before ,select,[type='checkbox']:checked + span::before,[type='checkbox']:not(:checked) + span::before,[type='radio']:checked + label::before,[type='radio']:not(:checked) + label::before,.quantity ,.input-text,.rollie_form_input{ \n".$rollie_border_data['inputs']->css_snippet()." \n color: ".get_theme_mod('rollie_form_input_text_color','#212529').";\n	\n border-color: ".  $rollie_form_input_border_color     ." !important; \n background: ". $rollie_form_input_color_backg ."; }");
 
 wp_add_inline_style( 'rollie_stylesheet',"span .select2-selection , .rollie_login_icons_c:before ,.quantity:active,.quantity-button:hover,.quantity-button :focus-within,.input-text:active,.input-text:hover,.input-text:focus-within,.rollie_form_input:active, .rollie_form_input:hover,.rollie_form_input { background: ".rgba2rgb($rollie_form_input_color_backg)."; }");
 

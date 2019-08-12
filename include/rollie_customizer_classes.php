@@ -1072,3 +1072,100 @@ class Rollie_Gradient {
 				return $css_snippet_all;
 			}
 		}
+
+class Rollie_Border{
+public $customizer_section_description;
+public $customizer_section_title; 
+private $border_set_name;
+private $panel_flag;
+private $customizer_section;
+
+	public function __construct($border_set_name, $customizer_section,$customizer_section_title,$customizer_section_description = '',$panel_flag = false){
+	$this->border_set_name ='rollie_border_'.$border_set_name;
+	$this->customizer_section = $customizer_section;
+	$this->panel_flag = $panel_flag;
+	$this->customizer_section_title = $customizer_section_title ;
+	$this->customizer_section_description = $customizer_section_description ;
+	}
+
+	public function add_customizer_controls() {
+	
+		global $wp_customize;
+		if ($this->panel_flag){
+
+			$wp_customize->add_section(
+				$this->border_set_name.'_section',
+				array(
+					'title'   =>$this->customizer_section_title,
+					'panel'    => $this->customizer_section,
+					'priority' => 20,
+				)
+			);
+			$this->customizer_section = $this->border_set_name.'_section';
+		}else{
+			$wp_customize->add_setting($this->border_set_name.'_collapse');
+			$wp_customize->add_control(
+			new Rollie_Customizer_Collapse_Label_Control(
+				$wp_customize,
+				$this->border_set_name.'_collapse',
+				array(
+					'label'   =>$this->customizer_section_title,
+					'section' => $this->customizer_section,
+					'input_attrs'=> array (
+					'rollie_collapse_elements_number'=> 2,
+					'rollie_open_close_auto'=>true,
+					)
+				)
+				)
+			);
+		}
+				$wp_customize->add_setting(
+				$this->border_set_name.'_w',
+				array(
+					'default'           => '2,2,2,2',
+					'sanitize_callback' => 'rollie_sanitize_css_ruler',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Rollie_Css_Ruler_Control(
+					$wp_customize,
+					$this->border_set_name.'_w',
+					array(
+						'label'   =>__( 'Border width:', 'Rollie' ),
+						'description'   => $this->customizer_section_description,
+						'section' =>$this->customizer_section,
+						'input_attrs'=>array(
+							'type'=>'b-width',
+						)
+					)
+				)
+			);	
+			$wp_customize->add_setting(
+				$this->border_set_name.'_rad',
+				array(
+					'default'           => '2,2,2,2',
+					'sanitize_callback' => 'rollie_sanitize_css_ruler',
+				)
+			);
+			$wp_customize->add_control(
+				new Rollie_Css_Ruler_Control(
+					$wp_customize,
+					$this->border_set_name.'_rad',
+					array(
+						'label'   => esc_html__( 'Border Radius:', 'Rollie' ),
+						'section' => $this->customizer_section,
+						'input_attrs'=>array(
+							'type'=>'b-width',
+						)
+					)
+				)
+			);	
+		
+			
+	}
+		public function css_snippet(){
+			return "\n  border-style:solid;\nborder-width:".str_replace(",","px ",get_theme_mod($this->border_set_name.'_w','2,2,2,2').',').";\n  border-radius:".str_replace(",","px ",get_theme_mod($this->border_set_name.'_rad','2,2,2,2').',').";\n";
+		}
+}
+

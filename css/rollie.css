@@ -1165,10 +1165,10 @@ left: 0;
 width: 100%;
 overflow: visible;
 }
-.header_wraper{
+.rollie_header_wrapper {
 	display: flex;
 }
-.header_wraper > header
+.rollie_header_wrapper  > header
 {
 	height: max-content;
 }

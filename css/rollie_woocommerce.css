@@ -519,7 +519,9 @@ padding-right: 15px;
 padding-left: 15px;
 }
 
-
+.woocommerce-MyAccount-content > .row{
+	height: 450px;
+} 
 
 
 
@@ -553,7 +555,9 @@ z-index: 100;
 position: absolute;
 right: 0;
 clear: both;
+
 }
+
 #rollie_nav_user_info .rollie_my_acc_nav_side_c{
 	top:0;
 	left: 0;
@@ -565,10 +569,7 @@ display: flex;
 align-items: center;
 }
 
-#rollie_nav_user_info .rollie_woo_order_table_banner > img{
-	height: 36px;
-	width: 36px;
-} 
+
 
 #rollie_nav_user_info .rollie_my_acc_nav_name,#rollie_nav_user_info .rollie_my_acc_nav_email{
 	display: none;
