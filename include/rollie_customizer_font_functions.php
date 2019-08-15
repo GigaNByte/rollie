@@ -79,9 +79,8 @@ new Rollie_Image_Size('thumbnail',__('Thumbnail Images Sizes','rollie'),'',array
 )),
 );
 $rollie_border_data = array(
-'comments'=> new Rollie_Border('comments','rollie_borders_section',__('Comments','rollie')),
-'sections'=> new Rollie_Border('sections','rollie_borders_section',__('Page Sections','rollie')),
-'tables'=> new Rollie_Border('tables','rollie_borders_section',__('Tables','rollie')),
+'sections'=> new Rollie_Border('sections','rollie_borders_section',__('Global Border Settings','rollie'),__('This control sets border settings for elements which has no assigned customizer controls like Top Navbar Menu Items','rollie')),
+'tables'=> new Rollie_Border('tables','rollie_borders_section',__('Tables, Comments & Page Sections','rollie')),
 'buttons'=> new Rollie_Border('buttons','rollie_buttons_section',__('Button Border','rollie')),
 'inputs'=> new Rollie_Border('inputs','rollie_forms_inputs_section',__('Inputs Border','rollie')),
 'images'=> new Rollie_Border('images','rollie_img_panel',__('Images Border','rollie'),'',true),

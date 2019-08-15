@@ -26,10 +26,8 @@
 					echo "</nav>";
 				}
 				?>
-					<button class="navbar-toggler m-2 rollie_navbar_toggler" type="button" data-toggle="collapse" data-target="#rollie_nav_top_2" aria-controls="rollie_nav_top_2" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon">
+					<button class="navbar-toggler m-2 rollie_navbar_toggler" type="button" data-toggle="collapse" data-target="#rollie_nav_top_2" aria-controls="rollie_nav_top_2" aria-expanded="false" aria-label="Toggle navigation">		
 							<i class="fas fa-bars"></i>
-						</span>
 					</button>
 
 					<?php
@@ -68,7 +66,7 @@
 						 'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',			
 						'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap rollie_nav_top_2_js ' . $rollie_navbar_align,
 						'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
-						'depth'           => '3',
+						'depth'           => '6',
 
 					));
 

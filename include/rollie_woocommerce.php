@@ -1432,10 +1432,8 @@ function woocomerce_rollie_nav_top_icons_colapsed(){
 <div class="collapse rollie_navbar_color  col-8 col-md-3 p-0" id="rollie_nav_user_info">
 <?php	
 if (is_user_logged_in()){
-  do_action( 'woocommerce_account_navigation' );   }else{
-?>	
-
-<?php 
+  do_action( 'woocommerce_account_navigation' );   
+}else{
 rollie_action_woo_before_account_navigation();
 rollie_action_woo_after_account_navigation();
 } ?>

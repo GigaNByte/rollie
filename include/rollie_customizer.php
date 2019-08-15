@@ -1550,7 +1550,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_embl_section',
 		array(
-			'title'    => __( 'Line Embellishments Design', 'Rollie' ),
+			'title'    => __( 'Border Line Embellishments Design', 'Rollie' ),
 			'panel'    => 'rollie_color_design_panel',
 			'priority' => 30,
 		)
@@ -2746,7 +2746,7 @@ $wp_customize->add_section(
 	$wp_customize->add_section(
 		'rollie_borders_section',
 		array(
-			'title'    => esc_html__( 'Page Sections, Tables, Comments', 'Rollie' ),
+			'title'    => esc_html__( 'Page Sections, Tables Borders', 'Rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)

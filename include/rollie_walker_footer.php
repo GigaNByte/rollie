@@ -44,8 +44,7 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 		$menu = wp_get_nav_menu_object( $args->menu );
 		$rollie_footer_logo = esc_url(get_theme_mod( 'rollie_footer_menu_logo' ));
 		$rollie_caption_1 = get_theme_mod( 'rollie_footer_logo_desc_text' );
-		$theme_locations = get_nav_menu_locations();
-		$theme_location = 'Footer_Menu';
+
 
 
 		if ( $this->isfirstrow && $rollie_footer_logo ) {
@@ -57,12 +56,11 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 
 			$output     .= '<div class=" col-lg-4 col-md-6 p-0  rollie_footer_col  align-middle rollie_subtitle_text_color rollie_f_footer_sub  rollie_logo_footer_menu">';
 			$output     .= '<a  href="'.esc_url( home_url( '/' ) ).'">';
-			
 			$output     .= '<img alt="'.get_the_title(attachment_url_to_postid($rollie_footer_logo)).'" srcset="' .$rollie_footer_logo.' 1x'.$rollie_retina_footer.'">';
-
 			$output		.= '</a>';
+
 			if ( $rollie_caption_1 ) {
-				$output .= '<p class=" rollie_footer_menu_caption rollie_flex_text_center ">' . $rollie_caption_1 . '</p>';
+			$output .= '<p class=" rollie_footer_menu_caption rollie_flex_text_center ">' . $rollie_caption_1 . '</p>';
 
 			}
 			$output .= '</div>';
@@ -96,30 +94,19 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
 			$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
 
-
-
 			$output     .= $indent . '<div' . $id . $value . $class_names . $li_attributes . '>';
+
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
-			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-
-
-						
-				$attributes .= ' class="nav-link rollie_second_text_color rollie_footer_nav_link dropdown-toggle '.rollie_embl_footer().'"';
-			
-
+			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';		
+			$attributes .= ' class="nav-link rollie_second_text_color rollie_footer_nav_link dropdown-toggle '.rollie_embl_footer().'"';
 			$attributes .= ' data-target="#" data-toggle="dropdown"';
 
 			$item_output = $args->before;
-		
-		
-
 			$item_output .= '<a ' . $attributes . ' >';
-	
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-
-			$item_output .= ( $depth == 0 && $args->walker->has_children ) ? ' </a>' : '</a>';
+			$item_output .= '</a>';
 
 		
 			
@@ -140,12 +127,9 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$attributes .= 'class="dropdown-item  rollie_subtitle_text_color rollie_f_footer_sub rollie_footer_dropdown_item"';
 
 			$item_output = $args->before;
-
 			$item_output .= '<a ' . $attributes . '>';
-
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $depth == 0 && $args->walker->has_children ) ? ' </a>' : '</a>';
-
+			$item_output .= '</a>';
 			$item_output .= $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
@@ -158,7 +142,6 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 				$output .= '</div>';
 				$this->counter = 0;
 			}
-	
 
 			$classes[] = 'nav-item';
 			$classes[] = 'rollie_footer_nav_item';
@@ -166,43 +149,27 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$classes[] = 'col-md-3';
 			$classes[] = 'rollie_footer_col';
 
-
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 			$class_names = ' class="' . esc_attr( $class_names ) . '"';
 
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
 			$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
 
-
-
-
-
 			$output .= $indent . '<div' . $id . $value . $class_names . $li_attributes . '>';
-
 
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-
 			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_footer_nav_link'.rollie_embl_footer().'"';
 
 			$item_output = $args->before;
-		
-	
-
 			$item_output .= '<a ' . $attributes . '>';
-	
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
-
-
-			
-
 			$item_output .= $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-
 
 		}
 
@@ -215,12 +182,9 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 
 			$attributes .= 'class="dropdown-item rollie_subtitle_text_color rollie_f_footer_sub rollie_footer_dropdown_item"';
 			$item_output = $args->before;
-
 			$item_output .= '<a ' . $attributes . '>';
-
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $depth == 0 && $args->walker->has_children ) ? ' </a>' : '</a>';
-
+			$item_output .= '</a>';
 			$item_output .= $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
