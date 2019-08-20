@@ -19,6 +19,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu
         if (($depth == 0)) {
             $classes = array(
                 'dropdown-menu',
+                'px-1',
                 'rollie_navbar_color',
                 'rollie_dropdown_menu'
             );
@@ -56,11 +57,10 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu
             }
             $this->dropdown_opened = 0;
             $this->dropdown_opened++;
-            $classes[]                = 'nav-item';   
+            $classes[] = 'nav-item';   
             $classes[] = 'rollie_nav_item';
             $classes[] = 'dropdown';
-            $classes[] = 'm-2';
-            $classes[] = 'px-2';
+            $classes[] = 'p-2';
             $classes[] = 'rollie_item_min_w';
             
             $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
@@ -121,8 +121,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu
             $this->dropdown_opened = 0;
             
             $classes[] = 'nav-item';
-            $classes[] = 'm-2';
-            $classes[] = 'px-2';
+            $classes[] = 'p-2';
             $classes[] = 'rollie_item_min_w';
             $classes[] = 'rollie_nav_item';
             
@@ -152,8 +151,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu
             $classes[] = 'nav-item';
             $classes[] = 'rollie_nav_item';
             $classes[] = 'subdropdown';
-            $classes[] = 'm-2';
-            $classes[] = 'px-2';
+            $classes[] = 'p-2';
             $classes[] = 'rollie_item_min_w';
             
             $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));

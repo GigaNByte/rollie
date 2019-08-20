@@ -1058,30 +1058,7 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_setting(
-		'rollie_footer_logo_desc_text',
-		array(
-			'default'           => '',
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'wp_kses_post',
-		)
-	);
 
-	$wp_customize->add_control(
-		new Skyrocket_TinyMCE_Custom_control(
-			$wp_customize,
-			'rollie_footer_logo_desc_text',
-			array(
-				'label'       => __( 'Footer logo description text' ),
-				'description' => __( 'Text will be displayed under or next to footer logo' ),
-				'section'     => 'rollie_footer_section',
-				'input_attrs' => array(
-					'toolbar1' => 'bold italic bullist numlist alignleft aligncenter alignright link',
-					'toolbar2' => 'formatselect outdent indent | blockquote charmap',
-				),
-			)
-		)
-	);
 
 	$wp_customize->add_setting(
 		'rollie_footer_caption_text',
@@ -1107,25 +1084,7 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-		$wp_customize->add_setting(
-			'rollie_footer_menu_logo',
-			array(
-				'default'           => '',
-				'sanitize_callback' => 'esc_url_raw',
 
-			)
-		);
-
-	$wp_customize->add_control(
-		new WP_Customize_Image_Control(
-			$wp_customize,
-			'rollie_footer_menu_logo',
-			array(
-				'label'   => __( 'Footer menu logo', 'rollie' ),
-				'section' => 'rollie_footer_section',
-			)
-		)
-	);
 
 
 

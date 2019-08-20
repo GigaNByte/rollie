@@ -1,13 +1,10 @@
 <?php
-
-
 /**
  * The template for displaying all pages
  *
  * This is the template displays single page
  *
  * @package
- * @subpackage
  * @since 1.0
  * @version 1.0
  */
@@ -31,11 +28,11 @@ endif;?>
 if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
 
         echo "<aside class='rollie_sidebar_right ".$rollie_sidebar_col." '>";// offset-1
-        dynamic_sidebar( 'sidebar_right' );
+        dynamic_sidebar( 'rollie_sidebar_right' );
         echo '</aside>';
     }
     rollie_pagination();
-    get_sidebar( 'bottom_1' );
+    get_sidebar( );
     ?>
 </div>
 <?php get_footer(); ?>

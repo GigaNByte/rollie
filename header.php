@@ -1,24 +1,46 @@
-
+<?php
+/**
+ * The template for displaying the header
+ *
+ * Displays all of the head element and everything up until the page header div.
+ *
+ * @package rollie
+ * @author sqnchy
+ * @since Rollie 1.0
+ */ 
+?>
 <!doctype html>
-<html>
+<html <?php language_attributes(); ?>>
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width , initial-scale=1">
-	<title>Rollie theme</title>
-
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
+		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<?php endif; ?>
 	<?php wp_head(); ?>
 
 </head>	
 
-<body class=" <?php echo 'body_page_id-' . get_queried_object_id(); ?>">
+<body <?php body_class(); ?>">
+<?php 
+if ( ! function_exists( 'wp_body_open' ) ) {
+        function wp_body_open() {
+                do_action( 'wp_body_open' );
+        }
+}
+?>
 	<div class='rollie_main_color rollie_background_color_div'></div>
 	<?php
-		if (get_theme_mod('rollie_menu_position',false)){
+
+		if (!get_theme_mod('rollie_menu_position',false)){
 				require get_template_directory().'/include/rollie_navbar.php' ;
 		} 
 	?>
 	<div class="rollie_header_container row p-0 ">
 		<?php 
-		if (!get_theme_mod('rollie_menu_position',false)){
+		if (get_theme_mod('rollie_menu_position',false)){
 			require get_template_directory().'/include/rollie_navbar.php' ;
 		}
 

@@ -50,18 +50,12 @@ rollie_pagination();
 
 if ( is_active_sidebar( 'sidebar_right' && $rollie_allow_sidebars ) ) {
 		echo "<aside class='rollie_sidebar_right ".$rollie_sidebar_col." '>";// offset-1
-		dynamic_sidebar( 'sidebar_right' );
+		dynamic_sidebar( 'rollie_sidebar_right' );
 		echo '</aside >';
 	}
-	get_sidebar( 'bottom_1' );
-	if ( is_archive() ) {
-		if ( is_active_sidebar( 'sidebar_bottom_archive' ) ) {
-			echo '<section class="row rollie_sidebar_bottom">';
-			dynamic_sidebar( 'sidebar_bottom_archive' );
-			echo '</section>';
-		}
-	}?>
+	get_sidebar( );
 
+	get_footer();
 
-	<?php	get_footer();?>
+?>
 	

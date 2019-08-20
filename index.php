@@ -38,18 +38,12 @@ endif;
 	if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
 		 $rollie_sidebar_col = 'col-'.get_theme_mod('rollie_posts_page_l_sidebar_size',2);
 		echo "<aside class='rollie_sidebar_right ".$rollie_sidebar_col." '>";
-		dynamic_sidebar( 'sidebar_right' );
+		dynamic_sidebar( 'rollie_sidebar_right' );
 		echo '</aside>';
 	}
 	rollie_pagination();
-	get_sidebar( 'bottom_1' );
-	if ( is_archive() ) {
-		if ( is_active_sidebar( 'sidebar_bottom_archive' ) ) {
-			echo '<section class="row rollie_sidebar_bottom">';
-				dynamic_sidebar( 'sidebar_bottom_archive' );
-			echo '</section >';
-		}
-	}
+	get_sidebar( );
+
 
 	?>
 </div>

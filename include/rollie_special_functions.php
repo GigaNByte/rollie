@@ -21,7 +21,7 @@ function rollie_navbar_icon(){
 			$rollie_retina_navbar = ', '.wr2x_get_retina_from_url( get_theme_mod( 'rollie_menu_top_logo' )).' 2x';
 		}
 
-		echo     '<a class="rollie_nav_top_logo m-auto" href="'.esc_url( home_url( '/' ) ).'">';
+		echo     '<a class="rollie_nav_top_logo m-auto px-2" href="'.esc_url( home_url( '/' ) ).'">';
 		$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' ))) ;
 		echo "<img class='p-1  m-auto d-block' srcset='" .esc_url(get_theme_mod( 'rollie_menu_top_logo' ))." 1x".$rollie_retina_navbar."' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
 		if(get_theme_mod('rollie_menu_top_logo_title',false)){

@@ -5,7 +5,7 @@ if (has_post_format('quote')) $rollie_post_format_css .= ' text-italics';
 if (has_post_format(array('status'))) $rollie_post_format_css = 'rollie_f_subtitles_h4 text-left';
 ?>
 
-<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt <?php echo $rollie_post_format_css; ?>"> 
+<div class="rollie_main_theme_text_color  rollie_post_excerpt rollie_f_excerpt <?php echo $rollie_post_format_css; ?>"> 
 
 	<?php 
 	if ( !isset($rollie_post_display_style_classes[ $rollie_current_style ]['post_excerpt_lenght'] ) || $rollie_post_display_style_classes[ $rollie_current_style ]['post_excerpt_lenght'] === 'full' ) {

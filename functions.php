@@ -185,62 +185,61 @@ foreach ($rollie_img_data as  $rollie_img_set_data) {
 add_filter( 'rollie_is_active_sidebar', 'is_active_sidebar', 10, 2 ); 
 function rollie_widget_setup() {
 
-	register_sidebar(
-		array(
-
-			'name'          => 'Sidebar_right',
-			'id'            => 'sidebar_right',
+	register_sidebar(array(
+			'name'          => __('Sidebar Right','rollie'),
+			'id'            => 'rollie_sidebar_right',
 			'class'         => 'rollie_sidebar_right',
 			'descripton'    => 'Its a sidebar right',
-
 			'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h3 class="widget-title">',
 			'after_title'   => '</h3>',
+	));
+	register_sidebar(array(
+			'name'          => __('Sidebar Left','rollie'),
+			'id'            => 'rollie_sidebar_left',
+			'class'         => 'rollie_sidebar_left',
+			'descripton'    => 'Its a sidebar left',
+			'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+	));
+	register_sidebar(array(
+		'name'          => __('Sidebar Bottom','rollie'),
+		'id'            => 'rollie_sidebar_bottom',
+		'class'         => 'rollie_sidebar_bottom',
+		'descripton'    => 'Its a widget area at bottom of page',
 
-		)
-	);
-		register_sidebar(
-			array(
-
-				'name'          => 'Sidebar_left',
-				'id'            => 'sidebar_left',
-				'class'         => 'rollie_sidebar_left',
-				'descripton'    => 'Its a sidebar left',
-
-				'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<h3 class="widget-title">',
-				'after_title'   => '</h3>',
-			)
-		);
-			register_sidebar(
-				array(
-
-					'name'          => 'Sidebar_bottom',
-					'id'            => 'sidebar_bottom',
-					'class'         => 'rollie_sidebar_bottom',
-					'descripton'    => 'Its a widget area at bottom of page',
-
-					'before_widget' => '<div id="%1$s" class="widget %2$s p-0 m-0 rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
-					'after_widget'  => '</div>',
-					'before_title'  => '<h1 class="widget-title">',
-					'after_title'   => '</h1>',
-				)
-			);
-				register_sidebar(
-					array(
-
-						'name'          => 'Sidebar_bottom_archive',
-						'id'            => 'sidebar_bottom_archive',
-						'class'         => 'rollie_sidebar_bottom',
-						'descripton'    => 'Its a widget area for archive page at bottom of page',
-						'before_widget' => '<div id="%1$s" class="widget %2$s  p-0 m-0   rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
-						'after_widget'  => '</div>',
-						'before_title'  => '<h1 class="widget-title">',
-						'after_title'   => '</h1>',
-					)
-				);
+		'before_widget' => '<div id="%1$s" class="widget %2$s p-0 m-0 rollie_f_widget  col-lg-3 col-md-4 col-xs-12 col-sm-6">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h1 class="widget-title">',
+		'after_title'   => '</h1>',
+	));
+	register_sidebar( array(
+	'name'          => __('Top Navbar Widget Area','rollie'),
+	'id'            => 'rollie_widgetarea_navbar',
+	'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
+	'after_widget'  => '</div>',
+	'before_title'  => '<h3 class="widget-title">',
+	'after_title'   => '</h3>',
+	));
+	register_sidebar( array(
+	'name'          => __('Side Footer Menu Widget Area','rollie'),
+	'id'            => 'rollie_widgetarea_footer_side',
+	'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
+	'after_widget'  => '</div>',
+	'before_title'  => '<h3 class="widget-title">',
+	'after_title'   => '</h3>',
+	));
+	register_sidebar( array(
+	'name'          => __('Bottom Footer Widget Area','rollie'),
+	'id'            => 'rollie_widgetarea_footer_bottom',
+	'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
+	'after_widget'  => '</div>',
+	'before_title'  => '<h3 class="widget-title">',
+	'after_title'   => '</h3>',
+	));
 
 }
 function rollie_custom_setup() {
