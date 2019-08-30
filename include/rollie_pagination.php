@@ -43,7 +43,7 @@ global $paged;
 		
 	if ( 1 != $pages ) {
 
-		echo '<nav class=" m-2 col-12 rollie_pagination rollie_f_b_f" aria-label="Page navigation" role="navigation" >';
+		echo '<nav class=" p-3 col-12 rollie_pagination rollie_f_b_f" aria-label="Page navigation" role="navigation" >';
 		echo '<span class="sr-only">Page navigation</span>';
 		echo '<ul class=" m-0 pagination rollie_pagination justify-content-center ft-wpbs">';
 

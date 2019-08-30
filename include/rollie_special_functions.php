@@ -93,9 +93,13 @@ foreach ($rollie_sizes as $size) {
   $image_srcset .=  "<img sizes='100%' class='".$class."'".$image_alt."src='".wp_get_attachment_image_url($image_id,$limit)."'>";
   $image_srcset .=  "</picture>";
 
+if (class_exists('A3_Lazy_Load')){
+	return apply_filters( 'a3_lazy_load_html',$image_srcset,null);
+}else{
+	return $image_srcset;
+}
 
-return $image_srcset;
-
+	
 }
 
 function rollie_post_foreground ($rollie_current_style) {
@@ -124,6 +128,7 @@ function rollie_post_foreground ($rollie_current_style) {
 					if (isset($rollie_parts[0])){
 						$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[0], 'full' );
 						$html .=  "<img class=' h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[0])."'/>";
+						
 					}
 
 					$html .= "</div>"; 
@@ -131,7 +136,7 @@ function rollie_post_foreground ($rollie_current_style) {
 					
 					if (isset($rollie_parts[1])){
 						$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[1], 'full' );
-						$html .=  "<img class=' h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[1])."'/>";
+						$html .=   "<img class=' h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[1])."'/>";
 					}
 
 					$html .= "</div>"; 
@@ -139,7 +144,7 @@ function rollie_post_foreground ($rollie_current_style) {
 					
 					if (isset($rollie_parts[2])){
 						$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[2], 'full' );
-						$html .=  "<img class='h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[2])."'/>";
+						$html .= "<img class='h-100 rollie_post_thumbnail  ' src='".$rollie_attachment[0]."' alt='".get_the_title($rollie_parts[2])."'/>";
 					}
 
 					$html .= "</div>";
@@ -181,8 +186,12 @@ function rollie_post_foreground ($rollie_current_style) {
 		if (!empty($html)){
 			$html = "<a href='".get_page_link()."'>".$html."</a>";	
 		}
-		
+	if (class_exists('A3_Lazy_Load')){
+		return apply_filters( 'a3_lazy_load_html',$html ,null);
+	}else{
 		return  $html;
+	}
+		
 }
 
 function rollie_page_template_sufix(){
@@ -518,4 +527,7 @@ function rollie_text_align_f($align)
 		default:
 		return ""; 
 	}
-}	
+}
+
+
+

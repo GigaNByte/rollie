@@ -345,59 +345,65 @@ $rollie_sufix='_'.$rollie_sufix;
 					)
 				)
 			);
-						$wp_customize->add_setting(
-			'rollie_post_page_masonry_size'.$rollie_sufix,
-			array(
-				'default'           => 33,
-				'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
+			$rollie_masonry_breakpoints = array('lg','sm','xs');
+			$rollie_size_labels = array('lg'=>__('Large desktops','rollie'),'sm'=>__('Medium Devices','rollie'),'xs'=>__('Phones','rollie'));
+  		$input_attrs_device = array('switch_size'=>'big','rollie_multiple_switch_cc' => 'rollie_grid_type'.$rollie_sufix.'-2');
+		foreach ($rollie_masonry_breakpoints as  $size) {
+			$input_attrs_device[$size] = true;
+			$input_attrs_device['collapse_target_'.$size] ='#customize-control-'.'rollie_post_page_masonry_size'.$size.$rollie_sufix;
+		}
 
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_post_page_masonry_size'.$rollie_sufix,
+		$wp_customize->add_setting(
+			   'rollie_post_page_masonry_size'.$rollie_sufix.'_device',
 			array(
-				'label'       =>__( 'Masonry single post width (%)' ,'rollie'),
-				'section'     => 'rollie_post_page'.$rollie_sufix,
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 50,
-					'step' => 1,
-				'rollie_multiple_switch_cc' => 'rollie_grid_type'.$rollie_sufix.'-2'
-				),			
-			)
-			)	
-	);
-							$wp_customize->add_setting(
-			'rollie_post_page_masonry_size_m'.$rollie_sufix,
-			array(
-				'default'           => 33,
-				'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
-			)
-		);
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 1,
 
-	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
-			$wp_customize,
-			'rollie_post_page_masonry_size_m'.$rollie_sufix,
-			array(
-				'label'       => __( 'Masonry single post width for smaller devices (%)','rollie' ),
-				'section'     => 'rollie_post_page'.$rollie_sufix,
-				'input_attrs' => array(
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-				'rollie_multiple_switch_cc' => 'rollie_grid_type'.$rollie_sufix.'-2'
-				),
-									
 			)
-			)
-	);			
+		);	
+
+			$wp_customize->add_control(
+	        new Rollie_Device_Control(
+	        $wp_customize,
+	       'rollie_post_page_masonry_size'.$rollie_sufix.'_device',
+		        array(		        
+		       	'section' => 'rollie_post_page'.$rollie_sufix,
+		    	'input_attrs'=>$input_attrs_device,
+		    	'label'=> __('Rollie Single Masonry Post Width','rollie'),
+		    )));
+			
+		foreach ($rollie_masonry_breakpoints as $size) {
+
+			$wp_customize->add_setting(
+				'rollie_post_page_masonry_size'.$size.$rollie_sufix,
+				array(
+					'default' => 33,
+					'transport' =>'refresh',
+					'sanitize_callback' => 'skyrocket_sanitize_integer',
+				)
+			);
+			$wp_customize->add_control(
+				new Skyrocket_Slider_Custom_Control(
+				$wp_customize,
+				'rollie_post_page_masonry_size'.$size.$rollie_sufix,
+				array(
+					'label'       => $rollie_size_labels[$size].' '.__('width (%)' ,'rollie'),
+					'section'     => 'rollie_post_page'.$rollie_sufix,
+					'input_attrs' => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					'rollie_multiple_switch_cc' => 'rollie_grid_type'.$rollie_sufix.'-2'
+					),			
+				))	
+			);
+		}
+		
+
+
+		
 				$wp_customize->add_setting(
-			'rollie_post_page_masonry_ma'.$rollie_sufix,
+			'rollie_post_page_masonry_gutter'.$rollie_sufix,
 			array(
 				'default'           => 3,
 				'transport' =>'refresh',
@@ -408,7 +414,7 @@ $rollie_sufix='_'.$rollie_sufix;
 	$wp_customize->add_control(
 		new Skyrocket_Slider_Custom_Control(
 			$wp_customize,
-			'rollie_post_page_masonry_ma'.$rollie_sufix,
+			'rollie_post_page_masonry_gutter'.$rollie_sufix,
 			array(
 				'label'       => __( 'Masonry gutter between posts (px)' ,'rollie'),
 				'section'     => 'rollie_post_page'.$rollie_sufix,
@@ -1058,6 +1064,24 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'rollie_footer_collapse',
+		array(
+			'default'           => true,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+		)
+	);
+	$wp_customize->add_control(
+		new Skyrocket_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_footer_collapse',
+			array(
+				'label'   =>__( 'Collapsing Footer Style', 'rollie' ),
+				'section' => 'rollie_footer_section',
+			)
+		)
+	);
 
 
 	$wp_customize->add_setting(
@@ -1074,8 +1098,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_footer_caption_text',
 			array(
-				'label'       => __( 'Footer caption text' ),
-				'description' => __( 'Text will be below footer navigation' ),
+				'label'       => __( 'Footer caption text', 'rollie' ),
+				'description' => __( 'Text will be shown below footer navigation', 'rollie'  ),
 				'section'     => 'rollie_footer_section',
 				'input_attrs' => array(
 					'toolbar1' => 'bold italic bullist numlist alignleft aligncenter alignright link',
@@ -2380,6 +2404,23 @@ $wp_customize->add_section(
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
+
+	$wp_customize->add_setting(	'rollie_navbar_colors_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_navbar_colors_label',
+		array(
+			'label'   => esc_html__( 'Navbar Text Colors', 'rollie' ),
+			'section'       => 'rollie_navbar_section',
+			'input_attrs'=> 
+			array (
+			'rollie_collapse_elements_number'=> 2,
+			'rollie_open_close_auto'=>true
+			)
+		)
+	));
+
 	$wp_customize->add_setting(
 		'rollie_navbar_text_color',
 		array(
@@ -2516,7 +2557,7 @@ $wp_customize->add_section(
 		$wp_customize->add_setting(
 			'rollie_menu_design',
 			array(
-				'sanitize_callback' => 'rollie_sanitize_radio',
+				'sanitize_callback' => 'rollie_sanitize_select',
 				'default'           => 'full',
 
 			)
@@ -2527,7 +2568,7 @@ $wp_customize->add_section(
 			array(
 				'label'   => esc_html__( 'Navbar menu design', 'Rollie' ),
 				'section' => 'rollie_navbar_section',
-				'type'    => 'radio',
+				'type'    => 'select',
 				'choices' => array(
 					'full' => esc_html__( 'Full width collapse', 'rollie' ),
 					'side' => esc_html__( 'Left side collapse', 'rollie' ),

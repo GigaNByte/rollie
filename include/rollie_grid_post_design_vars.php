@@ -14,17 +14,18 @@ if ( $rollie_allow_sidebar_r && $rollie_allow_sidebar_l && $rollie_allow_sidebar
 } else {
 	$rollie_post_display_style_classes [2]['first_div_col'] = ' col-6 col-md-4 p-2 p-md-auto ' . $rollie_m_a;
 }
-if (get_theme_mod('rollie_grid_type',1)==2){
+
+if (get_theme_mod('rollie_grid_type'.$rollie_template ,1)==2){
 	$rollie_post_display_style_classes [0]['first_div_col'] = ' rollie_grid_item ' ;
 	$rollie_post_display_style_classes [1]['first_div_col'] = ' rollie_grid_item ' ;
 	$rollie_post_display_style_classes [2]['first_div_col'] = ' rollie_grid_item ' ;
 }
 
-
-
 $rollie_post_display_style_classes [0]['second_div_col_classic'] = ' col-5 ';
 $rollie_post_display_style_classes [1]['second_div_col_classic'] = ' col-lg-5 col-6 ';
 $rollie_post_display_style_classes [2]['second_div_col_classic'] = ' col-12 col-md-7 col-lg-6 ';
+
+
 
 
 

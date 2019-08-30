@@ -212,7 +212,13 @@ $wrapper_classes   = apply_filters( 'woocommerce_single_product_image_gallery_cl
 			$html = rollie_get_gallery_image_html( $post_thumbnail_id, true );
 		} else {
 			$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
-			$html .= sprintf( '<img src="%s" alt="%s" class=" rollie_single_product_image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+		
+if (class_exists('A3_Lazy_Load')){
+	$html .= apply_filters( 'a3_lazy_load_html',sprintf( '<img src="%s" alt="%s" class=" rollie_single_product_image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) ),null);
+}else{
+	$html .= sprintf( '<img src="%s" alt="%s" class=" rollie_single_product_image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+}
+			
 			$html .= '</div>';
 		}
 echo $html;
@@ -329,9 +335,13 @@ $html .= "</div>";
   $html .= '<div class="rollie_single_product_swiper_container rollie_swiper swiper-container swiper-container-horizontal"><a class="rollie_swiper swiper-slide  " href="' . esc_url( $full_src[0] ) . '"><div  class="rollie_zoom_image" data-thumb="' . esc_url( $thumbnail_src[0] ) . '" class="woocommerce-product-gallery__image ">' . $image . '</div></a></div>';
 	}else{
 			$html  = '<div class="woocommerce-product-gallery__image--placeholder">';
+		if (class_exists('A3_Lazy_Load')){
+			$html .= apply_filters( 'a3_lazy_load_html',sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) ),null);
+		}else{	
 			$html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
-			$html .= '</div>';
 		}
+			$html .= '</div>';
+	}
  
 
   return $html;

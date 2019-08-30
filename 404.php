@@ -3,7 +3,9 @@
  get_header();?>
  	
  	</div><!-- closing page head from header.php-->
+ <?php	if (get_theme_mod('rollie_footer_collapse',true)){?>
  		 <div class="rollie_content_container_padding_bottom">
+<?php 	} ?>
 				
  		 
 

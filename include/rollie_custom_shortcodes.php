@@ -17,7 +17,7 @@ function rollie_custom_gallery( $string, $attr ) {
 
 		foreach ( $posts as $imagePost ) {
 			$output .= "<div class='swiper-slide rollie_post_thumbnail_img'>";
-			$output .= "<img src='" . wp_get_attachment_image_src( $imagePost->ID, 'full' )[0] . "'    alt='".get_the_title($imagePost->ID)."' />";
+			$output .= "<img src='" . wp_get_attachment_image_src( $imagePost->ID, 'full' )[0] . "' alt='".get_the_title($imagePost->ID)."' />";
 			$output .= "</div>";
 		}
 

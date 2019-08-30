@@ -47,8 +47,7 @@ global $wp_customize;
 	        new Rollie_Device_Control(
 	        $wp_customize,
 	         $this->img_set_name.'_device',
-		        array(
-		        
+		        array(		        
 		       	'section' => $this->customizer_section,
 		    	'input_attrs'=>$input_attrs_device,
 

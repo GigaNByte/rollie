@@ -160,7 +160,7 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_footer_nav_link'.rollie_embl_footer().'"';
+			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_f_footer rollie_footer_nav_link'.rollie_embl_footer().'"';
 
 			$item_output = $args->before;
 			$item_output .= '<a ' . $attributes . '>';

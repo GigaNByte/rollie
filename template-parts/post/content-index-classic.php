@@ -9,14 +9,16 @@ if(has_post_format(array('aside','status'))){
 
 
 
-<article class="rollie_posts_shadow " id="<?php echo 'post-' . get_the_ID(); ?>">
+
+
+<article class="rollie_posts_shadow rollie_post" id="<?php echo 'post-' . get_the_ID(); ?>">
 	<div  class=" <?php echo $rollie_article_wrapper; ?>" >
 		<?php
 		if (!has_post_format('status')){
 		 echo rollie_post_foreground($rollie_current_style);
 		}
 		 ?>
-		<div class=" <?php echo $rollie_post_wraper; ?> m-0 p-1" >
+		<div class=" <?php echo $rollie_post_wraper; ?> m-0 p-4" >
 		
 			<?php get_template_part( 'template-parts/special/content', 'display_cat' ); ?>
 			

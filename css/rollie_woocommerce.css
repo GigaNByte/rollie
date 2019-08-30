@@ -549,11 +549,15 @@ padding-left: 15px;
 }
 
 
+#rollie_nav_user_info.#rollie_nav_user_info *{
+	padding: 0 !important;
+	margin: 0  !important;
+}
 /*rollie_nav_top icons and colapses*/
 #rollie_nav_user_info,#rollie_nav_cart_info{
 z-index: 100;
 position: absolute;
-right: 0;
+right: 2rem;
 clear: both;
 
 }

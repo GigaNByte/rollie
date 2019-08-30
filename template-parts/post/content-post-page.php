@@ -12,7 +12,9 @@ require get_template_directory() .'/include/rollie_posts_pages_bootstrap_class_v
 ?>
 </div><!-- closing page head from header.php-->	
 
-<div class="rollie_content_container_padding_bottom"><!-- tag will be colosed in FOOTER.php if its woocomerce shop page you need to remowe sum hook -->
+<?php if (get_theme_mod('rollie_footer_collapse',true)){?>
+	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in footer.php more details about this container in footer.php-->
+<?php } ?>
 
  <div class=" row m-0">
  	<?php

@@ -117,7 +117,7 @@ if ( post_password_required() ) {
 
 		if ( ! empty( $rollie_links ) ) { ?>
 
-			<nav class="  m-1 rollie_pagination   rollie_f_b_f" aria-label="Comments Pagination" role="navigation">
+			<nav class=" p-3 rollie_pagination   rollie_f_b_f" aria-label="Comments Pagination" role="navigation">
 				<span class="sr-only"><?php _e('Page navigation','rollie'); ?></span>	
 				<ul class="pagination rollie_pagination justify-content-center m-0 ">
 

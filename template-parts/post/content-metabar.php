@@ -34,7 +34,7 @@ if ( comments_open() || ( get_the_tags() || ( $rollie_c_format && get_theme_mod(
 	?>
 	
 <div class="row m-0 p-0 rollie_f_meta d-flex">	
-		<div class="col-6 text-left pb-1  rollie_subtitle_text_color rollie_post_excerpt ">
+		<div class="col-6 text-left  rollie_subtitle_text_color rollie_post_excerpt ">
 			<div class="  rollie_icon_first  d-inline-block   m-1 ">	
 			
 			<?php
@@ -87,7 +87,7 @@ if ( comments_open() || ( get_the_tags() || ( $rollie_c_format && get_theme_mod(
 																							
 		</div>
 
-		<div class="col-6 text-right pb-1 rollie_subtitle_text_color rollie_post_excerpt  flex-row-reverse">
+		<div class="col-6 text-right  rollie_subtitle_text_color rollie_post_excerpt  flex-row-reverse">
 		<?php
 		if ( comments_open() ) {
 		$rollie_comments_num = get_comments_number();

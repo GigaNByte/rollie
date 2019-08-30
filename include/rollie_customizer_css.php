@@ -15,8 +15,8 @@ function rollie_customizer_css ()
 {	
 
 rollie_fonts_customizer_css();
-
-	$rollie_main_theme_color = new Rollie_Gradient ("rollie_main_theme_color", "#ffffff",'.rollie_main_color',array('background'));
+	
+	$rollie_main_theme_color = new Rollie_Gradient ("rollie_main_theme_color", "#ffffff",'.rollie_main_color,.rollie_grid_item',array('background'));
 
 	wp_add_inline_style( 'rollie_stylesheet', $rollie_main_theme_color->css_snippet());
 	$rollie_second_theme_color = new Rollie_Gradient ("rollie_second_theme_color", "#212121",'.rollie_second_color ,.rollie_footer.footer,.shop_table > thead ,.rollie_woo_order_table_banner, .rollie_top_menu_icons > button[aria-expanded="true"]',array('background'));
@@ -91,10 +91,8 @@ rollie_fonts_customizer_css();
 
 	global $rollie_border_data ;
 
-	if (get_theme_mod('rollie_grid_type',1)==2){
-		wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_size ,.rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size_m'.rollie_page_template_sufix(),33)."%;\n}\n@media (min-width: 768px) {\n.rollie_grid_size ,.rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size'.rollie_page_template_sufix(),50)."%;\n}\n}");
-		wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_item\n {\n padding: ".get_theme_mod('rollie_post_page_masonry_ma'.rollie_page_template_sufix(),3)."px;\n}");
-	}
+
+
 
 	if (get_theme_mod('rollie_shadow_posts')==true){
 		wp_add_inline_style( 'rollie_stylesheet'," .rollie_posts_shadow {box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
@@ -174,13 +172,23 @@ wp_add_inline_style('rollie_stylesheet',
 	".rollie_main_post_content\n{ padding-right:".get_theme_mod('rollie_posts_page_l_padding',3)."%;\n padding-left:".get_theme_mod('rollie_posts_page_l_padding',3)."%;\n\n}\n");
 wp_add_inline_style('rollie_stylesheet',
 	".rollie_single_page_content\n{ padding-right:".get_theme_mod('rollie_single_page_l_padding',3)."%;\n padding-left:".get_theme_mod('rollie_single_page_l_padding',3)."%;\n\n}\n");
+		
+		$rollie_masonry_breakpoints = array('lg','sm','xs');
 
 foreach (rollie_page_template_sufix_array() as  $sufix) {
-	wp_add_inline_style('rollie_stylesheet','.rollie_header_wrapper'.$sufix."\n{\n height:".get_theme_mod('rollie_header_height'.$sufix,60)."vh;\n}");
+	wp_add_inline_style('rollie_stylesheet','.rollie_header_wrapper'.$sufix."\n{\n min-height:".get_theme_mod('rollie_header_height'.$sufix,60)."vh;\n}");
+		if (get_theme_mod('rollie_grid_type'.$sufix,1)==2){
+		
+			wp_add_inline_style( 'rollie_stylesheet',"\n @media (min-width: 1280px) \n{\n.rollie_grid_size".$sufix.".rollie_grid_size ,.rollie_grid_size".$sufix."~ .rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size'.'lg'.$sufix,33)."%;\n}\n}");
+			wp_add_inline_style( 'rollie_stylesheet',"\n @media (min-width: 768px) and (max-width: 1279.98px)  \n{\n.rollie_grid_size".$sufix.".rollie_grid_size ,.rollie_grid_size".$sufix."~ .rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size'.'sm'.$sufix,33)."%;\n}\n}");
+			wp_add_inline_style( 'rollie_stylesheet',"\n @media (max-width: 767.98px) \n{\n.rollie_grid_size".$sufix.".rollie_grid_size  ,.rollie_grid_size".$sufix."~ .rollie_grid_item\n {\n width: ".get_theme_mod('rollie_post_page_masonry_size'.'xs'.$sufix,50)."%;\n}\n}");		
+
+			wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_grid_size".$sufix.".rollie_grid_item\n {\n padding: ".get_theme_mod('rollie_post_page_masonry_gutter'.$sufix,3)."px;\n}");
+	}
+
 }
 
-
-}
+} 
 
 
 

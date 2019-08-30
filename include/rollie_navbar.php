@@ -21,7 +21,7 @@ if ( get_theme_mod( 'rollie_menu_overlay' ) ) { ?>
 
 		if( has_nav_menu( 'rollie_top_menu_small_top_bar' )  ){
 
-			echo "<nav class='rollie_top_menu_small_top_bar col-12 rollie_flex_text_center '>";
+			echo "<nav class='rollie_top_menu_small_top_bar small col-12 rollie_flex_text_center '>";
 			if (get_theme_mod('rollie_menu_top_logo_positon',1) == 2 && ! empty( get_theme_mod( 'rollie_menu_top_logo' ) )){
 				rollie_navbar_icon();
 
@@ -31,7 +31,7 @@ if ( get_theme_mod( 'rollie_menu_overlay' ) ) { ?>
 				'theme_location'  => 'rollie_top_menu_small_top_bar',				
 				'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',
 				'container'=>'',		
-				'walker' => new Rollie_Walker_Nav_Top_Icons,
+				'walker' => new Rollie_Walker_Standard,
 				'depth'           => '1',
 			));
 			echo "</nav>";
@@ -67,19 +67,21 @@ if ( get_theme_mod( 'rollie_menu_overlay' ) ) { ?>
 			$rollie_navbar_align = 'ml-auto';
 		}
 
+	
+		if( has_nav_menu('rollie_top_menu')){
+			wp_nav_menu( array(
 
-		wp_nav_menu( array(
+				'theme_location'  => 'rollie_top_menu',
+				'container_id'    => 'rollie_nav_top_main_container',
+				'container_class' => 'collapse navbar-collapse   ' . $rollie_side_active_c , 
+				'menu_id'         => false,
+				'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',			
+				'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap  ' . $rollie_navbar_align,
+				'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
+				'depth'           => '6',
 
-			'theme_location'  => 'rollie_top_menu',
-			'container_id'    => 'rollie_nav_top_main_container',
-			'container_class' => 'collapse navbar-collapse   ' . $rollie_side_active_c , 
-			'menu_id'         => false,
-			'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',			
-			'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap  ' . $rollie_navbar_align,
-			'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
-			'depth'           => '6',
-
-		));
+			));
+		}
 
 		//example of using rollie_nav_top_icons_right action
 		add_action('rollie_nav_top_icons_right','rollie_nav_top_search_button',100);

@@ -24,6 +24,7 @@ function rollie_script_start() {
 
 	wp_enqueue_script( 'swiper_lib_js', get_template_directory_uri() . '/js/swiper.min.js', array(), '4.3.4', 'true' );
 	wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '4.2.1', 'true' );
+	wp_enqueue_script( 'imagesloaded_js', get_template_directory_uri() . '/js/imagesloaded.pkgd.min.js', array(), '1.0', 'true' );
 		wp_enqueue_script( 'masonry_js', get_template_directory_uri() . '/js/masonry.min.js', array(), '1.00', 'true' );
 	wp_enqueue_script( 'rollie_js', get_template_directory_uri() . '/js/rollie.js', array(), date("h:i:s"), 'true' );
 	if (class_exists('WooCommerce')) {
@@ -244,13 +245,12 @@ function rollie_widget_setup() {
 }
 function rollie_custom_setup() {
 
-	register_nav_menu( 'rollie_top_menu', __('Rollie Top Navbar: Main Menu Navigation','rollie') );
-	register_nav_menu( 'rollie_top_menu_icons', __('Rollie Top Navbar: Icon Menu Navigation','rollie') );
-	register_nav_menu( 'rollie_top_menu_small_top_bar', __('Rollie Top Navbar: Small top menu Navigation','rollie') );
+	register_nav_menu( 'rollie_top_menu', __('Rollie Top Navbar: Main Navigation','rollie') );
+	register_nav_menu( 'rollie_top_menu_icons', __('Rollie Top Navbar: Icon Navigation','rollie') );
+	register_nav_menu( 'rollie_top_menu_small_top_bar', __('Rollie Top Navbar: Small Top Navigation','rollie') );
+	register_nav_menu( 'rollie_footer_menu_bottom_bar', __('Rollie Footer: Small Bottom Navigation','rollie') );
 	register_nav_menu( 'rollie_cat_swap_menu', __('Rollie Category Swipe Menu','rollie') );
 	register_nav_menu( 'Footer_Menu', __('Rollie Footer Menu: Main Navigation','rollie') );
-
-
 	add_editor_style();
 	add_theme_support( 'woocommerce' );
 }

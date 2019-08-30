@@ -1,8 +1,10 @@
-<?php	get_template_part( 'template-parts/special/content-header' );?>
+<?php get_template_part( 'template-parts/special/content-header' );?>
 
 </div><!-- closing page head from header.php-->	
 
-	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in page.php-->
+<?php if (get_theme_mod('rollie_footer_collapse',true)){?>
+	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in footer.php more details about this container in footer.php-->
+<?php } ?>
 
 	<div class=" row m-0">
  	
