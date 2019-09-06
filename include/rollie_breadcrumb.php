@@ -10,7 +10,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 	
 	// Start the breadcrumb with a link to your homepage
         echo '<nav class="p-3 pl-5 text-left  rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb col-12">';
-        echo '<a class="rollie_category_title_text_color" href="';
+        echo '<a c href="';
         echo get_option('home');
         echo '">';
         bloginfo('name');
@@ -34,9 +34,7 @@ if ( class_exists( 'WooCommerce' ) ) {
         }
 	
 	// If the current page is a single post, show its title with the separator
-        if (is_single()) {
-           
-            
+        if (is_single()) {            
           echo the_title('<span class="rollie_category_title_text_color">'.$sep,'</span>');
         }
 	

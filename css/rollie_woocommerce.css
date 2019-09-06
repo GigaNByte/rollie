@@ -440,6 +440,7 @@ border: none;
 .rollie_my_acc_nav_side_c  {
 	height: max-content;
 	padding: 0;
+	overflow: hidden;
 }
 @media screen and (min-width: 768px) /* AT BOOTSTRAP md*/
 {
@@ -490,6 +491,13 @@ text-align: center;
 align-items: center;
 text-align: center;
 padding: 1rem;
+
+}
+.rollie_orders_sort_menu  .rollie_my_acc_nav_side {
+	padding: 0.5rem;
+}
+.woocommerce-MyAccount-navigation .rollie_my_acc_nav_side > a
+{
 display: flex;
 }
 .rollie_my_acc_nav_side 
@@ -508,15 +516,11 @@ display: flex;
 -ms-flex: 0 0 58.333333%;
 
 flex: 0 0 58.333333%;
-
 max-width: 58.333333%;
 position: relative;
-
 width: 100%;
-
-padding-right: 15px;
-
-padding-left: 15px;
+padding-right: 2rem;
+padding-left: 2rem;
 }
 
 .woocommerce-MyAccount-content > .row{
@@ -527,12 +531,10 @@ padding-left: 15px;
 
 @media screen and (min-width: 992px) /* AT BOOTSTRAP LG*/
 {
-		.rollie_my_acc_nav_side_c + .woocommerce-MyAccount-content
+	.rollie_my_acc_nav_side_c + .woocommerce-MyAccount-content
 	{
 	-ms-flex: 0 0 66.666667%;
-
 	flex: 0 0 66.666667%;
-
 	max-width: 66.666667%;
 	}
 	.rollie_my_acc_nav_big_tiles_c > .woocommerce-MyAccount-navigation /*  COL-LG-3*/
@@ -543,8 +545,7 @@ padding-left: 15px;
 	}
 	.rollie_my_acc_nav_big_tiles_full  :before
 	{
-		font-size: 8vw !important;
-	
+		font-size: 8vw !important;	
 	}
 }
 
@@ -773,12 +774,15 @@ border:none;
 {
 	padding: 0px !important;
 } 
-.rollie_woo_order_item_row ,.rollie_woo_order_summary_row 
+
+.rollie_woo_order_summary_row {
+margin-right: 2rem !important;
+margin-left: 2rem !important;
+}
+.rollie_woo_order_table_banner
 {
-	margin: 0px;
-	margin-left:0.5rem;
-	margin-right:0.5rem;
-	padding: 0px !important;
+padding-right: 2rem !important;
+padding-left: 2rem !important;
 }
 .woocommerce table.shop_table,.woocommerce table.shop_table td
 {
@@ -787,6 +791,7 @@ border:none;
 .rollie_table,.rollie_woo_border_custom_column_rad,address,.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register
 {
 border-style: solid;
+overflow: hidden;
 }
 
 .woocommerce-orders-table__row
@@ -796,6 +801,9 @@ border-style: solid;
 .rollie_woo_order_table_thumbnail>img
 {
 	max-width: 50px;
+}
+.rollie_woo_order_table_thumbnail{
+	text-align: center;
 }
 .woocommerce-orders-table__cell-rollie_order-custom_column:before
 {
@@ -1211,12 +1219,14 @@ text-align: right;
 }
 .rollie_woo_order_table_banner
 {
+	overflow: hidden;
 	border:solid;
 	border-left:none;
 	border-right:none;
 	border-color: inherit;
 	text-align: center;
 }
+
 /*cARRCD TOOTALS ENMD*/
 
 /*login*/		

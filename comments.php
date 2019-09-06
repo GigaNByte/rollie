@@ -40,11 +40,11 @@ if ( post_password_required() ) {
 
 						<h5 class="media-heading "><?php echo $rollie_reply->comment_author; ?></h5>
 					</div>	
-					<article class="rollie_comment_content">
+					<section> class="rollie_comment_content">
 						<p class="font-italic">
 							<?php echo $rollie_reply->comment_content; ?>
 						</p>
-					</article> 
+					</section> 
 				</div>
 			</div>	
 			<?php
@@ -117,7 +117,7 @@ if ( post_password_required() ) {
 
 		if ( ! empty( $rollie_links ) ) { ?>
 
-			<nav class=" p-3 rollie_pagination   rollie_f_b_f" aria-label="Comments Pagination" role="navigation">
+			<nav class=" p-4 rollie_pagination   rollie_f_b_f" aria-label="Comments Pagination" role="navigation">
 				<span class="sr-only"><?php _e('Page navigation','rollie'); ?></span>	
 				<ul class="pagination rollie_pagination justify-content-center m-0 ">
 

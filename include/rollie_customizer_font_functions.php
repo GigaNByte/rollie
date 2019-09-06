@@ -2,7 +2,7 @@
 
 
 $rollie_font_data = array(
-new Rollie_Font('navbar', __( 'Navbar items ', 'rollie' ),array('.rollie_f_navbar'),array(
+new Rollie_Font('navbar', __( 'Navigations & Footer', 'rollie' ),array('.rollie_f_navs'),array(
 	"U" => array( "ignore"=>false),
 	"ls" => array( "default" => 0.6),
 	"align" => array( "default" => "center"),
@@ -47,20 +47,6 @@ new Rollie_Font('widget',__( 'Widget content', 'rollie'), array('.rollie_f_widge
 new Rollie_Font('comment',__( 'Comments', 'rollie' ), array('.rollie_f_comment'),array(
 )),
 
-new Rollie_Font('footer',__( 'Footer items', 'rollie' ), array('.rollie_f_footer'),array(
-	"U" => array( "ignore"=>false),
-	"ls" => array( "default" => 0.6),
-	"align" => array( "default" => "center"),
-)),
-new Rollie_Font('footer_sub',__( 'Footer captions and subitems', 'rollie'), array('.rollie_f_footer_sub'),array(
-	"U" => array( "ignore"=>false),
-	"ls" => array( "default" => 0.6),
-	"max" => array( "default" => 14),
-	"min" => array( "default" => 14),
-	"alt_enable" => array( "default" => 2),
-	"align" => array( "default" => "center"),
-	"alt" => array( "default" => "'helvetica'"),
-)),
 new Rollie_Font('metainfo',__( 'Post metainfos', 'rollie' ),array('.rollie_f_meta'),array(
 )),
 );
@@ -84,5 +70,6 @@ $rollie_border_data = array(
 'buttons'=> new Rollie_Border('buttons','rollie_buttons_section',__('Button Border','rollie')),
 'inputs'=> new Rollie_Border('inputs','rollie_forms_inputs_section',__('Inputs Border','rollie')),
 'images'=> new Rollie_Border('images','rollie_img_panel',__('Images Border','rollie'),'',true),
+'avatars'=> new Rollie_Border('avatars','rollie_img_panel',__('User Avatars Border','rollie'),'',true),
 );
 

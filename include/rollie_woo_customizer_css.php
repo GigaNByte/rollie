@@ -4,8 +4,8 @@
 wp_enqueue_style( 'rollie_woo_stylesheet', get_template_directory_uri() . '/css/rollie_inline.css', array(),  date("h:i:s"), 'all' );
 
 
-wp_add_inline_style('rollie_woo_stylesheet'," .rollie_sort_orders_current,.rollie_my_acc_nav_side_c .is-active\n{\nbackground:".$rollie_main_theme_color->rgb.";\n}");
-
+wp_add_inline_style('rollie_woo_stylesheet'," .rollie_sort_orders_current,.rollie_my_acc_nav_side_c .is-active,.rollie_my_acc_nav_side:hover\n{\nbackground:".$rollie_main_theme_color->rgb.";\n}");
+wp_add_inline_style( 'rollie_stylesheet',".rollie_orders_sort_menu .rollie_my_acc_nav_side:hover{box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
 
 if (get_theme_mod('rollie_woo_l_shop_img',true)){
 wp_add_inline_style( 'rollie_woo_stylesheet', " .woocommerce ul.products li.product a img \n{\n max-height:".get_theme_mod('rollie_woo_l_shop_img_max_h',200)."px\n}");

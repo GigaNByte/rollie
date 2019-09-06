@@ -12,7 +12,7 @@ if ( get_theme_mod( 'rollie_menu_overlay' ) ) { ?>
 	<div class="overlay rollie_overlay rollie_collapse_side_overlay"></div>
 <?php } ?>
 
-<nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navbar'> 			
+<nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs'> 			
 
 	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible " >
 		<?php 

@@ -13,7 +13,7 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 // div ending for rollie_content_container_padding_bottom 
 //js uses container to calculate footer size and applies padding and manages collapsing
 ?>
-<footer class='rollie_menus_shadow rollie_f_footer_sub rollie_f_footer rollie_subtitle_text_color'>
+<footer class='rollie_menus_shadow rollie_f_footer_sub   rollie_f_navs  rollie_subtitle_text_color'>
 <div class="rollie_footer rollie_second_color <?php if (get_theme_mod('rollie_footer_collapse',true)) echo "rollie_footer_collapse rollie_padding_footer_measure";?>" id="rollie_footer">
 <?Php
 if ( has_nav_menu( 'Footer_Menu' )){ ?>

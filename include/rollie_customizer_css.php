@@ -147,7 +147,8 @@ wp_add_inline_style( 'rollie_stylesheet'," .rollie_chevron_menu { color: ".	 $ro
 wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_chevron_menu:hover{ color: ".	$rollie_navbar_hover_chevron   ."!important;}");
 
 wp_add_inline_style( 'rollie_stylesheet'," span  .select2-selection__rendered,.rollie_login_icons_c:before ,select,[type='checkbox']:checked + span::before,[type='checkbox']:not(:checked) + span::before,[type='radio']:checked + label::before,[type='radio']:not(:checked) + label::before,.quantity ,.input-text,.rollie_form_input{ \n".$rollie_border_data['inputs']->css_snippet()." \n color: ".get_theme_mod('rollie_form_input_text_color','#212529').";\n	\n border-color: ".  $rollie_form_input_border_color     ." !important; \n background: ". $rollie_form_input_color_backg ."; }");
-
+wp_add_inline_style( 'rollie_stylesheet'," .rollie_status_ajax_z  img,main img { \n".$rollie_border_data['images']->css_snippet()."\n border-color:\n".$rollie_third_theme_color->rgb."; \n }");
+wp_add_inline_style( 'rollie_stylesheet',"\n.rollie_avatar img,.avatar,.avatar img{ \n".$rollie_border_data['avatars']->css_snippet()."\n border-color:\n".$rollie_third_theme_color->rgb."; \n }");
 wp_add_inline_style( 'rollie_stylesheet',"span .select2-selection , .rollie_login_icons_c:before ,.quantity:active,.quantity-button:hover,.quantity-button :focus-within,.input-text:active,.input-text:hover,.input-text:focus-within,.rollie_form_input:active, .rollie_form_input:hover,.rollie_form_input { background: ".rgba2rgb($rollie_form_input_color_backg)."; }");
 
 wp_add_inline_style('rollie_stylesheet',' .rollie_form_input button  { border-style:none; }');

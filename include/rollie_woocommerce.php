@@ -620,8 +620,8 @@ function rollie_woo_order_custom_column( $order ) {
 ?>
 
 <div class='rollie_woo_order_table rollie_table rollie_woo_border_custom_column_rad '>
-	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >`
-	<div class='  rollie_woo_order_table_banner    '>		
+	<a href=" <?php echo esc_url($order->get_view_order_url()); ?>	" >
+	<div class='  rollie_woo_order_table_banner'>		
 
 	
 		<?php $rollie_o_date = $order->get_date_created()->date_i18n('Y-m-d')?>
@@ -632,7 +632,7 @@ function rollie_woo_order_custom_column( $order ) {
 		
 	</div>
 	</a>
-	<div class=' row  m-0 p-0 rollie_woo_order_table  rollie_darker_main_color '>
+	<div class=' row  m-0 py-1 rollie_woo_order_table  rollie_darker_main_color '>
 	
 			<div class='col-12'>
 					<div class='<?php rollie_embl_subtitles() ;?>'>
@@ -719,8 +719,10 @@ function rollie_woo_order_custom_column( $order ) {
 function rollie_woo_orders_table_sort_menu ()
 {
 	?>
-<div class='row rollie_orders_sort_menu rollie_darker_main_color  rollie_menus_shadow text-center mb-3'>
-
+<div class='row rollie_orders_sort_menu rollie_darker_main_color rollie_table rollie_menus_shadow text-center mb-3'>
+	<div class=" rollie_woo_order_table_banner col-12">		
+			<h2 class="col-12 text-left"><?php _e('Your orders','rollie');?></h2>
+	</div>
 	<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current  rollie_menus_shadow';?>'  >	 
 		<a href='<?php  echo wc_get_account_endpoint_url('orders') ; ?>'>
 			<div class='rollie_sort_orders_counter m-auto'>
@@ -846,7 +848,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	$rollie_user_info_class = " col-12 col-lg-3 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 2){
-	$rollie_class_c = " rollie_my_acc_nav_side_c position-sticky";
+	$rollie_class_c = " rollie_my_acc_nav_side_c rollie_f_navs position-sticky";
 	$rollie_class_c .= " col-5  ";
 	$rollie_class_c .= " col-lg-4  ";
 	$rollie_class_c .= ' rollie_menus_shadow  ';
@@ -858,10 +860,10 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	echo "<div class=' ".$rollie_class_c." '>";
 		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container   '>";
 		if (is_user_logged_in()){ // if is logged in 
-			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner  m-0 border-0  rollie_menus_shadow'>";
-			echo 		"<img class='mx-auto d-block' alt='".$rollie_current_user->display_name."' src='".get_avatar_url( get_current_user_id())."''>";
+			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner p-2 m-0 border-0  rollie_menus_shadow'>";
+			echo 		"<img class='mx-auto d-block rollie_avatar avatar' alt='".$rollie_current_user->display_name."' src='".get_avatar_url( get_current_user_id())."''>";
 
-			echo 		"<figcaption class='pt-1'>";
+			echo 		"<figcaption class='p-2'>";
 
 						if (!empty($rollie_current_user->user_login)) {
 						echo "<p><span class='rollie_my_acc_nav_login'>".$rollie_current_user->user_login." "."</span></p>";
@@ -1457,7 +1459,7 @@ rollie_action_woo_after_account_navigation();
  the_widget('WC_Widget_Cart','',array(
  	'before_widget'=>'<div class="widget woocommerce widget_shopping_cart rollie_table ">',
  	'after_widget'=>'</div>',
- 	'before_title'=>'<div class="rollie_woo_order_table_banner border-0 rollie_woo_color rollie_f_navbar col-12 row text-center"><div class="col-9"><i class="fas text-left fa-shopping-bag pl-2 float-left"></i>',
+ 	'before_title'=>'<div class="rollie_woo_order_table_banner border-0 rollie_woo_color rollie_f_navs col-12 row text-center"><div class="col-9"><i class="fas text-left fa-shopping-bag pl-2 float-left"></i>',
  	'after_title'=>'</div><div class="col-3 ">'. $rollie_minicart_count.'</div></div>',
 
  ));

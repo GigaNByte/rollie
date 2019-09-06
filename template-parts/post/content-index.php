@@ -89,14 +89,17 @@ if ($rollie_current_design == 1){
 	$rollie_post_wraper = 'col-12 rollie_clean';
 	
 }
+$rollie_article_wrapper = '';
 if (has_post_format(array('aside','quote'))){
 	$rollie_post_wraper = 'col-12 rollie_f_subtitle text-center';
 	if (has_post_thumbnail()){
 		$rollie_post_wraper .=' rollie_center_abs '; 
+	}else{
+			$rollie_article_wrapper = ' rollie_second_color ';
 	}
 
 
-	$rollie_article_wrapper = ' position-relative rollie_post_thumbnail_height_m rollie_second_color';
+	$rollie_article_wrapper .= ' position-relative rollie_post_thumbnail_height_m ';
 }
 if (has_post_format(array('status'))){
 	$rollie_post_wraper = 'col-12  rollie_f_subtitle';

@@ -8,11 +8,11 @@ if(has_post_format('status') && get_avatar_url($rollie_author_id)){
 	<div class='rollie_twitt_metadata row col-12 px-1'>
 		<div class='col-6  text-left'>
 			<a href='<?php echo get_the_author_link($rollie_author_id)?>'>
-				<img class=' mr-2 rounded' src="<?php echo get_avatar_url($rollie_author_id, array('size'=>40))?>" alt='<?php get_the_author_meta('nickname')?>' >
+				<img class=' mr-2 rollie_avatar avatar' src="<?php echo get_avatar_url($rollie_author_id, array('size'=>40))?>" alt='<?php get_the_author_meta('nickname')?>' >
 				<b><?php echo get_the_author_meta('nickname')?></b>
 			</a>
 		</div>
-		<time class=' col-6 rollie_date rollie_subtitle_text_color   rollie_f_meta_alt text-right'>
+		<time class=' col-6 rollie_date rollie_flex_center_v rollie_subtitle_text_color   rollie_f_meta_alt text-right'>
 		<?php echo get_the_time(get_option('time_format'))." ".get_the_date( get_option('date_format')); ?>
 		</time>	
 	</div>

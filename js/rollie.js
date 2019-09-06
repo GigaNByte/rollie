@@ -2,14 +2,11 @@
 function rollie_nav_handler( container , search_form , collapsing_container ){
 	jQuery(
 		function($){
-
-			if($('.rollie_header_container').find(container).length ){
-				console.log($('.rollie_header_wrapper').height() - $(container).parent().height()+'juhu'+$('.rollie_header_wrapper').height());
-				if ($('.rollie_header_wrapper').height() - $(container).parent().height() > 0){
-					$('.rollie_header_wrapper').css('min-height',$('.rollie_header_wrapper').height() - $(container).parent().height());
-				}
-			}
-
+			
+			if($('.rollie_header_container').find(container).length ){			
+			var rollie_header_container_initial_h	= $('.rollie_header_wrapper').height();
+			$('.rollie_header_wrapper').css('min-height',$('.rollie_header_wrapper').height() - $(container).height());
+			}		
 			if ($( '.rollie_collapse_side_js' ).length ) {
 				var rollie_collapse_side = true;
 			} else {
@@ -18,11 +15,11 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 			
 
 			$(window).on('resize',function(){
-				if($('.rollie_header_container').find(container).length ){
-					console.log( $(container).height()+'juhu'+$('.rollie_header_wrapper').height());
-					if ($('.rollie_header_wrapper').height() - $(container).height() > 0){
-						$('.rollie_header_wrapper').css('min-height',$('.rollie_header_wrapper').height() - $(container).height());
-					}
+				if($('.rollie_header_container').find(container).length ){		
+				$('.rollie_header_wrapper').css('min-height',rollie_header_container_initial_h);
+				
+				$('.rollie_header_wrapper').css('min-height',$('.rollie_header_wrapper').height() - $(container).height()+'px');
+					
 				}
 
 				$(collapsing_container).collapse('hide');
@@ -47,9 +44,6 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 				 $( container ).find('.navbar-nav').find('.menu-item').each(function(index) {
 				    rollie_nav_l += parseInt($(this).width(), 10);
 				});
-				rollie_nav_l * 
-				console.log($( container ).find('.navbar-nav').width());
-				console.log('juhu');
 				rollie_nav_l     = rollie_nav_l + plus;
 
 				if (rollie_nav_l <= 576) {
