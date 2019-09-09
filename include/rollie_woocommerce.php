@@ -29,7 +29,7 @@ add_action('woocommerce_sidebar','rollie_div_wraper_end');
 */
 function rollie_woo_content_post_page()
 {
-     require locate_template( 'template-parts/post/content-post-page.php' );
+     require locate_template( 'template-parts/post/content-post-page.php' );   
 }
 function rollie_woo_output_content_wrapper()
 {
@@ -70,11 +70,16 @@ function jk_woocommerce_breadcrumbs() {
 function rollie_woocommerce_sale_flash( $onsale, $post, $product ) { 
     return "<div class='rollie_f_meta rollie_d_contents rollie_second_text_color'>".$onsale."</div>"; 
 }; 
-
+function rollie_main_wrapper() {
+echo "</main>";
+}
 add_filter( 'woocommerce_sale_flash', 'rollie_woocommerce_sale_flash', 10, 3 ); 
 add_action('woocommerce_before_main_content','rollie_woo_content_post_page',8);
 add_action('woocommerce_before_main_content','rollie_woo_output_content_wrapper',11);
-add_action('woocommerce_after_main_content','rollie_div_wraper_end',11);
+
+add_action('woocommerce_after_main_content','rollie_main_wrapper',20);
+add_action('woocommerce_after_main_content','rollie_div_wraper_end',30);
+
 remove_action('woocommerce_before_main_content','woocommerce_output_content_wrapper',10);
 
 remove_action('woocommerce_after_main_content','woocommerce_output_content_wrapper_end',10);
@@ -848,7 +853,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	$rollie_user_info_class = " col-12 col-lg-3 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 2){
-	$rollie_class_c = " rollie_my_acc_nav_side_c rollie_f_navs position-sticky";
+	$rollie_class_c = "rollie_table rollie_my_acc_nav_side_c rollie_f_navs position-sticky";
 	$rollie_class_c .= " col-5  ";
 	$rollie_class_c .= " col-lg-4  ";
 	$rollie_class_c .= ' rollie_menus_shadow  ';
@@ -858,7 +863,7 @@ function rollie_filter_woo_account_menu_item_classes( $classes, $endpoint ) {
 	$rollie_class_c = " rollie_my_acc_nav_wide_c  ";
 	}
 	echo "<div class=' ".$rollie_class_c." '>";
-		echo "<div class='rollie_darker_main_color ".$rollie_dash_class."  rollie_my_acc_container   '>";
+		echo "<div class=' ".$rollie_dash_class."  rollie_my_acc_container   '>";
 		if (is_user_logged_in()){ // if is logged in 
 			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner p-2 m-0 border-0  rollie_menus_shadow'>";
 			echo 		"<img class='mx-auto d-block rollie_avatar avatar' alt='".$rollie_current_user->display_name."' src='".get_avatar_url( get_current_user_id())."''>";
@@ -998,7 +1003,6 @@ echo "<div class='rollie_woo_cart_content rollie_table rollie_woo_border_custom_
 }
 function rollie_div_wraper_end()
 {
-
 echo "</div>";
 }
 function rollie_woo_order_review_content()
@@ -1441,7 +1445,7 @@ add_action('rollie_nav_top_icons_right','woocomerce_rollie_nav_top_icons',20);
 
 function woocomerce_rollie_nav_top_icons_colapsed(){
 ?>
-<div class="collapse rollie_menus_shadow rollie_navbar_color  col-8 col-md-3 p-0" id="rollie_nav_user_info">
+<div  id="rollie_nav_user_info" class="collapse rollie_menus_shadow   col-8 col-md-3 p-0 ">
 <?php	
 if (is_user_logged_in()){
   do_action( 'woocommerce_account_navigation' );   
@@ -1450,14 +1454,14 @@ rollie_action_woo_before_account_navigation();
 rollie_action_woo_after_account_navigation();
 } ?>
 </div>
-<div class="collapse rollie_menus_shadow rollie_navbar_color  col-8 col-md-3 p-0" id="rollie_nav_cart_info">
+<div class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table   col-8 col-md-3 p-0" id="rollie_nav_cart_info">
 <?php 
     $items_count = WC()->cart->get_cart_contents_count();
     $text_label  =_n( 'item', 'items',$items_count, 'rollie' );
         $rollie_minicart_count ='<small> '.$text_label.': '.$items_count.'</small>';  
 
  the_widget('WC_Widget_Cart','',array(
- 	'before_widget'=>'<div class="widget woocommerce widget_shopping_cart rollie_table ">',
+ 	'before_widget'=>'<div class="widget woocommerce widget_shopping_cart  ">',
  	'after_widget'=>'</div>',
  	'before_title'=>'<div class="rollie_woo_order_table_banner border-0 rollie_woo_color rollie_f_navs col-12 row text-center"><div class="col-9"><i class="fas text-left fa-shopping-bag pl-2 float-left"></i>',
  	'after_title'=>'</div><div class="col-3 ">'. $rollie_minicart_count.'</div></div>',

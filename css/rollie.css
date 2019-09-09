@@ -193,7 +193,11 @@ overflow:hidden;
 	transition: width 200ms ease-in-out;
 
 }
-
+.rollie_table > .rollie_table{
+	border:none;
+	border-radius: 0px;
+	border-width: 0px;
+}
 .rollie_navbar_color > .rollie_navbar_color {
 	background: none;
 }
@@ -327,7 +331,7 @@ color: white;
 }
 
 #rollie_footer{
-
+width: 100%;
 }
 .rollie_footer_collapse
 {
@@ -800,6 +804,9 @@ article[id^="post"]
 .rollie_classic {
 	bottom: 0px;
 	right: 0px;
+	max-height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 .rollie_modern + img ,.rollie_classic+img{
 	position: absolute;

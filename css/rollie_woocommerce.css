@@ -471,6 +471,10 @@ border-top-style:solid ;
 border-left-style:solid;  
 border-right-style:solid; 
 }
+
+.rollie_navbar_color .rollie_my_acc_nav_side_c > .rollie_darker_main_color{
+background: inherit;
+}
 .rollie_my_acc_nav_side :before{
 text-align: center;
 	padding-left:0.5rem;
@@ -781,6 +785,7 @@ margin-left: 2rem !important;
 }
 .rollie_woo_order_table_banner
 {
+	background-clip: padding-box;
 padding-right: 2rem !important;
 padding-left: 2rem !important;
 }
@@ -1106,12 +1111,12 @@ max-width: 50%;
 }
 /* Cart TOOTALS*/
 
-
+/*
 .rollie_table  *
 {
 	border-color: inherit;
 }
-
+*/
 
 .woocommerce .cart-collaterals .cart_totals h2
 {

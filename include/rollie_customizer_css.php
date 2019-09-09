@@ -23,7 +23,7 @@ rollie_fonts_customizer_css();
 
 	wp_add_inline_style( 'rollie_stylesheet', $rollie_second_theme_color->css_snippet());
 	list ( $rollie_second_color_r , $rollie_second_color_g , $rollie_second_color_b ) = sscanf ( $rollie_second_theme_color->rgb, "#%02x%02x%02x");
-	wp_add_inline_style('rollie_stylesheet',".rollie_table, .rollie_my_acc_nav_side_c, .rollie_woo_order_table_banner{\n border-color:".$rollie_second_theme_color->rgb.";\n}");
+	wp_add_inline_style('rollie_stylesheet',".rollie_table, .rollie_woo_order_table_banner{\n border-color:".$rollie_second_theme_color->rgb.";\n}");
 	$rollie_third_theme_color = new Rollie_Gradient ("rollie_third_theme_color", "#a37e2c",'.rollie_third_color',array('background'));
 
 
@@ -64,9 +64,18 @@ rollie_fonts_customizer_css();
 	$rollie_button_alt_b_h = new Rollie_Gradient ('rollie_button_alt_b_h_color','#ffffff' ,' .rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover',array('background'));
 
 
+
+
+
+$rollie_shadow_button_h_snippet = '';
+if (get_theme_mod('rollie_shadow_button_h',true)==true){
+$rollie_shadow_button_h_snippet = "\n box-shadow: 0px 0px 8px 1px". get_theme_mod('rollie_shadow_theme_color','#e3e6e8').";\n";
+	wp_add_inline_style( 'rollie_stylesheet',"\n.rollie_button:hover , .woocommerce #respond input#submit:hover,.rollie_button:active,.woocommerce a.button:hover,.woocomerce .button:hover,.rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover{box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
+}
+
 	 wp_add_inline_style( 'rollie_stylesheet',"\n.rollie_button , .woocommerce #respond input#submit,.rollie_button,.woocommerce a.button,.woocomerce .button \n{\n color:" .$rollie_button_b_h->rgb.";\n border-color:" .$rollie_button_b_h->rgb.";\n}\n" );
-	 wp_add_inline_style( 'rollie_stylesheet',"\n.rollie_button:hover , .woocommerce #respond input#submit:hover,.rollie_button:hover,.woocommerce a.button:hover,.woocomerce .button:hover \n{\n color:" .$rollie_button_b->rgb.";\n border-color:" .$rollie_button_b->rgb.";\n}\n" );
-	 wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover \n{\n color:" .$rollie_button_alt_b->rgb.";\n border-color:" .$rollie_button_alt_b->rgb.";\n}\n" );
+	 wp_add_inline_style( 'rollie_stylesheet',"\n.rollie_button:hover , .woocommerce #respond input#submit:hover,.rollie_button:hover,.woocommerce a.button:hover,.woocomerce .button:hover \n{\n color:" .$rollie_button_b->rgb.";\n border-color:" .$rollie_button_b->rgb.";".$rollie_shadow_button_h_snippet."\n}\n" );
+	 wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_button_alt:hover,.woocommerce button.button.alt:hover ,.woocommerce a.button.alt:hover,.woocommerce .checkout-button:hover \n{\n color:" .$rollie_button_alt_b->rgb.";\n border-color:" .$rollie_button_alt_b->rgb.";".$rollie_shadow_button_h_snippet."\n}\n" );
 	 wp_add_inline_style( 'rollie_stylesheet',"\n .rollie_button_alt,.woocommerce button.button.alt ,.woocommerce a.button.alt,.woocommerce .checkout-button\n{\n color:" .$rollie_button_alt_b_h->rgb.";\n border-color:". $rollie_button_alt_b_h->rgb.";\n}\n" );
 	wp_add_inline_style( 'rollie_stylesheet',  $rollie_button_alt_b_h->css_snippet());
 
@@ -94,16 +103,23 @@ rollie_fonts_customizer_css();
 
 
 
-	if (get_theme_mod('rollie_shadow_posts')==true){
-		wp_add_inline_style( 'rollie_stylesheet'," .rollie_posts_shadow {box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
-	}
+if (get_theme_mod('rollie_shadow_menus',true)==true){
+	wp_add_inline_style( 'rollie_stylesheet'," .rollie_menus_shadow {box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
+}
+if (get_theme_mod('rollie_shadow_posts')==true){
+	wp_add_inline_style( 'rollie_stylesheet'," .rollie_posts_shadow {box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
+}
+if (get_theme_mod('rollie_shadow_images',true)==true){
+		wp_add_inline_style( 'rollie_stylesheet',".rollie_images_shadow, .rollie_status_ajax_z  img,main img {box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
+}
+
 
 	wp_add_inline_style( 'rollie_stylesheet'," 	.rollie_smart_banner_fade:hover{ 	background-color: rgba(".  $rollie_second_color_r .',' .  $rollie_second_color_g . ',' . $rollie_second_color_b.", 0.8);	}");
 	wp_add_inline_style( 'rollie_stylesheet'," .swiper-pagination-bullet-active{background:	". $rollie_third_color ."!important ;}");
 	wp_add_inline_style ( 'rollie_stylesheet'," .rollie_pagination:hover * , .rollie_pagination * ,.page-item , .rollie_fancy_line,.woocommerce h3 ,.woocommerce h2,address\n {border-color: \n ".$rollie_third_theme_color->rgb.";} ");
 
 
-	wp_add_inline_style('rollie_stylesheet',".rollie_table,.rollie_my_acc_nav_side_c  {\n ".$rollie_border_data['tables']->css_snippet()."\n}"); 
+	wp_add_inline_style('rollie_stylesheet',".rollie_table  {\n ".$rollie_border_data['tables']->css_snippet()."\n}"); 
 	wp_add_inline_style('rollie_stylesheet',".rollie_smart_banner_single img{\n ".$rollie_border_data['images']->css_snippet()."\nborder-color: \n ".$rollie_third_theme_color->rgb.";}"); 
 
 	if ( get_theme_mod ('rollie_embl_subtitles' ,1 ) == 1){
@@ -157,13 +173,11 @@ wp_add_inline_style( 'rollie_stylesheet',"  [type='radio']:checked + label:after
 wp_add_inline_style( 'rollie_stylesheet',"span .select2-selection ,label:hover::before  ,select:focus-within ,.quantity:focus-within,.input-text:focus-within,	.rollie_search_form_shadow:focus-within{ box-shadow: 0px 0px 8px 1px ". $rollie_form_input_border_color."; }");
 
 wp_add_inline_style( 'rollie_stylesheet'," 	.swiper-pagination-bullet{		background:	". $rollie_darker_main_theme_color->rgb_gr_1 .";}");
-if (get_theme_mod('rollie_shadow_menus',true)==true){
-	wp_add_inline_style( 'rollie_stylesheet'," .rollie_menus_shadow {box-shadow: 0px 0px 8px 1px	". get_theme_mod('rollie_shadow_theme_color','#e3e6e8')."}")	;
-}
 
 if (get_theme_mod('rollie_disable_sidebar_mobile',true)){  
 	wp_add_inline_style( 'rollie_stylesheet'," 	@media screen and (max-width:   768px){ .rollie_sidebar_left, .rollie_sidebar_right { display:none; }}	");
 }
+
 
 if (class_exists('WooCommerce')){
 	require get_template_directory() . '/include/rollie_woo_customizer_css.php';

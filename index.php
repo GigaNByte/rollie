@@ -31,6 +31,7 @@ if ( have_posts() ) :
 	endwhile;
 endif;
 ?>
+
 </main>
 	  
 	<?php

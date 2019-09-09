@@ -2238,17 +2238,51 @@ $rollie_border->add_customizer_controls();
 					$wp_customize,
 					'rollie_shadow_menus',
 					array(
-						'label'   => esc_html__( 'Enable on Menus ', 'Rollie' ),
+						'label'   => esc_html__( 'Shadow on Menus ', 'Rollie' ),
 						'section' => 'rollie_theme_colors_section',
 
 					)
 				)
 			);
+			$wp_customize->add_setting(
+				'rollie_shadow_images',
+				array(
+					'default'           => false,
+					'sanitize_callback' => 'rollie_sanitize_checkbox',
+				)
+			);
 
+				$wp_customize->add_control(
+					new Skyrocket_Toggle_Switch_Custom_control(
+						$wp_customize,
+						'rollie_shadow_images',
+						array(
+							'label'   => esc_html__( 'Shadow on images ', 'Rollie' ),
+							'section' => 'rollie_theme_colors_section',
 
+						)
+					)
+				);
 
+				$wp_customize->add_setting(
+					'rollie_shadow_button_h',
+					array(
+						'default'           => false,
+						'sanitize_callback' => 'rollie_sanitize_checkbox',
+					)
+				);
 
-
+					$wp_customize->add_control(
+						new Skyrocket_Toggle_Switch_Custom_control(
+							$wp_customize,
+							'rollie_shadow_button_h',
+							array(
+								'label'   => esc_html__( 'Shadow on Buttons at hover', 'Rollie' ),
+								'section' => 'rollie_theme_colors_section',
+							)
+						)
+					);
+					
 $wp_customize->add_section(
 		'rollie_theme_colors_text_section',
 		array(
