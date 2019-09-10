@@ -23,7 +23,7 @@ function rollie_top_menu_wp_nav_menu (){
 		$rollie_side_c         = 'rollie_navbar_color';
 	} 
 	if ( 'fixed' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
-		$rollie_side_active_c  = ' rollie_collapse_fixed ';
+		$rollie_side_active_c  = 'rollie_collapse_side_js rollie_collapse_fixed ';
 	} 
 
 	$rollie_navbar_align = get_theme_mod( 'rollie_menu_top_item_align',2);
