@@ -113,6 +113,8 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 						$( '.rollie_collapse_side_overlay' ).css('display','none').css( "opacity","0" );
 
 				});
+			}else{
+				$( container ).removeClass( 'navbar-expand invisible' );
 			}
 
 			//hide all colapses on top menu when colapsing another
@@ -291,6 +293,5 @@ $('.rollie_header_video').on('ended', function () {
 });
 $("video[autoplay]").each(function(){ this.play(); });
 
-	
 		
 });

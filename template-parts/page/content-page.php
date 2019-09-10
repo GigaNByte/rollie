@@ -63,6 +63,6 @@ if ( $rollie_is_active_sidebar_left && $rollie_is_active_sidebar_right) {
 					?>
 					</article>					 
 			</main>		 
-	</div>
+
 		
 	

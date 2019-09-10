@@ -178,21 +178,6 @@ position:relative;
 overflow:hidden;
 }
 */
-
-.rollie_navbar
-{
-	justify-content: center;
-	z-index:10;
-	white-space:normal;
-	flex-flow: wrap;
-}
-
-.rollie_collapse_side_js{
-	width:0px;
-	display: block;
-	transition: width 200ms ease-in-out;
-
-}
 .rollie_table > .rollie_table{
 	border:none;
 	border-radius: 0px;
@@ -202,31 +187,44 @@ overflow:hidden;
 	background: none;
 }
 
-.rollie_collapse_side_js.collapse.show  .navbar-nav,.rollie_collapse_side_js.collapsing  .navbar-nav{
-	padding: 1.5rem !important;
-	/*overvrite*/
-}	
-#rollie_nav_top_main_container  .navbar-nav{
-	padding-left:  0.5rem;
-	padding-right: 0.5rem;
+.rollie_navbar
+{
+	justify-content: center;
+	z-index:10;
+	white-space:normal;
+	flex-flow: wrap;
 }
-.rollie_collapse_side_js.collapse.show.menu-item,.rollie_collapse_side_js.collapsing.menu-item{
+
+/*rollie_fixed_menu*/
+
+.rollie_collapse_side_js,.rollie_collapse_fixed{
+	width:0px;
+	display: block;
+	transition: width 200ms ease-in-out;
+
+}
+
+
+#rollie_nav_top_main_container  .navbar-nav{
+	padding:  1rem;
+	
+}
+.rollie_collapse_side_js.collapse.show.menu-item,.rollie_collapse_side_js.collapsing.menu-item,.rollie_collapse_fixed.collapse.show.menu-item,.rollie_collapse_fixed.collapsing.menu-item{
 	padding: 1rem;
 }
-.rollie_collapse_side_js #rollie_nav_top_main_container
+.rollie_collapse_side_js #rollie_nav_top_main_container,.rollie_collapse_fixed #rollie_nav_top_main_container
 {
-
 	transition: width 200ms ease-in-out;
 }
-.rollie_collapse_side_js.collapsing,.rollie_collapse_side_js.collapse{
+.rollie_collapse_side_js.collapsing,.rollie_collapse_side_js.collapse, .rollie_collapse_fixed.collapsing,.rollie_collapse_fixed.collapse
+{
 	transition: width 200ms ease-in-out;
 	height: initial !important;
-
 }
-.rollie_collapse_side_js.collapse{
+.rollie_collapse_side_js.collapse,.rollie_collapse_fixed.collapse{
 	width: 0px;
 }
-.rollie_collapse_side_js.collapse.show
+.rollie_collapse_side_js.collapse.show,.rollie_collapse_fixed.collapse.show
 {
 	width: 300px;
 	overflow: hidden;
@@ -665,10 +663,7 @@ iframe
 {
 	font-style: italic;
 }
-.rollie_author
-{
 
-}
 .rollie_post_metadata
 {
 	padding-bottom:0.25rem;
@@ -681,7 +676,6 @@ iframe
 .rollie_pagination_arrow
 {
 	font-size: 1.6rem;
-
 }
 .rollie_pagination_arrow a,.rollie_d_contents
 {
@@ -1126,6 +1120,8 @@ margin-top:1rem;
 .rollie_nav_top_log{
 	margin: 50vh auto 0;
 }
+
+
 
 /*ROllie left navbar queries*/
 .navbar-nav

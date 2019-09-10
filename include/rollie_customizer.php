@@ -2605,7 +2605,8 @@ $wp_customize->add_section(
 				'type'    => 'select',
 				'choices' => array(
 					'full' => esc_html__( 'Full width collapse', 'rollie' ),
-					'side' => esc_html__( 'Left side collapse', 'rollie' ),
+					'side' => esc_html__( 'Side Layered collapse', 'rollie' ),
+					'fixed' => esc_html__( 'Side Fixed collapse', 'rollie' ),
 				),
 			)
 		);

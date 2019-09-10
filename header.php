@@ -34,18 +34,25 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	<div class='rollie_main_color rollie_background_color_div'></div>
 	<?php
 
-		if (!get_theme_mod('rollie_menu_position',false)){
-				require get_template_directory().'/include/rollie_navbar.php' ;
+		if (!get_theme_mod('rollie_menu_position',false) || 'fixed' == get_theme_mod( 'rollie_menu_design' ) ){
+			require get_template_directory().'/include/rollie_navbar.php' ;
+			
+			if ('fixed' == get_theme_mod('rollie_menu_design','full')){
+				echo "<div class='d-flex overflow-hidden'>";
+				echo "<div id='rollie_fixed_menu_container' class='rollie_menus_shadow  rollie_f_navs'>";
+				rollie_top_menu_wp_nav_menu(); 
+				echo "</div>";
+				echo "<div>";
+			}
 		} 
+
 	?>
+
 	<div class="rollie_header_container row p-0 ">
 		<?php 
-		if (get_theme_mod('rollie_menu_position',false)){
+		if (get_theme_mod('rollie_menu_position',false) && 'fixed' != get_theme_mod( 'rollie_menu_design' )){
 			require get_template_directory().'/include/rollie_navbar.php' ;
 		}
-
-
-
 
 		if ( esc_url_raw(get_field('rollie_header_video_src'))){
 			//url is sanitased in shortocde funct
@@ -83,9 +90,5 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 				echo rollie_header_image_responsive($rollie_image_id,$img_alt,'rollie_header_image',array('rollie_xs','rollie_s','rollie_m','rollie_l')); 
 			}
 		}
-
-
-
-		//	
-			?>
+?>
 		

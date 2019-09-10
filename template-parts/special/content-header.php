@@ -100,4 +100,4 @@ if (get_theme_mod('rollie_header_style'.rollie_page_template_sufix(),1)==2 || ge
 	<?php } ?>
 </header>	 	
 </div>
-</div>
+
