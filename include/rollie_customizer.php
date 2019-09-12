@@ -10,7 +10,7 @@ $panel name of parent panel to witch will be applied to section and control
 
 
 function rollie_meta_control($wp_customize,$rollie_sufix,$rollie_section_prefix){
-				$wp_customize->add_setting(	'rollie_meta_label'.$rollie_sufix);
+		$wp_customize->add_setting(	'rollie_meta_label'.$rollie_sufix);
 		$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -1137,25 +1137,7 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		);
 
-					$wp_customize->add_setting(
-						'rollie_search_form_menu_top',
-						array(
-							'default'           => true,
-							'sanitize_callback' => 'rollie_sanitize_checkbox',
-						)
-					);
 
-			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_search_form_menu_top',
-					array(
-						'label'   => __( 'Enable search form ', 'rollie' ),
-						'section' => 'rollie_menu_top_section',
-
-					)
-				)
-			);
 
 
 	$wp_customize->add_section(
@@ -1491,34 +1473,6 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 				
-
-	
-
-		// widget style customize
-
-
-
-		$wp_customize->add_setting(
-						'rollie_search_form_menu_top',
-						array(
-							'default'           => true,
-							'sanitize_callback' => 'rollie_sanitize_checkbox',
-						)
-					);
-
-			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_search_form_menu_top',
-					array(
-						'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
-						'section' => 'rollie_menu_top_section',
-
-					)
-				)
-			);
-
-
 
 
 	$wp_customize->add_section(
@@ -2497,7 +2451,31 @@ $wp_customize->add_section(
 		)
 	);
 
+	$wp_customize->add_setting(
+		'rollie_menu_top_item_align',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_radio',
+			'default'           => 2,
 
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Icon_Customize_Control(
+			$wp_customize,
+			'rollie_menu_top_item_align',
+			array(
+				'label'   => esc_html__( 'Menu items align', 'Rollie' ),
+				'section' => 'rollie_navbar_section',
+				'type'    => 'radio',
+				'choices' => array(
+					1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
+					2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
+					3 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
+				),
+			)
+		)
+	);
 		$wp_customize->add_setting(
 			'rollie_menu_top_logo',
 			array(
@@ -2539,54 +2517,8 @@ $wp_customize->add_section(
 					),
 				)
 			);
-					$wp_customize->add_setting(
-		'rollie_menu_top_logo_title',
-		array(
-			'default'           => false,
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'skyrocket_switch_sanitization',
 
-		)
-	);
-	
-	$wp_customize->add_control(
-		new Skyrocket_Toggle_Switch_Custom_control(
-			$wp_customize,
-			'rollie_menu_top_logo_title',
-			array(
-				'label'   =>__( 'Display Site Title', 'rollie' ),
-				'section' => 'rollie_navbar_section',
-					
-			)
-		)
-	);
-
-
-		$wp_customize->add_setting(
-			'rollie_menu_top_item_align',
-			array(
-				'sanitize_callback' => 'rollie_sanitize_radio',
-				'default'           => 2,
-
-			)
-		);
-
-		$wp_customize->add_control(
-			new Rollie_Icon_Customize_Control(
-				$wp_customize,
-				'rollie_menu_top_item_align',
-				array(
-					'label'   => esc_html__( 'Menu items align', 'Rollie' ),
-					'section' => 'rollie_navbar_section',
-					'type'    => 'radio',
-					'choices' => array(
-						1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-						2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
-						3 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
-					),
-				)
-			)
-		);
+		
 
 		$wp_customize->add_setting(
 			'rollie_menu_design',
@@ -2630,6 +2562,28 @@ $wp_customize->add_section(
 			)
 		);
 
+						$wp_customize->add_setting(
+			'rollie_menu_top_logo_title',
+			array(
+				'default'           => false,
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'skyrocket_switch_sanitization',
+
+			)
+		);
+		
+		$wp_customize->add_control(
+			new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_menu_top_logo_title',
+				array(
+					'label'   =>__( 'Display Site Title', 'rollie' ),
+					'section' => 'rollie_navbar_section',
+						
+				)
+			)
+		);
+
 
 
 					$wp_customize->add_setting(
@@ -2652,6 +2606,63 @@ $wp_customize->add_section(
 				)
 			);
 
+			$wp_customize->add_setting(
+				'rollie_menu_top_fixed',
+				array(
+					'default'           => true,
+					'sanitize_callback' => 'rollie_sanitize_checkbox',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_menu_top_fixed',
+				array(
+					'label'   => esc_html__( 'Fixed Top Navbar', 'Rollie' ),
+					'section' => 'rollie_navbar_section',
+				))
+			);
+
+			$wp_customize->add_setting(
+				'rollie_menu_top_transparent',
+				array(
+					'default'           => true,
+					'sanitize_callback' => 'rollie_sanitize_checkbox',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_menu_top_transparent',
+				array(
+					'label'   => __( 'Apply Transparency when Navbar is on top of the page', 'Rollie' ),
+					'description'   => __( 'Works better with fixed Navbar', 'Rollie' ),
+					'section' => 'rollie_navbar_section',
+				))
+			);
+
+
+
+			$wp_customize->add_setting(
+				'rollie_menu_top_always_collapse',
+				array(
+					'default'           => false,
+					'sanitize_callback' => 'rollie_sanitize_checkbox',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Skyrocket_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'rollie_menu_top_always_collapse',
+				array(
+					'label'   => esc_html__( 'Show always Collapsed Navigation', 'Rollie' ),
+					'description'   => esc_html__( 'By default Rollie Theme calculates and applies Collapsed Navigation on specified device sizes', 'Rollie' ),
+					'section' => 'rollie_navbar_section',
+				))
+			);
 					$wp_customize->add_setting(
 						'rollie_search_form_menu_top',
 						array(

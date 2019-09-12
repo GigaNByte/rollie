@@ -39,7 +39,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 			
 			if ('fixed' == get_theme_mod('rollie_menu_design','full')){
 				echo "<div class='d-flex overflow-hidden'>";
-				echo "<div id='rollie_fixed_menu_container' class='rollie_menus_shadow  rollie_f_navs'>";
+				echo "<div id='rollie_fixed_menu_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs'>";
 				echo "</div>";
 				echo "<div>";
 			}

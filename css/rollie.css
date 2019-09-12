@@ -196,8 +196,10 @@ overflow:hidden;
 }
 
 /*rollie_fixed_menu*/
-
-.rollie_collapse_side_js,.rollie_collapse_fixed{
+#rollie_fixed_menu_container{
+	z-index: 10;
+}
+.rollie_collapse_side_js{
 	width:0px;
 	display: block;
 	transition: width 200ms ease-in-out;
@@ -209,22 +211,22 @@ overflow:hidden;
 	padding:  1rem;
 	
 }
-.rollie_collapse_side_js.collapse.show.menu-item,.rollie_collapse_side_js.collapsing.menu-item,.rollie_collapse_fixed.collapse.show.menu-item,.rollie_collapse_fixed.collapsing.menu-item{
+.rollie_collapse_side_js.collapse.show.menu-item,.rollie_collapse_side_js.collapsing.menu-item{
 	padding: 1rem;
 }
-.rollie_collapse_side_js #rollie_nav_top_main_container,.rollie_collapse_fixed #rollie_nav_top_main_container
+.rollie_collapse_side_js #rollie_nav_top_main_container
 {
 	transition: width 200ms ease-in-out;
 }
-.rollie_collapse_side_js.collapsing,.rollie_collapse_side_js.collapse, .rollie_collapse_fixed.collapsing,.rollie_collapse_fixed.collapse
+.rollie_collapse_side_js.collapsing,.rollie_collapse_side_js.collapse
 {
 	transition: width 200ms ease-in-out;
 	height: initial !important;
 }
-.rollie_collapse_side_js.collapse,.rollie_collapse_fixed.collapse{
+.rollie_collapse_side_js.collapse{
 	width: 0px;
 }
-.rollie_collapse_side_js.collapse.show,.rollie_collapse_fixed.collapse.show
+.rollie_collapse_side_js.collapse.show
 {
 	width: 300px;
 	overflow: hidden;
@@ -237,7 +239,7 @@ overflow:hidden;
 	padding-right:0px !important;
 }
 
-.rollie_collapse_side_js.collapse.show,.rollie_collapse_side_js.collapsing{
+.rollie_collapse_side_js.collapse.show:not(.rollie_collapse_fixed),.rollie_collapse_side_js.collapsing:not(.rollie_collapse_fixed){
 	top:0;
 	left: 0;
 	position: absolute;

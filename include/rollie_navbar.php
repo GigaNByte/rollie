@@ -10,11 +10,19 @@
 if ( has_nav_menu( 'rollie_top_menu' ) ) {
 if ( get_theme_mod( 'rollie_menu_overlay' ) ) { ?>
 	<div class="overlay rollie_overlay rollie_collapse_side_overlay"></div>
-<?php } ?>
+<?php } 
+$rollie_menu_top_fixed = '';
+if (get_theme_mod('rollie_menu_top_fixed',true)){
+	$rollie_menu_top_fixed = 'position-fixed';
+}
+$rollie_menu_top_transparent = '';
+if (get_theme_mod('rollie_menu_top_transparent',true)){
+	$rollie_menu_top_transparent = ' rollie_menu_top_transparent';
+}
+?>
+<nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs <?php echo $rollie_menu_top_fixed ?>'> 			
 
-<nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs'> 			
-
-	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible " >
+	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo $rollie_menu_top_transparent?>" >
 		<?php 
 
 		 dynamic_sidebar( 'rollie_widgetarea_navbar' );
