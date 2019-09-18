@@ -2516,10 +2516,7 @@ $wp_customize->add_section(
 
 					),
 				)
-			);
-
-		
-
+			);	
 		$wp_customize->add_setting(
 			'rollie_menu_design',
 			array(
@@ -2542,6 +2539,30 @@ $wp_customize->add_section(
 				),
 			)
 		);
+if (class_exists('Woocommerce')){
+		$wp_customize->add_setting(
+		'rollie_nav_top_icons_colapsed_content',
+			array(
+				'sanitize_callback' => 'rollie_sanitize_select',
+				'default'           => 'small',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			'rollie_nav_top_icons_colapsed_content',
+			array(
+				'label'   => esc_html__( 'Icons Menu Colapsed Content Design', 'Rollie' ),
+				'section' => 'rollie_navbar_section',
+				'type'    => 'select',
+				'choices' => array(
+					'small' => esc_html__( 'Small collapse', 'rollie' ),
+					'side' => esc_html__( 'Full side collapse', 'rollie' ),
+				),
+			)
+		);
+}
+
 
 			$wp_customize->add_setting(
 			'rollie_menu_position',

@@ -38,10 +38,11 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 			require get_template_directory().'/include/rollie_navbar.php' ;
 			
 			if ('fixed' == get_theme_mod('rollie_menu_design','full')){
-				echo "<div class='d-flex overflow-hidden'>";
-				echo "<div id='rollie_fixed_menu_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs'>";
+				echo "<div class=' d-flex flex-row overflow-hidden'>";
+				echo "<div id='rollie_fixed_menu_left_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs'>";
 				echo "</div>";
-				echo "<div>";
+				echo "<div class='w-100 col p-0'>";
+				echo "<div class='rollie_fixed_menu_fixed_content'>";
 			}
 		} 
 

@@ -65,10 +65,16 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 		?>
 
 	</footer>
+
 <?php 
 if ('fixed' == get_theme_mod('rollie_menu_design','full')){
+echo "</div>";//fixed content
 echo "</div>";//header,main,footer
+echo "<div id='rollie_fixed_menu_right_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs '>";
+rollie_nav_top_icons_colapsed_content();
+echo "</div>";
 echo "</div>";//row
+
 }
 ?>
 </body>

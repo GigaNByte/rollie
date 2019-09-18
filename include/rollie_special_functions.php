@@ -14,7 +14,20 @@ $src = esc_url_raw($src);
 " src="'.$src.'"></video>';
 });
 
-
+function rollie_nav_top_icons_colapsed_content(){
+	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'side'){
+		$rollie_nav_top_icons_colapsed_content_class = 'rollie_nav_top_icons_colapsed_content_side';
+	}else{
+		$rollie_nav_top_icons_colapsed_content_class = 'rollie_nav_top_icons_colapsed_content_small';
+	}
+	echo "<nav id='rollie_nav_top_icons_colapsed_content' class='".$rollie_nav_top_icons_colapsed_content_class ."'>";
+	//example of using rollie_nav_top_icons_colapsed_content
+	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'small'){
+		add_action('rollie_nav_top_icons_colapsed_content','rollie_nav_top_search_button_colapsed',10);
+	}
+	do_action('rollie_nav_top_icons_colapsed_content');
+	echo "</nav>";
+}
 function rollie_top_menu_wp_nav_menu (){
 	$rollie_side_active_c  = '';
 	$rollie_side_c        = '';

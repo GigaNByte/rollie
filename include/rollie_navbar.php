@@ -17,12 +17,17 @@ if (get_theme_mod('rollie_menu_top_fixed',true)){
 }
 $rollie_menu_top_transparent = '';
 if (get_theme_mod('rollie_menu_top_transparent',true)){
-	$rollie_menu_top_transparent = ' rollie_menu_top_transparent';
+	$rollie_menu_top_transparent = ' rollie_menu_top_transparent rollie_transparent ';
+}
+$rollie_menu_top_always_collapse = '';
+if (get_theme_mod('rollie_menu_top_always_collapse',false)){
+	
+	$rollie_menu_top_always_collapse = ' rollie_menu_top_always_collapse ';
 }
 ?>
 <nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs <?php echo $rollie_menu_top_fixed ?>'> 			
 
-	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo $rollie_menu_top_transparent?>" >
+	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo $rollie_menu_top_transparent.$rollie_menu_top_always_collapse ?>" >
 		<?php 
 
 		 dynamic_sidebar( 'rollie_widgetarea_navbar' );
@@ -74,13 +79,16 @@ if (get_theme_mod('rollie_menu_top_transparent',true)){
 		
 		?>	
 	</div>
-	<div id='rollie_nav_top_icons_colapsed_content'>						
-		<?php
-		//example of using rollie_nav_top_icons_colapsed_content
-		add_action('rollie_nav_top_icons_colapsed_content','rollie_nav_top_search_button_colapsed',10);
-		do_action('rollie_nav_top_icons_colapsed_content');
-		?>
-	</div>
+	<?php 
+	
+
+	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'side'){
+		rollie_nav_top_search_button_colapsed(); 
+	}else{
+		rollie_nav_top_icons_colapsed_content();
+		
+	}
+  ?>
 </nav>
 
 <?php } ?>
