@@ -325,11 +325,14 @@ transform: rotate(180deg);
 .rollie_nav_top_icons_colapsed_content_side #rollie_nav_user_info,.rollie_nav_top_icons_colapsed_content_side #rollie_nav_cart_info{
 position: initial;
 right: 0px;
-width: 0px;
-height: 100% !important; 
+
+	height: 100% !important; 
 }
 .rollie_nav_top_icons_colapsed_content_side #rollie_nav_user_info.collapse.show,.rollie_nav_top_icons_colapsed_content_side #rollie_nav_cart_info.collapse.show{
 width: 400px;
+}
+.rollie_nav_top_icons_colapsed_content_side #rollie_nav_user_info > div,.rollie_nav_top_icons_colapsed_content_side #rollie_nav_cart_info > div{
+min-width: 400px
 }
 .rollie_nav_top_icons_colapsed_content_side #rollie_nav_cart_info,.rollie_nav_top_icons_colapsed_content_side #rollie_nav_user_info,.rollie_nav_top_icons_colapsed_content_side .rollie_my_acc_nav_side_c{
 

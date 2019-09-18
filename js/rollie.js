@@ -187,14 +187,14 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 				});
 				//iCON MENU COLLAPSE CONTENT HANDLER
 			if ($('.rollie_nav_top_icons_colapsed_content_side').length){
-			$('.rollie_nav_top_icons_colapsed_content_side').css('padding-top',$('#rollie_navbar_c').height()+"px");
+			
 			
 				
 				
 			$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').on(
 				'show.bs.collapse',
 				function () {	
-
+					$('.rollie_nav_top_icons_colapsed_content_side').css('padding-top',$('#rollie_navbar_c').height()+"px");
 					
 					$('.rollie_navbar_color').css('background',rgba2rgb(rollie_navbar_color));	
 
