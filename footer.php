@@ -13,8 +13,8 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 // div ending for rollie_content_container_padding_bottom 
 //js uses container to calculate footer size and applies padding and manages collapsing
 ?>
-	<footer id='rollie_footer' class='rollie_menus_shadow rollie_f_footer_sub   rollie_f_navs  rollie_subtitle_text_color'>
-		<div class="rollie_footer rollie_second_color <?php if (get_theme_mod('rollie_footer_collapse',true)) echo "rollie_footer_collapse rollie_padding_footer_measure";?>" id="rollie_footer">
+	<footer id='rollie_footer' class='rollie_menus_shadow rollie_f_footer_sub rollie_f_navs rollie_subtitle_text_color'>
+		<div class="rollie_footer rollie_second_color <?php if (get_theme_mod('rollie_footer_collapse',true)) echo "rollie_footer_collapse rollie_padding_footer_measure";?>">
 			<?Php
 			if ( has_nav_menu( 'Footer_Menu' )){ ?>
 
@@ -70,7 +70,8 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 if ('fixed' == get_theme_mod('rollie_menu_design','full')){
 echo "</div>";//fixed content
 echo "</div>";//header,main,footer
-echo "<div id='rollie_fixed_menu_right_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs '>";
+//rollie_menus_shadow is added to rollie_fixed_menu_right_container in js to prevent box shadow overflow
+echo "<div id='rollie_fixed_menu_right_container' class=' rollie_navbar_color rollie_f_navs '>";
 rollie_nav_top_icons_colapsed_content();
 echo "</div>";
 echo "</div>";//row

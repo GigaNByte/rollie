@@ -838,7 +838,7 @@ function rollie_action_woo_before_account_navigation ()
 
 	$rollie_actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	if ( $rollie_actual_link == get_permalink( get_option('woocommerce_myaccount_page_id') )) /*if is displayed dashboard page apply class that creates bigger tiles*/{
-		$rollie_dash_class =" rollie_my_acc_dashboard ";
+		$rollie_dash_class =" rollie_my_acc_dashboard rollie_table";
 	}
 	else{
 		$rollie_dash_class = "";
@@ -853,7 +853,11 @@ function rollie_action_woo_before_account_navigation ()
 		$rollie_user_info_class = " col-12 col-lg-3 ";
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 2){
+
 		$rollie_class_c = "rollie_table rollie_my_acc_nav_side_c rollie_f_navs position-sticky";
+		if (is_user_logged_in()){
+			$rollie_class_c .= " rollie_logged_in ";
+		}
 		$rollie_class_c .= " col-5  ";
 		$rollie_class_c .= " col-lg-4  ";
 		$rollie_class_c .= ' rollie_menus_shadow  ';
@@ -1460,6 +1464,7 @@ function rollie_order_details($order)
 			rollie_action_woo_after_account_navigation();
 		} ?>
 	</div>
+	
 	<?php
 	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'small'){ 
 		echo	'<div class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table  col-8 col-md-3 p-0 " id="rollie_nav_cart_info">';

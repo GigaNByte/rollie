@@ -16,7 +16,7 @@ get_template_part( 'template-parts/special/content-header' );
 	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in footer.php more details about this container in footer.php-->
 	<?php } ?>
 
-	<div class=" row m-0">
+	<div class=" rollie_flex_height_stretch row m-0">
 		<?php
 
 		$rollie_is_active_sidebar_left  = $rollie_allow_sidebar_l && $rollie_allow_sidebars ;

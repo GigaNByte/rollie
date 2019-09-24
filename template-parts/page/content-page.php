@@ -6,7 +6,7 @@
 	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in footer.php more details about this container in footer.php-->
 <?php } ?>
 
-	<div class=" row m-0">
+	<div class="rollie_flex_height_stretch row m-0">
  	
 <?php
 
@@ -32,16 +32,16 @@ if ( $rollie_is_active_sidebar_left && $rollie_is_active_sidebar_right) {
 
 	if (class_exists( 'WooCommerce' )  &&  is_account_page()){
 		//disables paddings in smaller devices
-		$disable_paddings = 'rollie_disable_p';
+		$disable_paddings = 'rollie_woo_disable_p';
 	}else{
 		$disable_paddings = '';
 	}
 
 ?>
 
-		<main  id="<?php echo 'page-' . get_the_ID(); ?>" class=' <?php echo $disable_paddings; ?> rollie_f_main  rollie_main_theme_text_color    <?php echo $rollie_main_col ?> '>
+		<main  id="<?php echo 'page-' . get_the_ID(); ?>" class='   rollie_f_main  rollie_main_theme_text_color    <?php echo $rollie_main_col ?> '>
 			<?php rollie_breadcrumb();?>	
-		  	<article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="rollie_text_content_align rollie_single_page_content">
+		  	<article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="<?php echo $disable_paddings; ?> rollie_text_content_align rollie_single_page_content">
 			<?php
 			require locate_template('/template-parts/special/content-singlemeta.php');
 

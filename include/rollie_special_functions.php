@@ -260,8 +260,14 @@ function rollie_page_template_sufix(){
 	}
 }
 function rollie_page_template_sufix_array(){
-	return array('_ctar','_sp','_spp','_se','_pp');
-	}
+	if (class_exists('Woocommerce')){
+		return array('_ctar','_sp','_spp','_se','_pp','_woo');
+	} 
+	else{
+		return array('_ctar','_sp','_spp','_se','_pp');
+	}	
+	
+}
 function rollie_subtitle(){
 	global $post;
 	if ( class_exists('get_field') && get_field( 'rollie_alternate_subtitle', get_the_ID() )){

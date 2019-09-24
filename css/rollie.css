@@ -1,3 +1,4 @@
+
 .rollie_main_color{
 	z-index: -1;
 }
@@ -88,7 +89,10 @@ html,body
 
 body
 {
-	position: relative;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	font-family: 'Rokkitt', serif,'Helvetica Neue','Helvetica',Arial,Verdana;
 }
 img{
@@ -112,6 +116,15 @@ img{
 	display:block;
 	width:100%;
 	z-index: 1;
+}
+.rollie_flex_height_stretch{
+	flex: 1 1 auto;
+}
+.rollie_fixed_menu_fixed_content
+{
+	display: flex;
+	flex-flow: column;
+	height: 100%;
 }
 
 .rollie_header_shortcode{
@@ -181,8 +194,7 @@ overflow:hidden;
 */
 .rollie_table > .rollie_table{
 	border:none;
-	border-radius: 0px;
-	border-width: 0px;
+
 }
 .rollie_navbar_color > .rollie_navbar_color {
 	background: none;
@@ -200,6 +212,7 @@ overflow:hidden;
 	width: min-content;
 	height: 100%;
 	min-height: 100%;
+
 }
 
 /*rollie_fixed_menu*/
@@ -239,9 +252,17 @@ background: transparent !important;
 }
 .rollie_collapse_side_js.collapse.show
 {
-	width: 300px;
-	overflow: hidden;
+	overflow-x: hidden;
+	width: 100vw;
 }
+
+@media screen and (min-width: 300px){
+	.rollie_collapse_side_js.collapse.show
+{
+		width: 300px;
+}
+}
+
 
 .rollie_nav_link:hover,.rollie_nav_link
 {
@@ -280,10 +301,11 @@ font-size: inherit;
 
 }
 
-
+@media screen and (min-width:300px){
 .rollie_item_min_w
 {
 	min-width:200px;
+}
 }
 /*
 .rollie_chevron_menu.fa-gradient{
@@ -343,6 +365,7 @@ color: white;
 
 #rollie_footer{
 width: 100%;
+margin-top:4rem; 
 }
 .rollie_footer_collapse
 {

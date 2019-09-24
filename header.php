@@ -32,17 +32,18 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 }
 ?>
 	<div class='rollie_main_color rollie_background_color_div'></div>
+
 	<?php
 
 		if (!get_theme_mod('rollie_menu_position',false) || 'fixed' == get_theme_mod( 'rollie_menu_design' ) ){
 			require get_template_directory().'/include/rollie_navbar.php' ;
 			
 			if ('fixed' == get_theme_mod('rollie_menu_design','full')){
-				echo "<div class=' d-flex flex-row overflow-hidden'>";
+				echo "<div class=' d-flex flex-row '>";
 				echo "<div id='rollie_fixed_menu_left_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs'>";
 				echo "</div>";
 				echo "<div class='w-100 col p-0'>";
-				echo "<div class='rollie_fixed_menu_fixed_content'>";
+				echo "<div class='rollie_fixed_menu_fixed_content '>";
 			}
 		} 
 
