@@ -728,7 +728,7 @@ function rollie_woo_orders_table_sort_menu ()
 		<div class=" rollie_woo_order_table_banner col-12">		
 			<h2 class="col-12 text-left"><?php _e('Your orders','rollie');?></h2>
 		</div>
-		<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current  rollie_menus_shadow';?>'  >	 
+		<div class='col-6 col-md-4 col-xl-6  rollie_my_acc_nav_side <?php if (is_wc_endpoint_url('orders')) echo 'rollie_sort_orders_current  rollie_menus_shadow';?>'  >	 
 			<a href='<?php  echo wc_get_account_endpoint_url('orders') ; ?>'>
 				<div class='rollie_sort_orders_counter m-auto'>
 					<h3>
@@ -742,7 +742,7 @@ function rollie_woo_orders_table_sort_menu ()
 		</div>
 
 
-		<div class='col-6 col-md-4 col-xl-6 rollie_my_acc_nav_side 	<?php if (is_wc_endpoint_url('completed')) echo 'rollie_sort_orders_current';?>'  >
+		<div class='col-6 col-md-4 col-xl-6  rollie_my_acc_nav_side 	<?php if (is_wc_endpoint_url('completed')) echo 'rollie_sort_orders_current';?>'  >
 			<a href='<?php  echo wc_get_account_endpoint_url('completed') ; ?>'>
 				<div class='rollie_sort_orders_counter m-auto'>
 					<h3><?php	rollie_get_total_orders_e(array('wc-completed'))	?></h3>

@@ -2565,7 +2565,7 @@ if (class_exists('Woocommerce')){
 
 
 			$wp_customize->add_setting(
-			'rollie_menu_position',
+			'rollie_menu_over_header_image',
 			array(
 				'default'           => false,
 				'sanitize_callback' => 'rollie_sanitize_checkbox',
@@ -2575,7 +2575,7 @@ if (class_exists('Woocommerce')){
 		$wp_customize->add_control(
 			new Skyrocket_Toggle_Switch_Custom_control(
 				$wp_customize,
-				'rollie_menu_position',
+				'rollie_menu_over_header_image',
 				array(
 					'label'   =>__( 'Navbar over Image', 'rollie' ),
 					'section' => 'rollie_navbar_section',

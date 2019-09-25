@@ -1,4 +1,9 @@
-
+.rollie_orders_sort_menu .rollie_my_acc_nav_side{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 .rollie_main_color{
 	z-index: -1;
 }
@@ -247,6 +252,7 @@ background: transparent !important;
 	transition: width 200ms ease-in-out;
 
 }
+
 .rollie_collapse_side_js.collapse{
 	width: 0px;
 }
