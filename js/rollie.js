@@ -41,10 +41,10 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 			var rollie_header_container_initial_h	= $('.rollie_header_wrapper').height();
 			$('.rollie_header_wrapper').css('min-height',$('.rollie_header_wrapper').height() - $(container).height());
 		}		
-		if ($( '.rollie_collapse_side_js' ).length ) {
-			var rollie_collapse_side = true;
+		if ($( '.rollie_collapse_overlap' ).length ) {
+			var rollie_collapse_overlap = true;
 		} else {
-			var rollie_collapse_side = false;
+			var rollie_collapse_overlap = false;
 		}
 		if ($( '.rollie_collapse_fixed' ).length ) {		
 			var rollie_collapse_fixed = true;
@@ -53,7 +53,7 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 		}
 		//on swipe
 
-		if (rollie_collapse_fixed ||  rollie_collapse_side){
+		if (rollie_collapse_fixed ||  rollie_collapse_overlap){
 
 	 		 $(document).on('swiperight', function(e,data) {
 	 		 	if($('.rollie_nav_top_icons_colapsed_content_side').length && $('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').hasClass('show')){
@@ -95,12 +95,12 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 			}	
 					
 				
-					$('.rollie_nav_top_icons_colapsed_content_side').css('padding-top',$('#rollie_navbar_c').height()+"px");
+					$('.rollie_nav_top_icons_colapsed_content_side').css('margin-top',$('#rollie_navbar_c').height()+"px");
 					$('#rollie_nav_user_info').find('.woocommerce-MyAccount-navigation').find('ul').css('min-height',$(window).height()-$('#rollie_nav_user_info').find('.rollie_woo_order_table_banner').height()-$('#rollie_navbar_c').height()+"px");	
 				
 			$(collapsing_container).collapse('hide');
 			$(container).find('.rollie_navbar_toggler').blur();
-			if (rollie_collapse_side){
+			if (rollie_collapse_overlap){
 				$(collapsing_container).insertBefore('.rollie_top_menu_icons');
 			}
 		});	
@@ -145,7 +145,8 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 			$( collapsing_container ).on(
 				'show.bs.collapse',
 				function () {	
-					if (rollie_collapse_side){
+
+					if (rollie_collapse_overlap){
 						$('.rollie_menu_top_transparent').css('background','inherit');
 					if (rollie_collapse_fixed){
 						$('.rollie_navbar_color').css('background',rgba2rgb(rollie_navbar_color));	
@@ -155,13 +156,14 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 						$(collapsing_container).insertAfter(container);
 					}
 
-					$('.rollie_collapse_side_js').css('margin-top',$('#rollie_navbar_c').height()+"px");
+					$('.rollie_collapse_side').css('margin-top',$('#rollie_navbar_c').height()+"px");
 
 				}else{
 					$(collapsing_container).insertAfter('.rollie_top_menu_icons');
 				}
 
 				$(container).parent().find('.collapse.show').collapse('hide');	
+				$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').collapse('hide');
 
 				$('.navbar-nav' ).addClass( 'm-0' );
 				$( '.rollie_collapse_side_overlay' ).css('display','block').css( "opacity","1" );
@@ -182,13 +184,12 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 			$( collapsing_container ).on(
 				'hidden.bs.collapse',
 				function () {			
-
-						//$('.rollie_menu_top_transparent').css('background','transparent');
+			
 						$('.rollie_collapse_side_overlay').css('display','none').css( "opacity","0" );
 						$('.navbar-nav').removeClass( 'm-0' );
 						
-						if (rollie_collapse_side){
-							$('.rollie_collapse_side_js').css('margin-top','0');							
+						if (rollie_collapse_overlap){
+							$('.rollie_collapse_side').css('margin-top','0');							
 							$(collapsing_container).insertBefore('.rollie_top_menu_icons');
 						}else{
 							$('.rollie_top_menu_icons').insertAfter(collapsing_container);
@@ -224,23 +225,25 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 
 				//iCON MENU COLLAPSE CONTENT HANDLER
 		if ($('.rollie_nav_top_icons_colapsed_content_side').length){
+			//only adding this attribute dynamicaly  collapse works propely	
 			
-
 
 			$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').on(
 				'show.bs.collapse',
 				function () {	
-				
-					$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').not(this).collapse('hide');
+
+					$(collapsing_container).collapse('hide');
+					
 					$('#rollie_fixed_menu_right_container').addClass('rollie_menus_shadow');
-					$('.rollie_nav_top_icons_colapsed_content_side').css('padding-top',$('#rollie_navbar_c').height()+"px");
+					$('.rollie_nav_top_icons_colapsed_content_side').css('margin-top',$('#rollie_navbar_c').height()+"px");
+					
 					
 					
 					$('.rollie_navbar_color').css('background',rgba2rgb(rollie_navbar_color));	
-
 					$('.rollie_fixed_menu_fixed_content').addClass('position-fixed');			
 					$( '.rollie_collapse_side_overlay' ).css('display','block').css( "opacity","1" );
 					$('.rollie_menu_top_transparent').removeClass('rollie_transparent');
+
 				});
 
 			$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').on(
@@ -252,19 +255,18 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 				});
 			$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').on(
 				'hide.bs.collapse',
-				function () {	
-
-					
-					$('.rollie_collapse_side_overlay').css('display','none').css( "opacity","0" );		
-					$('.rollie_navbar_color').css('background',rollie_navbar_color);	
-					
+				function () {					
+					$('.rollie_collapse_side_overlay').css('display','none').css( "opacity","0" );												
 				}
 				);	
 				$('.rollie_nav_top_icons_colapsed_content_side').find('.collapse').on(
 					'hidden.bs.collapse',
 					function () {	
-						$('.rollie_fixed_menu_fixed_content').removeClass('position-fixed');
-					$('#rollie_fixed_menu_right_container').removeClass('rollie_menus_shadow');
+						if (!$('#rollie_nav_top_icons_colapsed_content').children().hasClass('collapsing')){
+							$('.rollie_navbar_color').css('background',rollie_navbar_color);	
+							$('.rollie_fixed_menu_fixed_content').removeClass('position-fixed');
+							$('#rollie_fixed_menu_right_container').removeClass('rollie_menus_shadow');
+						}
 				});
 
 			}	

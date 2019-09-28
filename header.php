@@ -33,15 +33,17 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 ?>
 	<div class='rollie_main_color rollie_background_color_div'></div>
 
-	<?php//
+	<?php
 
-		if (!get_theme_mod('rollie_menu_over_header_image',false) || 'fixed' == get_theme_mod( 'rollie_menu_design' )  ){
+		if (!get_theme_mod('rollie_menu_over_header_image',false) || 'fixed' == get_theme_mod( 'rollie_menu_design','full') || get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
 			require get_template_directory().'/include/rollie_navbar.php' ;
 			
-			if ('fixed' == get_theme_mod('rollie_menu_design','full')){
+			if ('fixed' == get_theme_mod('rollie_menu_design','full')|| get_theme_mod('rollie_nav_top_icons_colapsed_content','side') ){
 				echo "<div class=' d-flex flex-row '>";
-				echo "<div id='rollie_fixed_menu_left_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs'>";
-				echo "</div>";
+				if ('fixed' == get_theme_mod('rollie_menu_design','full')){
+					echo "<div id='rollie_fixed_menu_left_container' class='rollie_menus_shadow rollie_navbar_color rollie_f_navs'>";
+					echo "</div>";
+				}
 				echo "<div class='w-100 col p-0'>";
 				echo "<div class='rollie_fixed_menu_fixed_content'>";
 			}
@@ -50,8 +52,9 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	?>
 
 	<div class="rollie_header_container row p-0 ">
+		
 		<?php 
-		if (get_theme_mod('rollie_menu_over_header_image',false) && 'fixed' != get_theme_mod( 'rollie_menu_design' )){
+		if (get_theme_mod('rollie_menu_over_header_image',false) && 'fixed' != get_theme_mod( 'rollie_menu_design','full' )){
 			require get_template_directory().'/include/rollie_navbar.php' ;
 		}
 

@@ -438,7 +438,7 @@ function rollie_woo_login_form_site_icon (){
 	}
 
 }
-add_action('woocommerce_login_form_start','rollie_woo_login_form_site_icon',5);
+add_action('woocommerce_login_form_start','rollie_navbar_icon',5);
 
 //
 //loginend
@@ -855,9 +855,7 @@ function rollie_action_woo_before_account_navigation ()
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 2){
 
 		$rollie_class_c = "rollie_table rollie_my_acc_nav_side_c rollie_f_navs position-sticky";
-		if (is_user_logged_in()){
-			$rollie_class_c .= " rollie_logged_in ";
-		}
+	
 		$rollie_class_c .= " col-5  ";
 		$rollie_class_c .= " col-lg-4  ";
 		$rollie_class_c .= ' rollie_menus_shadow  ';
@@ -865,6 +863,11 @@ function rollie_action_woo_before_account_navigation ()
 	}
 	elseif (get_theme_mod('rollie_woo_l_my_account_nav',1) == 3){
 		$rollie_class_c = " rollie_my_acc_nav_wide_c  ";
+	}
+	if (is_user_logged_in()){
+		$rollie_class_c .= " rollie_logged_in ";
+	}else{
+		$rollie_class_c .= " rollie_logged_out ";
 	}
 	echo "<div class=' ".$rollie_class_c." '>";
 	echo "<div class=' ".$rollie_dash_class."  rollie_my_acc_container   '>";
@@ -1449,9 +1452,9 @@ function rollie_order_details($order)
 
 	function woocommerce_rollie_nav_top_icons_colapsed(){
 		if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small')=='small'){
-			echo "<div  id='rollie_nav_user_info' class='collapse rollie_menus_shadow col-8 col-md-3 p-0'> ";
+			echo "<div  data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow col-8 col-md-3 p-0'> ";
 		}else{
-			echo "<div  id='rollie_nav_user_info' class='collapse rollie_menus_shadow rollie_collapse_side_js'> ";
+			echo "<div data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow rollie_flex_text_center rollie_collapse_side'> ";
 
 		} 
 		?>
@@ -1467,9 +1470,9 @@ function rollie_order_details($order)
 	
 	<?php
 	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'small'){ 
-		echo	'<div class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table  col-8 col-md-3 p-0 " id="rollie_nav_cart_info">';
+		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content"  class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table  col-8 col-md-3 p-0 " id="rollie_nav_cart_info">';
 	}else{
-		echo	'<div class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table rollie_collapse_side_js" id="rollie_nav_cart_info">';
+		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content" class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table rollie_collapse_side" id="rollie_nav_cart_info">';
 	}
 	?>
 

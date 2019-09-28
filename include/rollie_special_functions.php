@@ -20,7 +20,7 @@ function rollie_nav_top_icons_colapsed_content(){
 	}else{
 		$rollie_nav_top_icons_colapsed_content_class = 'rollie_nav_top_icons_colapsed_content_small';
 	}
-	echo "<nav id='rollie_nav_top_icons_colapsed_content' class='".$rollie_nav_top_icons_colapsed_content_class ."'>";
+	echo "<nav id='rollie_nav_top_icons_colapsed_content' class='d-flex ".$rollie_nav_top_icons_colapsed_content_class ."'>";
 	//example of using rollie_nav_top_icons_colapsed_content
 	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'small'){
 		add_action('rollie_nav_top_icons_colapsed_content','rollie_nav_top_search_button_colapsed',10);
@@ -31,12 +31,13 @@ function rollie_nav_top_icons_colapsed_content(){
 function rollie_top_menu_wp_nav_menu (){
 	$rollie_side_active_c  = '';
 	$rollie_side_c        = '';
-	if ( 'side' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
-		$rollie_side_active_c  = ' rollie_collapse_side_js rollie_navbar_color ';
+	if('full' == get_theme_mod( 'rollie_menu_design' ,'full')){
+		$rollie_side_active_c  = ' rollie_collapse_full ';
+	}elseif ( 'side' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
+		$rollie_side_active_c  = ' rollie_collapse_side rollie_navbar_color rollie_collapse_overlap';
 		$rollie_side_c         = 'rollie_navbar_color';
-	} 
-	if ( 'fixed' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
-		$rollie_side_active_c  = 'rollie_collapse_side_js rollie_collapse_fixed ';
+	}elseif ( 'fixed' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
+		$rollie_side_active_c  = 'rollie_collapse_side rollie_collapse_fixed ';
 	} 
 
 	$rollie_navbar_align = get_theme_mod( 'rollie_menu_top_item_align',2);
@@ -75,7 +76,7 @@ function rollie_navbar_icon(){
 		$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_menu_top_logo' ))) ;
 		echo "<img class='p-1  m-auto d-block' srcset='" .esc_url(get_theme_mod( 'rollie_menu_top_logo' ))." 1x".$rollie_retina_navbar."' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
 		if(get_theme_mod('rollie_menu_top_logo_title',false)){
-			echo '<div class="rollie_f_header_h2">'.get_bloginfo('name')."</div>";
+			echo '<div class="text-center rollie_firts">'.get_bloginfo('name')."</div>";
 		}
 		echo '</a>';
 	}	
