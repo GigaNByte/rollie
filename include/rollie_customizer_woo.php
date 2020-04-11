@@ -7,8 +7,8 @@
 		$wp_customize->add_panel(
 		'rollie_woo_l_panel',
 		array(
-			'title'    => __( 'Rollie Woocommerce layouts' ),
-			'priority' => 20,
+			'title'    => __( 'Rollie Woocommerce Layouts' ),
+			'priority' => 19,
 		)
 	);
 	$wp_customize->add_section(
@@ -54,7 +54,7 @@
 		);
 
 	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+		new Rollie_Slider_Custom_Control(
 			$wp_customize,
 			'rollie_woo_l_single_img_max_h',
 			array(
@@ -79,7 +79,7 @@
 		);
 
 	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+		new Rollie_Slider_Custom_Control(
 			$wp_customize,
 			'rollie_woo_l_single_w',
 			array(
@@ -104,7 +104,7 @@
 		);
 
 	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+		new Rollie_Slider_Custom_Control(
 			$wp_customize,
 			'rollie_woo_l_single_w_md',
 			array(
@@ -141,7 +141,7 @@ $wp_customize->get_control( 'woocommerce_catalog_rows' )->section = 'rollie_woo_
 
 
 		$wp_customize->add_control(
-			new Skyrocket_Toggle_Switch_Custom_control(
+			new Rollie_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'rollie_woo_l_shop_img',
 				array(
@@ -165,7 +165,7 @@ $wp_customize->get_control( 'woocommerce_catalog_rows' )->section = 'rollie_woo_
 		);
 
 	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+		new Rollie_Slider_Custom_Control(
 			$wp_customize,
 			'rollie_woo_l_shop_img_max_h',
 			array(
@@ -202,7 +202,7 @@ $wp_customize->get_control( 'woocommerce_catalog_rows' )->section = 'rollie_woo_
 			)
 		);
 $wp_customize->add_control(
-			new Skyrocket_Toggle_Switch_Custom_control(
+			new Rollie_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'rollie_woo_l_shop_display_sku',
 				array(
@@ -302,7 +302,7 @@ $wp_customize->add_control(
 		'rollie_woo_c&d_panel',
 		array(
 			'title'    => __( 'Rollie Woocommerce Colors and Design' ),
-			'priority' => 20,
+			'priority' => 19,
 		)
 	);
 
@@ -404,7 +404,7 @@ $wp_customize->add_section(
 		);
 
 	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+		new Rollie_Slider_Custom_Control(
 			$wp_customize,
 			'rollie_woo_notice_radius',
 			array(
@@ -429,7 +429,7 @@ $wp_customize->add_section(
 				);
 
 		$wp_customize->add_control(
-			new Skyrocket_Toggle_Switch_Custom_control(
+			new Rollie_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'rollie_woo_notice_icon_invert',
 				array(
@@ -449,7 +449,7 @@ $wp_customize->add_section(
 				);
 
 		$wp_customize->add_control(
-			new Skyrocket_Toggle_Switch_Custom_control(
+			new Rollie_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'rollie_woo_notice_width_full',
 				array(
@@ -496,7 +496,7 @@ $wp_customize->add_section(
 	);
 
 	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
+		new Rollie_Alpha_Color_Control(
 			$wp_customize,
 			'rollie_woo_error_border_color',
 			array(
@@ -516,7 +516,7 @@ $wp_customize->add_section(
 	);
 
 	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
+		new Rollie_Alpha_Color_Control(
 			$wp_customize,
 			'rollie_woo_notice_border_color',
 			array(
@@ -539,7 +539,7 @@ $wp_customize->add_section(
 	);
 
 	$wp_customize->add_control(
-		new Customize_Alpha_Color_Control(
+		new Rollie_Alpha_Color_Control(
 			$wp_customize,
 			'rollie_woo_success_border_color',
 			array(

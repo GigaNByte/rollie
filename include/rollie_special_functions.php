@@ -14,6 +14,29 @@ $src = esc_url_raw($src);
 " src="'.$src.'"></video>';
 });
 
+function rollie_comments_counter(){
+?>
+	<span class='  rollie_icon_first fa-stack  fa-1x'>
+		<i class='far fa-comment fa-stack-2x'></i>
+		<strong class='fa-stack-1x fa-stack-text   rollie_t_shadow_0 '><?php echo get_comments_number()?></strong>
+	</span>
+<?php	
+}
+function rollie_avatar ($rollie_author_id,$rollie_center_avatar = false){
+	if(empty($rollie_author_id)) return;
+
+	if($rollie_center_avatar){
+		$rollie_center_avatar = 'class="rollie_flex_text_center"';
+	}else{
+		$rollie_center_avatar ='';
+	} 
+	?>
+
+	<a <?php echo  $rollie_center_avatar ?> href='<?php echo get_the_author_link($rollie_author_id)?>'>
+		<img class='rollie_avatar avatar mr-2' src="<?php echo get_avatar_url($rollie_author_id, array('size'=>40))?>" alt='<?php get_the_author_meta('nickname')?>' >	
+	</a>
+<?php
+}
 function rollie_nav_top_icons_colapsed_content(){
 	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'side'){
 		$rollie_nav_top_icons_colapsed_content_class = 'rollie_nav_top_icons_colapsed_content_side';
@@ -378,6 +401,8 @@ function rollie_get_embedded_media( $type = array() ) {
 	}
 	elseif ( function_exists( 'get_field' ) ) {
 		echo get_field( 'rollie_excerpt' );
+	}else{
+		the_excerpt();
 	}
 
 }	

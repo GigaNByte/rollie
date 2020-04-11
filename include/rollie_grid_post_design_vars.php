@@ -21,20 +21,12 @@ if (get_theme_mod('rollie_grid_type'.$rollie_template ,1)==2){
 	$rollie_post_display_style_classes [2]['first_div_col'] = ' rollie_grid_item ' ;
 }
 
-$rollie_post_display_style_classes [0]['second_div_col_classic'] = ' col-5 ';
+$rollie_post_display_style_classes [0]['second_div_col_classic'] = ' col-7 col-lg-6 ';
 $rollie_post_display_style_classes [1]['second_div_col_classic'] = ' col-lg-5 col-6 ';
 $rollie_post_display_style_classes [2]['second_div_col_classic'] = ' col-12 col-md-7 col-lg-6 ';
 
 
-
-
-
-
-
-$rollie_post_display_style_classes [0]['post_author_date_div'] = '';
-$rollie_post_display_style_classes [1]['post_author_date_div'] = ' p-0 ';
-$rollie_post_display_style_classes [2]['post_author_date_div'] = '';
-
+//not used
 $rollie_post_display_style_classes [0]['post_excerpt_lenght'] = 'full';
 $rollie_post_display_style_classes [1]['post_excerpt_lenght'] = 30;
 $rollie_post_display_style_classes [2]['post_excerpt_lenght'] = 1;
@@ -42,7 +34,7 @@ $rollie_post_display_style_classes [2]['post_excerpt_lenght'] = 1;
 $rollie_post_display_style_classes [0] ['post_excerpt_lenght_raw'] = 'full';
 $rollie_post_display_style_classes [1] ['post_excerpt_lenght_raw'] = 'full';
 $rollie_post_display_style_classes [2] ['post_excerpt_lenght_raw'] = 30;
-
+//not used end
 
 $rollie_post_display_style_classes [0]['post_excerpt_div_col_modern'] = ' col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 ';
 $rollie_post_display_style_classes [1]['post_excerpt_div_col_modern'] = ' col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 ';

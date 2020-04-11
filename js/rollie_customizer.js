@@ -141,49 +141,34 @@ jQuery( document ).ready(function($) {
 	{
 		var	value = $(selector_name).attr('rollie_collapse_elements');
 
-		if ($(selector_name).attr('rollie_open_close_auto') == 'true'){
+			//closing border bottom
 			$(selector_name).parent().next().css('margin-top','0');
 			$(selector_name).parent().css('margin-bottom','0');
 			$(selector_name).children().first().css('margin-top','0');
-			$(selector_name).parent().nextAll().eq(parseInt(value)-1).addClass('rollie_collapse_bb');
-
-		}
+			$(selector_name).parent().nextAll('.rollie_collapse_label_show_flag').eq(parseInt(value)-1).addClass('rollie_collapse_bb');
+		
 
 
 
 		$(selector_name).parent().nextAll('li').each(function( index ) {
+			
 			var tr = true;
-			if(!on_doc_ready)
-			{
-
-
-				if (($(this).attr('rollie_mscc_active') == 'disactive'))
-				{
-					tr=false;
-				}
-
+			if(!on_doc_ready && $(this).attr('rollie_mscc_active') == 'disactive'){		
+				tr=false;
 			}
+
 			if (value  !== 'undefined'  && index <  value){
-
-
-
 				if( ! $( this ).hasClass('rollie_collapse_label_show_flag')  )   {	
-
-
+					$( this ).attr("aria-hidden","false");
 					$(this).addClass('rollie_collapse_label_show_flag');
-					if (tr)
-					{
-			$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
-		}
-
-	}
-	else{
-
-
-		$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
-	}
-
-}	
+					if (tr){
+						$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
+					}
+				}else{
+					$( this ).attr("aria-hidden","true");
+					$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
+				}
+			}	
 });
 	}
 
@@ -196,6 +181,14 @@ jQuery( document ).ready(function($) {
 		});
 		$( '.rollie_collapse_label_toggle' ).on( "click", function() { 
 			rollie_collapse_label_toggle_controler(this,false);
+				console.log($(this).attr("aria-expanded"));
+			if ($(this).attr("aria-expanded") =="true"){
+
+				$(this).attr("aria-expanded","false");
+			}else{
+				$(this).attr("aria-expanded","true");
+			}//escape!
+			
 		});
 	}
 
@@ -239,8 +232,8 @@ jQuery( document ).ready(function($) {
 
 	 $('.customize-control-tinymce-editor').each(function(){
 		// Get the toolbar strings that were passed from the PHP Class
-		var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].skyrockettinymcetoolbar1;
-		var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].skyrockettinymcetoolbar2;
+		var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar1;
+		var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar2;
 
 		wp.editor.initialize( $(this).attr('id'), {
 			tinymce: {
@@ -257,6 +250,7 @@ jQuery( document ).ready(function($) {
 	 		$('#'+editor.id).trigger('change');
 	 	});
 	 });
+	 
 	/**
 	 * Googe Font Select Custom Control
 	 *
@@ -319,7 +313,7 @@ jQuery( document ).ready(function($) {
 		var bodyfontcontrol = _wpCustomizeSettings.controls[customizerControlName];
 
 		// Find the index of the selected font
-		var indexes = $.map(bodyfontcontrol.skyrocketfontslist, function(obj, index) {
+		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function(obj, index) {
 			if(obj.family === selectedFont) {
 				return index;
 			}
@@ -327,7 +321,7 @@ jQuery( document ).ready(function($) {
 		var index = indexes[0];
 
 		// For the selected Google font show the available weight/style variants
-		$.each(bodyfontcontrol.skyrocketfontslist[index].variants, function(val, text) {
+		$.each(bodyfontcontrol.rollie_fontslist[index].variants, function(val, text) {
 			elementRegularWeight.append(
 				$('<option></option>').val(text).html(text)
 				);
@@ -357,14 +351,14 @@ jQuery( document ).ready(function($) {
 			elementBoldWeight.prop('disabled', 'disabled');
 		}
 		
-		$.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
+		$.each(bodyfontcontrol.rollie_fontslist[index].subsets, function(val, text) {
 			elementSubsetsWeight.append(
 				$('<option></option>').val(text).html(text)
 				);
 		});
 		
 		// Update the font category based on the selected font
-		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.skyrocketfontslist[index].category);
+		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.rollie_fontslist[index].category);
 
 		skyrocketGetAllSelects($(this).parent().parent());
 
@@ -402,7 +396,7 @@ jQuery( document ).ready(function($) {
 		var bodyfontcontrol = _wpCustomizeSettings.controls[customizerControlName];
 
 		// Find the index of the selected font
-		var indexes = $.map(bodyfontcontrol.skyrocketfontslist, function(obj, index) {
+		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function(obj, index) {
 			if(obj.family === selectedFont) {
 				return index;
 			}
@@ -410,7 +404,7 @@ jQuery( document ).ready(function($) {
 		var index = indexes[0];
 
 		// For the selected Google font show the available weight/style variants
-		$.each(bodyfontcontrol.skyrocketfontslist[index].variants, function(val, text) {
+		$.each(bodyfontcontrol.rollie_fontslist[index].variants, function(val, text) {
 			elementRegularWeight.append(
 				$('<option></option>').val(text).html(text)
 				);
@@ -440,7 +434,7 @@ jQuery( document ).ready(function($) {
 			elementBoldWeight.prop('disabled', 'disabled');
 		}
 		
-		$.each(bodyfontcontrol.skyrocketfontslist[index].subsets, function(val, text) {
+		$.each(bodyfontcontrol.rollie_fontslist[index].subsets, function(val, text) {
 			elementSubsetsWeight.append(
 				$('<option></option>').val(text).html(text)
 				);
@@ -449,7 +443,7 @@ jQuery( document ).ready(function($) {
 		// Update the font category based on the selected font
 
 		skyrocketGetAllSelects($(this).parent().parent());
-		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.skyrocketfontslist[index].category);
+		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.rollie_fontslist[index].category);
 		var rollie_regularweight= $(ul_class).find(".rollie_regularweight").attr("rollie-reset-value");
 		var rollie_italicweight = $(ul_class).find(".rollie_italicweight").attr("rollie-reset-value");
 		var rollie_boldweight = $(ul_class).find(".rollie_boldweight").attr("rollie-reset-value");
@@ -754,11 +748,6 @@ rollie_css_ruler_control();
 		});
 
 	});
-
-
-
-
-
 
 });
 

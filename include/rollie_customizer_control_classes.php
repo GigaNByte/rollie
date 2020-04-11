@@ -6,33 +6,26 @@
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @link https://github.com/maddisondesigns
 	 */
-class Skyrocket_TinyMCE_Custom_control extends WP_Customize_Control {
+class Rollie_TinyMCE_Custom_control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
-	public $type = 'tinymce_editor';
-	/**
-	 * Enqueue our scripts and styles
-	 */
-	public function enqueue() {
-		wp_enqueue_script( 'skyrocket-custom-controls-js', trailingslashit( get_template_directory_uri() ) . 'js/customizer.js', array( 'jquery' ), '1.0', true );
-		wp_enqueue_style( 'skyrocket-custom-controls-css', trailingslashit( get_template_directory_uri() ) . 'css/customizer.css', array(), '1.0', 'all' );
-		wp_enqueue_editor();
-	}
+	public $type = 'rollie_tinymce_editor';
+
 	/**
 	 * Pass our TinyMCE toolbar string to JavaScript
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['skyrockettinymcetoolbar1'] = isset( $this->input_attrs['toolbar1'] ) ? esc_attr( $this->input_attrs['toolbar1'] ) : 'bold italic bullist numlist alignleft aligncenter alignright link';
-		$this->json['skyrockettinymcetoolbar2'] = isset( $this->input_attrs['toolbar2'] ) ? esc_attr( $this->input_attrs['toolbar2'] ) : '';
+		$this->json['rollie_tinymcetoolbar1'] = isset( $this->input_attrs['toolbar1'] ) ? esc_attr( $this->input_attrs['toolbar1'] ) : 'bold italic bullist numlist alignleft aligncenter alignright link';
+		$this->json['rollie_tinymcetoolbar2'] = isset( $this->input_attrs['toolbar2'] ) ? esc_attr( $this->input_attrs['toolbar2'] ) : '';
 	}
 	/**
 	 * Render the control in the customizer
 	 */
 	public function render_content() {
 		?>
-			<div class="tinymce-control">
+			<div class="rollie_tinymce_control">
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 			<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
@@ -51,7 +44,7 @@ class Skyrocket_TinyMCE_Custom_control extends WP_Customize_Control {
 	 */
 
 
-class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
+class Rollie_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
@@ -107,7 +100,7 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['skyrocketfontslist'] = $this->fontList;
+		$this->json['rollie_fontslist'] = $this->fontList;
 	}
 	/**
 	 * Render the control in the customizer
@@ -268,31 +261,9 @@ class Skyrocket_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Rollie_Icon_Customize_Control extends WP_Customize_Control {
 
-public $type = 'image_radio_button';
+public $type = 'rollie_image_radio_button';
 
 	public function render_content() {
 
@@ -354,11 +325,11 @@ public $type = 'image_radio_button';
 	}
 
 }
-class Skyrocket_Slider_Custom_Control extends WP_Customize_Control {
+class Rollie_Slider_Custom_Control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
-	public $type = 'slider_control';
+	public $type = 'rollie_slider_control';
 	/**
 	 * Enqueue our scripts and styles
 	 */
@@ -394,11 +365,11 @@ class Skyrocket_Slider_Custom_Control extends WP_Customize_Control {
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @link https://github.com/maddisondesigns
 	 */
-class Skyrocket_Simple_Notice_Custom_Control extends WP_Customize_Control {
+class Rollie_Notice_Custom_Control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
-	public $type = 'simple_notice';
+	public $type = 'rollie_simple_notice';
 	/**
 	 * Render the control in the customizer
 	 */
@@ -422,7 +393,7 @@ class Skyrocket_Simple_Notice_Custom_Control extends WP_Customize_Control {
 			'code'   => array(),
 		);
 		?>
-			<div class="simple-notice-custom-control">
+			<div class="rollie_simple_notice_control">
 			<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -440,11 +411,11 @@ class Skyrocket_Simple_Notice_Custom_Control extends WP_Customize_Control {
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @link https://github.com/maddisondesigns
 	 */
-class Skyrocket_Toggle_Switch_Custom_control extends WP_Customize_Control {
+class Rollie_Toggle_Switch_Custom_control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */
-	public $type = 'toogle_switch';
+	public $type = 'rollie_toogle_switch';
 	/**
 	 * Enqueue our scripts and styles
 	 */
@@ -454,17 +425,17 @@ class Skyrocket_Toggle_Switch_Custom_control extends WP_Customize_Control {
 	 */
 	public function render_content() {
 		?>
-			<div class="toggle-switch-control">
-				<div class="toggle-switch">
-					<input type="checkbox" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" class="toggle-switch-checkbox" value="<?php echo esc_attr( $this->value() ); ?>" 
+			<div class="rollie_toggle_switch_control">
+				<div class="rollie_toogle_switch">
+					<input type="checkbox" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" class="rollie_toogle_switch_checkbox" value="<?php echo esc_attr( $this->value() ); ?>" 
 					<?php
 					$this->link();
 					checked( $this->value() );
 					?>
 					 >
-					<label class="toggle-switch-label" for="<?php echo esc_attr( $this->id ); ?>">
-						<span class="toggle-switch-inner "></span>
-						<span class="toggle-switch-switch"></span>
+					<label class="rollie_toogle_switch_label" for="<?php echo esc_attr( $this->id ); ?>">
+						<span class="rollie_toogle_switch_inner "></span>
+						<span class="rollie_toogle_switch_switch"></span>
 					</label>
 				</div>
 				<div class="customize-control-title pr-1"><?php echo esc_html( $this->label ); ?></div>
@@ -483,7 +454,7 @@ class Rollie_Multiple_Switch_Customizer_Control extends WP_Customize_Control {
 
 	//support for font reseting
 
-	public $type = 'multiple-switch';
+	public $type = 'rollie_multiple_switch';
 	public function render_content() {	
 		$rollie_font_reset_toogle_class   = '';
 		$rollie_font_reset_toogle_arg   = '';
@@ -494,7 +465,7 @@ class Rollie_Multiple_Switch_Customizer_Control extends WP_Customize_Control {
 			}
 		} 
 
-		  $input_id         = '_customize-input-' . $this->id;
+		  $input_id		= '_customize-input-' . $this->id;
     $description_id   = '_customize-description-' . $this->id;
     $describedby_attr = ( ! empty( $this->description ) ) ? ' aria-describedby="' . esc_attr( $description_id ) . '" ' : '';
 
@@ -541,7 +512,7 @@ class Rollie_Multiple_Switch_Customizer_Control extends WP_Customize_Control {
 class Rollie_Text_Custom_Control extends WP_Customize_Control {
 
 
-	public $type = 'text_custom_control';
+	public $type = 'rollie_text_custom';
 
 	public function render_content() {
 
@@ -575,20 +546,20 @@ class Rollie_Text_Custom_Control extends WP_Customize_Control {
 
 }
 
-function action_customize_render_control( $instance ) { 
+function rollie_customize_render_control( $instance ) { 
 	if (isset($instance->input_attrs['rollie_multiple_switch_cc']) ){ $rollie_mscc_attrs = esc_attr( $instance->input_attrs['rollie_multiple_switch_cc'] );?>
 	<div  rollie_mscc_attrs="<?php if (isset($rollie_mscc_attrs) ) echo esc_attr($rollie_mscc_attrs) ;?>"></div>
 <?php 
 }
 }; 
 
-add_action( 'customize_render_control', 'action_customize_render_control', 1, 1 ); 
+add_action( 'customize_render_control', 'rollie_customize_render_control', 1, 1 ); 
 class Rollie_Device_Control extends WP_Customize_Control{
-	public $type = 'rollie-device';
+	public $type = 'rollie_device';
 	public function render_content() {
 	if ( ! empty( $this->label ) ){
 	?>
-	<label for="<?php echo esc_attr( $this->id ); ?>" class="customize-control-title rollie-device-title"><?php echo esc_html( $this->label ); ?></label>
+	<label for="<?php echo esc_attr( $this->id ); ?>" class="customize-control-title "><?php echo esc_html( $this->label ); ?></label>
 	<?php }?>
 
 		<div class='rollie_device_control_c p-1 customize-control  <?php if (isset($this->input_attrs['switch_size']) && $this->input_attrs['switch_size']== 'big') echo 'rollie_big_device'; ?> '>	
@@ -609,11 +580,11 @@ class Rollie_Device_Control extends WP_Customize_Control{
 	}	
 }
 
-class Customize_Alpha_Color_Control extends WP_Customize_Control {
+class Rollie_Alpha_Color_Control extends WP_Customize_Control {
 	/**
 	 * Official control name.
 	 */
-	public $type = 'rollie-alpha-color';
+	public $type = 'rollie_alpha_color';
 	/**
 	 * Add support for palettes to be passed in.
 	 *
@@ -637,13 +608,8 @@ class Customize_Alpha_Color_Control extends WP_Customize_Control {
 	 */
 	public function render_content() {
 		// Process the palette
-//
-
-
 		if (isset($this->input_attrs['rollie_multiple_switch_cc']) ) $rollie_mscc_attrs = esc_attr( $this->input_attrs['rollie_multiple_switch_cc'] );
 				 
-
-
 		if ( is_array( $this->palette ) ) {
 			$palette = implode( '|', $this->palette );
 		} else {
@@ -678,17 +644,10 @@ class Rollie_Customizer_Collapse_Label_Control extends WP_Customize_Control {
 
 public $type = 'rollie_toogle_label';
 	public function render_content() {	
-		 if (isset($this->input_attrs['rollie_open_close_auto']) && $this->input_attrs['rollie_open_close_auto']){
-		 	 $rollie_open_close_auto ='true';
-		 }
-		 else {
-		 	$rollie_open_close_auto='false';
-		 }
-		 	
-            ?> 
+?> 
 
             <?php if ( ! empty( $this->label ) ) : ?>
-            	<h3 class="rollie_collapse_label_toggle accordion-section-title customize-control-title  rollie_customizer_label " rollie_open_close_auto="<?Php echo esc_attr($rollie_open_close_auto)?>" rollie_collapse_elements="<?Php if (isset($this->input_attrs['rollie_collapse_elements_number'])) echo esc_attr ($this->input_attrs['rollie_collapse_elements_number'])  ?>">
+            	<h3 class="rollie_customizer_label rollie_collapse_label_toggle accordion-section-title customize-control-title " aria-expanded="false"  rollie_collapse_elements="<?Php if (isset($this->input_attrs['rollie_collapse_elements_number'])) echo esc_attr ($this->input_attrs['rollie_collapse_elements_number'])  ?>">
 
             		<?php echo esc_html( $this->label ); ?></h3>
                 
@@ -702,8 +661,9 @@ public $type = 'rollie_toogle_label';
 class Rollie_Css_Ruler_Control extends WP_Customize_Control {
 	public $type = 'rollie_css_ruler';
 		public function render_content() {	
-
+	
 ?>
+
 <div class='rollie_css_ruler_label customize-control-title'><?php echo esc_html( $this->label ); ?></div>
 <div class='rollie_css_ruler_label customize-control-description'><?php echo esc_html( $this->description ); ?></div>
 <div class='rollie_css_ruler_c'>

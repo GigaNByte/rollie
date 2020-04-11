@@ -1,6 +1,5 @@
 <?php
 
-
 $rollie_font_data = array(
 new Rollie_Font('navbar', __( 'Navigations & Footer', 'rollie' ),array('.rollie_f_navs'),array(
 	"U" => array( "ignore"=>false),

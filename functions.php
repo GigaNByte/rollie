@@ -38,10 +38,10 @@ function rollie_style_start( ) {
 global $rollie_font_data;
 	wp_enqueue_style( 'swiper_lib_css', get_template_directory_uri() . '/css/swiper.min.css', array(), '4.3.4', 'all' );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.2.1', 'all' );
-	wp_enqueue_style('woocommerce_stylesheet', WP_PLUGIN_URL. '/woocommerce/assets/css/woocommerce.css',false,'1.0',"all");
 	wp_enqueue_style( 'rollie_stylesheet', get_template_directory_uri() . '/css/rollie.css', array(),  date("h:i:s"), 'all' );
     
 	if ( class_exists( 'WooCommerce' ) ) {
+		wp_enqueue_style('woocommerce_stylesheet', WP_PLUGIN_URL. '/woocommerce/assets/css/woocommerce.css',false,'1.0',"all");
 		wp_enqueue_style( 'rollie_woo_stylesheet', get_template_directory_uri() . '/css/rollie_woocommerce.css', array(), date("h:i:s"), 'all' );
 	}
 	
@@ -55,7 +55,7 @@ Enqueue Script */
 
 function rollie_customize_script(){
     wp_enqueue_script( 'rollie_customizer_preview', get_template_directory_uri() . '/js/rollie_customizer_preview.js', array( 'jquery', 'customize-preview' ), date("h:i:s"), true );
-    if (class_exists('woocommerce'))
+    if (class_exists('WooCommerce'))
     {
     	  wp_enqueue_script( 'rollie_woo_customizer_preview', get_template_directory_uri() . '/js/rollie_woo_customizer_preview.js', array( 'jquery', 'customize-preview' ), date("h:i:s"), true );
     }
@@ -305,6 +305,7 @@ function my_acf_json_load_point( $paths ) {
     
 }
 
+
 require get_template_directory() . '/include/rollie_required_plugins_TGMPA.php';
 require get_template_directory() . '/include/rollie_sanitization_functions.php';
 require get_template_directory() . '/include/rollie_walker_cat_swap.php';
@@ -320,14 +321,15 @@ require get_template_directory() . '/include/rollie_acf_field_import.php';
 require get_template_directory() . '/presets/rollie-presets.php';
 require get_template_directory() . '/include/rollie_pagination.php';
 require get_template_directory() . '/include/rollie_register_strings_polylang.php';
-require get_template_directory() . '/include/rollie_woocommerce.php';
 require get_template_directory() . '/include/rollie_smart_widget.php';
 require get_template_directory() . '/include/rollie_ajax.php';
 require get_template_directory() . '/include/rollie_customizer_css.php';	
 require get_template_directory() . '/include/rollie_customizer_classes.php';	
 require get_template_directory() . '/include/rollie_customizer_font_functions.php';
 
-
+if (class_exists('WooCommerce')) {
+require get_template_directory() . '/include/rollie_woocommerce.php';
+}
 
 add_action( 'customize_register', 'rollie_customizer_register' );
 add_action( 'after_setup_theme', 'rollie_custom_setup' );

@@ -418,11 +418,6 @@ function rollie_single_product_content(){
 do_action( 'woocommerce_product_meta_end' ); 
 
 
-
-
-
-
-
 //single product end 
 	 //login
 function rollie_woo_login_form_site_icon (){

@@ -65,7 +65,7 @@ global $wp_customize;
 		);
 
 	$wp_customize->add_control(
-		new Skyrocket_Toggle_Switch_Custom_control(
+		new Rollie_Toggle_Switch_Custom_control(
 			$wp_customize,
 			$this->img_set_name.'_crop_'.$key,
 			array(
@@ -184,7 +184,7 @@ public	function add_customizer_controls(){
 				$font_set_class_str =  implode(", ", $this->font_set_class);
 
 	$wp_customize->add_control(
-		new Skyrocket_Simple_Notice_Custom_control(
+		new Rollie_Notice_Custom_Control(
 			$wp_customize,
 			$this->font_set_name.'_i',
 			array(
@@ -247,7 +247,7 @@ public	function add_customizer_controls(){
 	);
 
 	$wp_customize->add_control(
-		new Skyrocket_Google_Font_Select_Custom_Control(
+		new Rollie_Google_Font_Select_Custom_Control(
 			$wp_customize,
 			$this->font_set_name.'_obj',
 			array(
@@ -303,7 +303,7 @@ public	function add_customizer_controls(){
 	);
 
 	$wp_customize->add_control(
-		new Skyrocket_Slider_Custom_Control(
+		new Rollie_Slider_Custom_Control(
 			$wp_customize,
 			$this->font_set_name.'_alt_weight',
 			array(
@@ -329,7 +329,7 @@ public	function add_customizer_controls(){
 				)
 			);
 			$wp_customize->add_control(
-				new Skyrocket_Toggle_Switch_Custom_control(
+				new Rollie_Toggle_Switch_Custom_control(
 					$wp_customize,
 					$this->font_set_name.'_U',
 					array(
@@ -359,8 +359,8 @@ public	function add_customizer_controls(){
 						'choices' => array(
 							1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
 							2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
-							3 => esc_html__( 'fa-align-justify three Justify ', 'rollie' ),
-							4 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
+							3 => esc_html__( 'fa-align-justify Justify ', 'rollie' ),
+							4 => esc_html__( 'fa-align-right Align right  ', 'rollie' ),
 
 						),
 					)
@@ -377,7 +377,7 @@ public	function add_customizer_controls(){
 		);
 
 		$wp_customize->add_control(
-			new Skyrocket_Slider_Custom_Control(
+			new Rollie_Slider_Custom_Control(
 				$wp_customize,
 				$this->font_set_name.'_max',
 				array(
@@ -402,7 +402,7 @@ public	function add_customizer_controls(){
 		);
 
 		$wp_customize->add_control(
-			new Skyrocket_Slider_Custom_Control(
+			new Rollie_Slider_Custom_Control(
 				$wp_customize,
 				$this->font_set_name.'_min',
 				array(
@@ -437,7 +437,7 @@ public	function add_customizer_controls(){
 			);
 
 			$wp_customize->add_control(
-				new Skyrocket_Slider_Custom_Control(
+				new Rollie_Slider_Custom_Control(
 					$wp_customize,
 					$this->font_set_name.'_'.$value.'_min',
 					array(
@@ -463,7 +463,7 @@ public	function add_customizer_controls(){
 			);
 
 			$wp_customize->add_control(
-				new Skyrocket_Slider_Custom_Control(
+				new Rollie_Slider_Custom_Control(
 					$wp_customize,
 					$this->font_set_name.'_'.$value.'_max',
 					array(
@@ -492,7 +492,7 @@ public	function add_customizer_controls(){
 			)
 		);
 		$wp_customize->add_control(
-			new Skyrocket_Slider_Custom_Control(
+			new Rollie_Slider_Custom_Control(
 				$wp_customize,
 				$this->font_set_name.'_ls',
 				array(
@@ -517,7 +517,7 @@ public	function add_customizer_controls(){
 			)
 		);
 		$wp_customize->add_control(
-			new Skyrocket_Slider_Custom_Control(
+			new Rollie_Slider_Custom_Control(
 				$wp_customize,
 				$this->font_set_name.'_lh',
 				array(
@@ -1111,8 +1111,7 @@ private $customizer_section;
 					'label'   =>$this->customizer_section_title,
 					'section' => $this->customizer_section,
 					'input_attrs'=> array (
-					'rollie_collapse_elements_number'=> 2,
-					'rollie_open_close_auto'=>true,
+					'rollie_collapse_elements_number'=> 2
 					)
 				)
 				)

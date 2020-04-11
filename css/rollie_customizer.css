@@ -8,7 +8,7 @@
 	display: block;
 }
 
-.customize-control-description  strong
+.rollie_control_description  strong
 {
 	text-align: center;
 }
@@ -173,8 +173,8 @@ display: table;
 .slider-custom-control .ui-button,
 .slider-custom-control .ui-button.ui-state-disabled:hover,
 .slider-custom-control .ui-button.ui-state-disabled:active {
-	background: #2885bb none repeat scroll 0 0;
-	border: 1px solid #2885bb;
+	background: #266928 none repeat scroll 0 0;
+	border: 1px solid #266928;
 	color: #454545;
 	font-weight: normal;
 }
@@ -223,7 +223,7 @@ display: table;
    ========================================================================== */
 
 
-.toggle-switch {
+.rollie_toogle_switch {
 	position: relative;
 	width: 64px;
 	-webkit-user-select: none;
@@ -232,11 +232,11 @@ display: table;
 	float: right;
 }
 
-.toggle-switch .toggle-switch-checkbox {
+.rollie_toogle_switch .rollie_toogle_switch_checkbox {
 	display: none;
 }
 
-.toggle-switch .toggle-switch-label {
+.rollie_toogle_switch .rollie_toogle_switch_label {
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
@@ -246,15 +246,15 @@ display: table;
 	margin: 0;
 }
 
-.toggle-switch-inner {
+.rollie_toogle_switch_inner {
 	display: block;
 	width: 200%;
 	margin-left: -100%;
 	transition: margin 0.3s ease-in 0s;
 }
 
-.toggle-switch-inner:before,
-.toggle-switch-inner:after {
+.rollie_toogle_switch_inner::before,
+.rollie_toogle_switch_inner::after {
 	display: block;
 	float: left;
 	width: 50%;
@@ -268,14 +268,14 @@ display: table;
 	box-sizing: border-box;
 }
 
-.toggle-switch-inner:before {
+.rollie_toogle_switch_inner::before {
 	content: "ON";
 	padding-left: 8px;
-	background-color: #2885bb;
+	background-color: #266928;
 	color: #FFFFFF;
 }
 
-.toggle-switch-inner:after {
+.rollie_toogle_switch_inner::after {
 	content: "OFF";
 	padding-right: 8px;
 	background-color: #EEEEEE;
@@ -283,7 +283,7 @@ display: table;
 	text-align: right;
 }
 
-.toggle-switch-switch {
+.rollie_toogle_switch_switch {
 	display: block;
 	width: 16px;
 	margin: 3px;
@@ -297,7 +297,7 @@ display: table;
 	transition: all 0.3s ease-in 0s;
 }
 
-.toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-inner {
+.rollie_toogle_switch_checkbox:checked + .rollie_toogle_switch_label .rollie_toogle_switch_inner {
 	margin-left: 0;
 }
 /**
@@ -325,7 +325,9 @@ display: table;
 	margin-left: 0;
 	float: right;
 }
-
+.customize-control-rollie_alpha_color.wp-picker-container input[type="text"].wp-color-picker{
+width: 140px;
+}
 .wp-picker-container .wp-picker-open ~ .wp-picker-holder .alpha-color-picker-container {
 	display: block;
 }
@@ -428,7 +430,7 @@ display: table;
 	}
 }
 
-.toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch {
+.rollie_toogle_switch_checkbox:checked + .rollie_toogle_switch_label .rollie_toogle_switch_switch {
 	right: 0px;
 }
 input:checked{
@@ -437,10 +439,10 @@ input:checked{
  /* !important will be changed */
  .rollie_multiple_switch_group_js
 {
+	background: #fff;
 	margin: 0px ;
 	padding: 0.4rem;	
 	border-width: 2px;
-	border-color: #cccccc;
 	box-sizing: border-box;
 	border-left-style: solid;
 	border-right-style : solid;
@@ -457,7 +459,7 @@ visibility: hidden ;
 {
 	margin: 0px;
 }
-.customize-control-multiple-switch
+.customize-control-rollie_multiple_switch
 {
 	margin: 0px ;
 }
@@ -470,14 +472,13 @@ display: flex;
 -ms-flex-wrap: wrap;
 flex-wrap: wrap;
  border-width: 2px;
-border-color: #cccccc;
 margin-top:0px; 
   border-style: solid;
   border-radius: 3px;
 color: #72777c;
 }
 
-.rollie_single_gradient_padding ,[id$="_gs"] ~ .customize-control-slider_control >  .slider-custom-control
+.rollie_single_gradient_padding ,[id$="_gs"] ~ .customize-control-rollie_slider_control >  .slider-custom-control
 {
 	margin: 0.4rem;
 }
@@ -534,12 +535,11 @@ display: none;
 }
 .rollie_multiple_switch_bb,.rollie_collapse_bb
 {
-border-bottom: solid;
-border-width: 2px;
-border-color: #cccccc;
-margin-bottom: 12px;
-display: block;
+	border-bottom: solid;
+	border-width: 2px;
 
+	margin-bottom: 12px;
+	display: block;
 } 
 .rollie_css_ruler_c{
 	display: flex;
@@ -558,20 +558,20 @@ text-align: center;
 
 .rollie_device_control_c > div 
 {
-font-size: 1rem;
-width: 1rem;
-padding: 0.3rem;
-height: 1rem;
-border-width: 1px;
-border-top:solid;
-border-bottom:solid;
+	font-size: 1rem;
+	width: 1rem;
+	padding: 0.3rem;
+	height: 1rem;
+	border-width: 1px;
+	border-top:solid;
+	border-bottom:solid;
 }
 .rollie_device_control_c  .rollie_big_device  > div 
 {
-font-size: 2rem;
-width: 2rem;
-padding: 0.5rem;
-height: 2rem;
+	font-size: 2rem;
+	width: 2rem;
+	padding: 0.5rem;
+	height: 2rem;
 }
 .rollie_device_control_c > div:nth-last-child(1){
 	border-right:solid;
@@ -583,60 +583,77 @@ height: 2rem;
 {
 	background: #ffffff;
 	border:solid;
-	color:#2885bb;
-	border-color: #2885bb !important;
-	
+	color:#266928;
+	border-color: #266928 !important;
 }
 .rollie_multiple_switch 
 {
 
 	transition: border-color,0.2s;
-		border-bottom-style: solid;
+	border-bottom-style: solid;
 	border-bottom-width: 4px;
-margin: 0px !important;
-padding: 0px !important;
-height: 3rem;
-display: flex !important;
-  justify-content: center;
-  align-items: center;
-  border-bottom-color: rgba(0,0,0,0);
-cursor: pointer;
+	margin: 0px !important;
+	padding: 0px !important;
+	height: 3rem;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	border-bottom-color: rgba(0,0,0,0);
+	cursor: pointer;
 }
 
 .rollie_checked_style
 {
-	
-	border-bottom-color: #0073aa;
+	border-bottom-color: #266928;
 }
 .rollie_multiple_switch_c
 {
-	background: #ffffff;
+	background: #eeeeee;
 	margin:0px!important;
 	padding:0px !important;
-		   transition: background-color: 2s;
+	transition: background-color: 2s;
 }
 .rollie_multiple_switch_c:hover
 {
 	color: black;
-
 background:linear-gradient(to right, #ccc  ,#fff  , #ccc  ) !important;
 
 }
+
+
 .rollie_customizer_label
 {
-	background: #ffffff !important;
-	border-left:  4px solid rgba(0,0,0,0) !important;
-	color: #555d66!important;
+	background: #ffffff ;
+	border-left:  4px solid !important;
+}
+.rollie_customizer_label.customize-control-title{
+	margin-bottom: 0px;
+	border-bottom: none;
 }
 
-.rollie_customizer_label_active,.rollie_customizer_label:hover
+
+#customize-theme-controls [id*="rollie"].control-section > .accordion-section-title,#customize-controls [id*="rollie"].control-section.open .accordion-section-title
 {
-	color: #0073aa !important;
-	border-left: 4px solid #0073aa !important;
-	background: inherit !important;
+	background-color: #266928;
 
 }
-.rollie_customizer_label:hover   .rollie_customizer_label:after
+#customize-theme-controls [id*="rollie"].control-section:hover > .accordion-section-title,#customize-theme-controls [id*="rollie"].control-section .accordion-section-title:focus,#customize-theme-controls [id*="rollie"].control-section .accordion-section-title:hover,#customize-theme-controls [id*="rollie"].control-section .accordion-section-title[aria-expanded="true"]
 {
-	color: #0073aa!important;
+	border-left-color: #266928;
 }
+
+#customize-theme-controls [id*="rollie"].control-section:hover > .accordion-section-title,#customize-controls [id*="rollie"].control-section.open .accordion-section-title:active,
+#customize-controls [id*="rollie"].control-section.open .accordion-section-title[aria-expanded="true"],#customize-controls [id*="rollie"].control-section.open .accordion-section-title:hover,.rollie_checked_style
+{
+	background-color:#ffffff;
+}
+#customize-theme-controls [id*="rollie"].control-section .accordion-section-title::after, #customize-theme-controls [id*="rollie"].control-section > .accordion-section-title, #customize-controls [id*="rollie"].control-section.open .accordion-section-title
+{
+	color: #f3f3f5;
+}
+#customize-theme-controls [id*="rollie"].control-section:hover > .accordion-section-title::after,#customize-theme-controls [id*="rollie"].control-section:hover > .accordion-section-title,#customize-theme-controls [id*="rollie"].control-section .accordion-section-title[aria-expanded="true"],#customize-theme-controls [id*="rollie"].control-section .accordion-section-title:hover,
+#customize-theme-controls [id*="rollie"].control-section .accordion-section-title[aria-expanded="true"]::after,#customize-theme-controls [id*="rollie"].control-section .accordion-section-title:hover::after,#customize-theme-controls [id*="rollie"].control-section .accordion-section-title[aria-expanded="true"]::after,.rollie_checked_style
+{
+	color: #266928;
+}
+

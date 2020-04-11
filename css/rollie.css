@@ -48,8 +48,7 @@ button:focus
 	border:none;
 }
 
-
-
+    
 .rollie_main_post_content > a
 .size-auto,
 .size-full,
@@ -708,10 +707,7 @@ iframe
 	font-style: italic;
 }
 
-.rollie_post_metadata
-{
-	padding-bottom:0.25rem;
-}
+
 
 
 
@@ -768,7 +764,7 @@ iframe
 
 article[id^="post"]
 {
-	padding: 2rem;
+	padding: 1.5rem;
 }
 
 
@@ -1051,6 +1047,7 @@ margin-top:1rem;
 	color:inherit;
 	background:inherit;
 }
+
 #rollie_navbar_c   
 {
 	z-index: 80;
@@ -1059,6 +1056,9 @@ margin-top:1rem;
 	left: 0;
 	width: 100%;
 	overflow: visible;
+}
+.rollie_reverse_text_color.rollie_second_text_color .rollie_main_theme_text_color,.rollie_reverse_text_color.rollie_second_text_color .rollie_title_text_color{
+color:inherit;	
 }
 .rollie_header_wrapper {
 	display: flex;

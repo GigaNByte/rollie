@@ -8,8 +8,6 @@ constructor(control_name, css_class, css_property) {
 
 /*this.css_before_value = css_before_value;*/
 }
-
-
 }
 function hexToRgbA_2(hex) {
  var c;
@@ -171,10 +169,6 @@ rollie_color_obj.css_value = rollie_standard_color;
 
 
    });
-
-
-
-
 
   }
  });
