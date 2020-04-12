@@ -25,8 +25,14 @@
 {
 display:block;
 margin:auto;
- width:30px;
+ width:20px;
+ height:20px;
 
+}
+.rollie_customizer_icon_single input[type="radio"]:checked::before{
+width: 10px;
+height: 10px;
+margin: 4px;
 }
 
 .rollie_w_100
@@ -441,7 +447,7 @@ input:checked{
 {
 	background: #fff;
 	margin: 0px ;
-	padding: 0.4rem;	
+	padding: 0.7rem;	
 	border-width: 2px;
 	box-sizing: border-box;
 	border-left-style: solid;
@@ -507,9 +513,6 @@ li {
     margin-bottom: 0px;
 }
 
-.customize-control-radio {
-    padding: 0px;	
-    }
 .rollie_multiple_switch_c  > span
 {
 padding: 0.4rem;
@@ -529,6 +532,7 @@ display: none;
 	display: flex !important;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .google-fonts .select2 {
 	width: 100% !important;
@@ -565,6 +569,7 @@ text-align: center;
 	border-width: 1px;
 	border-top:solid;
 	border-bottom:solid;
+	background:#f3f3f5;
 }
 .rollie_device_control_c  .rollie_big_device  > div 
 {
@@ -626,13 +631,22 @@ background:linear-gradient(to right, #ccc  ,#fff  , #ccc  ) !important;
 	background: #ffffff ;
 	border-left:  4px solid !important;
 }
+
 .rollie_customizer_label.customize-control-title{
 	margin-bottom: 0px;
 	border-bottom: none;
 }
 
+#customize-theme-controls [id*="rollie"].control-section .accordion-section-title[aria-expanded="true"]::after{
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
 
-#customize-theme-controls [id*="rollie"].control-section > .accordion-section-title,#customize-controls [id*="rollie"].control-section.open .accordion-section-title
+}
+
+#customize-theme-controls [id*="rollie"].control-section > .accordion-section-title,#customize-controls [id*="rollie"].control-section.open .accordion-section-title,.rollie_customizer_icon_single input[type="radio"]:checked::before
 {
 	background-color: #266928;
 
@@ -657,3 +671,6 @@ background:linear-gradient(to right, #ccc  ,#fff  , #ccc  ) !important;
 	color: #266928;
 }
 
+#customize-theme-controls .customize-pane-child.accordion-section-content{
+	padding: 8px;
+}

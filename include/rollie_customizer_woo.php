@@ -49,7 +49,7 @@
 			array(
 				'default'           => 200,
 					'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -74,7 +74,7 @@
 			array(
 				'default'           => 8,
 					'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -99,7 +99,7 @@
 			array(
 				'default'           => 12,
 					'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -160,7 +160,7 @@ $wp_customize->get_control( 'woocommerce_catalog_rows' )->section = 'rollie_woo_
 			array(
 				'default'           => 200,
 					'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -301,7 +301,7 @@ $wp_customize->add_control(
 		$wp_customize->add_panel(
 		'rollie_woo_c&d_panel',
 		array(
-			'title'    => __( 'Rollie Woocommerce Colors and Design' ),
+			'title'    => __( 'Rollie Woocommerce Colors & Design' ),
 			'priority' => 19,
 		)
 	);
@@ -399,7 +399,7 @@ $wp_customize->add_section(
 			array(
 				'default'           => 0,
 				'transport'         => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 

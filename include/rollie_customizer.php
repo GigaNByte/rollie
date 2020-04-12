@@ -20,6 +20,7 @@ function rollie_meta_control($wp_customize,$rollie_sufix,$rollie_section_prefix)
 				'section'       => $rollie_section_prefix.$rollie_sufix,
 				'input_attrs'=> array (
 				'rollie_collapse_elements_number'=> 5
+
 			)
 			)
 		)
@@ -200,7 +201,7 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 			array(
 				'default'           => 65,
 				'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -279,9 +280,9 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 					'section' => $rollie_section_prefix.$rollie_sufix,
 					'type'    => 'radio',
 					'choices' => array(
-						1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-						2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
-						3 => esc_html__( 'fa-align-right Align right  ', 'rollie' ),
+						1 => 'fa-align-left '.esc_html__( 'Align left', 'rollie' ),
+						2 => 'fa-align-center '.esc_html__( 'Center', 'rollie' ),
+						3 => 'fa-align-right '.esc_html__( 'Align right', 'rollie' ),
 					),
 				)
 			)
@@ -304,9 +305,9 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 					'section' => $rollie_section_prefix.$rollie_sufix,
 					'type'    => 'radio',
 					'choices' => array(
-						1 => esc_html__( 'fa-align-left Top ', 'rollie' ),
-						2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
-						3 => esc_html__( 'fa-align-right three Bottom  ', 'rollie' ),
+						1 => 'fa-align-left '.esc_html__( 'Align left', 'rollie' ),
+						2 => 'fa-align-center '.esc_html__( 'Center', 'rollie' ),
+						3 => 'fa-align-right '.esc_html__( 'Align right', 'rollie' ),
 					),
 				)
 			)
@@ -420,7 +421,7 @@ $rollie_sufix='_'.$rollie_sufix;
 				array(
 					'default' => 33,
 					'transport' =>'refresh',
-					'sanitize_callback' => 'skyrocket_sanitize_integer',
+					'sanitize_callback' => 'rollie_sanitize_integer',
 				)
 			);
 			$wp_customize->add_control(
@@ -448,7 +449,7 @@ $rollie_sufix='_'.$rollie_sufix;
 			array(
 				'default'           => 3,
 				'transport' =>'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -557,9 +558,9 @@ $rollie_sufix='_'.$rollie_sufix;
 					'section' => 'rollie_post_page'.$rollie_sufix,
 					'type'    => 'radio',
 					'choices' => array(
-						1 =>__( 'fa-bars split on row ', 'rollie' ),
-						2 =>__( 'fa-th-large split two on row ', 'rollie' ),
-						3 =>__( 'fa-th split three on row ', 'rollie' ),
+						1 =>'fa-bars-split'.__( 'One column on row', 'rollie' ),
+						2 =>'fa-th-large-split'.__( 'Two columns on row', 'rollie' ),
+						3 =>'fa-th'.__( 'Three column on row ', 'rollie' ),
 					),
 							'input_attrs'=>array(
 				'rollie_multiple_switch_cc' => 'rollie_grid_type'.$rollie_sufix.'-1'
@@ -811,7 +812,7 @@ function rollie_add_gradient_control ($wp_customize,$section_name,$setting_name,
 			array(
 				'default'           => 40,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 					'input_attrs'=>array(
 				'rollie_multiple_switch_cc' => $setting_name.'_gs-2'
 		
@@ -874,7 +875,7 @@ function rollie_add_gradient_control ($wp_customize,$section_name,$setting_name,
 			array(
 				'default'           => 40,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -927,7 +928,7 @@ function rollie_add_gradient_control ($wp_customize,$section_name,$setting_name,
 			array(
 				'default'           => 0,
 					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -952,7 +953,7 @@ function rollie_add_gradient_control ($wp_customize,$section_name,$setting_name,
 			array(
 				'default'           => 45,
 					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 
 			)
 		);
@@ -1094,7 +1095,7 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_panel(
 		'rollie_post_formats_panel',
 		array(
-			'title'    => __( 'Rollie post formats' ),
+			'title'    => __( 'Rollie Post Formats' ),
 			'priority' => 18,
 		)
 	);
@@ -1174,9 +1175,9 @@ function rollie_customizer_register( $wp_customize ) {
 					'section' => 'rollie_menu_top_section',
 					'type'    => 'radio',
 					'choices' => array(
-						1 =>__( 'fa-align-left Align left ', 'rollie' ),
-						2 =>__( 'fa-align-center Center ', 'rollie' ),
-						3 =>__( 'fa-align-right Align right  ', 'rollie' ),
+						1 => 'fa-align-left'.esc_html__( 'Align left ', 'rollie' ),
+						2 => 'fa-align-center'.esc_html__( 'Center ', 'rollie' ),
+						3 => 'fa-align-right'.esc_html__( 'Align right  ', 'rollie' ),
 					),
 				)
 			)
@@ -1352,7 +1353,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 2,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1377,7 +1378,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 3,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1473,7 +1474,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 2,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1498,7 +1499,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 3,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1580,7 +1581,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 1,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1642,7 +1643,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 1,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1703,7 +1704,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 1,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1764,7 +1765,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'default'           => 1,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1786,20 +1787,32 @@ function rollie_customizer_register( $wp_customize ) {
 $wp_customize->add_section(
 		'rollie_font_breakpoints',
 		array(
-			'title'    => __( 'Advanced Responsiveness Settings', 'Rollie' ),
+			'title'    => __( 'Advanced Font Responsiveness Settings', 'Rollie' ),
 			'panel'    => 'rollie_font_panel',
 			'priority' => 1,
 		)
 	);
 
-
-
+	$wp_customize->add_setting(	'rollie_font_vw_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_font_vw_label',
+		array(
+			'label'   => esc_html__( 'Font Responsiveness Breakpoints', 'rollie' ),
+			'section'       => 'rollie_font_breakpoints',
+			'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 2,
+				'expanded'=>true
+			)
+		)
+	));
 $wp_customize->add_setting(
 			'rollie_font_vw_min',
 			array(
 				'default'   => 400,
 				'transport' => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -1808,8 +1821,8 @@ $wp_customize->add_setting(
 				$wp_customize,
 				'rollie_font_vw_min',
 				array(
-					'label'       => __( 'Select vievport width when font stops downsizing (px)' , 'rollie'),
-					'description' => __( 'Breakpoint should be less than','rollie').' max '.__('vievport width otherwise sets default values', 'rollie' ),
+					'label'       => __( 'Downscaling breakpoint (px)' , 'rollie'),
+					'description' => __( 'Select screen width when font stops downscaling. Breakpoint should be less than maximum ','rollie').__('screen width otherwise sets default values', 'rollie' ),
 					'section'     => 'rollie_font_breakpoints',
 					'input_attrs' => array(
 						'min'  => 0,
@@ -1826,7 +1839,7 @@ $wp_customize->add_setting(
 			array(
 				'default'   =>  1200,
 				'transport' => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 		$wp_customize->add_control(
@@ -1834,8 +1847,8 @@ $wp_customize->add_setting(
 				$wp_customize,
 				'rollie_font_vw_max',
 				array(
-					'label'       =>__( 'Select vievport width when font starts downsizing (px)', 'rollie' ),
-					'description' =>__( 'Breakpoint should be greater than','rollie').	' min '.__('vievport width otherwise sets default values', 'rollie' ),
+					'label'       =>__( 'Upscaling breakpoint (px)', 'rollie' ),
+					'description' =>__( 'Select screen width when font starts upscaling. Breakpoint should be greater than minimum ','rollie').__('screen width otherwise sets default values', 'rollie' ),
 						'section'     => 'rollie_font_breakpoints',
 					'input_attrs' => array(
 						'min'  => 200,
@@ -1949,7 +1962,7 @@ $rollie_border->add_customizer_controls();
 			array(
 				'default'           => 40,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 					'input_attrs'=>array(
 				'rollie_multiple_switch_cc' => 'rollie_title_bg_theme_color_gs-2'
 		
@@ -2012,7 +2025,7 @@ $rollie_border->add_customizer_controls();
 			array(
 				'default'           => 40,
 				'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -2065,7 +2078,7 @@ $rollie_border->add_customizer_controls();
 			array(
 				'default'           => 0,
 					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -2090,7 +2103,7 @@ $rollie_border->add_customizer_controls();
 			array(
 				'default'           => 45,
 					'transport' =>'postMessage',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 
 			)
 		);
@@ -2165,8 +2178,8 @@ $rollie_border->add_customizer_controls();
 				'label'   => esc_html__( 'Box Shadows', 'rollie' ),
 				'section'       => 'rollie_theme_colors_section',
 				'input_attrs'=> array (
-								'rollie_collapse_elements_number'=> 3,
-							)
+					'rollie_collapse_elements_number'=> 5,
+				)
 			)
 		)
 	);
@@ -2214,7 +2227,7 @@ $rollie_border->add_customizer_controls();
 					$wp_customize,
 					'rollie_shadow_posts',
 					array(
-						'label'   => esc_html__( 'Enable on Posts and Products ', 'Rollie' ),
+						'label'   => esc_html__( 'Shadow on Posts and Products ', 'Rollie' ),
 						'section' => 'rollie_theme_colors_section',
 
 					)
@@ -2286,7 +2299,21 @@ $wp_customize->add_section(
 			'priority' => 30,
 		)
 	);
-
+	$wp_customize->add_setting(	'rollie_theme_colors_text_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_theme_colors_text_label',
+		array(
+			'label'   => esc_html__( 'Theme Text Colors', 'rollie' ),
+			'section'       => 'rollie_theme_colors_text_section',
+			'input_attrs'=> 
+			array (
+				'rollie_collapse_elements_number'=> 7,
+				'expanded'=>true
+			)
+		)
+	));
 
 	$wp_customize->add_setting(
 		'rollie_title_text_color',
@@ -2509,9 +2536,9 @@ $wp_customize->add_section(
 				'section' => 'rollie_navbar_section',
 				'type'    => 'radio',
 				'choices' => array(
-					1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-					2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
-					3 => esc_html__( 'fa-align-right three Align right  ', 'rollie' ),
+					1 => 'fa-align-left'.esc_html__( 'Align left ', 'rollie' ),
+					2 => 'fa-align-center'.esc_html__( 'Center ', 'rollie' ),
+					3 => 'fa-align-right'.esc_html__( 'Align right  ', 'rollie' ),
 				),
 			)
 		)
@@ -2873,7 +2900,21 @@ if (class_exists('Woocommerce')){
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
-
+		$wp_customize->add_setting(	'rollie_icons_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_icons_label',
+			array(
+				'label'   =>__( 'Icons Colors', 'rollie' ),
+				'section'       => 'rollie_icons_section',
+				'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 3,
+				'expanded'=>true
+			)
+			)
+		)
+	);
 		$wp_customize->add_setting(
 			'rollie_icon_color_first',
 			array(
@@ -2937,11 +2978,27 @@ if (class_exists('Woocommerce')){
 	$wp_customize->add_section(
 		'rollie_forms_inputs_section',
 		array(
-			'title'    => esc_html__( 'Forms and inputs ', 'Rollie' ),
+			'title'    => esc_html__( 'Forms', 'Rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
+		$wp_customize->add_setting(	'rollie_forms_inputs_color_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_forms_inputs_color_label',
+			array(
+				'label'   =>__( 'Form Colors', 'rollie' ),
+				'section'       => 'rollie_forms_inputs_section',
+				'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 3,
+						'expanded'=>true
+			)
+			)
+		)
+	);
+
 	$wp_customize->add_setting(
 		'rollie_form_input_color_backg',
 		array(
@@ -2951,7 +3008,7 @@ if (class_exists('Woocommerce')){
 		)
 	);
 
-	// Alpha Color Picker control.
+
 	$wp_customize->add_control(
 		new Rollie_Alpha_Color_Control(
 			$wp_customize,

@@ -76,7 +76,7 @@ global $wp_customize;
 		)
 	);
 	$wp_customize->add_setting($this->img_set_name.'_w_'.$key, array(
-		 'sanitize_callback' => 'skyrocket_sanitize_integer',
+		 'sanitize_callback' => 'rollie_sanitize_integer',
 		 'default'=>$size['w'],
 	));		
 	   $wp_customize->add_control( $this->img_set_name.'_w_'.$key, array(
@@ -85,7 +85,7 @@ global $wp_customize;
 	  'label' => __( 'Image Width (px): ','rollie' ).$size['size_label'],
 	));	
 	$wp_customize->add_setting($this->img_set_name.'_h_'.$key, array(
-		 'sanitize_callback' => 'skyrocket_sanitize_integer',
+		 'sanitize_callback' => 'rollie_sanitize_integer',
 		 'default'=>$size['h'],
 	));		
 	   $wp_customize->add_control( $this->img_set_name.'_h_'.$key, array(
@@ -165,6 +165,7 @@ foreach(Rollie_Font::$font_data_def as $key => $value){
 public	function add_customizer_controls(){
 	
 	global $wp_customize;
+
 		$wp_customize->add_section(
 		$this->font_set_name.'_section',
 		array(
@@ -173,6 +174,23 @@ public	function add_customizer_controls(){
 			'priority' => 20,
 		)
 	);
+
+	
+	$wp_customize->add_setting(	$this->font_set_name.'_label1');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		$this->font_set_name.'_label1',
+		array(
+			'label'   => __( 'Font Family: ','rollie' ).esc_html__($this->customizer_section_title,'rollie'),
+			'section'       => $this->customizer_section,
+			'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 5,
+				'expanded'=>true,
+			)
+		)
+	));
+
 			$wp_customize->add_setting(
 		$this->font_set_name.'_i',
 		array(
@@ -188,8 +206,7 @@ public	function add_customizer_controls(){
 			$wp_customize,
 			$this->font_set_name.'_i',
 			array(
-				'label'       => __( 'Font options for','rollie' ).': '.__($this->customizer_section_title,'rollie'),
-				'description' => ' <span>'.__( 'This options are saved to css selectors:','rollie').'<span class="rollie_info_c"><b><strong>'.$font_set_class_str.'</strong> </b></span></span></br> </br><strong> <span class="rollie_warn_c ">'.__('Important!','rollie').' </span>'.__('Using many different Google Fonts and weights in theme may slow down loading of your site!','rollie').'</strong><br><a href="https://fonts.google.com/" target="_blank">'.__('More information about','rollie').' Google Fonts</a>' ,
+				'description' => ' <span>'.__( 'This styles are saved to css selectors:','rollie').'<span class="rollie_info_c"><b><strong> '.esc_html($font_set_class_str).'</strong> </b></span></span></br> </br><strong> <span class="rollie_warn_c ">'.__('Important!','rollie').' </span>'.__('Using many different Fonts and weights in theme may slow down loading of your site!','rollie').'</strong><br><a href="https://fonts.google.com/" target="_blank">'.__('More information about','rollie').' Google Fonts</a>' ,
 				'section'     => $this->customizer_section,
 			)
 		)
@@ -251,9 +268,7 @@ public	function add_customizer_controls(){
 			$wp_customize,
 			$this->font_set_name.'_obj',
 			array(
-
-				'label'       => __( 'Font family Google ' ),
-				'description' => esc_html__( 'Select Google Fonts ' ),
+				'description' => esc_html__( 'Select Google Fonts Family' ),
 				'section'     => $this->customizer_section,
 				'input_attrs' => array(
 					'font_count' => 'all',
@@ -281,7 +296,8 @@ public	function add_customizer_controls(){
 	$wp_customize->add_control(
 		$this->font_set_name.'_alt',
 		array(
-			'label'       => esc_html__( ' Type custom non-google font name ( be sure that font is included to this site! )', 'rollie' ),
+			'label'       => esc_html__( 'Custom Font Name', 'rollie' ),
+			'description'       => esc_html__( 'This name will be added to CSS stylesheet. Be sure that font file is included to website. If font is incorect, sets default', 'rollie' ),
 			'section'     => $this->customizer_section,
 			'type'        => 'text',
 			'placeholder' => 'Arial',
@@ -297,7 +313,7 @@ public	function add_customizer_controls(){
 		array(
 			'default'   =>  $this->font_data['alt_weight']['default'],
 			'transport' => 'refresh',
-			'sanitize_callback' => 'skyrocket_sanitize_integer',
+			'sanitize_callback' => 'rollie_sanitize_integer',
 
 		)
 	);
@@ -307,7 +323,7 @@ public	function add_customizer_controls(){
 			$wp_customize,
 			$this->font_set_name.'_alt_weight',
 			array(
-				'label'       => esc_html__( 'Font Weight for alternative font' ),
+				'label'       => esc_html__( 'Font Weight for custom font' ),
 				'section'     => $this->customizer_section,
 				'input_attrs' => array(
 					'min'  => 100,
@@ -319,26 +335,33 @@ public	function add_customizer_controls(){
 		)
 	);
 
-		if  (!$this->font_data['U']['ignore']){
-			$wp_customize->add_setting(
-				$this->font_set_name.'_U',
-				array(
-					'default'   => $this->font_data['U']['default'],
-					'transport' => 'refresh',
-					'sanitize_callback' => 'wp_filter_nohtml_kses',
-				)
-			);
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-					$wp_customize,
-					$this->font_set_name.'_U',
-					array(
-						'label'   => __( 'Uppercase content' ),
-						'section' => $this->customizer_section,
-					)
-				)
-			);
-		}	
+	$rollie_count_elements=4;
+	if  (!$this->font_data['U']['ignore']){
+	$rollie_count_elements++;
+	}
+	if(!$this->font_data['align']['ignore']){
+	$rollie_count_elements++;	
+	}	
+	if(($this->font_data['h4_min']['ignore'] == false && $this->font_data['h4_max']['ignore'] == false) || ($this->font_data['h2_min']['ignore'] == false && $this->font_data['h2_max']['ignore'] == false)){
+	$rollie_count_elements+=2;
+	}
+
+	$wp_customize->add_setting(	$this->font_set_name.'_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		$this->font_set_name.'_label',
+		array(
+			'label'   => __( 'Font Size & Align','rollie' ),
+			'section'       => $this->customizer_section,
+			'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> $rollie_count_elements,
+				'expanded'=>true,
+			)
+		)
+	));
+
+	
 		if(!$this->font_data['align']['ignore']){
 			$wp_customize->add_setting(
 				$this->font_set_name.'_align',
@@ -353,7 +376,7 @@ public	function add_customizer_controls(){
 					$wp_customize,
 					$this->font_set_name.'_align',
 					array(
-						'label'   => esc_html__( 'heading align', 'rollie' ),
+						'label'   => esc_html__( 'Text align', 'rollie' ),
 						'section' => $this->customizer_section,
 						'type'    => 'radio',
 						'choices' => array(
@@ -367,12 +390,32 @@ public	function add_customizer_controls(){
 				)
 			);
 		}
+		if  (!$this->font_data['U']['ignore']){
+			$wp_customize->add_setting(
+				$this->font_set_name.'_U',
+				array(
+					'default'   => $this->font_data['U']['default'],
+					'transport' => 'refresh',
+					'sanitize_callback' => 'wp_filter_nohtml_kses',
+				)
+			);
+			$wp_customize->add_control(
+				new Rollie_Toggle_Switch_Custom_control(
+					$wp_customize,
+					$this->font_set_name.'_U',
+					array(
+						'label'   => __( 'Uppercase text' ),
+						'section' => $this->customizer_section,
+					)
+				)
+			);
+		}
 		$wp_customize->add_setting(
 			$this->font_set_name.'_max',
 			array(
 				'default'   =>  $this->font_data['max']['default'],
 				'transport' => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -397,7 +440,7 @@ public	function add_customizer_controls(){
 			array(
 				'default'   =>  $this->font_data['min']['default'],
 				'transport' => 'refresh',
-				'sanitize_callback' => 'skyrocket_sanitize_integer',
+				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
 		);
 
@@ -432,7 +475,7 @@ public	function add_customizer_controls(){
 				array(
 					'default'   => $this->font_data[$value.'_min']['default'],
 					'transport' => 'refresh',
-					'sanitize_callback' => 'skyrocket_sanitize_integer',
+					'sanitize_callback' => 'rollie_sanitize_integer',
 				)
 			);
 
@@ -458,7 +501,7 @@ public	function add_customizer_controls(){
 				array(
 					'default'   => $this->font_data[$value.'_max']['default'],
 					'transport' => 'refresh',
-					'sanitize_callback' => 'skyrocket_sanitize_integer',
+					'sanitize_callback' => 'rollie_sanitize_integer',
 				)
 			);
 
@@ -1073,18 +1116,25 @@ class Rollie_Gradient {
 		}
 
 class Rollie_Border{
-public $customizer_section_description;
-public $customizer_section_title; 
+private $customizer_section_description;
+private $customizer_section_title; 
 private $border_set_name;
 private $panel_flag;
+private $expand_label;
 private $customizer_section;
 
-	public function __construct($border_set_name, $customizer_section,$customizer_section_title,$customizer_section_description = '',$panel_flag = false){
+	public function __construct($border_set_name, $customizer_section,$customizer_section_title,$customizer_section_description = '',$panel_flag = false,$expand_label= false){
 	$this->border_set_name ='rollie_border_'.$border_set_name;
 	$this->customizer_section = $customizer_section;
 	$this->panel_flag = $panel_flag;
 	$this->customizer_section_title = $customizer_section_title ;
 	$this->customizer_section_description = $customizer_section_description ;
+	if ($expand_label){
+		$this->expand_label = true ;
+	}else{
+		$this->expand_label = false ;
+	}
+			
 	}
 
 	public function add_customizer_controls() {
@@ -1102,6 +1152,8 @@ private $customizer_section;
 			);
 			$this->customizer_section = $this->border_set_name.'_section';
 		}else{
+
+
 			$wp_customize->add_setting($this->border_set_name.'_collapse');
 			$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
@@ -1110,8 +1162,10 @@ private $customizer_section;
 				array(
 					'label'   =>$this->customizer_section_title,
 					'section' => $this->customizer_section,
+					'priority' => 30,
 					'input_attrs'=> array (
-					'rollie_collapse_elements_number'=> 2
+					'rollie_collapse_elements_number'=> 2,
+					'expanded'=>$this->expand_label 
 					)
 				)
 				)
@@ -1133,6 +1187,7 @@ private $customizer_section;
 						'label'   =>__( 'Border width:', 'Rollie' ),
 						'description'   => $this->customizer_section_description,
 						'section' =>$this->customizer_section,
+						'priority' => 30,
 						'input_attrs'=>array(
 							'type'=>'b-width',
 						)
@@ -1153,6 +1208,7 @@ private $customizer_section;
 					array(
 						'label'   => esc_html__( 'Border Radius:', 'Rollie' ),
 						'section' => $this->customizer_section,
+						'priority' => 30,
 						'input_attrs'=>array(
 							'type'=>'b-width',
 						)

@@ -353,6 +353,9 @@ class Rollie_Slider_Custom_Control extends WP_Customize_Control {
 
 			<div class="slider-custom-control" >
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span><input type="number" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-slider-value" <?php $this->link(); ?> />
+				<?php if ( ! empty( $this->description ) ) : ?>
+					<span id="<?php echo esc_attr( $description_id ); ?>" class="description customize-control-description"><?php echo $this->description; ?></span>
+				<?php endif; ?>
 				<div class="slider" slider-min-value="<?php echo esc_attr( $this->input_attrs['min'] ); ?>" slider-max-value="<?php echo esc_attr( $this->input_attrs['max'] ); ?>" slider-step-value="<?php echo esc_attr( $this->input_attrs['step'] ); ?>"></div><span class="slider-reset dashicons dashicons-image-rotate" rollie-reset-value="<?php echo esc_attr( $this->value() ); ?>"></span>
 			</div>
 			<?php
@@ -642,12 +645,19 @@ class Rollie_Customizer_Collapse_Label_Control extends WP_Customize_Control {
 	 * Displays title and description
 	 */
 
-public $type = 'rollie_toogle_label';
-	public function render_content() {	
-?> 
+	public $type = 'rollie_toogle_label';
+	public $expanded = "false";
 
-            <?php if ( ! empty( $this->label ) ) : ?>
-            	<h3 class="rollie_customizer_label rollie_collapse_label_toggle accordion-section-title customize-control-title " aria-expanded="false"  rollie_collapse_elements="<?Php if (isset($this->input_attrs['rollie_collapse_elements_number'])) echo esc_attr ($this->input_attrs['rollie_collapse_elements_number'])  ?>">
+	
+
+	public function render_content() {	
+		if (isset($this->input_attrs['expanded']) && $this->input_attrs['expanded']){
+			$this->expanded = "true";
+			
+		}
+            if ( ! empty( $this->label ) ) :
+             ?>
+            	<h3 class="rollie_customizer_label rollie_collapse_label_toggle accordion-section-title customize-control-title " aria-expanded="<?php echo esc_attr($this->expanded);?>"  rollie_collapse_elements="<?Php if (isset($this->input_attrs['rollie_collapse_elements_number'])) echo esc_attr ($this->input_attrs['rollie_collapse_elements_number'])  ?>">
 
             		<?php echo esc_html( $this->label ); ?></h3>
                 

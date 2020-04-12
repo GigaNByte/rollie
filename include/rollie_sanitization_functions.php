@@ -2,7 +2,7 @@
 function rollie_sanitize_css_ruler( $input){
 	$input = explode(',',$input,4); 
 foreach ($input as $key => $input_single) {
-	$input_single =  skyrocket_sanitize_integer($input_single);
+	$input_single =  rollie_sanitize_integer($input_single);
 }
 	$input = implode(',',$input);
 	return  $input ;
@@ -108,7 +108,7 @@ function rollie_sanitize_checkbox( $input ) {
 	}
 
 
-function skyrocket_sanitize_integer( $input ) {
+function rollie_sanitize_integer( $input ) {
 		return (int) $input;
 }
 function rollie_sanitize_rgba( $color ) {

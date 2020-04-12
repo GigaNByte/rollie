@@ -147,48 +147,46 @@ jQuery( document ).ready(function($) {
 			$(selector_name).children().first().css('margin-top','0');
 			$(selector_name).parent().nextAll('.rollie_collapse_label_show_flag').eq(parseInt(value)-1).addClass('rollie_collapse_bb');
 		
-
-
-
 		$(selector_name).parent().nextAll('li').each(function( index ) {
 			
 			var tr = true;
 			if(!on_doc_ready && $(this).attr('rollie_mscc_active') == 'disactive'){		
 				tr=false;
 			}
-
 			if (value  !== 'undefined'  && index <  value){
-				if( ! $( this ).hasClass('rollie_collapse_label_show_flag')  )   {	
+				
+				if( !$( this ).hasClass('rollie_collapse_label_show_flag') || ($(selector_name).attr('aria-expanded')=='true' && on_doc_ready)&& ($(this).attr('rollie_mscc_active') != 'disactive')  )   {	
+				
 					$( this ).attr("aria-hidden","false");
 					$(this).addClass('rollie_collapse_label_show_flag');
 					if (tr){
 						$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
 					}
+				
 				}else{
+						 
 					$( this ).attr("aria-hidden","true");
 					$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
 				}
 			}	
-});
-	}
+		});
 
+	}
 	function rollie_collapse_label_toggle ()
 	{	
-
 
 		$('.rollie_collapse_label_toggle').each(function(){
 			rollie_collapse_label_toggle_controler(this,true);
 		});
 		$( '.rollie_collapse_label_toggle' ).on( "click", function() { 
-			rollie_collapse_label_toggle_controler(this,false);
-				console.log($(this).attr("aria-expanded"));
 			if ($(this).attr("aria-expanded") =="true"){
 
 				$(this).attr("aria-expanded","false");
 			}else{
 				$(this).attr("aria-expanded","true");
-			}//escape!
-			
+			}
+			rollie_collapse_label_toggle_controler(this,false);
+		
 		});
 	}
 
