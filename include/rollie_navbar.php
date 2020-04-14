@@ -35,7 +35,7 @@ if (get_theme_mod('rollie_menu_top_always_collapse',false)){
 		if( has_nav_menu( 'rollie_top_menu_small_top_bar' )  ){
 
 			echo "<nav class='rollie_top_menu_small_top_bar small col-12 rollie_flex_text_center '>";
-			if (get_theme_mod('rollie_menu_top_logo_positon',1) == 2 && ! empty( get_theme_mod( 'rollie_menu_top_logo' ) )){
+			if (get_theme_mod('rollie_menu_top_logo_positon',1) == 2 && ! empty( get_theme_mod( 'rollie_top_navbar_logo' ) )){
 				rollie_navbar_icon();
 
 			}
@@ -55,7 +55,7 @@ if (get_theme_mod('rollie_menu_top_always_collapse',false)){
 		</button>
 
 		<?php
-		if (get_theme_mod('rollie_menu_top_logo_positon',1) == 1 && ! empty( get_theme_mod( 'rollie_menu_top_logo' ) ) ) {
+		if (get_theme_mod('rollie_menu_top_logo_positon',1) == 1 && ! empty( get_theme_mod( 'rollie_top_navbar_logo' ) ) ) {
 			rollie_navbar_icon();
 		}
 

@@ -48,11 +48,11 @@ wp_add_inline_style('rollie_woo_stylesheet',".woocommerce-info{ \n border-color:
 if (get_theme_mod('rollie_woo_notice_width_full',true)){
 wp_add_inline_style('rollie_woo_stylesheet' ,'.woocommerce-notices-wrapper{width:100%;}');
 }
-if (get_theme_mod('rollie_woo_notice',2) == 1){
+if (get_theme_mod('rollie_woo_notice_border',2) == 1){
 wp_add_inline_style('rollie_woo_stylesheet' ,".woocommerce-NoticeGroup > ul\n{\n border-top-style:solid;\n}\n");
-}elseif (get_theme_mod('rollie_woo_notice',2) == 2 ){
+}elseif (get_theme_mod('rollie_woo_notice_border',2) == 2 ){
 wp_add_inline_style('rollie_woo_stylesheet' ,".woocommerce-NoticeGroup > ul\n{\n border-left-style:solid;\n}\n");
-}elseif (get_theme_mod('rollie_woo_notice',2) == 3 ){
+}elseif (get_theme_mod('rollie_woo_notice_border',2) == 3 ){
 wp_add_inline_style('rollie_woo_stylesheet' ,".woocommerce-NoticeGroup > ul\n{\n border-style:solid; \n}\n");
 }
 

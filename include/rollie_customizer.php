@@ -1,13 +1,4 @@
 <?php
-/*
-
-@param
-$panel name of parent panel to witch will be applied to section and control
-  $section -> name of new post page section
-  $setting->prefix of all setings in this control section
-  $title -> frontend title of this new section
-*/
-
 
 function rollie_meta_control($wp_customize,$rollie_sufix,$rollie_section_prefix){
 		$wp_customize->add_setting(	'rollie_meta_label'.$rollie_sufix);
@@ -1110,6 +1101,21 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(	'rollie_footer_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_footer_label',
+		array(
+			'label'   =>__( 'Footer Settings', 'rollie' ),
+			'section'       => 'rollie_footer_section',
+			'input_attrs'=> array (
+			'rollie_collapse_elements_number'=> 2,
+			'expanded'=>true
+		)
+		)
+	));
+
 	$wp_customize->add_setting(
 		'rollie_footer_collapse',
 		array(
@@ -1155,36 +1161,30 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_section(
+		'rollie_menu_top_section',
+		array(
+			'title'    =>__( 'Menu top settings', 'Rollie' ),
+			'priority' => 20,
+		)
+	);
 
-
-
-				$wp_customize->add_section(
-					'rollie_menu_top_section',
-					array(
-						'title'    =>__( 'Menu top settings', 'Rollie' ),
-						'priority' => 20,
-					)
-				);
-
-		$wp_customize->add_control(
-			new Rollie_Icon_Customize_Control(
-				$wp_customize,
-				'rollie_menu_top_item_align',
-				array(
-					'label'   =>__( 'Menu items align', 'Rollie' ),
-					'section' => 'rollie_menu_top_section',
-					'type'    => 'radio',
-					'choices' => array(
-						1 => 'fa-align-left'.esc_html__( 'Align left ', 'rollie' ),
-						2 => 'fa-align-center'.esc_html__( 'Center ', 'rollie' ),
-						3 => 'fa-align-right'.esc_html__( 'Align right  ', 'rollie' ),
-					),
-				)
+	$wp_customize->add_control(
+		new Rollie_Icon_Customize_Control(
+			$wp_customize,
+			'rollie_menu_top_item_align',
+			array(
+				'label'   =>__( 'Menu items align', 'Rollie' ),
+				'section' => 'rollie_menu_top_section',
+				'type'    => 'radio',
+				'choices' => array(
+					1 => 'fa-align-left '.esc_html__( 'Left', 'rollie' ),
+					2 => 'fa-align-center '.esc_html__( 'Center', 'rollie' ),
+					3 => 'fa-align-right '.esc_html__( 'Right', 'rollie' ),
+				),
 			)
-		);
-
-
-
+		)
+	);
 
 	$wp_customize->add_section(
 		'rollie_pagination_section',
@@ -1194,6 +1194,21 @@ function rollie_customizer_register( $wp_customize ) {
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
+	$wp_customize->add_setting(	'rollie_pagination_section_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_pagination_section_label',
+		array(
+			'label'   => esc_html__( 'Pagination Settings', 'rollie' ),
+			'section'       => 'rollie_pagination_section',
+			'input_attrs'=> 
+			array (
+			'rollie_collapse_elements_number'=> 3,
+			'expanded'=> true
+			)
+		)
+	));
 	$wp_customize->add_setting(
 		'rollie_pagination_enable',
 		array(
@@ -1225,7 +1240,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_pagination_display_name',
 			array(
-				'label'   => __( 'Display next and previous post or page title', 'Rollie' ),
+				'label'   => __( 'Display next and previous post or page title in pagination', 'Rollie' ),
 				'section' => 'rollie_pagination_section',
 			)
 		)
@@ -1248,114 +1263,137 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-		$wp_customize->add_section(
-					'rollie_sidebar_section',
-					array(
-						'title'    =>__( 'Sidebars Global Settings', 'Rollie' ),
-						'priority' => 20,
-						'panel'    => 'rollie_layout_panel',
-					)
-				);
-
-					$wp_customize->add_setting(
-						'rollie_disable_sidebar_mobile',
-						array(
-							'default'           => true,
-							'sanitize_callback' => 'rollie_sanitize_checkbox',
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_disable_sidebar_mobile',
-					array(
-						'label'   => __( 'Disable sidebars on small screens ', 'Rollie' ),
-						'section' => 'rollie_sidebar_section',
-
-					)
+	$wp_customize->add_section(
+				'rollie_sidebar_section',
+				array(
+					'title'    =>__( 'Sidebars Global Settings', 'Rollie' ),
+					'priority' => 20,
+					'panel'    => 'rollie_layout_panel',
 				)
 			);
+	$wp_customize->add_setting(	'rollie_sidebar_section_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_sidebar_section_label',
+		array(
+			'label'   =>__('Sidebars Global Settings','rollie') ,
+			'section'       => 'rollie_sidebar_section',
+			'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 1,
+				'expanded'=>true,
+			)
+		)
+	));
+	$wp_customize->add_setting(
+		'rollie_disable_sidebar_mobile',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_disable_sidebar_mobile',
+			array(
+				'label'   => __( 'Disable sidebars on small screens ', 'Rollie' ),
+				'section' => 'rollie_sidebar_section',
+
+			)
+		)
+	);
 
 
 	$wp_customize->add_section(
 		'rollie_post_pages_l_section',
 		array(
-			'title'    => __( 'Post Pages', 'Rollie' ),
+			'title'    => __( 'Post Pages Sidebars Layout', 'Rollie' ),
 			'panel'    => 'rollie_layout_panel',
 			'priority' => 20,
 		)
 	);
 
-				$wp_customize->add_section(
+	$wp_customize->add_section(
 		'rollie_single_page_l_section',
 		array(
-			'title'    => __( 'Single Pages', 'Rollie' ),
+			'title'    => __( 'Single Pages Sidebars Layout', 'Rollie' ),
 			'panel'    => 'rollie_layout_panel',
 			'priority' => 20,
 		)
 	);
-
-		
 	
-				$wp_customize->add_setting(
-			'rollie_posts_page_l_ignore',
-			array(
-				'default' => false,
-				'sanitize_callback' => 'rollie_sanitize_checkbox',
-			)
-		);
+	$wp_customize->add_setting(	'rollie_post_pages_l_label');
 	$wp_customize->add_control(
-			new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_posts_page_l_ignore',
-				array(
-					'label'       =>__( 'Display sidebars only when there are widgets inside ', 'rollie' ),
-					'section'     => 'rollie_post_pages_l_section',
-					'description' => "This feature will disable settings below",
-	
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_post_pages_l_label',
+		array(
+			'label'   =>__('Post Pages Sidebars Layout','rollie') ,
+			'section'       => 'rollie_post_pages_l_section',
+			'input_attrs'=> array (
+				'rollie_collapse_elements_number'=> 4,
+				'expanded'=>true,
 			)
-			)
-		);
+		)
+	));
 
 	$wp_customize->add_setting(
+		'rollie_posts_page_l',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_radio',
+			'default'           => 2,
+		)
+	);
+	
+	$wp_customize->add_control(
+		new Rollie_Icon_Customize_Control(
+			$wp_customize,
 			'rollie_posts_page_l',
 			array(
-				'sanitize_callback' => 'rollie_sanitize_radio',
-				'default'           => 2,
-
-			)
-		);
-	
-		$wp_customize->add_control(
-			new Rollie_Icon_Customize_Control(
-				$wp_customize,
-				'rollie_posts_page_l',
-				array(
-					'label'   =>__( 'Sidebars Layout', 'rollie' ),
-					'description'=>__( 'You can modify sidebar content in "Widgets" panel ', 'rollie' ),
-					'type'    => 'radio',
-					'section' => 'rollie_post_pages_l_section',
-					'choices' => array(
-						1 =>__( 'sidebar_left only left sidebar  ', 'rollie' ),
-						2 =>__( 'full_size no sidebars', 'rollie' ),
-						3 =>__( 'double_sidebars double sidebars', 'rollie' ),
-						4 =>__( 'sidebar_right only right sidebar ', 'rollie' ),
-					),
-					'input_attrs' =>array(
-					'icon_type'	=> 'png',
-					)
+				'label'   =>__( 'Sidebars Layout', 'rollie' ),
+				'description'=>__( 'You can modify sidebar content in "Widgets" panel ', 'rollie' ),
+				'type'    => 'radio',
+				'section' => 'rollie_post_pages_l_section',
+				'choices' => array(
+					1 =>__( 'sidebar_left only left sidebar  ', 'rollie' ),
+					2 =>__( 'full_size no sidebars', 'rollie' ),
+					3 =>__( 'double_sidebars double sidebars', 'rollie' ),
+					4 =>__( 'sidebar_right only right sidebar ', 'rollie' ),
+				),
+				'input_attrs' =>array(
+				'icon_type'	=> 'png',
 				)
 			)
-		);
-			$wp_customize->add_setting(
-			'rollie_posts_page_l_sidebar_size',
-			array(
-				'default'           => 2,
-				'transport' =>'postMessage',
-				'sanitize_callback' => 'rollie_sanitize_integer',
-			)
-		);
+		)
+	);
+	$wp_customize->add_setting(
+	'rollie_posts_page_l_ignore',
+		array(
+			'default' => false,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+	new Rollie_Toggle_Switch_Custom_control(
+		$wp_customize,
+		'rollie_posts_page_l_ignore',
+		array(
+			'label'       =>__( 'Display sidebars only when are including widgets', 'rollie' ),
+			'section'     => 'rollie_post_pages_l_section',	
+		)
+	));
+
+		$wp_customize->add_setting(
+		'rollie_posts_page_l_sidebar_size',
+		array(
+			'default'           => 2,
+			'transport' =>'postMessage',
+			'sanitize_callback' => 'rollie_sanitize_integer',
+		)
+	);
 
 	$wp_customize->add_control(
 		new Rollie_Slider_Custom_Control(
@@ -1363,7 +1401,7 @@ function rollie_customizer_register( $wp_customize ) {
 			'rollie_posts_page_l_sidebar_size',
 			array(
 				'description'=>'Be sure that layout with sidebars is applied',
-				'label'       =>__( 'Sidebar size' ),
+				'label'       =>__( 'Sidebar size (%)','rollie' ),
 				'section'     => 'rollie_post_pages_l_section',
 				'input_attrs' => array(
 					'min'  => 1,
@@ -1371,9 +1409,10 @@ function rollie_customizer_register( $wp_customize ) {
 					'step' => 1,
 				),
 			)
-		)
-	);
-				$wp_customize->add_setting(
+		));
+
+	
+		$wp_customize->add_setting(
 			'rollie_posts_page_l_padding',
 			array(
 				'default'           => 3,
@@ -1387,7 +1426,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_posts_page_l_padding',
 			array(
-				'label'       =>__( 'Padding in Main Content' ),
+				'label'       =>__( 'Padding Between Main Container and sidebars (%)' ),
 				'section'     => 'rollie_post_pages_l_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1398,12 +1437,52 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 				
-			
 
-		$wp_customize->add_setting(
+	$wp_customize->add_setting(
+		'rollie_post_page_grid_for_paged_php',
+		array(
+			'default' => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+			$wp_customize,
 			'rollie_post_page_grid_for_paged_php',
 			array(
-				'default' => true,
+				'label'       =>__( 'Invert vertical sidebars to horizontal in small devices', 'rollie' ),
+				'section'     => 'rollie_posts_page_section',
+				'description' => "This feature won't work if 'disable sidebars on in small devices' option in sidebars global settings is enabled",
+			)
+		)
+	);
+		$wp_customize->add_setting(	'rollie_single_page_l_label');
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			'rollie_single_page_l_label',
+			array(
+				'label'   =>__('Single Pages Sidebars Layout','rollie') ,
+				'section'       => 'rollie_single_page_l_section',
+				'input_attrs'=> array (
+					'rollie_collapse_elements_number'=> 4,
+					'expanded'=>true,
+				)
+			)
+		));
+		$wp_customize->add_setting(
+			'rollie_single_page_l',
+			array(
+				'sanitize_callback' => 'rollie_sanitize_radio',
+				'default'           => 2,
+
+			)
+		);
+		$wp_customize->add_setting(
+		'rollie_single_page_l_ignore',
+			array(
+				'default' => false,
 				'sanitize_callback' => 'rollie_sanitize_checkbox',
 			)
 		);
@@ -1411,40 +1490,12 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			new Rollie_Toggle_Switch_Custom_control(
 				$wp_customize,
-				'rollie_post_page_grid_for_paged_php',
-				array(
-					'label'       =>__( 'Invert vertical sidebars to horizontal in small devices', 'rollie' ),
-					'section'     => 'rollie_posts_page_section',
-					'description' => "This feature won't work if 'disable sidebars on in small devices' option in sidebars global settings is enabled",
-
-				)
-			)
-		);
-				$wp_customize->add_setting(
-			'rollie_single_page_l_ignore',
-			array(
-				'default' => false,
-				'sanitize_callback' => 'rollie_sanitize_checkbox',
-			)
-		);
-	$wp_customize->add_control(
-			new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
 				'rollie_single_page_l_ignore',
 				array(
-					'label'       =>__( 'Display sidebars only when there are widgets inside ', 'rollie' ),
+					'label'       =>__( 'Display sidebars only when are including widgets', 'rollie' ),
 					'section'     => 'rollie_single_page_l_section',
 					'description' => "This feature will disable settings below",
 				)
-			)
-		);
-
-		$wp_customize->add_setting(
-			'rollie_single_page_l',
-			array(
-				'sanitize_callback' => 'rollie_sanitize_radio',
-				'default'           => 2,
-
 			)
 		);
 
@@ -1454,7 +1505,7 @@ function rollie_customizer_register( $wp_customize ) {
 				'rollie_single_page_l',
 				array(
 					'label'   =>__( 'Sidebars Layout', 'rollie' ),
-					'description'=>__( 'You can modify sidebar content in "Widgets" panel ', 'rollie' ),
+					'description'=>__( 'You can modify sidebars content in Wordpress Widgets panel ', 'rollie' ),
 					'section' => 'rollie_single_page_l_section',
 					'type'    => 'radio',
 					'choices' => array(
@@ -1469,7 +1520,7 @@ function rollie_customizer_register( $wp_customize ) {
 				)
 			)
 		);
-					$wp_customize->add_setting(
+		$wp_customize->add_setting(
 			'rollie_single_page_l_sidebar_size',
 			array(
 				'default'           => 2,
@@ -1484,7 +1535,7 @@ function rollie_customizer_register( $wp_customize ) {
 			'rollie_single_page_l_sidebar_size',
 			array(
 				'description'=>'Be sure that layout with sidebars is applied',
-				'label'       =>__( 'Sidebar size' ),
+				'label'       =>__( 'Sidebar size (%)','rollie' ),
 				'section'     => 'rollie_single_page_l_section',
 				'input_attrs' => array(
 					'min'  => 1,
@@ -1494,7 +1545,7 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-						$wp_customize->add_setting(
+		$wp_customize->add_setting(
 			'rollie_single_page_l_padding',
 			array(
 				'default'           => 3,
@@ -1524,7 +1575,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_theme_colors_section',
 		array(
-			'title'    => __( 'Theme Colors', 'Rollie' ),
+			'title'    => __( 'Theme Colors', 'rollie' ),
 			'panel'    => 'rollie_color_design_panel',
 			'priority' => 30,
 		)
@@ -1533,7 +1584,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_embl_section',
 		array(
-			'title'    => __( 'Border Line Embellishments Design', 'Rollie' ),
+			'title'    => __( 'Border Line Embellishments Design', 'rollie' ),
 			'panel'    => 'rollie_color_design_panel',
 			'priority' => 30,
 		)
@@ -1548,7 +1599,7 @@ function rollie_customizer_register( $wp_customize ) {
 				'section'       => 'rollie_embl_section',
 				'input_attrs'=> array (
 				'rollie_collapse_elements_number'=> 2
-							)
+				)
 			)
 		)
 	);
@@ -1565,7 +1616,7 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			'rollie_embl_titles', // rollie_one_on_row_design_php_0
 			array(
-				'label'   => esc_html__( 'Design of  Embellishments', 'Rollie' ),
+				'label'   => esc_html__( 'Design of  Embellishments', 'rollie' ),
 				'section' => 'rollie_embl_section',
 				'type'    => 'select',
 				'choices' => array(
@@ -2450,6 +2501,26 @@ $wp_customize->add_section(
 		)
 	);
 
+	$wp_customize->add_setting(
+			'rollie_muted_color',
+			array(
+				'default'   => '#282828',
+				'transport' => 'refresh',
+
+			)
+		);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'rollie_muted_color',
+			array(
+				'label'             => __( 'Muted Color ', 'Rollie' ),
+				'section'           => 'rollie_theme_colors_text_section',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
+			)
+		)
+	);
 
 	// navbars
 	$wp_customize->add_section(
@@ -2460,6 +2531,25 @@ $wp_customize->add_section(
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
+	$wp_customize->add_setting(
+		'rollie_top_navbar_logo',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'rollie_top_navbar_logo',
+			array(
+				'label'   => __( 'Top Navbar logo', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+				'priority'=>2
+			)
+		)
+	);
 
 	$wp_customize->add_setting(	'rollie_navbar_colors_label');
 	$wp_customize->add_control(
@@ -2467,7 +2557,7 @@ $wp_customize->add_section(
 		$wp_customize,
 		'rollie_navbar_colors_label',
 		array(
-			'label'   => esc_html__( 'Navbar Text Colors', 'rollie' ),
+			'label'   => esc_html__( 'Navbar Design & Align', 'rollie' ),
 			'section'       => 'rollie_navbar_section',
 			'input_attrs'=> 
 			array (
@@ -2518,6 +2608,20 @@ $wp_customize->add_section(
 		)
 	);
 
+	$wp_customize->add_setting(	'rollie_menu_top_position_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_menu_top_position_label',
+		array(
+			'label'   => esc_html__( 'Navbar Design And Position', 'rollie' ),
+			'section'       => 'rollie_navbar_section',
+			'input_attrs'=> array (
+			'rollie_collapse_elements_number'=> 5
+			)
+		)
+	));
+
 	$wp_customize->add_setting(
 		'rollie_menu_top_item_align',
 		array(
@@ -2536,77 +2640,78 @@ $wp_customize->add_section(
 				'section' => 'rollie_navbar_section',
 				'type'    => 'radio',
 				'choices' => array(
-					1 => 'fa-align-left'.esc_html__( 'Align left ', 'rollie' ),
-					2 => 'fa-align-center'.esc_html__( 'Center ', 'rollie' ),
-					3 => 'fa-align-right'.esc_html__( 'Align right  ', 'rollie' ),
+					1 => 'fa-align-left '.esc_html__( 'Left ', 'rollie' ),
+					2 => 'fa-align-center '.esc_html__( 'Center ', 'rollie' ),
+					3 => 'fa-align-right '.esc_html__( 'Right  ', 'rollie' ),
 				),
 			)
 		)
 	);
-		$wp_customize->add_setting(
-			'rollie_menu_top_logo',
-			array(
-				'default'           => '',
-				'sanitize_callback' => 'esc_url_raw',
 
-			)
-		);
-	$wp_customize->add_control(
-		new WP_Customize_Image_Control(
-			$wp_customize,
-			'rollie_menu_top_logo',
-			array(
-				'label'   => __( 'Top menu logo', 'rollie' ),
-				'section' => 'rollie_navbar_section',
-			)
+	$wp_customize->add_setting(
+		'rollie_menu_top_logo_positon',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_select',
+			'default'           => 1,
+
 		)
 	);
 
-		$wp_customize->add_setting(
+	$wp_customize->add_control(
 			'rollie_menu_top_logo_positon',
 			array(
-				'sanitize_callback' => 'rollie_sanitize_select',
-				'default'           => 1,
-
-			)
-		);
- 
-		$wp_customize->add_control(
-				'rollie_menu_top_logo_positon',
-				array(
-					'label'   => esc_html__( 'Menu Logo Position', 'Rollie' ),
-					'section' => 'rollie_navbar_section',
-					'type'    => 'select',
-					'choices' => array(
-						1 => esc_html__( 'Main Menu Navigation', 'rollie' ),
-						2 => esc_html__( 'Small Top Menu Navigation', 'rollie' ),
-
-					),
-				)
-			);	
-		$wp_customize->add_setting(
-			'rollie_menu_design',
-			array(
-				'sanitize_callback' => 'rollie_sanitize_select',
-				'default'           => 'full',
-
-			)
-		);
-
-		$wp_customize->add_control(
-			'rollie_menu_design',
-			array(
-				'label'   => esc_html__( 'Navbar menu design', 'Rollie' ),
+				'label'   => esc_html__( 'Menu Logo Position', 'Rollie' ),
 				'section' => 'rollie_navbar_section',
 				'type'    => 'select',
 				'choices' => array(
-					'full' => esc_html__( 'Full width collapse', 'rollie' ),
-					'side' => esc_html__( 'Side Layered collapse', 'rollie' ),
-					'fixed' => esc_html__( 'Side Fixed collapse', 'rollie' ),
+					1 => esc_html__( 'Main Menu Navigation', 'rollie' ),
+					2 => esc_html__( 'Small Top Menu Navigation', 'rollie' ),
+
 				),
 			)
-		);
-if (class_exists('Woocommerce')){
+		);	
+	$wp_customize->add_setting(
+		'rollie_menu_design',
+		array(
+			'sanitize_callback' => 'rollie_sanitize_select',
+			'default'           => 'full',
+
+		)
+	);
+
+	$wp_customize->add_control(
+		'rollie_menu_design',
+		array(
+			'label'   => esc_html__( 'Navbar menu design', 'Rollie' ),
+			'section' => 'rollie_navbar_section',
+			'type'    => 'select',
+			'choices' => array(
+				'full' => esc_html__( 'Full width collapse', 'rollie' ),
+				'side' => esc_html__( 'Side Layered collapse', 'rollie' ),
+				'fixed' => esc_html__( 'Side Fixed collapse', 'rollie' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_menu_top_fixed',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+		$wp_customize,
+		'rollie_menu_top_fixed',
+		array(
+			'label'   => esc_html__( 'Fixed Top Navbar', 'Rollie' ),
+			'section' => 'rollie_navbar_section',
+		))
+	);
+
+	if (class_exists('Woocommerce')){
 		$wp_customize->add_setting(
 		'rollie_nav_top_icons_colapsed_content',
 			array(
@@ -2628,148 +2733,140 @@ if (class_exists('Woocommerce')){
 				),
 			)
 		);
-}
+	}
 
+	$wp_customize->add_setting(	'rollie_navbar_a_settings_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_navbar_a_settings_label',
+		array(
+			'label'   => esc_html__( 'Navbar Additional Settings', 'rollie' ),
+			'section'       => 'rollie_navbar_section',
+			'input_attrs'=> 
+			array (
+			'rollie_collapse_elements_number'=> 7
+			)
+		)
+	));
 
-			$wp_customize->add_setting(
+	$wp_customize->add_setting(
+	'rollie_menu_over_header_image',
+		array(
+			'default'           => false,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+			$wp_customize,
 			'rollie_menu_over_header_image',
 			array(
-				'default'           => false,
-				'sanitize_callback' => 'rollie_sanitize_checkbox',
-			)
-		);
+				'label'   =>__( 'Navbar over background image', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+		)
+		)
+	);
 
-		$wp_customize->add_control(
-			new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_menu_over_header_image',
-				array(
-					'label'   =>__( 'Navbar over Image', 'rollie' ),
-					'section' => 'rollie_navbar_section',
-			)
-			)
-		);
-
-						$wp_customize->add_setting(
+	$wp_customize->add_setting(
+		'rollie_menu_top_logo_title',
+		array(
+			'default'           => false,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'skyrocket_switch_sanitization',
+		)
+	);
+	
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+			$wp_customize,
 			'rollie_menu_top_logo_title',
 			array(
-				'default'           => false,
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'skyrocket_switch_sanitization',
+				'label'   =>__( 'Display Site Title', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+					
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_menu_overlay',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_menu_overlay',
+			array(
+				'label'   => esc_html__( 'Enable overlay when menu drops', 'Rollie' ),
+				'section' => 'rollie_navbar_section',
 
 			)
-		);
-		
-		$wp_customize->add_control(
-			new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_menu_top_logo_title',
-				array(
-					'label'   =>__( 'Display Site Title', 'rollie' ),
-					'section' => 'rollie_navbar_section',
-						
-				)
+		)
+	);
+
+
+	$wp_customize->add_setting(
+		'rollie_menu_top_transparent',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+		$wp_customize,
+		'rollie_menu_top_transparent',
+		array(
+			'label'   => __( 'Apply Transparency when Navbar is on top of the page', 'Rollie' ),
+			'description'   => __( 'Works better with fixed Navbar', 'Rollie' ),
+			'section' => 'rollie_navbar_section',
+		))
+	);
+
+	$wp_customize->add_setting(
+		'rollie_menu_top_always_collapse',
+		array(
+			'default'           => false,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+		$wp_customize,
+		'rollie_menu_top_always_collapse',
+		array(
+			'label'   => esc_html__( 'Show always Collapsed Navigation', 'Rollie' ),
+			'description'   => esc_html__( 'By default Rollie Theme calculates and applies Collapsed Navigation on specified device sizes', 'Rollie' ),
+			'section' => 'rollie_navbar_section',
+		))
+	);
+	$wp_customize->add_setting(
+		'rollie_search_form_menu_top',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_control(
+			$wp_customize,
+			'rollie_search_form_menu_top',
+			array(
+				'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
+				'section' => 'rollie_navbar_section',
+
 			)
-		);
-
-
-
-					$wp_customize->add_setting(
-						'rollie_menu_overlay',
-						array(
-							'default'           => true,
-							'sanitize_callback' => 'rollie_sanitize_checkbox',
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_menu_overlay',
-					array(
-						'label'   => esc_html__( 'Enable overlay when menu drops', 'Rollie' ),
-						'section' => 'rollie_navbar_section',
-
-					)
-				)
-			);
-
-			$wp_customize->add_setting(
-				'rollie_menu_top_fixed',
-				array(
-					'default'           => true,
-					'sanitize_callback' => 'rollie_sanitize_checkbox',
-				)
-			);
-
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_menu_top_fixed',
-				array(
-					'label'   => esc_html__( 'Fixed Top Navbar', 'Rollie' ),
-					'section' => 'rollie_navbar_section',
-				))
-			);
-
-			$wp_customize->add_setting(
-				'rollie_menu_top_transparent',
-				array(
-					'default'           => true,
-					'sanitize_callback' => 'rollie_sanitize_checkbox',
-				)
-			);
-
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_menu_top_transparent',
-				array(
-					'label'   => __( 'Apply Transparency when Navbar is on top of the page', 'Rollie' ),
-					'description'   => __( 'Works better with fixed Navbar', 'Rollie' ),
-					'section' => 'rollie_navbar_section',
-				))
-			);
-
-
-
-			$wp_customize->add_setting(
-				'rollie_menu_top_always_collapse',
-				array(
-					'default'           => false,
-					'sanitize_callback' => 'rollie_sanitize_checkbox',
-				)
-			);
-
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'rollie_menu_top_always_collapse',
-				array(
-					'label'   => esc_html__( 'Show always Collapsed Navigation', 'Rollie' ),
-					'description'   => esc_html__( 'By default Rollie Theme calculates and applies Collapsed Navigation on specified device sizes', 'Rollie' ),
-					'section' => 'rollie_navbar_section',
-				))
-			);
-					$wp_customize->add_setting(
-						'rollie_search_form_menu_top',
-						array(
-							'default'           => true,
-							'sanitize_callback' => 'rollie_sanitize_checkbox',
-						)
-					);
-
-			$wp_customize->add_control(
-				new Rollie_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'rollie_search_form_menu_top',
-					array(
-						'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
-						'section' => 'rollie_navbar_section',
-
-					)
-				)
-			);
+		)
+	);
 
 	
 
@@ -2835,10 +2932,10 @@ if (class_exists('Woocommerce')){
 		$wp_customize->add_control(
 			'rollie_tags_icon',
 			array(
-				'label'       => esc_html__( ' Type different Font Awesome class for tag icon ', 'Rollie' ),
+				'label'       => esc_html__( 'Type different Font Awesome class for tag icon ', 'Rollie' ),
 				'section'     => 'rollie_tags',
 				'type'        => 'text',
-				'placeholder' => __( ' fa-tags', 'Rollie' ),
+				'placeholder' => __( 'fa-tags', 'Rollie' ),
 			)
 		);
 
@@ -2854,7 +2951,7 @@ if (class_exists('Woocommerce')){
 		$wp_customize->add_control(
 			'rollie_tag_char',
 			array(
-				'label'       => esc_html__( ' Type character which will be displaying  before every tag name ', 'Rollie' ),
+				'label'       => esc_html__( 'Type character which will be displaying  before every tag name ', 'Rollie' ),
 				'section'     => 'rollie_tags',
 				'type'        => 'text',
 				'placeholder' => __( '#', 'Rollie' ),
@@ -3069,10 +3166,23 @@ if (class_exists('Woocommerce')){
 		)
 	);
 
+	$wp_customize->add_setting(	'rollie_post_format_gallery_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_post_format_gallery_label',
+		array(
+			'label'   =>__( 'Metainfos', 'rollie' ),
+			'section'       => 'rollie_post_format_gallery',
+			'input_attrs'=> array (
+			'rollie_collapse_elements_number'=> 1,
+			'expanded'=>true
+		)
+		)
+	));
 
-
-			$wp_customize->add_setting(
-		'rollie_post_format_gallery_static',
+	$wp_customize->add_setting(
+		'rollie_post_format_gallery_slider',
 		array(
 			'default'           => true,
 			'transport'         => 'refresh',
@@ -3084,9 +3194,9 @@ if (class_exists('Woocommerce')){
 	$wp_customize->add_control(
 		new Rollie_Toggle_Switch_Custom_control(
 			$wp_customize,
-			'rollie_post_format_gallery_static',
+			'rollie_post_format_gallery_slider',
 			array(
-				'label'   =>__( 'Display gallery without slider', 'rollie' ),
+				'label'   =>__( 'Display gallery post format as slider', 'rollie' ),
 				'section' => 'rollie_post_format_gallery',
 					
 			)
@@ -3097,8 +3207,6 @@ foreach ($rollie_img_data as $img_data) {
 	$img_data->add_customizer_controls();
 }
 
-
-	
 	if (class_exists('WooCommerce')){
 	require get_template_directory() . '/include/rollie_customizer_woo.php';
 		}

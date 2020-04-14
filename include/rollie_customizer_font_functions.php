@@ -68,7 +68,7 @@ $rollie_border_data = array(
 'tables'=> new Rollie_Border('tables','rollie_borders_section',__('Page Sections Border Sizes','rollie'),__('This control sets border settings for tables, Comments and specific page sections','rollie'),false,true),
 'buttons'=> new Rollie_Border('buttons','rollie_buttons_section',__('Button Border Sizes','rollie')),
 'inputs'=> new Rollie_Border('inputs','rollie_forms_inputs_section',__('Form and Input Border Sizes','rollie'),false,true),
-'images'=> new Rollie_Border('images','rollie_img_panel',__('Image Border Sizes','rollie'),'',true),
-'avatars'=> new Rollie_Border('avatars','rollie_img_panel',__('User Avatar Border Sizes','rollie'),'',true),
+'images'=> new Rollie_Border('images','rollie_img_panel',__('Image Border Sizes','rollie'),'',true,true),
+'avatars'=> new Rollie_Border('avatars','rollie_img_panel',__('User Avatar Border Sizes','rollie'),'',true,true),
 );
 

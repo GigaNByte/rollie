@@ -29,6 +29,21 @@ global $wp_customize;
 			'priority' => 20,
 		)
 	);
+		$wp_customize->add_setting(	$this->customizer_section_title.'_label' );
+		$wp_customize->add_control(
+		new Rollie_Customizer_Collapse_Label_Control(
+			$wp_customize,
+			$this->customizer_section_title.'_label',
+			array(
+				'label'   => esc_html($this->customizer_section_title).' '.__( 'Settings','rollie' ),
+				'section' => $this->customizer_section,
+				'input_attrs'=> array (
+					'rollie_collapse_elements_number'=> 1+count($this->img_sizes_data)*3,
+					'expanded'=>true,
+				)
+			)
+		));
+
 		$wp_customize->add_setting(
 			    $this->img_set_name.'_device',
 			array(
@@ -1151,9 +1166,8 @@ private $customizer_section;
 				)
 			);
 			$this->customizer_section = $this->border_set_name.'_section';
-		}else{
-
-
+		}
+		if(!$this->panel_flag || $this->expand_label ){
 			$wp_customize->add_setting($this->border_set_name.'_collapse');
 			$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(

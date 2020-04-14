@@ -1,5 +1,35 @@
+	/**
+	 * TinyMCE Custom Control
+	 *
+	 * @author Anthony Hortin <http://maddisondesigns.com>
+	 * @license http://www.gnu.org/licenses/gpl-2.0.html
+	 * @link https://github.com/maddisondesigns
+	 */
+
 jQuery( document ).ready(function($) {
 	"use strict";
+	function rollie_tinymce_control(){
+		$('.customize-control-tinymce-editor').each(function(){
+				// Get the toolbar strings that were passed from the PHP Class
+				var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar1;
+				var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar2;
+
+				wp.editor.initialize( $(this).attr('id'), {
+					tinymce: {
+						wpautop: true,
+						toolbar1: tinyMCEToolbar1String,
+						toolbar2: tinyMCEToolbar2String
+					},
+					quicktags: true
+				});
+		});
+	}
+	 $(document).on( 'tinymce-editor-init', function( event, editor ) {
+	 	editor.on('change', function(e) {
+	 		tinyMCE.triggerSave();
+	 		$('#'+editor.id).trigger('change');
+	 	});
+	 });
 
 	function rollie_css_ruler_control(){
 		$('.rollie_css_ruler_link').on('click',function(){
@@ -41,35 +71,53 @@ jQuery( document ).ready(function($) {
 	$(this).parent().parent().find('.rollie_css_ruler_input').trigger('change');
 		});
 	}
+	/*
+	rollie_device_control is similar rollie_multiple_switch
+	- in rollie_multiple_switch children controls are declaring membership to switch option
+	- in rollie_device_control switch children controls are declared by master switch control
+	- rollie_collapse_bb are responsivble for smooth bottom border ending if switch is nested inside rollie_collapse_label
+	- some snippets are complicated due to integrate rollie_multiple_switch & rollie_device_control & rollie_collapse_label and other collapsing controls without colisions between them
+	*/
 	function rollie_device_control()
 	{
-		$('.rollie_device_control').each(function(){
+		$('.rollie_device_control').each(function(){	
+			$($(this).attr('data-target')).attr('aria-hidden','false');
 			if ($(this).attr('aria-expanded')=='false'){
 				$($(this).attr('data-target')).css('display','none');
-			}	
+				$($(this).attr('data-target')).attr('aria-hidden','true');
+			}
 		});
-		$('.rollie_device_control').on('click',function(){
+		$('.rollie_device_control_c').each(function(){
+			$(this).parent('li').nextAll("[aria-hidden='false']").first().nextAll("[aria-hidden='true']").first().prev().addClass('rollie_collapse_bb');
+		}) ;
+		$('.rollie_device_control').on('click',function(){	
+			
 			var all = '';
 			 $(this).siblings('.rollie_device_control').each(function(){
              all += $(this).attr('data-target')+',';
 			 }); 
 			 all = all.slice(0, -1);
+
+			if ($(this).attr('aria-expanded')=='false'){
+					
+				$($(this).attr('data-target')).each(function(){
+					$(this).css('display','block');		
+					$(this).attr('aria-hidden','false');				
+				});	
 		
-				if ($(this).attr('aria-expanded')=='false'){
-						console.log($(this).attr('data-target'));
-					$($(this).attr('data-target')).each(function(){
-						$(this).css('display','block');						
-					});	
-					console.log(all);
-					$(all).not($(this).attr('data-target')).each(function(){
-						$(this).css('display','none');						
-					});	
-					$(this).attr('aria-expanded','true');
-				
-				
-					$(this).siblings().not(this).attr('aria-expanded','false');
-				}				
-			});
+				$(all).not($(this).attr('data-target')).each(function(){
+					$(this).css('display','none');	
+					$(this).attr('aria-hidden','true');					
+				});	
+				$(this).attr('aria-expanded','true');
+			
+			
+				$(this).siblings().not(this).attr('aria-expanded','false');
+				$('.rollie_device_control_c').each(function(){
+					$(this).parent('li').nextAll("[aria-hidden='false']").first().nextAll("[aria-hidden='true']").first().prev().addClass('rollie_collapse_bb');
+				}) ;
+			}				
+		});
 	}
 	
 	function rollie_multiple_switch_underline()
@@ -100,17 +148,15 @@ jQuery( document ).ready(function($) {
 			if ($(this).is(":checked") ==  true) {
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','active');
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
-				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().addClass('rollie_multiple_switch_bb');
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().addClass('rollie_collapse_bb');
 			} else {
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','disactive');
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
 
-				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().removeClass('rollie_multiple_switch_bb');
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().removeClass('rollie_collapse_bb');
 			}
 
 		});
-
-
 	}
 	function rollie_multiple_switch()
 	{
@@ -125,15 +171,13 @@ jQuery( document ).ready(function($) {
 			rollie_input_name = '';
 			rollie_input_name = $(this).find('input').attr('name');
 
+			rollie_multiple_switch_hide_show_controler(rollie_input_name); //on document ready
+			 $(this).find('input').on("change",function(){//on change
+			 	rollie_input_name = $(this).attr('name');
+			 	rollie_multiple_switch_hide_show_controler(rollie_input_name);
+			 });
 
-	rollie_multiple_switch_hide_show_controler(rollie_input_name); //on document ready
-	 $(this).find('input').on("change",function(){//on change
-	 	rollie_input_name = $(this).attr('name');
-	 	rollie_multiple_switch_hide_show_controler(rollie_input_name);
-	 });
-
-	});
-
+		});
 
 	}
 
@@ -153,19 +197,19 @@ jQuery( document ).ready(function($) {
 			if(!on_doc_ready && $(this).attr('rollie_mscc_active') == 'disactive'){		
 				tr=false;
 			}
+
 			if (value  !== 'undefined'  && index <  value){
 				
 				if( !$( this ).hasClass('rollie_collapse_label_show_flag') || ($(selector_name).attr('aria-expanded')=='true' && on_doc_ready)&& ($(this).attr('rollie_mscc_active') != 'disactive')  )   {	
-				
-					$( this ).attr("aria-hidden","false");
+				//	$( this ).attr("aria-hidden","false");
 					$(this).addClass('rollie_collapse_label_show_flag');
+					
 					if (tr){
 						$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
 					}
 				
-				}else{
-						 
-					$( this ).attr("aria-hidden","true");
+				}else{						 			
+				//	$( this ).attr("aria-hidden","true");
 					$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
 				}
 			}	
@@ -189,25 +233,38 @@ jQuery( document ).ready(function($) {
 		
 		});
 	}
+		function rollie_add_panel_icon(rollie_panel_slug,dashicon_classes)
+	{
+		$("li[aria-owns='sub-accordion-"+rollie_panel_slug+"']>h3").prepend('<span class="dashicons '+dashicon_classes+'"></span>')	;
+	}
 
+	rollie_add_panel_icon ('panel-rollie_grid_meta_panel','dashicons-layout');
+	rollie_add_panel_icon ('panel-rollie_font_panel','dashicons-editor-textcolor');
+	rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
+	rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
+	rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
+
+	rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
+	rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
+	rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
+	rollie_add_panel_icon ('section-rollie_search_form_section','dashicons-search');
+	rollie_add_panel_icon ('section-rollie_icons_section','dashicons-menu');
+	rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-customizer');
+	rollie_css_ruler_control();
+	rollie_tinymce_control();
 	rollie_collapse_label_toggle ();
 	rollie_multiple_switch();
 	rollie_device_control();
+
 	$('.rollie_collapse_label_toggle').each(function(){
 		rollie_collapse_label_toggle_controler(this,true);
 	});
 
 
-
-
-
 	$( ".rollie_font_reset" ).on( "click", function() {
 		var rollie_object_name = $(this).attr("object_name");
 		var rollie_def = $(this).attr('default');
-		console.log(rollie_def);
 		var rollie_object_frontend_class = rollie_object_name.replace("_obj", "");
-
-
 		wp.customize( rollie_object_name ).set(rollie_def);	
 
 		$(".rollie_fonts_list").val($(".rollie_fonts_list").attr("rollie-reset-value"));
@@ -217,45 +274,7 @@ jQuery( document ).ready(function($) {
 		$(".rollie_subsets").val($(".rollie_subsets").attr("rollie-reset-value"));
 		$(".rollie_font_category").val($(".rollie_font_category").attr("rollie-reset-value"));
 		$(".rollie_fonts_list,.rollie_regularweight,.rollie_italicweight,.rollie_boldweight,.rollie_subsets,.rollie_font_category").trigger('change');
-	})
-
-
-	/**
-	 * TinyMCE Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
-	 */
-
-	 $('.customize-control-tinymce-editor').each(function(){
-		// Get the toolbar strings that were passed from the PHP Class
-		var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar1;
-		var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar2;
-
-		wp.editor.initialize( $(this).attr('id'), {
-			tinymce: {
-				wpautop: true,
-				toolbar1: tinyMCEToolbar1String,
-				toolbar2: tinyMCEToolbar2String
-			},
-			quicktags: true
-		});
-	});
-	 $(document).on( 'tinymce-editor-init', function( event, editor ) {
-	 	editor.on('change', function(e) {
-	 		tinyMCE.triggerSave();
-	 		$('#'+editor.id).trigger('change');
-	 	});
-	 });
-	 
-	/**
-	 * Googe Font Select Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
-	 */
+	})	 
 
 	 $('.google-fonts-list').each(function (i, obj) {
 	 	if (!$(obj).hasClass('select2-hidden-accessible')) {
@@ -270,25 +289,7 @@ jQuery( document ).ready(function($) {
 	 	});
 	 });
 	 $('.google-fonts-list').on('change', function() {
-		/*		if (data.isreset==true)
-		{
-			var rollie_regularweight= $(".rollie_regularweight").attr("rollie-reset-value");
-		 var rollie_italicweight = $(".rollie_italicweight").attr("rollie-reset-value");
-		 var rollie_boldweight = $(".rollie_boldweight").attr("rollie-reset-value");
-		 var rollie_subsets = $(".rollie_subsets").attr("rollie-reset-value");
-		  var rollie_category = $(".rollie_font_category").attr("rollie-reset-value");
-
-		 $(".rollie_regularweight").val(rollie_regularweight);
-		 $(".rollie_italicweight").val(rollie_italicweight);
-		 $(".rollie_boldweight").val(rollie_boldweight);
-		 $(".rollie_subsets").val(rollie_subsets);
-		  $(".rollie_font_category").val(rollie_category);
-		 $(".rollie_regularweight option[value="+rollie_regularweight+"]").attr('selected', 'selected');
-		 $(".rollie_italicweight option[value="+rollie_italicweight+"]").attr('selected', 'selected');
-		 $(".rollie_boldweight option[value="+rollie_boldweight+"]").attr('selected', 'selected');
-		 $(".rollie_subsets option[value="+rollie_subsets+"]").attr('selected', 'selected');
-		}
-		*/
+	
 		var elementRegularWeight = $(this).parent().parent().find('.google-fonts-regularweight-style');
 		var elementItalicWeight = $(this).parent().parent().find('.google-fonts-italicweight-style');
 		var elementBoldWeight = $(this).parent().parent().find('.google-fonts-boldweight-style');
@@ -361,8 +362,6 @@ jQuery( document ).ready(function($) {
 		skyrocketGetAllSelects($(this).parent().parent());
 
 	});
-
-
 
 
 
@@ -556,29 +555,6 @@ jQuery( document ).ready(function($) {
 		$(this).parent().find('.slider').slider('value', resetValue);
 	});
 	
-
-
-	function rollie_add_panel_icon(rollie_panel_slug,dashicon_classes)
-	{
-		$("li[aria-owns='sub-accordion-"+rollie_panel_slug+"']>h3").prepend('<span class="dashicons '+dashicon_classes+'"></span>')	;
-	}
-
-	rollie_add_panel_icon ('panel-rollie_grid_meta_panel','dashicons-layout');
-	rollie_add_panel_icon ('panel-rollie_font_panel','dashicons-editor-textcolor');
-	rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
-	rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
-	rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
-
-	rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
-	rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
-	rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
-	rollie_add_panel_icon ('section-rollie_search_form_section','dashicons-search');
-	rollie_add_panel_icon ('section-rollie_icons_section','dashicons-menu');
-	rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-customizer');
-
-rollie_css_ruler_control();
-
-
 	// Loop over each control and transform it into our color picker.
 	$( '.alpha-color-control' ).each( function() {
 
