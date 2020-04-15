@@ -42,12 +42,26 @@ $wp_customize->add_setting(	'rollie_woo_l_shop_vanilla_settings_label');
 			'section'       => 'rollie_woo_l_shop_section',
 			'priority' => 1,
 			'input_attrs'=> array (
-			'rollie_collapse_elements_number'=> 6,
+			'rollie_collapse_elements_number'=> 7,
 			'expanded'=>false
 		)
 		)
 	)
 );
+	$wp_customize->add_setting('rollie_woo_l_shop_vanilla_settings_desc_1',);
+	$wp_customize->add_control(
+		new Rollie_Notice_Control(
+			$wp_customize,
+			'rollie_woo_l_shop_vanilla_settings_desc_1',
+			array(
+				'description' => 'Woocommerce Products Grid settings are in Rollie Post Grids & Post Meta Panel' ,
+				'section'     => 'rollie_woo_l_shop_section',
+				'priority'=>1
+			)
+		)
+	);
+
+
 $wp_customize->add_section(
 		'rollie_woo_l_single_section',
 		array(
@@ -330,11 +344,11 @@ array(
 $wp_customize->add_control(
 'rollie_woo_l_my_account_nav', 
 array(
-	'label'   => esc_html__( 'Design of posts displayed as one in one row', 'Rollie' ),
+	'label'   => esc_html__( 'Design of My Account navigation', 'Rollie' ),
 	'section' => 'rollie_woo_l_my_account_section',
 	'type'    => 'select',
 	'choices' => array(
-		1 => esc_html__( 'Big Tiles', 'rollie' ),
+		1 => esc_html__( 'Big Tiles Nav', 'rollie' ),
 		2 => esc_html__( 'Simple Side Nav', 'rollie' ),
 		3 => esc_html__( 'Wide Top Nav', 'rollie' ),
 	),

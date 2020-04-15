@@ -299,7 +299,7 @@ public $type = 'rollie_image_radio_button';
 							<?php if ( isset($this->input_attrs['icon_type']) && $this->input_attrs['icon_type']=='png') { ?>	
 							<img class="rollie_dash rollie_icon_customize_control_img"   src="<?php echo get_template_directory_uri().'/images/'.esc_html( $rollie_split[0] ).'.png'  ;?>"></img>
 							<?php }else{?>
-									<i class="rollie_dash  fab fa-2x   <?php echo ( esc_html( $rollie_split[0] ) ); ?> "></i>
+									<i class="rollie_dash  fab fa-2x   <?php echo ( esc_html(preg_replace('/[ ,]+/', ' ', trim($rollie_split[0]))) ); ?> "></i>
 							<?php }?>
 							 </label>
 						
@@ -368,7 +368,7 @@ class Rollie_Slider_Custom_Control extends WP_Customize_Control {
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @link https://github.com/maddisondesigns
 	 */
-class Rollie_Notice_Custom_Control extends WP_Customize_Control {
+class Rollie_Notice_Control extends WP_Customize_Control {
 	/**
 	 * The type of control being rendered
 	 */

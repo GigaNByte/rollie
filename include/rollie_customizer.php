@@ -296,9 +296,9 @@ function rollie_header_control($wp_customize,$rollie_sufix,$rollie_section_prefi
 					'section' => $rollie_section_prefix.$rollie_sufix,
 					'type'    => 'radio',
 					'choices' => array(
-						1 => 'fa-align-left '.esc_html__( 'Align left', 'rollie' ),
-						2 => 'fa-align-center '.esc_html__( 'Center', 'rollie' ),
-						3 => 'fa-align-right '.esc_html__( 'Align right', 'rollie' ),
+						1 => "fa-align-left,fa-rotate-90,d-block,mb-6  ".esc_html__( 'Align Top', 'rollie' ),
+						2 => "fa-align-justify,mb-6  ".esc_html__( 'Center', 'rollie' ),
+						3 => "fa-align-right,fa-rotate-90,d-block,mb-6 ".esc_html__( 'Align Bottom', 'rollie' ),
 					),
 				)
 			)
@@ -2026,7 +2026,7 @@ $rollie_border->add_customizer_controls();
 			$wp_customize,
 			'rollie_title_bg_theme_color_stop_gr_1',
 			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ' ),
 				'section'     => 'rollie_theme_colors_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -2074,7 +2074,7 @@ $rollie_border->add_customizer_controls();
 				$wp_customize->add_setting(
 			'rollie_title_bg_theme_color_stop_gr_2',
 			array(
-				'default'           => 40,
+				'default'           => 100,
 				'transport' =>'postMessage',
 				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
@@ -2085,7 +2085,7 @@ $rollie_border->add_customizer_controls();
 			$wp_customize,
 		'rollie_title_bg_theme_color_stop_gr_2',
 			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ' ),
 				'section'     => 'rollie_theme_colors_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -2127,7 +2127,7 @@ $rollie_border->add_customizer_controls();
 				$wp_customize->add_setting(
 			'rollie_title_bg_theme_color_stop_gr_3',
 			array(
-				'default'           => 0,
+				'default'           => 100,
 					'transport' =>'postMessage',
 				'sanitize_callback' => 'rollie_sanitize_integer',
 			)
@@ -2138,7 +2138,7 @@ $rollie_border->add_customizer_controls();
 			$wp_customize,
 			'rollie_title_bg_theme_color_stop_gr_3',
 			array(
-				'label'       => esc_html__( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ' ),
 				'section'     => 'rollie_theme_colors_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -2961,7 +2961,7 @@ $wp_customize->add_section(
 	$wp_customize->add_section(
 		'rollie_borders_section',
 		array(
-			'title'    => esc_html__( 'Page Sections, Tables Borders', 'Rollie' ),
+			'title'    => esc_html__( 'Page Sections Borders ', 'Rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)

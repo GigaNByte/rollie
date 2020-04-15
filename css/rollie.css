@@ -220,7 +220,7 @@ overflow:hidden;
 
 /*rollie_fixed_menu*/
 #rollie_fixed_menu_left_container,#rollie_fixed_menu_right_container{
-	z-index: 10;
+	/*z-index: 10;*/
 	min-height: 100vh;
 }
 

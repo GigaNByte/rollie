@@ -206,18 +206,10 @@ public	function add_customizer_controls(){
 		)
 	));
 
-			$wp_customize->add_setting(
-		$this->font_set_name.'_i',
-		array(
-			'default'           => '',
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'rollie_sanitize_class_html',
-		)
-	);
-				$font_set_class_str =  implode(", ", $this->font_set_class);
-
+	$wp_customize->add_setting($this->font_set_name.'_i');
+	$font_set_class_str =  implode(", ", $this->font_set_class);
 	$wp_customize->add_control(
-		new Rollie_Notice_Custom_Control(
+		new Rollie_Notice_Control(
 			$wp_customize,
 			$this->font_set_name.'_i',
 			array(

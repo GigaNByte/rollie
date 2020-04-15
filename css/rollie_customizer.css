@@ -537,6 +537,9 @@ display: none;
 .google-fonts .select2 {
 	width: 100% !important;
 }
+.mb-6{
+	margin-bottom: 6px;
+}
 .rollie_collapse_bb
 {
 	border-bottom: solid;
