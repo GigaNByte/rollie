@@ -74,11 +74,6 @@ function rollieGradientControl(rollie_gradient_obj) {
    rollie_angle_gr = rollieRangeSanitize(setting.get(), 0, 360);
   });
 
-
-
-
-
-
   var rollie_gr_css = '';
 
   rollie_gr_css = /*rollie_gradient_obj.css_before_value*/  " linear-gradient( " + rollie_angle_gr + "deg, " + rollie_gr_1 + " " + rollie_stop_gr_1 + "% , " + rollie_gr_2 + " " + rollie_stop_gr_2 + "% , " + rollie_gr_3 + " " + rollie_stop_gr_3 + "% )";
@@ -151,6 +146,8 @@ rollie_color_obj.css_value = rollie_standard_color;
  var rollie_gr_sub_controls = [
   '_gs', '_gr_1', '_gr_2', '_gr_3', '_stop_gr_1', '_stop_gr_2', '_stop_gr_3', '_angle_gr', ''
  ];
+
+
 
 
  $.each(rollie_gr_controls, function(index, id) {

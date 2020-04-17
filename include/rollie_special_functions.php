@@ -54,66 +54,84 @@ function rollie_nav_top_icons_colapsed_content(){
 function rollie_top_menu_wp_nav_menu (){
 	$rollie_side_active_c  = '';
 	$rollie_side_c        = '';
-	if('full' == get_theme_mod( 'rollie_menu_design' ,'full')){
+	if('full' == get_theme_mod( 'rollie_navbar_design' ,'full')){
 		$rollie_side_active_c  = ' rollie_collapse_full ';
-	}elseif ( 'side' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
-		$rollie_side_active_c  = ' rollie_collapse_side rollie_navbar_color rollie_collapse_overlap';
-		$rollie_side_c         = 'rollie_navbar_color';
-	}elseif ( 'fixed' == get_theme_mod( 'rollie_menu_design' ,'full') ) {
-		$rollie_side_active_c  = 'rollie_collapse_side rollie_collapse_fixed ';
+	}elseif ( 'side' == get_theme_mod( 'rollie_navbar_design' ,'full') ) {
+		$rollie_side_active_c  = ' rollie_collapse_side rollie_navbar_color rollie_collapse_side_navbar';
+		$rollie_side_c         = 'rollie_navbar_color';	
+	}elseif ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed' == get_theme_mod( 'rollie_navbar_design' ,'full') ) {
+		$rollie_side_active_c  = ' rollie_collapse_side rollie_collapse_fixed ';
+		if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')){
+				$rollie_side_active_c  = ' rollie_collapse_side rollie_collapse_fixed rollie_collapse_fixed_full';
+		}
 	} 
 
-	$rollie_navbar_align = get_theme_mod( 'rollie_menu_top_item_align',2);
-	if ( $rollie_navbar_align == 1 ) {
-		$rollie_navbar_align = '';
-	} elseif ( $rollie_navbar_align == 2 ) {
-		$rollie_navbar_align = 'm-auto';
-	} elseif ( $rollie_navbar_align == 3 ) {
-		$rollie_navbar_align = 'ml-auto';
+	$rollie_navbar_align_mod = get_theme_mod( 'rollie_menu_top_item_align',2);
+	 
+
+	$rollie_navbar_align = '';
+	if ( $rollie_navbar_align_mod == 1 ) {
+		$rollie_navbar_align = 'mr-auto text-left';
+	}
+	elseif ( $rollie_navbar_align_mod == 2 ) {
+		$rollie_navbar_align = 'm-auto text-center';
+	} elseif ( $rollie_navbar_align_mod == 3 ) {
+		$rollie_navbar_align = 'ml-auto text-right';
 	}
 
+
+add_filter('wp_nav_menu_items','search_box_function', 10, 2);
+function search_box_function( $nav, $args ) {
+    if( $args->theme_location == 'rollie_top_menu' )
+        return rollie_navbar_icon('rollie_navbar_collapse_logo',false).$nav;
+}
 	if( has_nav_menu('rollie_top_menu')){
 		wp_nav_menu( array(
-
 			'theme_location'  => 'rollie_top_menu',
 			'container_id'    => 'rollie_nav_top_main_container',
-			'container_class' => 'collapse navbar-collapse   ' . $rollie_side_active_c , 
+			'container_class' => 'collapse navbar-collapse ' . $rollie_side_active_c , 
 			'menu_id'         => false,
 			'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',			
-			'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap  ' . $rollie_navbar_align,
+			'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap ' . $rollie_navbar_align,
 			'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
 			'depth'           => '6',
-
 		));
 	}
 }
 
-function rollie_navbar_icon(){
+function rollie_navbar_icon($logo_url = 'rollie_navbar_logo',$echo = true){
 	$rollie_retina_navbar = '';
-	if (get_theme_mod( 'rollie_top_navbar_logo' )){
-		if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url(get_theme_mod( 'rollie_top_navbar_logo' ))){
-			$rollie_retina_navbar = ', '.wr2x_get_retina_from_url( get_theme_mod( 'rollie_top_navbar_logo' )).' 2x';
+	$rollie_retina_navbar_snippet = '';
+	if (get_theme_mod( $logo_url )){
+		if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url(get_theme_mod( $logo_url  ))){
+			$rollie_retina_navbar = ', '.wr2x_get_retina_from_url( get_theme_mod( $logo_url  )).' 2x';
 		}
 
-		echo     '<a class="rollie_nav_top_logo m-auto px-2" href="'.esc_url( home_url( '/' ) ).'">';
-		$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_top_navbar_logo' ))) ;
-		echo "<img class='p-1  m-auto d-block' srcset='" .esc_url(get_theme_mod( 'rollie_top_navbar_logo' ))." 1x".$rollie_retina_navbar."' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
-		if(get_theme_mod('rollie_menu_top_logo_title',false)){
-			echo '<div class="text-center rollie_firts">'.get_bloginfo('name')."</div>";
+		$rollie_retina_navbar_snippet .= '<a class="rollie_nav_top_logo m-auto px-2" href="'.esc_url( home_url( '/' ) ).'">';
+		$rollie_menu_top_logo_id =  attachment_url_to_postid(esc_url(get_theme_mod( $logo_url ))) ;
+			$rollie_retina_navbar_snippet .= "<img class='p-1  m-auto d-block' srcset='" .esc_url(get_theme_mod($logo_url))." 1x".$rollie_retina_navbar."' alt='".get_the_title($rollie_menu_top_logo_id)."'>";
+		if(get_theme_mod('rollie_navbar_logo_title',false)){
+				$rollie_retina_navbar_snippet .= '<div class="text-center">'.get_bloginfo('name')."</div>";
 		}
-		echo '</a>';
+			$rollie_retina_navbar_snippet .= '</a>';
 	}	
+	if ($echo){
+		echo $rollie_retina_navbar_snippet ;
+	}else{
+		return $rollie_retina_navbar_snippet ;
+
+	}
 }
 
 function rollie_nav_top_search_button(){
-	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) {	?>
+	if ( get_theme_mod( 'rollie_navbar_search_form' ) ) {	?>
 		<button data-toggle="collapse" data-target="#rollie_search_input_menu_top" aria-expanded="false" aria-controls="rollie_search_input_menu_top" id='rollie_search_button_standalone' class=" btn ">
 			<i class="fas fa-search"></i>
 		</button>	
 	<?php }	
 }
 function rollie_nav_top_search_button_colapsed(){
-	if ( get_theme_mod( 'rollie_search_form_menu_top' ) ) { ?>
+	if ( get_theme_mod( 'rollie_navbar_search_form' ) ) { ?>
 		<div id="rollie_search_input_menu_top" class="collapse rollie_navbar_color py-1" >
 			<?Php get_search_form(); ?>
 		</div>

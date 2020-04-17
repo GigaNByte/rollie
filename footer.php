@@ -67,7 +67,7 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 	</footer>
 
 <?php 
-if ('fixed' == get_theme_mod('rollie_menu_design','full')|| 'side' == get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
+if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')||'fixed' == get_theme_mod('rollie_navbar_design','full')|| 'side' == get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
 echo "</div>";//fixed content
 echo "</div>";//header,main,footer
 //rollie_menus_shadow is added to rollie_fixed_menu_right_container in js to prevent box shadow overflow

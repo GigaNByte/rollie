@@ -219,7 +219,7 @@ function rollie_widget_setup() {
 		'after_title'   => '</h1>',
 	));
 	register_sidebar( array(
-	'name'          => __('Top Navbar Widget Area','rollie'),
+	'name'          => __('Navbar Widget Area','rollie'),
 	'id'            => 'rollie_widgetarea_navbar',
 	'before_widget' => '<div id="%1$s" class="widget %2$s rollie_f_widget ">',
 	'after_widget'  => '</div>',
@@ -246,12 +246,12 @@ function rollie_widget_setup() {
 }
 function rollie_custom_setup() {
 
-	register_nav_menu( 'rollie_top_menu', __('Rollie Top Navbar: Main Navigation','rollie') );
-	register_nav_menu( 'rollie_top_menu_icons', __('Rollie Top Navbar: Icon Navigation','rollie') );
+	register_nav_menu( 'rollie_top_menu', __('Rollie Navbar','rollie') );
+	register_nav_menu( 'rollie_top_menu_icons', __('Rollie Navbar: Icon Navigation','rollie') );
 	register_nav_menu( 'rollie_top_menu_small_top_bar', __('Rollie Top Navbar: Small Top Navigation','rollie') );
 	register_nav_menu( 'rollie_footer_menu_bottom_bar', __('Rollie Footer: Small Bottom Navigation','rollie') );
 	register_nav_menu( 'rollie_cat_swap_menu', __('Rollie Category Swipe Menu','rollie') );
-	register_nav_menu( 'Footer_Menu', __('Rollie Footer Menu: Main Navigation','rollie') );
+	register_nav_menu( 'Footer_Menu', __('Rollie Footer Menu','rollie') );
 	add_editor_style();
 	add_theme_support( 'woocommerce' );
 }

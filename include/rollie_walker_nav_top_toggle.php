@@ -3,7 +3,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu
 {
     public $dropdown_opened = 0;
     public $rollie_max_dropdown_depth = 0;
-
+    
     function start_lvl(&$output, $depth = 0, $args = array())
     {
         
@@ -36,6 +36,7 @@ class Rollie_Walker_Nav_Top_Toggle extends Walker_Nav_Menu
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
         
         $output .= "{$n}{$indent}<div $class_names >{$n}";
+    
         
     }
     

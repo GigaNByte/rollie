@@ -421,10 +421,10 @@ do_action( 'woocommerce_product_meta_end' );
 //single product end 
 	 //login
 function rollie_woo_login_form_site_icon (){
-	if (get_theme_mod( 'rollie_top_navbar_logo' ));
+	if (get_theme_mod( 'rollie_navbar_logo' ));
 	{
 		echo '<div class="rollie_login_form_site_icon_wrapper">';
-		echo '<img class="rollie_login_form_site_icon d-block m-auto" alt="'.get_the_title(attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_top_navbar_logo' )))).'" src="'.esc_url(get_theme_mod( 'rollie_top_navbar_logo' )).'"/>';
+		echo '<img class="rollie_login_form_site_icon d-block m-auto" alt="'.get_the_title(attachment_url_to_postid(esc_url(get_theme_mod( 'rollie_navbar_logo' )))).'" src="'.esc_url(get_theme_mod( 'rollie_navbar_logo' )).'"/>';
 
 		if (get_theme_mod( 'rollie_footer_logo_desc_text' )){
 			echo '<div class="rollie_f_footer_sub m-1 rollie_subtitle_text_color">'.get_theme_mod( 'rollie_footer_logo_desc_text' ).'</div>';

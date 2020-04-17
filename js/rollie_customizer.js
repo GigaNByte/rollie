@@ -243,7 +243,6 @@ jQuery( document ).ready(function($) {
 	rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
 	rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
 	rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
-
 	rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
 	rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
 	rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
@@ -255,6 +254,22 @@ jQuery( document ).ready(function($) {
 	rollie_collapse_label_toggle ();
 	rollie_multiple_switch();
 	rollie_device_control();
+
+	// fixes ui logic in top menu 
+	wp.customize( 'rollie_navbar_fixed', 'rollie_navbar_absolute', function( field1, field2 ) {
+	    field1.bind( function( value ) {
+	    	if (value){
+	        	field2.set( false );
+	    	}
+	    } );
+	} );
+	wp.customize('rollie_navbar_absolute', 'rollie_navbar_fixed', function( field1, field2 ) {
+	    field1.bind( function( value ) {
+	    	if (value){
+	        	field2.set( false );
+	    	}
+	    } );
+	} );
 
 	$('.rollie_collapse_label_toggle').each(function(){
 		rollie_collapse_label_toggle_controler(this,true);
