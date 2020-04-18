@@ -31,13 +31,16 @@ if ( ! function_exists( 'wp_body_open' ) ) {
         }
 }
 ?>
+
 	<div class='rollie_main_color rollie_background_color_div'></div>
 
 	<?php
-
+//navbar containers logic
 		if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed' == get_theme_mod( 'rollie_navbar_design','full') || get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
-			require get_template_directory().'/include/rollie_navbar.php' ;
-			
+			if ('fixed_full' != get_theme_mod('rollie_navbar_design','full')){
+				require get_template_directory().'/include/rollie_navbar.php' ;
+			}
+
 			if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')|| 'fixed' == get_theme_mod('rollie_navbar_design','full') || get_theme_mod('rollie_nav_top_icons_colapsed_content','side') ){
 				echo "<div class=' d-flex flex-row '>";
 				if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') ||'fixed' == get_theme_mod('rollie_navbar_design','full')){
@@ -47,6 +50,12 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 				}
 				echo "<div class='w-100 col p-0'>";
 				echo "<div class='rollie_fixed_menu_fixed_content'>";
+				if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')){
+				require get_template_directory().'/include/rollie_navbar.php' ;
+				}
+				if ( get_theme_mod( 'rollie_navbar_overlay' ,true) && !'full' == get_theme_mod('rollie_navbar_design','full'))   { 
+					echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay'></div>";		
+				 } 
 			}
 		} 
 

@@ -8,17 +8,20 @@
  */
 
 if ( has_nav_menu( 'rollie_top_menu' ) ) {
-if ( get_theme_mod( 'rollie_navbar_overlay' ,true) ) { ?>
-	<div class="overlay rollie_overlay rollie_collapse_side_overlay"></div>
-<?php } 
+
 $rollie_menu_top_position = '';
+if ( get_theme_mod( 'rollie_navbar_overlay' ,true) && !'full' == get_theme_mod('rollie_navbar_design','full'))   { 
+	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay'></div>";		
+ } 
 if (get_theme_mod('rollie_navbar_absolute',false)){
 	$rollie_menu_top_position = 'position-absolute';
 }
 if (get_theme_mod('rollie_navbar_fixed',true)){
 	$rollie_menu_top_position = 'position-fixed';
 }
-
+if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') && !get_theme_mod('rollie_navbar_absolute',false)){
+	$rollie_menu_top_position = '';
+}
 $rollie_navbar_transparent = '';
 if (get_theme_mod('rollie_navbar_transparent',true)){
 	$rollie_navbar_transparent = ' rollie_navbar_transparent rollie_transparent ';

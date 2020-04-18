@@ -258,7 +258,11 @@ background: transparent !important;
 }
 .rollie_collapse_side.collapsing
 {
-	height: auto;
+	height:auto;
+}
+.rollie_collapse_side.collapsing.rollie_collapse_fixed,.rollie_collapse_side.collapsing.rollie_collapse_fixed_full {
+
+height: 0px;
 }
 .rollie_collapse_side.collapse{
 	width: 0px;

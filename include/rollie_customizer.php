@@ -2516,58 +2516,8 @@ $wp_customize->add_section(
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
-	$wp_customize->add_setting(	'rollie_navbar_logos_label');
-	$wp_customize->add_control(
-	new Rollie_Customizer_Collapse_Label_Control(
-		$wp_customize,
-		'rollie_navbar_logos_label',
-		array(
-			'label'   => esc_html__( 'Navbar Logos', 'rollie' ),
-			'section'       => 'rollie_navbar_section',
-			'input_attrs'=> 
-			array (
-			'rollie_collapse_elements_number'=> 2
-			)
-		)
-	));
-	$wp_customize->add_setting(
-		'rollie_navbar_logo',
-		array(
-			'default'           => '',
-			'sanitize_callback' => 'esc_url_raw',
 
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Image_Control(
-			$wp_customize,
-			'rollie_navbar_logo',
-			array(
-				'label'   => __( 'Navbar logo', 'rollie' ),
-				'section' => 'rollie_navbar_section',
-				'priority'=>2
-			)
-		)
-	);
-	$wp_customize->add_setting(
-		'rollie_navbar_collapse_logo',
-		array(
-			'default'           => '',
-			'sanitize_callback' => 'esc_url_raw',
-
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Image_Control(
-			$wp_customize,
-			'rollie_navbar_collapse_logo',
-			array(
-				'label'   => __( 'Navbar Collapse Logo', 'rollie' ),
-				'section' => 'rollie_navbar_section',
-				'priority'=>2
-			)
-		)
-	);
+	
 	$wp_customize->add_setting(	'rollie_navbar_colors_label');
 	$wp_customize->add_control(
 	new Rollie_Customizer_Collapse_Label_Control(
@@ -2884,7 +2834,61 @@ $wp_customize->add_section(
 		)
 	);
 
-	
+	$wp_customize->add_setting(	'rollie_navbar_logos_label');
+	$wp_customize->add_control(
+	new Rollie_Customizer_Collapse_Label_Control(
+		$wp_customize,
+		'rollie_navbar_logos_label',
+		array(
+			'label'   => esc_html__( 'Navbar Logos', 'rollie' ),
+			'section'       => 'rollie_navbar_section',
+			'priority'=>2,
+			'input_attrs'=> 
+			array (
+			'rollie_collapse_elements_number'=> 2
+			)
+		)
+	));
+
+	$wp_customize->add_setting(
+		'rollie_navbar_logo',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'rollie_navbar_logo',
+			array(
+				'label'   => __( 'Navbar logo', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+				'priority'=>2
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_navbar_collapse_logo',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'rollie_navbar_collapse_logo',
+			array(
+				'label'   => __( 'Navbar Collapse Logo', 'rollie' ),
+				'section' => 'rollie_navbar_section',
+				'priority'=>2
+			)
+		)
+	);
 
 	
 
