@@ -251,7 +251,7 @@ function rollie_custom_setup() {
 	register_nav_menu( 'rollie_top_menu_small_top_bar', __('Rollie Top Navbar: Small Top Navigation','rollie') );
 	register_nav_menu( 'rollie_footer_menu_bottom_bar', __('Rollie Footer: Small Bottom Navigation','rollie') );
 	register_nav_menu( 'rollie_cat_swap_menu', __('Rollie Category Swipe Menu','rollie') );
-	register_nav_menu( 'Footer_Menu', __('Rollie Footer Menu','rollie') );
+	register_nav_menu( 'rollie_footer_menu', __('Rollie Footer Menu','rollie') );
 	add_editor_style();
 	add_theme_support( 'woocommerce' );
 }

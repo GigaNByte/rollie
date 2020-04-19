@@ -4,8 +4,7 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 	public $counter         = 0;/*Closes item with subitems .*/
 	public $isfirstrow      = true;
 	public $dropdownsibling = false;
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
-
+	function start_lvl( &$output, $depth = 0, $args = array() ) {	
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 			$t = '';
 			$n = '';

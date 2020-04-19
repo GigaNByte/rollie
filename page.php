@@ -22,7 +22,6 @@ if ( have_posts() ) :
 endif;?>
 
 
-
 <?php
 
 if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {

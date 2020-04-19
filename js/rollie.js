@@ -170,8 +170,9 @@ function rollie_nav_handler( container , search_form , collapsing_container ){
 					//$('.rollie_navbar_color').css('background',rgba2rgb(rollie_navbar_color));	
 					$('.rollie_fixed_menu_fixed_content').addClass('position-fixed');				
 					$(collapsing_container).appendTo($('#rollie_fixed_menu_left_container'));
-				//	$('.rollie_collapse_side').css('margin-top',$('#rollie_navbar_c').height()+"px");
-
+					if (!$('.rollie_collapse_fixed').hasClass('rollie_collapse_fixed_full')){
+						$('.rollie_collapse_side').css('margin-top',$('#rollie_navbar_c').height()+"px");
+					}	
 				}else{
 					$(collapsing_container).insertAfter('.rollie_top_menu_icons');
 				}
@@ -351,7 +352,6 @@ jQuery(function($){
 
 			}
 			);
-
 	}
 
 	//swiper for gallery if activated

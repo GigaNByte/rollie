@@ -13,19 +13,21 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 // div ending for rollie_content_container_padding_bottom 
 //js uses container to calculate footer size and applies padding and manages collapsing
 ?>
+
 	<footer id='rollie_footer' class='rollie_menus_shadow rollie_f_footer_sub rollie_f_navs rollie_subtitle_text_color'>
+
 		<div class="rollie_footer rollie_second_color <?php if (get_theme_mod('rollie_footer_collapse',true)) echo "rollie_footer_collapse rollie_padding_footer_measure";?>">
 			<?Php
-			if ( has_nav_menu( 'Footer_Menu' )){ ?>
+			if ( has_nav_menu( 'rollie_footer_menu' )){ ?>
 
 				<nav class="navbar navbar-expand-sm p-4 justify-content-center ">
 					<?php
 					wp_nav_menu(
 						array(
 							'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',
-							'theme_location' => 'Footer_Menu',
+							'theme_location' => 'rollie_footer_menu',
 							'container'      => false,
-							'menu_class'     => '  justify-content-center row footer-row',
+							'menu_class'     => 'justify-content-center row footer-row',
 							'walker'         => new Rollie_Walker_Footer(),
 						)
 					); 
@@ -48,8 +50,7 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 				echo "<nav class='rollie_top_menu_small_top_bar  col-12 rollie_flex_text_center '>";
 				wp_nav_menu( array(
 					'theme_location'  => 'rollie_footer_menu_bottom_bar',				
-					'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',
-					'container'=>'',		
+					'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',		
 					'walker' => new Rollie_Walker_Standard,
 					'depth'  => '1',
 				));

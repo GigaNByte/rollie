@@ -80,10 +80,12 @@ function rollie_top_menu_wp_nav_menu (){
 	}
 
 
-add_filter('wp_nav_menu_items','search_box_function', 10, 2);
-function search_box_function( $nav, $args ) {
-    if( $args->theme_location == 'rollie_top_menu' )
-        return rollie_navbar_icon('rollie_navbar_collapse_logo',false).$nav;
+add_filter('wp_nav_menu_items','rollie_navbar_collapse_logo', 10, 2);
+function rollie_navbar_collapse_logo( $nav, $args ) {
+    if( $args->theme_location == 'rollie_top_menu' && get_theme_mod('rollie_navbar_collapse_logo')){ 
+        return "<div class='rollie_navbar_collapse_logo'>".rollie_navbar_icon('rollie_navbar_collapse_logo',false)."</div>".$nav;
+    }else 
+    return $nav;
 }
 	if( has_nav_menu('rollie_top_menu')){
 		wp_nav_menu( array(

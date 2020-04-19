@@ -99,6 +99,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 				$img_alt = get_post_meta( $rollie_image_id, '_wp_attachment_image_alt', true ); 
 				echo rollie_header_image_responsive($rollie_image_id,$img_alt,'rollie_header_image',array('rollie_xs','rollie_s','rollie_m','rollie_l')); 
 			}
+			
 		}
 ?>
 		
