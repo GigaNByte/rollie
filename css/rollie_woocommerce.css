@@ -369,6 +369,7 @@ border:none;
 	top:10%;
 	left:0;
 	overflow: hidden;
+	height: max-content;
 }
 .rollie_zoom_image{
 width: max-content;
@@ -831,8 +832,7 @@ margin-left: 2rem !important;
 .rollie_woo_order_table_banner
 {
 	background-clip: padding-box;
-padding-right: 2rem !important;
-padding-left: 2rem !important;
+padding:3rem;
 }
 .woocommerce table.shop_table,.woocommerce table.shop_table td
 {

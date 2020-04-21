@@ -83,7 +83,7 @@ function rollie_top_menu_wp_nav_menu (){
 add_filter('wp_nav_menu_items','rollie_navbar_collapse_logo', 10, 2);
 function rollie_navbar_collapse_logo( $nav, $args ) {
     if( $args->theme_location == 'rollie_top_menu' && get_theme_mod('rollie_navbar_collapse_logo')){ 
-        return "<div class='rollie_navbar_collapse_logo'>".rollie_navbar_icon('rollie_navbar_collapse_logo',false)."</div>".$nav;
+        return "<div class='rollie_navbar_collapse_logo rollie_item_min_w'>".rollie_navbar_icon('rollie_navbar_collapse_logo',false)."</div>".$nav;
     }else 
     return $nav;
 }

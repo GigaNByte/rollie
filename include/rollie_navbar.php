@@ -13,8 +13,12 @@
 if ( has_nav_menu( 'rollie_top_menu' ) ) {
 
 $rollie_menu_top_position = '';
-if ( get_theme_mod( 'rollie_navbar_overlay' ,true) && !'full' == get_theme_mod('rollie_navbar_design','full'))   { 
+if ( get_theme_mod( 'rollie_navbar_overlay' ,true) && 'full' != get_theme_mod('rollie_navbar_design','full'))   { 
+	if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')) {
+	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay position-absolute'></div>";	
+	}else{
 	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay'></div>";		
+ 	}
  } 
 if (get_theme_mod('rollie_navbar_absolute',false)){
 	$rollie_menu_top_position = 'position-absolute';
@@ -22,8 +26,9 @@ if (get_theme_mod('rollie_navbar_absolute',false)){
 if (get_theme_mod('rollie_navbar_fixed',true)){
 	$rollie_menu_top_position = 'position-fixed';
 }
-if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') && !get_theme_mod('rollie_navbar_absolute',false)){
-	$rollie_menu_top_position = '';
+if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') && get_theme_mod('rollie_navbar_fixed',true)){
+	$rollie_menu_top_position = 'position-sticky';
+	echo "<div class='rollie_extra_fixed_wrapper w-100 h-100'>";
 }
 $rollie_navbar_transparent = '';
 if (get_theme_mod('rollie_navbar_transparent',true)){
@@ -35,6 +40,7 @@ if (get_theme_mod('rollie_navbar_always_collapse',false)){
 	$rollie_navbar_always_collapse = ' rollie_navbar_always_collapse ';
 }
 ?>
+
 <nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs <?php echo $rollie_menu_top_position ?>'> 			
 
 	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo $rollie_navbar_transparent.$rollie_navbar_always_collapse ?>" >
@@ -101,4 +107,6 @@ if (get_theme_mod('rollie_navbar_always_collapse',false)){
   ?>
 </nav>
 
-<?php } ?>
+<?php 
+if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') && get_theme_mod('rollie_navbar_fixed',true)) echo "</div>";
+} ?>

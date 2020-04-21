@@ -867,7 +867,7 @@ function rollie_action_woo_before_account_navigation ()
 	echo "<div class=' ".$rollie_class_c." '>";
 	echo "<div class=' ".$rollie_dash_class."  rollie_my_acc_container   '>";
 		if (is_user_logged_in()){ // if is logged in 
-			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner p-2 m-0 border-0  rollie_menus_shadow'>";
+			echo 	"<figure class=' ".$rollie_user_info_class. " rollie_woo_order_table_banner m-0 border-0  rollie_menus_shadow'>";
 			echo 		"<img class='mx-auto d-block rollie_avatar avatar' alt='".$rollie_current_user->display_name."' src='".get_avatar_url( get_current_user_id())."''>";
 
 			echo 		"<figcaption class='p-2'>";
@@ -1449,7 +1449,7 @@ function rollie_order_details($order)
 		if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small')=='small'){
 			echo "<div  data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow col-8 col-md-3 p-0'> ";
 		}else{
-			echo "<div data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow rollie_flex_text_center rollie_collapse_side'> ";
+			echo "<div data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow rollie_flex_text_center rollie_nav_top_icons_side_item rollie_collapse_side'> ";
 
 		} 
 		?>
@@ -1467,7 +1467,7 @@ function rollie_order_details($order)
 	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'small'){ 
 		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content"  class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table  col-8 col-md-3 p-0 " id="rollie_nav_cart_info">';
 	}else{
-		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content" class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table rollie_collapse_side" id="rollie_nav_cart_info">';
+		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content" class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table rollie_collapse_side rollie_nav_top_icons_side_item" id="rollie_nav_cart_info">';
 	}
 	?>
 

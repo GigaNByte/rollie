@@ -73,7 +73,7 @@ echo "</div>";//fixed content
 echo "</div>";//header,main,footer
 //rollie_menus_shadow is added to rollie_fixed_menu_right_container in js to prevent box shadow overflow
 if('side' == get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
-	echo "<div id='rollie_fixed_menu_right_container' class='d-flex rollie_navbar_color rollie_f_navs '>";
+	echo "<div id='rollie_fixed_menu_right_container' class='d-flex  rollie_f_navs '>";
 	rollie_nav_top_icons_colapsed_content();
 	echo "</div>";
 }
