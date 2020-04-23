@@ -68,12 +68,17 @@ if (get_theme_mod('rollie_footer_collapse',true)){
 	</footer>
 
 <?php 
-if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')||'fixed' == get_theme_mod('rollie_navbar_design','full')|| 'side' == get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
+if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')||'fixed' == get_theme_mod('rollie_navbar_design','full')|| 'small' != get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
 echo "</div>";//fixed content
 echo "</div>";//header,main,footer
 //rollie_menus_shadow is added to rollie_fixed_menu_right_container in js to prevent box shadow overflow
-if('side' == get_theme_mod('rollie_nav_top_icons_colapsed_content','side')){
-	echo "<div id='rollie_fixed_menu_right_container' class='d-flex  rollie_f_navs '>";
+if('small' != get_theme_mod('rollie_nav_top_icons_colapsed_content','small')){
+	
+	if ('fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','full')) {
+		echo "<div id='rollie_fixed_menu_right_container' class='d-flex rollie_fixed_menu_right_container_fixed_full rollie_f_navs '>";
+	}else{
+		echo "<div id='rollie_fixed_menu_right_container' class='d-flex  rollie_f_navs '>";
+	}
 	rollie_nav_top_icons_colapsed_content();
 	echo "</div>";
 }

@@ -13,8 +13,8 @@
 if ( has_nav_menu( 'rollie_top_menu' ) ) {
 
 $rollie_menu_top_position = '';
-if ( get_theme_mod( 'rollie_navbar_overlay' ,true) && 'full' != get_theme_mod('rollie_navbar_design','full'))   { 
-	if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')) {
+if ( get_theme_mod( 'rollie_navbar_overlay' ,true) )   { 
+	if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')||'fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','small')) {
 	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay position-absolute'></div>";	
 	}else{
 	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay'></div>";		
@@ -26,10 +26,13 @@ if (get_theme_mod('rollie_navbar_absolute',false)){
 if (get_theme_mod('rollie_navbar_fixed',true)){
 	$rollie_menu_top_position = 'position-fixed';
 }
-if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') && get_theme_mod('rollie_navbar_fixed',true)){
+$rollie_fixed_full_fixed_fix = false;
+if (('fixed_full' == get_theme_mod('rollie_navbar_design','full') && get_theme_mod('rollie_navbar_fixed',true)) || ('fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','small')&& 'fixed' == get_theme_mod('rollie_navbar_fixed',true))){
+$rollie_fixed_full_fixed_fix  = true; 
 	$rollie_menu_top_position = 'position-sticky';
-	echo "<div class='rollie_extra_fixed_wrapper w-100 h-100'>";
+	echo "<div id='rollie_extra_fixed_wrapper' class=' w-100 h-100'>";
 }
+
 $rollie_navbar_transparent = '';
 if (get_theme_mod('rollie_navbar_transparent',true)){
 	$rollie_navbar_transparent = ' rollie_navbar_transparent rollie_transparent ';
@@ -98,7 +101,7 @@ if (get_theme_mod('rollie_navbar_always_collapse',false)){
 	<?php 
 	
 
-	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'side'){
+	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') != 'small'){
 		rollie_nav_top_search_button_colapsed(); 
 	}else{
 		rollie_nav_top_icons_colapsed_content();
@@ -108,5 +111,5 @@ if (get_theme_mod('rollie_navbar_always_collapse',false)){
 </nav>
 
 <?php 
-if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') && get_theme_mod('rollie_navbar_fixed',true)) echo "</div>";
+if ($rollie_fixed_full_fixed_fix) echo "</div>";
 } ?>

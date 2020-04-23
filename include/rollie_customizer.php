@@ -2687,10 +2687,10 @@ $wp_customize->add_section(
 			'section' => 'rollie_navbar_section',
 			'type'    => 'select',
 			'choices' => array(
-				'full' => esc_html__( 'Top: Full width', 'rollie' ),
-				'side' => esc_html__( 'Side: Layered', 'rollie' ),
-				'fixed' => esc_html__( 'Side: Fixed 1 ', 'rollie' ),
-				'fixed_full' => esc_html__( 'Side: Fixed 2', 'rollie' ),
+				'full' => __( 'Top: Full width', 'rollie' ),
+				'side' =>__( 'Side: Layered', 'rollie' ),
+				'fixed' => __( 'Side: Fixed 1 ', 'rollie' ),
+				'fixed_full' => __( 'Side: Fixed 2', 'rollie' ),
 			),
 		)
 	);
@@ -2707,12 +2707,14 @@ $wp_customize->add_section(
 		$wp_customize->add_control(
 			'rollie_nav_top_icons_colapsed_content',
 			array(
-				'label'   => esc_html__( 'Icons Menu Colapsed Content Design', 'Rollie' ),
+				'label'   => esc_html__( 'Icons menu collapse design', 'Rollie' ),
+				'description'   => esc_html__( 'This options applies changes to collapsible Woocommerce Cart and MyAccount widgets', 'Rollie' ),
 				'section' => 'rollie_navbar_section',
 				'type'    => 'select',
 				'choices' => array(
-					'small' => esc_html__( 'Small collapse', 'rollie' ),
-					'side' => esc_html__( 'Full side collapse', 'rollie' ),
+					'small' => __( 'Small', 'rollie' ),
+					'fixed' => __( 'Side: Fixed 1', 'rollie' ),
+					'fixed_full' => __( 'Side: Fixed 2', 'rollie' ),
 				),
 			)
 		);

@@ -38,7 +38,7 @@ function rollie_avatar ($rollie_author_id,$rollie_center_avatar = false){
 <?php
 }
 function rollie_nav_top_icons_colapsed_content(){
-	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'side'){
+	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') != 'small'){
 		$rollie_nav_top_icons_colapsed_content_class = 'rollie_nav_top_icons_colapsed_content_side';
 	}else{
 		$rollie_nav_top_icons_colapsed_content_class = 'rollie_nav_top_icons_colapsed_content_small';
