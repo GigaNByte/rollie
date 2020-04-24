@@ -81,7 +81,18 @@ button:focus
 {
 	word-wrap: normal;
 }
-
+.rollie_overflow_y{
+	overflow-y:hidden;
+}
+#rollie_fixed_menu_fixed_content
+{
+overflow-x: hidden;
+position: fixed;
+}
+.rollie_scroll_block{
+	//overflow-y: scroll;
+	overflow-y: hidden;
+}
 html,body
 {
 	white-space: normal;
@@ -217,11 +228,18 @@ overflow:hidden;
 
 .rollie_nav_top_icons_colapsed_content_side{
 	width: min-content;
-
 }
 
 /*rollie_fixed_menu*/
-
+.rollie_navbar_relative{
+	position:relative;
+}
+.rollie_navbar_fixed{
+	position: fixed;
+}
+.rollie_navbar_absolute{
+	position: absolute;
+}
 #rollie_fixed_menu_left_container{
 	z-index: 9;
 	min-height: 100vh;
@@ -983,7 +1001,6 @@ margin-top:1rem;
 #rollie_navbar_c   
 {
 	z-index: 80;
-	position: relative;
 	top: 0;
 	left: 0;
 	width: 100%;

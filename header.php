@@ -44,11 +44,13 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 			if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')|| 'fixed' == get_theme_mod('rollie_navbar_design','full') || 'small' != get_theme_mod('rollie_nav_top_icons_colapsed_content','small') ){
 				echo "<div class=' d-flex flex-row h-100'>";
 				if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed' == get_theme_mod('rollie_navbar_design','full')){		
-					$rollie_fixed_full= '';
+					$rollie_fixed_class= '';
 					if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')) {
-						$rollie_fixed_full = 'rollie_fixed_full_menu_container';
+						$rollie_fixed_class = 'rollie_fixed_full_menu_container';
+					}else{
+						$rollie_fixed_class = 'position-absolute';
 					}
-					echo "<div id='rollie_fixed_menu_left_container' class='rollie_menus_shadow ".$rollie_fixed_full." rollie_flex_text_center rollie_navbar_color rollie_f_navs'>";					
+					echo "<div id='rollie_fixed_menu_left_container' class='rollie_menus_shadow ".$rollie_fixed_class." rollie_flex_text_center rollie_navbar_color rollie_f_navs'>";					
 					echo "</div>";
 				}
 				echo "<div id='rollie_content_wrapper' class='w-100 col p-0'>";

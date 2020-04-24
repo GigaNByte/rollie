@@ -21,16 +21,19 @@ if ( get_theme_mod( 'rollie_navbar_overlay' ,true) )   {
  	}
  } 
 if (get_theme_mod('rollie_navbar_absolute',false)){
-	$rollie_menu_top_position = 'position-absolute';
+	$rollie_menu_top_position = 'rollie_navbar_absolute';
 }
 if (get_theme_mod('rollie_navbar_fixed',true)){
-	$rollie_menu_top_position = 'position-fixed';
+	$rollie_menu_top_position = 'rollie_navbar_fixed';
+}
+if (empty($rollie_menu_top_position)){
+		$rollie_menu_top_position = 'rollie_navbar_relative';
 }
 $rollie_fixed_full_fixed_fix = false;
 if (('fixed_full' == get_theme_mod('rollie_navbar_design','full') && get_theme_mod('rollie_navbar_fixed',true)) || ('fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','small')&& 'fixed' == get_theme_mod('rollie_navbar_fixed',true))){
 $rollie_fixed_full_fixed_fix  = true; 
-	$rollie_menu_top_position = 'position-sticky';
-	echo "<div id='rollie_extra_fixed_wrapper' class=' w-100 h-100'>";
+	//$rollie_menu_top_position = 'position-sticky';
+	//echo "<div id='rollie_extra_fixed_wrapper' class=' w-100 h-100'>";
 }
 
 $rollie_navbar_transparent = '';
@@ -111,5 +114,5 @@ if (get_theme_mod('rollie_navbar_always_collapse',false)){
 </nav>
 
 <?php 
-if ($rollie_fixed_full_fixed_fix) echo "</div>";
+//if ($rollie_fixed_full_fixed_fix)echo "</div>";
 } ?>
