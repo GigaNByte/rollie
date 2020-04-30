@@ -1435,10 +1435,10 @@ function rollie_order_details($order)
 
 	function woocomerce_rollie_nav_top_icons(){
 		?>
-		<button class="btn" data-toggle="collapse" data-target="#rollie_nav_user_info" aria-expanded="false" aria-controls="rollie_nav_user_info">
+		<button class="btn" data-toggle="collapse"  data-target="#rollie_nav_user_info" aria-expanded="false" aria-controls="rollie_nav_user_info">
 			<i class='fas fa-user'></i>
 		</button>	
-		<button class="btn" data-toggle="collapse" data-target="#rollie_nav_cart_info" aria-expanded="false" aria-controls="rollie_nav_cart_info">
+		<button class="btn" data-toggle="collapse"   data-target="#rollie_nav_cart_info" aria-expanded="false" aria-controls="rollie_nav_cart_info">
 			<i class='fas fa-shopping-bag'></i>
 		</button>	
 		<?php	
@@ -1447,9 +1447,9 @@ function rollie_order_details($order)
 
 	function woocommerce_rollie_nav_top_icons_colapsed(){
 		if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small')=='small'){
-			echo "<div  data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow col-8 col-md-3 p-0'> ";
+			echo "<div   id='rollie_nav_user_info' class='collapse rollie_menus_shadow col-8 col-md-3 p-0'> ";
 		}else{
-			echo "<div data-parent='#rollie_nav_top_icons_colapsed_content' id='rollie_nav_user_info' class='collapse rollie_menus_shadow rollie_flex_text_center rollie_nav_top_icons_side_item rollie_collapse_side'> ";
+			echo "<div  id='rollie_nav_user_info' class='collapse rollie_menus_shadow rollie_flex_text_center rollie_nav_top_icons_side_item rollie_collapse_side'> ";
 
 		} 
 		?>
@@ -1465,9 +1465,9 @@ function rollie_order_details($order)
 	
 	<?php
 	if (get_theme_mod('rollie_nav_top_icons_colapsed_content','small') == 'small'){ 
-		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content"  class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table  col-8 col-md-3 p-0 " id="rollie_nav_cart_info">';
+		echo	'<div  class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table  col-8 col-md-3 p-0 " id="rollie_nav_cart_info">';
 	}else{
-		echo	'<div data-parent="#rollie_nav_top_icons_colapsed_content" class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table rollie_collapse_side rollie_nav_top_icons_side_item" id="rollie_nav_cart_info">';
+		echo	'<div class="collapse  rollie_menus_shadow rollie_navbar_color rollie_table rollie_collapse_side rollie_nav_top_icons_side_item" id="rollie_nav_cart_info">';
 	}
 	?>
 

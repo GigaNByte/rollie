@@ -37,12 +37,12 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	<?php
 //navbar containers logic
 		if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed' == get_theme_mod( 'rollie_navbar_design','full') || 'small' != get_theme_mod('rollie_nav_top_icons_colapsed_content','small')){
-			if ('fixed_full' != get_theme_mod('rollie_navbar_design','full') && 'fixed_full' != get_theme_mod('rollie_nav_top_icons_colapsed_content','small')){
+		//	if ('fixed_full' != get_theme_mod('rollie_navbar_design','full') && 'fixed_full' != get_theme_mod('rollie_nav_top_icons_colapsed_content','small')){
 				require get_template_directory().'/include/rollie_navbar.php' ;
-			}
+		//	}
 
 			if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')|| 'fixed' == get_theme_mod('rollie_navbar_design','full') || 'small' != get_theme_mod('rollie_nav_top_icons_colapsed_content','small') ){
-				echo "<div class=' d-flex flex-row h-100'>";
+				echo "<div id='rollie_main_container'class='h-100 d-flex flex-row '>";
 				if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed' == get_theme_mod('rollie_navbar_design','full')){		
 					$rollie_fixed_class= '';
 					if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')) {
@@ -54,11 +54,14 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 					echo "</div>";
 				}
 				echo "<div id='rollie_content_wrapper' class='w-100 col p-0'>";
-		
-				echo "<div id='rollie_fixed_menu_fixed_content'>";
-				if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','small')){
-				require get_template_directory().'/include/rollie_navbar.php' ;
+				if (get_theme_mod('rollie_navbar_fixed',true)){
+				echo "<div id='rollie_fixed_menu_fixed_content' class='rollie_fixed_content'>";
+				}else{
+					echo "<div id='rollie_fixed_menu_fixed_content'>";
 				}
+		//		if ('fixed_full' == get_theme_mod('rollie_navbar_design','full') || 'fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','small')){
+			//	require get_template_directory().'/include/rollie_navbar.php' ;
+			//	}
 			
 			}
 		} 

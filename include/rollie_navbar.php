@@ -14,11 +14,9 @@ if ( has_nav_menu( 'rollie_top_menu' ) ) {
 
 $rollie_menu_top_position = '';
 if ( get_theme_mod( 'rollie_navbar_overlay' ,true) )   { 
-	if ('fixed_full' == get_theme_mod('rollie_navbar_design','full')||'fixed_full' == get_theme_mod('rollie_nav_top_icons_colapsed_content','small')) {
-	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay position-absolute'></div>";	
-	}else{
+
 	echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay'></div>";		
- 	}
+ 	
  } 
 if (get_theme_mod('rollie_navbar_absolute',false)){
 	$rollie_menu_top_position = 'rollie_navbar_absolute';
