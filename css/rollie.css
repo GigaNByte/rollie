@@ -229,7 +229,9 @@ overflow:hidden;
 .rollie_nav_top_icons_colapsed_content_side{
 	width: min-content;
 }
-
+#rollie_nav_top_icons_colapsed_content .rollie_my_acc_nav_side_c {
+	overflow:auto;
+}
 
 /*rollie_fixed_menu*/
 .rollie_navbar_relative{

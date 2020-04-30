@@ -419,14 +419,17 @@ margin: 1rem;
 margin: auto;
 display: inline-block;
 }
+
 .woocommerce-MyAccount-navigation > ul {
+padding: 0 0 3rem 0;
+
 list-style:none;
 display: -ms-flexbox;
 display: flex;
 -ms-flex-wrap: wrap;
 flex-wrap: wrap;
 text-align:center;
-padding: 0;
+
 }
 	.woocommerce-orders-table__cell-rollie_order-custom_column
 	{
@@ -499,6 +502,7 @@ border: none;
 }
 .rollie_my_acc_nav_side_c  > .woocommerce-MyAccount-navigation
 {
+
 -ms-flex: 0 0 100%;
 
 flex: 0 0 100%;
