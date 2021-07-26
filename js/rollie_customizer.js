@@ -1,44 +1,44 @@
-	/**
-	 * TinyMCE Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
-	 */
+/**
+ * TinyMCE Custom Control
+ *
+ * @author Anthony Hortin <http://maddisondesigns.com>
+ * @license http://www.gnu.org/licenses/gpl-2.0.html
+ * @link https://github.com/maddisondesigns
+ */
 
-jQuery( document ).ready(function($) {
+jQuery(document).ready(function ($) {
 	"use strict";
-	function rollie_tinymce_control(){
-		$('.customize-control-tinymce-editor').each(function(){
-				// Get the toolbar strings that were passed from the PHP Class
-				var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar1;
-				var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar2;
+	function rollie_tinymce_control() {
+		$('.customize-control-tinymce-editor').each(function () {
+			// Get the toolbar strings that were passed from the PHP Class
+			var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar1;
+			var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].rollie_tinymcetoolbar2;
 
-				wp.editor.initialize( $(this).attr('id'), {
-					tinymce: {
-						wpautop: true,
-						toolbar1: tinyMCEToolbar1String,
-						toolbar2: tinyMCEToolbar2String
-					},
-					quicktags: true
-				});
+			wp.editor.initialize($(this).attr('id'), {
+				tinymce: {
+					wpautop: true,
+					toolbar1: tinyMCEToolbar1String,
+					toolbar2: tinyMCEToolbar2String
+				},
+				quicktags: true
+			});
 		});
 	}
-	 $(document).on( 'tinymce-editor-init', function( event, editor ) {
-	 	editor.on('change', function(e) {
-	 		tinyMCE.triggerSave();
-	 		$('#'+editor.id).trigger('change');
-	 	});
-	 });
+	$(document).on('tinymce-editor-init', function (event, editor) {
+		editor.on('change', function (e) {
+			tinyMCE.triggerSave();
+			$('#' + editor.id).trigger('change');
+		});
+	});
 
-	function rollie_css_ruler_control(){
-		$('.rollie_css_ruler_link').on('click',function(){
-			if($(this).find('.rollie_ruler_link').hasClass('dashicons-admin-links')){
+	function rollie_css_ruler_control() {
+		$('.rollie_css_ruler_link').on('click', function () {
+			if ($(this).find('.rollie_ruler_link').hasClass('dashicons-admin-links')) {
 				$(this).find('.rollie_ruler_link').removeClass('dashicons-admin-links');
 				$(this).find('.rollie_ruler_link').addClass('dashicons-editor-unlink');
 
 
-			}else{
+			} else {
 
 				$(this).parent().find('.rollie_css_ruler_item').val($(this).parent().find('.rollie_css_ruler_item').first().val());
 				$(this).parent().find('.rollie_css_ruler_item').text($(this).parent().find('.rollie_css_ruler_item').first().val());
@@ -52,23 +52,23 @@ jQuery( document ).ready(function($) {
 
 
 
-		$( ".rollie_css_ruler_item").on('change',function(){
-		
-			if ($(this).parent().parent().find('.rollie_ruler_link').hasClass('dashicons-admin-links')){
-			
+		$(".rollie_css_ruler_item").on('change', function () {
+
+			if ($(this).parent().parent().find('.rollie_ruler_link').hasClass('dashicons-admin-links')) {
+
 				$(this).parent().parent().find('.rollie_css_ruler_item').val($(this).val());
 				$(this).parent().parent().find('.rollie_css_ruler_item').text($(this).val());
 			}
 
 			var ruler_val = [
-			$(this).parent().parent().find('.rollie_css_ruler_item_l').val(),
-			$(this).parent().parent().find('.rollie_css_ruler_item_t').val(),
-			$(this).parent().parent().find('.rollie_css_ruler_item_b').val(),
-			$(this).parent().parent().find('.rollie_css_ruler_item_r').val(),
-			]; 
-			
+				$(this).parent().parent().find('.rollie_css_ruler_item_l').val(),
+				$(this).parent().parent().find('.rollie_css_ruler_item_t').val(),
+				$(this).parent().parent().find('.rollie_css_ruler_item_b').val(),
+				$(this).parent().parent().find('.rollie_css_ruler_item_r').val(),
+			];
+
 			$(this).parent().parent().find('.rollie_css_ruler_input').val(ruler_val.join(","));
-	$(this).parent().parent().find('.rollie_css_ruler_input').trigger('change');
+			$(this).parent().parent().find('.rollie_css_ruler_input').trigger('change');
 		});
 	}
 	/*
@@ -78,209 +78,201 @@ jQuery( document ).ready(function($) {
 	- rollie_collapse_bb are responsivble for smooth bottom border ending if switch is nested inside rollie_collapse_label
 	- some snippets are complicated due to integrate rollie_multiple_switch & rollie_device_control & rollie_collapse_label and other collapsing controls without colisions between them
 	*/
-	function rollie_device_control()
-	{
-		$('.rollie_device_control').each(function(){	
-			$($(this).attr('data-target')).attr('aria-hidden','false');
-			if ($(this).attr('aria-expanded')=='false'){
-				$($(this).attr('data-target')).css('display','none');
-				$($(this).attr('data-target')).attr('aria-hidden','true');
+	function rollie_device_control() {
+		$('.rollie_device_control').each(function () {
+			$($(this).attr('data-target')).attr('aria-hidden', 'false');
+			if ($(this).attr('aria-expanded') == 'false') {
+				$($(this).attr('data-target')).css('display', 'none');
+				$($(this).attr('data-target')).attr('aria-hidden', 'true');
 			}
 		});
-		$('.rollie_device_control_c').each(function(){
+		$('.rollie_device_control_c').each(function () {
 			$(this).parent('li').nextAll("[aria-hidden='false']").first().nextAll("[aria-hidden='true']").first().prev().addClass('rollie_collapse_bb');
-		}) ;
-		$('.rollie_device_control').on('click',function(){	
-			
-			var all = '';
-			 $(this).siblings('.rollie_device_control').each(function(){
-             all += $(this).attr('data-target')+',';
-			 }); 
-			 all = all.slice(0, -1);
+		});
+		$('.rollie_device_control').on('click', function () {
 
-			if ($(this).attr('aria-expanded')=='false'){
-					
-				$($(this).attr('data-target')).each(function(){
-					$(this).css('display','block');		
-					$(this).attr('aria-hidden','false');				
-				});	
-		
-				$(all).not($(this).attr('data-target')).each(function(){
-					$(this).css('display','none');	
-					$(this).attr('aria-hidden','true');					
-				});	
-				$(this).attr('aria-expanded','true');
-			
-			
-				$(this).siblings().not(this).attr('aria-expanded','false');
-				$('.rollie_device_control_c').each(function(){
+			var all = '';
+			$(this).siblings('.rollie_device_control').each(function () {
+				all += $(this).attr('data-target') + ',';
+			});
+			all = all.slice(0, -1);
+
+			if ($(this).attr('aria-expanded') == 'false') {
+
+				$($(this).attr('data-target')).each(function () {
+					$(this).css('display', 'block');
+					$(this).attr('aria-hidden', 'false');
+				});
+
+				$(all).not($(this).attr('data-target')).each(function () {
+					$(this).css('display', 'none');
+					$(this).attr('aria-hidden', 'true');
+				});
+				$(this).attr('aria-expanded', 'true');
+
+
+				$(this).siblings().not(this).attr('aria-expanded', 'false');
+				$('.rollie_device_control_c').each(function () {
 					$(this).parent('li').nextAll("[aria-hidden='false']").first().nextAll("[aria-hidden='true']").first().prev().addClass('rollie_collapse_bb');
-				}) ;
-			}				
-		});
-	}
-	
-	function rollie_multiple_switch_underline()
-	{
-		$('.rollie_multiple_switch > input').each(function(){
-			
-			if ($(this).prop('checked')){
-				$( this ).parent().addClass( "rollie_checked_style" );
-				$(this).addClass( "rollie_checked" );
-			}
-			else{
-				$( this ).parent().removeClass( "rollie_checked_style" );
-				$(this).removeClass( "rollie_checked" );
+				});
 			}
 		});
 	}
-	function rollie_multiple_switch_hide_show_controler(rollie_input_name)
-	{
+
+	function rollie_multiple_switch_underline() {
+		$('.rollie_multiple_switch > input').each(function () {
+
+			if ($(this).prop('checked')) {
+				$(this).parent().addClass("rollie_checked_style");
+				$(this).addClass("rollie_checked");
+			}
+			else {
+				$(this).parent().removeClass("rollie_checked_style");
+				$(this).removeClass("rollie_checked");
+			}
+		});
+	}
+	function rollie_multiple_switch_hide_show_controler(rollie_input_name) {
 
 
 		var rollie_mscc_id = '';
 
-		$('.rollie_multiple_switch_row_js').find( 'input[name='+rollie_input_name+']').each(function(index){
+		$('.rollie_multiple_switch_row_js').find('input[name=' + rollie_input_name + ']').each(function (index) {
 
 			rollie_mscc_id = '';
 			rollie_mscc_id = $(this).closest('.rollie_mscc_js').attr('rollie_mscc_attrs');
 
-			if ($(this).is(":checked") ==  true) {
-				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','active');
+			if ($(this).is(":checked") == true) {
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active', 'active');
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().addClass('rollie_collapse_bb');
 			} else {
-				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active','disactive');
+				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().attr('rollie_mscc_active', 'disactive');
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().removeClass('rollie_multiple_switch_group_js').addClass('rollie_multiple_switch_group_hidden_js');
-
 				$(this).closest('li').nextAll().prev("[rollie_mscc_attrs = " + rollie_mscc_id + "]").next().last().removeClass('rollie_collapse_bb');
 			}
 
 		});
 	}
-	function rollie_multiple_switch()
-	{
+	function rollie_multiple_switch() {
 		rollie_multiple_switch_underline();
 
 		$(".rollie_multiple_switch > input").on("change", rollie_multiple_switch_underline);
 
 		var rollie_input_name = '';
 
-		$('.rollie_multiple_switch_row_js').each(function() {
+		$('.rollie_multiple_switch_row_js').each(function () {
 
 			rollie_input_name = '';
 			rollie_input_name = $(this).find('input').attr('name');
 
 			rollie_multiple_switch_hide_show_controler(rollie_input_name); //on document ready
-			 $(this).find('input').on("change",function(){//on change
-			 	rollie_input_name = $(this).attr('name');
-			 	rollie_multiple_switch_hide_show_controler(rollie_input_name);
-			 });
+			$(this).find('input').on("change", function () {//on change
+				rollie_input_name = $(this).attr('name');
+				rollie_multiple_switch_hide_show_controler(rollie_input_name);
+			});
 
 		});
 
 	}
 
-	function rollie_collapse_label_toggle_controler (selector_name,on_doc_ready)
-	{
-		var	value = $(selector_name).attr('rollie_collapse_elements');
+	function rollie_collapse_label_toggle_controler(selector_name, on_doc_ready) {
+		var value = $(selector_name).attr('rollie_collapse_elements');
 
-			//closing border bottom
-			$(selector_name).parent().next().css('margin-top','0');
-			$(selector_name).parent().css('margin-bottom','0');
-			$(selector_name).children().first().css('margin-top','0');
-			$(selector_name).parent().nextAll('.rollie_collapse_label_show_flag').eq(parseInt(value)-1).addClass('rollie_collapse_bb');
-		
-		$(selector_name).parent().nextAll('li').each(function( index ) {
-			
+		//closing border bottom
+		$(selector_name).parent().next().css('margin-top', '0');
+		$(selector_name).parent().css('margin-bottom', '0');
+		$(selector_name).children().first().css('margin-top', '0');
+		if (on_doc_ready) {
+			$(selector_name).parent().nextAll('.rollie_collapse_label_show_flag').eq(parseInt(value) - 1).addClass('rollie_collapse_bb');
+		}
+
+
+		$(selector_name).parent().nextAll('li').each(function (index) {
+
 			var tr = true;
-			if(!on_doc_ready && $(this).attr('rollie_mscc_active') == 'disactive'){		
-				tr=false;
+			if (!on_doc_ready && $(this).attr('rollie_mscc_active') == 'disactive') {
+				tr = false;
 			}
 
-			if (value  !== 'undefined'  && index <  value){
-				
-				if( !$( this ).hasClass('rollie_collapse_label_show_flag') || ($(selector_name).attr('aria-expanded')=='true' && on_doc_ready)&& ($(this).attr('rollie_mscc_active') != 'disactive')  )   {	
-				//	$( this ).attr("aria-hidden","false");
+			if (value !== 'undefined' && index < value) {
+
+				if (!$(this).hasClass('rollie_collapse_label_show_flag') || ($(selector_name).attr('aria-expanded') == 'true' && on_doc_ready) && ($(this).attr('rollie_mscc_active') != 'disactive')) {
+					//	$( this ).attr("aria-hidden","false");
 					$(this).addClass('rollie_collapse_label_show_flag');
-					
-					if (tr){
+
+					if (tr) {
 						$(this).removeClass('rollie_multiple_switch_group_hidden_js').addClass('rollie_multiple_switch_group_js');//	i couldnt do this because another my custom control manipulate visiblity at the same area if( $( this ).css('visibility') == 'hidden')
 					}
-				
-				}else{						 			
-				//	$( this ).attr("aria-hidden","true");
+
+				} else {
+					//	$( this ).attr("aria-hidden","true");
 					$(this).removeClass('rollie_multiple_switch_group_js  rollie_collapse_label_show_flag').addClass('rollie_multiple_switch_group_hidden_js');
 				}
-			}	
-		});
-
-	}
-	function rollie_collapse_label_toggle ()
-	{	
-
-		$('.rollie_collapse_label_toggle').each(function(){
-			rollie_collapse_label_toggle_controler(this,true);
-		});
-		$( '.rollie_collapse_label_toggle' ).on( "click", function() { 
-			if ($(this).attr("aria-expanded") =="true"){
-
-				$(this).attr("aria-expanded","false");
-			}else{
-				$(this).attr("aria-expanded","true");
 			}
-			rollie_collapse_label_toggle_controler(this,false);
-		
 		});
 	}
-		function rollie_add_panel_icon(rollie_panel_slug,dashicon_classes)
-	{
-		$("li[aria-owns='sub-accordion-"+rollie_panel_slug+"']>h3").prepend('<span class="dashicons '+dashicon_classes+'"></span>')	;
+	function rollie_collapse_label_toggle() {
+
+		$('.rollie_collapse_label_toggle').each(function () {
+			rollie_collapse_label_toggle_controler(this, true);
+		});
+		$('.rollie_collapse_label_toggle').on("click", function () {
+			if ($(this).attr("aria-expanded") == "true") {
+				$(this).attr("aria-expanded", "false");
+			} else {
+				$(this).attr("aria-expanded", "true");
+			}
+			rollie_collapse_label_toggle_controler(this, false);
+		});
+	}
+	function rollie_add_panel_icon(rollie_panel_slug, dashicon_classes) {
+		$("li[aria-owns='sub-accordion-" + rollie_panel_slug + "']>h3").prepend('<span class="dashicons ' + dashicon_classes + '"></span>');
 	}
 
-	rollie_add_panel_icon ('panel-rollie_grid_meta_panel','dashicons-layout');
-	rollie_add_panel_icon ('panel-rollie_font_panel','dashicons-editor-textcolor');
-	rollie_add_panel_icon ('panel-rollie_misc_panel','dashicons-admin-settings');
-	rollie_add_panel_icon ('panel-rollie_color_design_panel','dashicons-admin-customizer');
-	rollie_add_panel_icon ('panel-rollie_post_formats_panel','dashicons-format-status');
-	rollie_add_panel_icon ('section-rollie_sidebar_section','dashicons-exerpt-view');
-	rollie_add_panel_icon ('section-rollie_comments_section','dashicons-admin-comments');
-	rollie_add_panel_icon ('section-rollie_buttons_section','dashicons-admin-collapse');
-	rollie_add_panel_icon ('section-rollie_search_form_section','dashicons-search');
-	rollie_add_panel_icon ('section-rollie_icons_section','dashicons-menu');
-	rollie_add_panel_icon ('section-rollie_theme_colors_section','dashicons-admin-customizer');
+	rollie_add_panel_icon('panel-rollie_grid_meta_panel', 'dashicons-layout');
+	rollie_add_panel_icon('panel-rollie_font_panel', 'dashicons-editor-textcolor');
+	rollie_add_panel_icon('panel-rollie_misc_panel', 'dashicons-admin-settings');
+	rollie_add_panel_icon('panel-rollie_color_design_panel', 'dashicons-admin-customizer');
+	rollie_add_panel_icon('panel-rollie_post_formats_panel', 'dashicons-format-status');
+	rollie_add_panel_icon('section-rollie_sidebar_section', 'dashicons-exerpt-view');
+	rollie_add_panel_icon('section-rollie_comments_section', 'dashicons-admin-comments');
+	rollie_add_panel_icon('section-rollie_buttons_section', 'dashicons-admin-collapse');
+	rollie_add_panel_icon('section-rollie_search_form_section', 'dashicons-search');
+	rollie_add_panel_icon('section-rollie_icons_section', 'dashicons-menu');
+	rollie_add_panel_icon('section-rollie_theme_colors_section', 'dashicons-admin-customizer');
 	rollie_css_ruler_control();
 	rollie_tinymce_control();
-	rollie_collapse_label_toggle ();
+	rollie_collapse_label_toggle();
 	rollie_multiple_switch();
 	rollie_device_control();
 
 	// fixes ui logic in top menu 
-	wp.customize( 'rollie_navbar_fixed', 'rollie_navbar_absolute', function( field1, field2 ) {
-	    field1.bind( function( value ) {
-	    	if (value){
-	        	field2.set( false );
-	    	}
-	    } );
-	} );
-	wp.customize('rollie_navbar_absolute', 'rollie_navbar_fixed', function( field1, field2 ) {
-	    field1.bind( function( value ) {
-	    	if (value){
-	        	field2.set( false );
-	    	}
-	    } );
-	} );
+	wp.customize('rollie_navbar_fixed', 'rollie_navbar_absolute', function (field1, field2) {
+		field1.bind(function (value) {
+			if (value) {
+				field2.set(false);
+			}
+		});
+	});
+	wp.customize('rollie_navbar_absolute', 'rollie_navbar_fixed', function (field1, field2) {
+		field1.bind(function (value) {
+			if (value) {
+				field2.set(false);
+			}
+		});
+	});
 
-	$('.rollie_collapse_label_toggle').each(function(){
-		rollie_collapse_label_toggle_controler(this,true);
+	$('.rollie_collapse_label_toggle').each(function () {
+		rollie_collapse_label_toggle_controler(this, true);
 	});
 
 
-	$( ".rollie_font_reset" ).on( "click", function() {
+	$(".rollie_font_reset").on("click", function () {
 		var rollie_object_name = $(this).attr("object_name");
 		var rollie_def = $(this).attr('default');
 		var rollie_object_frontend_class = rollie_object_name.replace("_obj", "");
-		wp.customize( rollie_object_name ).set(rollie_def);	
+		wp.customize(rollie_object_name).set(rollie_def);
 
 		$(".rollie_fonts_list").val($(".rollie_fonts_list").attr("rollie-reset-value"));
 		$(".rollie_regularweight").val($(".rollie_regularweight").attr("rollie-reset-value"));
@@ -289,22 +281,22 @@ jQuery( document ).ready(function($) {
 		$(".rollie_subsets").val($(".rollie_subsets").attr("rollie-reset-value"));
 		$(".rollie_font_category").val($(".rollie_font_category").attr("rollie-reset-value"));
 		$(".rollie_fonts_list,.rollie_regularweight,.rollie_italicweight,.rollie_boldweight,.rollie_subsets,.rollie_font_category").trigger('change');
-	})	 
+	})
 
-	 $('.google-fonts-list').each(function (i, obj) {
-	 	if (!$(obj).hasClass('select2-hidden-accessible')) {
-	 		$(obj).select2();
-	 	}
-	 });
-	 $('.rollie_font_reset').on('click', function (){
-	 	$('.google-fonts-list').each(function (i, obj) {
-	 		if (!$(obj).hasClass('select2-hidden-accessible')) {
-	 			$(obj).select2();
-	 		}
-	 	});
-	 });
-	 $('.google-fonts-list').on('change', function() {
-	
+	$('.google-fonts-list').each(function (i, obj) {
+		if (!$(obj).hasClass('select2-hidden-accessible')) {
+			$(obj).select2({ dropdownParent: $('#customize-controls') });
+		}
+	});
+	$('.rollie_font_reset').on('click', function () {
+		$('.google-fonts-list').each(function (i, obj) {
+			if (!$(obj).hasClass('select2-hidden-accessible')) {
+				$(obj).select2({ dropdownParent: $('#customize-controls') });
+			}
+		});
+	});
+	$('.google-fonts-list').on('change', function () {
+
 		var elementRegularWeight = $(this).parent().parent().find('.google-fonts-regularweight-style');
 		var elementItalicWeight = $(this).parent().parent().find('.google-fonts-italicweight-style');
 		var elementBoldWeight = $(this).parent().parent().find('.google-fonts-boldweight-style');
@@ -327,50 +319,50 @@ jQuery( document ).ready(function($) {
 		var bodyfontcontrol = _wpCustomizeSettings.controls[customizerControlName];
 
 		// Find the index of the selected font
-		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function(obj, index) {
-			if(obj.family === selectedFont) {
+		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function (obj, index) {
+			if (obj.family === selectedFont) {
 				return index;
 			}
 		});
 		var index = indexes[0];
 
 		// For the selected Google font show the available weight/style variants
-		$.each(bodyfontcontrol.rollie_fontslist[index].variants, function(val, text) {
+		$.each(bodyfontcontrol.rollie_fontslist[index].variants, function (val, text) {
 			elementRegularWeight.append(
 				$('<option></option>').val(text).html(text)
-				);
+			);
 			if (text.indexOf("italic") >= 0) {
 				elementItalicWeight.append(
 					$('<option></option>').val(text).html(text)
-					);
+				);
 				elementItalicWeightCount++;
 			} else {
 				elementBoldWeight.append(
 					$('<option></option>').val(text).html(text)
-					);
+				);
 				elementBoldWeightCount++;
 			}
 		});
 
-		if(elementItalicWeightCount == 0) {
+		if (elementItalicWeightCount == 0) {
 			elementItalicWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-				);
+			);
 			elementItalicWeight.prop('disabled', 'disabled');
 		}
-		if(elementBoldWeightCount == 0) {
+		if (elementBoldWeightCount == 0) {
 			elementBoldWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-				);
+			);
 			elementBoldWeight.prop('disabled', 'disabled');
 		}
-		
-		$.each(bodyfontcontrol.rollie_fontslist[index].subsets, function(val, text) {
+
+		$.each(bodyfontcontrol.rollie_fontslist[index].subsets, function (val, text) {
 			elementSubsetsWeight.append(
 				$('<option></option>').val(text).html(text)
-				);
+			);
 		});
-		
+
 		// Update the font category based on the selected font
 		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.rollie_fontslist[index].category);
 
@@ -380,19 +372,19 @@ jQuery( document ).ready(function($) {
 
 
 
-	 $('.rollie_font_reset').on('click', function() {
+	$('.rollie_font_reset').on('click', function () {
 
-	 	var ul_class=$(this).parent().parent().parent();
+		var ul_class = $(this).parent().parent().parent();
 
-	 	var font_list = $( ul_class ).find($(".google-fonts-list"));
-	 	var elementRegularWeight = $(font_list).parent().parent().find('.google-fonts-regularweight-style');
-	 	var elementItalicWeight = $(font_list).parent().parent().find('.google-fonts-italicweight-style');
-	 	var elementBoldWeight = $(font_list).parent().parent().find('.google-fonts-boldweight-style');
-	 	var elementSubsetsWeight = $(font_list).parent().parent().find('.google-fonts-subsets-style');
-	 	var selectedFont = $(font_list).val();
-	 	var customizerControlName = $(font_list).attr('control-name');
-	 	var elementItalicWeightCount = 0;
-	 	var elementBoldWeightCount = 0;
+		var font_list = $(ul_class).find($(".google-fonts-list"));
+		var elementRegularWeight = $(font_list).parent().parent().find('.google-fonts-regularweight-style');
+		var elementItalicWeight = $(font_list).parent().parent().find('.google-fonts-italicweight-style');
+		var elementBoldWeight = $(font_list).parent().parent().find('.google-fonts-boldweight-style');
+		var elementSubsetsWeight = $(font_list).parent().parent().find('.google-fonts-subsets-style');
+		var selectedFont = $(font_list).val();
+		var customizerControlName = $(font_list).attr('control-name');
+		var elementItalicWeightCount = 0;
+		var elementBoldWeightCount = 0;
 
 		// Clear Weight/Style dropdowns
 		elementRegularWeight.empty();
@@ -406,57 +398,57 @@ jQuery( document ).ready(function($) {
 
 		// Get the Google Fonts control object
 		var bodyfontcontrol = _wpCustomizeSettings.controls[customizerControlName];
-
+		console.log(bodyfontcontrol)
 		// Find the index of the selected font
-		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function(obj, index) {
-			if(obj.family === selectedFont) {
+		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function (obj, index) {
+			if (obj.family === selectedFont) {
 				return index;
 			}
 		});
 		var index = indexes[0];
 
 		// For the selected Google font show the available weight/style variants
-		$.each(bodyfontcontrol.rollie_fontslist[index].variants, function(val, text) {
+		$.each(bodyfontcontrol.rollie_fontslist[index].variants, function (val, text) {
 			elementRegularWeight.append(
 				$('<option></option>').val(text).html(text)
-				);
+			);
 			if (text.indexOf("italic") >= 0) {
 				elementItalicWeight.append(
 					$('<option></option>').val(text).html(text)
-					);
+				);
 				elementItalicWeightCount++;
 			} else {
 				elementBoldWeight.append(
 					$('<option></option>').val(text).html(text)
-					);
+				);
 				elementBoldWeightCount++;
 			}
 		});
 
-		if(elementItalicWeightCount == 0) {
+		if (elementItalicWeightCount == 0) {
 			elementItalicWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-				);
+			);
 			elementItalicWeight.prop('disabled', 'disabled');
 		}
-		if(elementBoldWeightCount == 0) {
+		if (elementBoldWeightCount == 0) {
 			elementBoldWeight.append(
 				$('<option></option>').val('').html('Not Available for this font')
-				);
+			);
 			elementBoldWeight.prop('disabled', 'disabled');
 		}
-		
-		$.each(bodyfontcontrol.rollie_fontslist[index].subsets, function(val, text) {
+
+		$.each(bodyfontcontrol.rollie_fontslist[index].subsets, function (val, text) {
 			elementSubsetsWeight.append(
 				$('<option></option>').val(text).html(text)
-				);
+			);
 		});
-		
+
 		// Update the font category based on the selected font
 
 		skyrocketGetAllSelects($(this).parent().parent());
 		$(this).parent().parent().find('.google-fonts-category').val(bodyfontcontrol.rollie_fontslist[index].category);
-		var rollie_regularweight= $(ul_class).find(".rollie_regularweight").attr("rollie-reset-value");
+		var rollie_regularweight = $(ul_class).find(".rollie_regularweight").attr("rollie-reset-value");
 		var rollie_italicweight = $(ul_class).find(".rollie_italicweight").attr("rollie-reset-value");
 		var rollie_boldweight = $(ul_class).find(".rollie_boldweight").attr("rollie-reset-value");
 		var rollie_subsets = $(ul_class).find(".rollie_subsets").attr("rollie-reset-value");
@@ -467,29 +459,29 @@ jQuery( document ).ready(function($) {
 		$(ul_class).find(".rollie_boldweight").val(rollie_boldweight);
 		$(ul_class).find(".rollie_subsets").val(rollie_subsets);
 		$(ul_class).find(".rollie_font_category").val(rollie_category);
-		$(ul_class).find(".rollie_regularweight option[value="+rollie_regularweight+"]").attr('selected', 'selected');
-		$(ul_class).find(".rollie_italicweight option[value="+rollie_italicweight+"]").attr('selected', 'selected');
-		$(ul_class).find(".rollie_boldweight option[value="+rollie_boldweight+"]").attr('selected', 'selected');
-		$(ul_class).find(".rollie_subsets option[value="+rollie_subsets+"]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_regularweight option[value=" + rollie_regularweight + "]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_italicweight option[value=" + rollie_italicweight + "]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_boldweight option[value=" + rollie_boldweight + "]").attr('selected', 'selected');
+		$(ul_class).find(".rollie_subsets option[value=" + rollie_subsets + "]").attr('selected', 'selected');
 	});
-	 $('.google_fonts_select_control select').on('change', function() {
-	 	skyrocketGetAllSelects($(this).parent().parent());
-	 });
-	 $('.rollie_font_reset').on('click', function() {
-	 	skyrocketGetAllSelectsreset($(this).parent().parent().parent());		
-	 });
+	$('.google_fonts_select_control select').on('change', function () {
+		skyrocketGetAllSelects($(this).parent().parent());
+	});
+	$('.rollie_font_reset').on('click', function () {
+		skyrocketGetAllSelectsreset($(this).parent().parent().parent());
+	});
 
 
 
-	 function skyrocketGetAllSelects($element) {
-	 	var selectedFont = {
-	 		font: $element.find('.google-fonts-list').val(),
-	 		regularweight: $element.find('.google-fonts-regularweight-style').val(),
-	 		italicweight: $element.find('.google-fonts-italicweight-style').val(),
-	 		boldweight: $element.find('.google-fonts-boldweight-style').val(),
-	 		subsets: $element.find('.google-fonts-subsets-style').val(),
-	 		category: $element.find('.google-fonts-category').val()
-	 	};
+	function skyrocketGetAllSelects($element) {
+		var selectedFont = {
+			font: $element.find('.google-fonts-list').val(),
+			regularweight: $element.find('.google-fonts-regularweight-style').val(),
+			italicweight: $element.find('.google-fonts-italicweight-style').val(),
+			boldweight: $element.find('.google-fonts-boldweight-style').val(),
+			subsets: $element.find('.google-fonts-subsets-style').val(),
+			category: $element.find('.google-fonts-category').val()
+		};
 
 
 		// Important! Make sure to trigger change event so Customizer knows it has to save the field
@@ -500,16 +492,16 @@ jQuery( document ).ready(function($) {
 		var selectedFont = {
 			font: $element.find(".rollie_fonts_list").attr("rollie-reset-value"),
 			regularweight: $element.find(".rollie_regularweight").attr("rollie-reset-value"),
-			italicweight:  $element.find(".rollie_italicweight").attr("rollie-reset-value"),
+			italicweight: $element.find(".rollie_italicweight").attr("rollie-reset-value"),
 			boldweight: $element.find(".rollie_boldweight").attr("rollie-reset-value"),
-			subsets:  $element.find(".rollie_subsets").attr("rollie-reset-value"),
+			subsets: $element.find(".rollie_subsets").attr("rollie-reset-value"),
 			category: $element.find('.google-fonts-category').val(),
 		};
 
 		// Important! Make sure to trigger change event so Customizer knows it has to save the field
 		$element.find('.customize-control-google-font-selection').val(JSON.stringify(selectedFont)).trigger('change');
 	}
-	
+
 	/**
 	 * Slider Custom Control
 	 *
@@ -519,7 +511,7 @@ jQuery( document ).ready(function($) {
 	 */
 
 	// Set our slider defaults and initialise the slider
-	$('.slider-custom-control').each(function(){
+	$('.slider-custom-control').each(function () {
 		var sliderValue = $(this).find('.customize-control-slider-value').val();
 		var newSlider = $(this).find('.slider');
 		var sliderMinValue = parseFloat(newSlider.attr('slider-min-value'));
@@ -531,7 +523,7 @@ jQuery( document ).ready(function($) {
 			min: sliderMinValue,
 			max: sliderMaxValue,
 			step: sliderStepValue,
-			change: function(e,ui){
+			change: function (e, ui) {
 				// Important! When slider stops moving make sure to trigger change event so Customizer knows it has to save the field
 				$(this).parent().find('.customize-control-slider-value').trigger('change');
 			}
@@ -539,12 +531,12 @@ jQuery( document ).ready(function($) {
 	});
 
 	// Change the value of the input field as the slider is moved
-	$('.slider').on('slide', function(event, ui) {
+	$('.slider').on('slide', function (event, ui) {
 		$(this).parent().find('.customize-control-slider-value').val(ui.value);
 	});
 
 	// Reset slider and input field back to the default value
-	$('.slider-reset').on('click', function() {
+	$('.slider-reset').on('click', function () {
 		var resetValue = $(this).attr('rollie-reset-value');
 		$(this).parent().find('.customize-control-slider-value').val(resetValue);
 		$(this).parent().find('.slider').slider('value', resetValue);
@@ -552,46 +544,46 @@ jQuery( document ).ready(function($) {
 	});
 
 	// Update slider if the input field loses focus as it's most likely changed
-	$('.customize-control-slider-value').blur(function() {
+	$('.customize-control-slider-value').blur(function () {
 		var resetValue = $(this).val();
 		var slider = $(this).parent().find('.slider');
 		var sliderMinValue = parseInt(slider.attr('slider-min-value'));
 		var sliderMaxValue = parseInt(slider.attr('slider-max-value'));
 
 		// Make sure our manual input value doesn't exceed the minimum & maxmium values
-		if(resetValue < sliderMinValue) {
+		if (resetValue < sliderMinValue) {
 			resetValue = sliderMinValue;
 			$(this).val(resetValue);
 		}
-		if(resetValue > sliderMaxValue) {
+		if (resetValue > sliderMaxValue) {
 			resetValue = sliderMaxValue;
 			$(this).val(resetValue);
 		}
 		$(this).parent().find('.slider').slider('value', resetValue);
 	});
-	
+
 	// Loop over each control and transform it into our color picker.
-	$( '.alpha-color-control' ).each( function() {
+	$('.alpha-color-control').each(function () {
 
 		// Scope the vars.
 		var $control, startingColor, paletteInput, showOpacity, defaultColor, palette,
-		colorPickerOptions, $container, $alphaSlider, alphaVal, sliderOptions;
+			colorPickerOptions, $container, $alphaSlider, alphaVal, sliderOptions;
 
 		// Store the control instance.
-		$control = $( this );
+		$control = $(this);
 
 		// Get a clean starting value for the option.
-		startingColor = $control.val().replace( /\s+/g, '' );
+		startingColor = $control.val().replace(/\s+/g, '');
 
 		// Get some data off the control.
-		paletteInput = $control.attr( 'data-palette' );
-		showOpacity  = $control.attr( 'data-show-opacity' );
-		defaultColor = $control.attr( 'data-default-color' );
+		paletteInput = $control.attr('data-palette');
+		showOpacity = $control.attr('data-show-opacity');
+		defaultColor = $control.attr('data-default-color');
 
 		// Process the palette.
-		if ( paletteInput.indexOf( '|' ) !== -1 ) {
-			palette = paletteInput.split( '|' );
-		} else if ( 'false' == paletteInput ) {
+		if (paletteInput.indexOf('|') !== -1) {
+			palette = paletteInput.split('|');
+		} else if ('false' == paletteInput) {
 			palette = false;
 		} else {
 			palette = true;
@@ -599,57 +591,57 @@ jQuery( document ).ready(function($) {
 
 		// Set up the options that we'll pass to wpColorPicker().
 		colorPickerOptions = {
-			change: function( event, ui ) {
+			change: function (event, ui) {
 				var key, value, alpha, $transparency;
 
-				key = $control.attr( 'data-customize-setting-link' );
-				value = $control.wpColorPicker( 'color' );
+				key = $control.attr('data-customize-setting-link');
+				value = $control.wpColorPicker('color');
 
 				// Set the opacity value on the slider handle when the default color button is clicked.
-				if ( defaultColor == value ) {
-					alpha = acp_get_alpha_value_from_color( value );
-					$alphaSlider.find( '.ui-slider-handle' ).text( alpha );
+				if (defaultColor == value) {
+					alpha = acp_get_alpha_value_from_color(value);
+					$alphaSlider.find('.ui-slider-handle').text(alpha);
 				}
 
 				// Send ajax request to wp.customize to trigger the Save action.
-				wp.customize( key, function( obj ) {
-					obj.set( value );
+				wp.customize(key, function (obj) {
+					obj.set(value);
 				});
 
-				$transparency = $container.find( '.transparency' );
+				$transparency = $container.find('.transparency');
 
 				// Always show the background color of the opacity slider at 100% opacity.
-				$transparency.css( 'background-color', ui.color.toString( 'no-alpha' ) );
+				$transparency.css('background-color', ui.color.toString('no-alpha'));
 			},
 			palettes: palette // Use the passed in palette.
 		};
 
 		// Create the colorpicker.
-		$control.wpColorPicker( colorPickerOptions );
+		$control.wpColorPicker(colorPickerOptions);
 
-		$container = $control.parents( '.wp-picker-container:first' );
+		$container = $control.parents('.wp-picker-container:first');
 
 		// Insert our opacity slider.
-		$( '<div class="alpha-color-picker-container">' +
+		$('<div class="alpha-color-picker-container">' +
 			'<div class="min-click-zone click-zone"></div>' +
 			'<div class="max-click-zone click-zone"></div>' +
 			'<div class="alpha-slider"></div>' +
 			'<div class="transparency"></div>' +
-			'</div>' ).appendTo( $container.find( '.wp-picker-holder' ) );
+			'</div>').appendTo($container.find('.wp-picker-holder'));
 
-		$alphaSlider = $container.find( '.alpha-slider' );
+		$alphaSlider = $container.find('.alpha-slider');
 
 		// If starting value is in format RGBa, grab the alpha channel.
-		alphaVal = acp_get_alpha_value_from_color( startingColor );
+		alphaVal = acp_get_alpha_value_from_color(startingColor);
 
 		// Set up jQuery UI slider() options.
 		sliderOptions = {
-			create: function( event, ui ) {
-				var value = $( this ).slider( 'value' );
+			create: function (event, ui) {
+				var value = $(this).slider('value');
 
 				// Set up initial values.
-				$( this ).find( '.ui-slider-handle' ).text( value );
-				$( this ).siblings( '.transparency ').css( 'background-color', startingColor );
+				$(this).find('.ui-slider-handle').text(value);
+				$(this).siblings('.transparency ').css('background-color', startingColor);
 			},
 			value: alphaVal,
 			range: 'max',
@@ -660,80 +652,80 @@ jQuery( document ).ready(function($) {
 		};
 
 		// Initialize jQuery UI slider with our options.
-		$alphaSlider.slider( sliderOptions );
+		$alphaSlider.slider(sliderOptions);
 
 		// Maybe show the opacity on the handle.
-		if ( 'true' == showOpacity ) {
-			$alphaSlider.find( '.ui-slider-handle' ).addClass( 'show-opacity' );
+		if ('true' == showOpacity) {
+			$alphaSlider.find('.ui-slider-handle').addClass('show-opacity');
 		}
 
 		// Bind event handlers for the click zones.
-		$container.find( '.min-click-zone' ).on( 'click', function() {
-			acp_update_alpha_value_on_color_control( 0, $control, $alphaSlider, true );
+		$container.find('.min-click-zone').on('click', function () {
+			acp_update_alpha_value_on_color_control(0, $control, $alphaSlider, true);
 		});
-		$container.find( '.max-click-zone' ).on( 'click', function() {
-			acp_update_alpha_value_on_color_control( 100, $control, $alphaSlider, true );
+		$container.find('.max-click-zone').on('click', function () {
+			acp_update_alpha_value_on_color_control(100, $control, $alphaSlider, true);
 		});
 
 		// Bind event handler for clicking on a palette color.
-		$container.find( '.iris-palette' ).on( 'click', function() {
+		$container.find('.iris-palette').on('click', function () {
 			var color, alpha;
 
-			color = $( this ).css( 'background-color' );
-			alpha = acp_get_alpha_value_from_color( color );
+			color = $(this).css('background-color');
+			alpha = acp_get_alpha_value_from_color(color);
 
-			acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider );
+			acp_update_alpha_value_on_alpha_slider(alpha, $alphaSlider);
 
 			// Sometimes Iris doesn't set a perfect background-color on the palette,
 			// for example rgba(20, 80, 100, 0.3) becomes rgba(20, 80, 100, 0.298039).
 			// To compensante for this we round the opacity value on RGBa colors here
 			// and save it a second time to the color picker object.
-			if ( alpha != 100 ) {
-				color = color.replace( /[^,]+(?=\))/, ( alpha / 100 ).toFixed( 2 ) );
+			if (alpha != 100) {
+				color = color.replace(/[^,]+(?=\))/, (alpha / 100).toFixed(2));
 			}
 
-			$control.wpColorPicker( 'color', color );
+			$control.wpColorPicker('color', color);
 		});
 
 		// Bind event handler for clicking on the 'Clear' button.
-		$container.find( '.button.wp-picker-clear' ).on( 'click', function() {
-			var key = $control.attr( 'data-customize-setting-link' );
+		$container.find('.button.wp-picker-clear').on('click', function () {
+			var key = $control.attr('data-customize-setting-link');
 
 			// The #fff color is delibrate here. This sets the color picker to white instead of the
 			// defult black, which puts the color picker in a better place to visually represent empty.
-			$control.wpColorPicker( 'color', '#ffffff' );
+			$control.wpColorPicker('color', '#ffffff');
 
 			// Set the actual option value to empty string.
-			wp.customize( key, function( obj ) {
-				obj.set( '' );
+			wp.customize(key, function (obj) {
+				obj.set('');
 			});
 
-			acp_update_alpha_value_on_alpha_slider( 100, $alphaSlider );
+			acp_update_alpha_value_on_alpha_slider(100, $alphaSlider);
 		});
 
 		// Bind event handler for clicking on the 'Default' button.
-		$container.find( '.button.wp-picker-default' ).on( 'click', function() {
-			var alpha = acp_get_alpha_value_from_color( defaultColor );
+		$container.find('.button.wp-picker-default').on('click', function () {
+			var alpha = acp_get_alpha_value_from_color(defaultColor);
 
-			acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider );
+			acp_update_alpha_value_on_alpha_slider(alpha, $alphaSlider);
 		});
 
 		// Bind event handler for typing or pasting into the input.
-		$control.on( 'input', function() {
-			var value = $( this ).val();
-			var alpha = acp_get_alpha_value_from_color( value );
+		$control.on('input', function () {
+			var value = $(this).val();
+			var alpha = acp_get_alpha_value_from_color(value);
 
-			acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider );
+			acp_update_alpha_value_on_alpha_slider(alpha, $alphaSlider);
 		});
 
 		// Update all the things when the slider is interacted with.
-		$alphaSlider.slider().on( 'slide', function( event, ui ) {
-			var alpha = parseFloat( ui.value ) / 100.0;
+		$alphaSlider.slider().on('slide', function (event, ui) {
+			var alpha = parseFloat(ui.value) / 100.0;
 
-			acp_update_alpha_value_on_color_control( alpha, $control, $alphaSlider, false );
+			acp_update_alpha_value_on_color_control(alpha, $control, $alphaSlider, false);
 
 			// Change value shown on slider handle.
-			$( this ).find( '.ui-slider-handle' ).text( ui.value );
+			$(this).find('.ui-slider-handle').text(ui.value);
 		});
 
 	});
@@ -752,24 +744,24 @@ jQuery( document ).ready(function($) {
  * Override the stock color.js toString() method to add support for
  * outputting RGBa or Hex.
  */
- Color.prototype.toString = function( flag ) {
+Color.prototype.toString = function (flag) {
 
 	// If our no-alpha flag has been passed in, output RGBa value with 100% opacity.
 	// This is used to set the background color on the opacity slider during color changes.
-	if ( 'no-alpha' == flag ) {
-		return this.toCSS( 'rgba', '1' ).replace( /\s+/g, '' );
+	if ('no-alpha' == flag) {
+		return this.toCSS('rgba', '1').replace(/\s+/g, '');
 	}
 
 	// If we have a proper opacity value, output RGBa.
-	if ( 1 > this._alpha ) {
-		return this.toCSS( 'rgba', this._alpha ).replace( /\s+/g, '' );
+	if (1 > this._alpha) {
+		return this.toCSS('rgba', this._alpha).replace(/\s+/g, '');
 	}
 
 	// Proceed with stock color.js hex output.
-	var hex = parseInt( this._color, 10 ).toString( 16 );
-	if ( this.error ) { return ''; }
-	if ( hex.length < 6 ) {
-		for ( var i = 6 - hex.length - 1; i >= 0; i-- ) {
+	var hex = parseInt(this._color, 10).toString(16);
+	if (this.error) { return ''; }
+	if (hex.length < 6) {
+		for (var i = 6 - hex.length - 1; i >= 0; i--) {
 			hex = '0' + hex;
 		}
 	}
@@ -780,15 +772,15 @@ jQuery( document ).ready(function($) {
 /**
  * Given an RGBa, RGB, or hex color value, return the alpha channel value.
  */
- function acp_get_alpha_value_from_color( value ) {
- 	var alphaVal;
+function acp_get_alpha_value_from_color(value) {
+	var alphaVal;
 
 	// Remove all spaces from the passed in value to help our RGBa regex.
-	value = value.replace( / /g, '' );
+	value = value.replace(/ /g, '');
 
-	if ( value.match( /rgba\(\d+\,\d+\,\d+\,([^\)]+)\)/ ) ) {
-		alphaVal = parseFloat( value.match( /rgba\(\d+\,\d+\,\d+\,([^\)]+)\)/ )[1] ).toFixed(2) * 100;
-		alphaVal = parseInt( alphaVal );
+	if (value.match(/rgba\(\d+\,\d+\,\d+\,([^\)]+)\)/)) {
+		alphaVal = parseFloat(value.match(/rgba\(\d+\,\d+\,\d+\,([^\)]+)\)/)[1]).toFixed(2) * 100;
+		alphaVal = parseInt(alphaVal);
 	} else {
 		alphaVal = 100;
 	}
@@ -799,11 +791,11 @@ jQuery( document ).ready(function($) {
 /**
  * Force update the alpha value of the color picker object and maybe the alpha slider.
  */
- function acp_update_alpha_value_on_color_control( alpha, $control, $alphaSlider, update_slider ) {
- 	var iris, colorPicker, color;
+function acp_update_alpha_value_on_color_control(alpha, $control, $alphaSlider, update_slider) {
+	var iris, colorPicker, color;
 
- 	iris = $control.data( 'a8cIris' );
- 	colorPicker = $control.data( 'wpWpColorPicker' );
+	iris = $control.data('a8cIris');
+	colorPicker = $control.data('wpWpColorPicker');
 
 	// Set the alpha value on the Iris object.
 	iris._color._alpha = alpha;
@@ -812,7 +804,7 @@ jQuery( document ).ready(function($) {
 	color = iris._color.toString();
 
 	// Set the value of the input.
-	$control.val( color );
+	$control.val(color);
 
 	// Update the background color of the color picker.
 	colorPicker.toggler.css({
@@ -820,19 +812,19 @@ jQuery( document ).ready(function($) {
 	});
 
 	// Maybe update the alpha slider itself.
-	if ( update_slider ) {
-		acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider );
+	if (update_slider) {
+		acp_update_alpha_value_on_alpha_slider(alpha, $alphaSlider);
 	}
 
 	// Update the color value of the color picker object.
-	$control.wpColorPicker( 'color', color );
+	$control.wpColorPicker('color', color);
 }
 
 /**
  * Update the slider handle position and label.
  */
- function acp_update_alpha_value_on_alpha_slider( alpha, $alphaSlider ) {
- 	$alphaSlider.slider( 'value', alpha );
- 	$alphaSlider.find( '.ui-slider-handle' ).text( alpha.toString() );
- }
+function acp_update_alpha_value_on_alpha_slider(alpha, $alphaSlider) {
+	$alphaSlider.slider('value', alpha);
+	$alphaSlider.find('.ui-slider-handle').text(alpha.toString());
+}
 

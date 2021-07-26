@@ -70,7 +70,8 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1564258747
+    "modified": 1625661219,
+    "local_file": "G:XAMPP2021htdocs\/wp-content\/themes\/rollie_2\/acf-json\/group_5d3cadc56d233.json"
 }

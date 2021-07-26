@@ -1,14 +1,8 @@
-
-1. copyright ownership: Karol Saj aka Squanchy,Wilczurs
-
+1.Copyright ownership: Karol Saj
 2.License: GPL 
-
-
 3.Photos,logos,modified logos,modified photos  are property of their respective owners and are mentioned below:
-
 CC BY 3.0 and public domain Attributions
 Photos included in this project  belong to:
-
 Pok Rie from Pexels
 The Boy that time forgot
 Doris Antony, Berlin
@@ -26,4 +20,3 @@ Some pages from wikipedia.org
 6.  Used and edited fragments of code from this authors , sites and sources:
 https://divpusher.com/blog/wordpress-customizer-sanitization-examples#number
 https://github.com/maddisondesigns/customizer-custom-controls 
-https://github.com/Alecaddd/Sunset-theme

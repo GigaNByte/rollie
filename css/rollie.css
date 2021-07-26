@@ -632,21 +632,14 @@ iframe
 	justify-content: center;
 }
 
-
-
-
-
-
 /*slider*/
-
-
 .rollie_cat_swap_menu  .swiper-container {
 	max-width: 850px;
 	height: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
-.rollie_cat_swap_menu  .swiper-slide , {
+.rollie_cat_swap_menu  .swiper-slide {
 	font-size:1rem;
 	transition: font-size 0.3s;
 
@@ -701,7 +694,7 @@ iframe
 	font-family: 'Rokkitt';
 	text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
 	transition-duration:0.25s;
-	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
 	text-align: center;
 	vertical-align: middle;
@@ -762,10 +755,13 @@ article[id^="post"]
 	max-width: 100%;
 	max-height: 40vh;
 }
+
 .rollie_post_thumbnail_height_m
 {
-	/*	height:40vh;*/
+	/*height:40vh;*/
+	width: 100%;
 }
+
 [class*="col-"]
 {
 	padding:0.5rem;
@@ -804,7 +800,7 @@ article[id^="post"]
 	position: absolute;
 }
 
-/*RAAAW*/
+/*RAW*/
 .rollie_first_post_title_c_raw
 {
 	min-height:100px;
@@ -812,10 +808,6 @@ article[id^="post"]
 	letter-spacing: .05em;
 
 }
-
-
-
-
 /* post format */
 .rollie_post_format_status .rollie_post_thumbnail  {
 margin-top:1rem;
@@ -887,8 +879,6 @@ margin-top:1rem;
 	clear: left;
 }
 
-
-
 .rollie_flex_text_center
 {
 	display: flex;
@@ -959,8 +949,6 @@ margin-top:1rem;
 	margin:0;
 
 }
-
-
 
 .rollie_card_header
 {
@@ -1281,12 +1269,12 @@ justify-content: center;
 [type="radio"]:disabled:checked + label:before,
 [type="radio"]:disabled:not(:checked) + label:before,
 [type="checkbox"]:disabled:checked + span:before,
-[type="checkbox"]:disabled:not(:checked) + span:before,
+[type="checkbox"]:disabled:not(:checked) + span:before
 {
 	border-color: #ccc;
 	background-color: #eee;
 }
-[type="radio"]:disabled:checked + label:after.,
+[type="radio"]:disabled:checked + label:after,
 [type="checkbox"]:disabled:checked + span:after
 {
 	background: #aaa;

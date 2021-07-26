@@ -4,14 +4,15 @@
 if ( has_nav_menu( 'rollie_cat_swap_menu' ) ) {
 
 
-	/*$rollie_m_o = get_menu_object_by_registered_slug( 'rollie_cat_swap_menu' );
+	/*
+	$rollie_m_o = rollie_get_menu_object_by_registered_slug( 'rollie_cat_swap_menu' );
 	if ( function_exists( 'get_field' ) ) {
 		$rollie_swap_cat_t = get_field( 'rollie_swap_cat_on_page_type', $rollie_m_o );
 	}
-*/
+	*/
 
-//	if ( $rollie_swap_cat_t && in_array( 'single_post', $rollie_swap_cat_t ) ) {
-		?>
+	// if ( $rollie_swap_cat_t && in_array( 'single_post', $rollie_swap_cat_t ) ) {
+	?>
  <div class=" rollie_cat_swap_menu">
  
 
@@ -44,5 +45,5 @@ if ( has_nav_menu( 'rollie_cat_swap_menu' ) ) {
 							
 								 </div>
 								<?php
-	//}
+								// }
 }

@@ -1,10 +1,11 @@
 <?php
 class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 
-	public $counter         = 0;/*Closes item with subitems .*/
-	public $isfirstrow      = true;
-	public $dropdownsibling = false;
-	function start_lvl( &$output, $depth = 0, $args = array() ) {	
+	private $counter         = 0;/*Closes item with subitems .*/
+	private $isfirstrow      = true;
+	private $dropdownsibling = false;
+
+	function start_lvl( &$output, $depth = 0, $args = array() ) {
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 			$t = '';
 			$n = '';
@@ -39,26 +40,24 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 	}
 
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-		
-		$menu = wp_get_nav_menu_object( $args->menu );
-		$rollie_footer_logo = esc_url(get_theme_mod( 'rollie_footer_menu_logo' ));
-		$rollie_caption_1 = get_theme_mod( 'rollie_footer_logo_desc_text' );
 
-
+		$menu               = wp_get_nav_menu_object( $args->menu );
+		$rollie_footer_logo = esc_url( get_theme_mod( 'rollie_footer_menu_logo' ) );
+		$rollie_caption_1   = get_theme_mod( 'rollie_footer_logo_desc_text' );
 
 		if ( $this->isfirstrow && $rollie_footer_logo ) {
 				$rollie_retina_footer = '';
-		
-			if (function_exists('wr2x_get_retina_from_url') && wr2x_get_retina_from_url($rollie_footer_logo)){
-			$rollie_retina_footer = ', '.wr2x_get_retina_from_url($rollie_footer_logo).' 2x';
+
+			if ( function_exists( 'wr2x_get_retina_from_url' ) && wr2x_get_retina_from_url( $rollie_footer_logo ) ) {
+				$rollie_retina_footer = ', ' . wr2x_get_retina_from_url( $rollie_footer_logo ) . ' 2x';
 			}
-		if (dynamic_sidebar('rollie_widgetarea_footer_side')){
-			$output     .= '<div class=" col-lg-4 col-md-6 p-0  rollie_footer_col  align-middle    rollie_logo_footer_menu">';
-			ob_start();
-			dynamic_sidebar('rollie_widgetarea_footer_side');
-			$output .= ob_get_contents();
-			ob_end_clean();
-				$output     .='</div>';
+			if ( dynamic_sidebar( 'rollie_widgetarea_footer_side' ) ) {
+				$output .= '<div class=" col-lg-4 col-md-6 p-0  rollie_footer_col  align-middle    rollie_logo_footer_menu">';
+				ob_start();
+				dynamic_sidebar( 'rollie_widgetarea_footer_side' );
+				$output .= ob_get_contents();
+				ob_end_clean();
+				$output .= '</div>';
 			}
 		}
 
@@ -69,7 +68,7 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
-		if ( $args->walker->has_children && $depth === 0 ) {
+		if ( $args->walker->has_children && 0 == $depth ) {
 
 			if ( $this->dropdownsibling ) {
 				 $output .= '</div>';
@@ -90,24 +89,19 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
 			$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
 
-			$output     .= $indent . '<div' . $id . $value . $class_names . $li_attributes . '>';
+			$output .= $indent . '<div' . $id . $value . $class_names . $li_attributes . '>';
 
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
-			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';		
-			$attributes .= ' class="nav-link rollie_second_text_color rollie_f_footer rollie_footer_nav_link dropdown-toggle '.rollie_embl_footer().'"';
+			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
+			$attributes .= ' class="nav-link rollie_second_text_color rollie_f_footer rollie_footer_nav_link dropdown-toggle ' . rollie_embl_footer() . '"';
 			$attributes .= ' data-target="#" data-toggle="dropdown"';
 
-	
-			$item_output = $args->before;
+			$item_output  = $args->before;
 			$item_output .= '<a ' . $attributes . ' >';
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
-
-
-		
-			
 
 			$item_output .= $args->after;
 
@@ -124,7 +118,7 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 
 			$attributes .= 'class="dropdown-item   rollie_footer_dropdown_item"';
 
-			$item_output = $args->before;
+			$item_output  = $args->before;
 			$item_output .= '<a ' . $attributes . '>';
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
@@ -133,11 +127,11 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}
 
-		if ( ( ! $args->walker->has_children ) && ( $depth === 0 ) ) {
+		if ( ( ! $args->walker->has_children ) && ( 0 == $depth ) ) {
 
 			$this->dropdownsibling = false;
 			if ( $this->counter > 0 ) {
-				$output .= '</div>';
+				$output       .= '</div>';
 				$this->counter = 0;
 			}
 
@@ -159,9 +153,9 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
-			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_f_footer rollie_footer_nav_link'.rollie_embl_footer().'"';
+			$attributes .= ' data-target="#" class="nav-link rollie_second_text_color rollie_f_footer rollie_footer_nav_link' . rollie_embl_footer() . '"';
 
-			$item_output = $args->before;
+			$item_output  = $args->before;
 			$item_output .= '<a ' . $attributes . '>';
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
@@ -178,8 +172,8 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
 
-			$attributes .= 'class="dropdown-item   rollie_footer_dropdown_item"';
-			$item_output = $args->before;
+			$attributes  .= 'class="dropdown-item   rollie_footer_dropdown_item"';
+			$item_output  = $args->before;
 			$item_output .= '<a ' . $attributes . '>';
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
@@ -193,8 +187,3 @@ class Rollie_Walker_Footer extends Rollie_Walker_Nav_Top_Toggle {
 	}
 
 }
-
-
-
-
-

@@ -15,40 +15,31 @@ class Rollie_Comment_Walker extends Walker_Comment {
 	 */
 
 	protected function html5_comment( $comment, $depth, $args ) {
-		$tag = ( $args['style'] === 'div' ) ? 'div' : 'li';
 		?>		
-		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'has-children media' : ' media' ); ?>>
-			
-
+		<div id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'has-children media' : ' media' ); ?>>
 			<div class="media-body card mt-3 rollie_comment rollie_darker_main_color " id="div-comment-<?php comment_ID(); ?>">
 				<div class="card-header rollie_card_header hoverable ">
 					<div class="flex-center rollie_f_main">
-						<?php if ( $args['avatar_size'] != 0 ) : ?>
-						<a href="<?php echo get_comment_author_url(); ?>" class="media-object float-left">
-							<?php echo get_avatar( $comment, $args['avatar_size'], 'mm', '', array( 'class' => 'comment_avatar mr-2 ' ) ); ?>
+						<?php if ( 0 != $args['avatar_size'] ) : ?>
+						<a href="<?php echo esc_url( get_comment_author_url() ); ?>" class="media-object float-left">
+							<?php echo get_avatar( $comment, $args['avatar_size'], 'mm', '', array( 'class' => 'comment_avatar mr-2' ) ); ?>
 						</a>
 						<?php endif; ?>
 						<h5 class="media-heading "><?php echo get_comment_author_link(); ?></h5>
 					</div>
-						<div class="rollie_comment_content ">
-								<?php comment_text(); ?>	
+					<div class="rollie_comment_content ">
+						<?php comment_text(); ?>	
 					</div>
-			
-					<div class="rollie_comment_metadata flex-center ">
-						
-						<ul class="list-inline">
+					<div class="rollie_comment_metadata flex-center ">				
 							<a class="hidden-xs-down mr-1" href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 								<div class='d-inline-block  small font-weight-light  rollie_subtitle_text_color'>
 									<time datetime="<?php comment_time( 'c' ); ?>">
-									<?php printf( _x( '%s ago', '%s = human-readable time difference', 'your-text-domain' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ); ?>
+									<?php echo esc_html( printf( _x( '%s ago', '%s = human-readable time difference', 'rollie' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ) ); ?>
 									</time>
 								</div>	
 							</a>
-							
-							<?php edit_comment_link( '<i class=" fas fa-edit rollie_icon_first rollie_icon_comment"></i> ' .__( 'Edit' ), ' <li class=" edit-link list-inline-item chip  ">', '</li>' ); ?>
-							
 							<?php
-
+							edit_comment_link( '<i class=" fas fa-edit rollie_icon_first rollie_icon_comment"></i> ' . __( 'Edit' ), '<span class="edit-link list-inline-item chip">', '</span>' );
 								comment_reply_link(
 									array_merge(
 										$args,
@@ -57,30 +48,22 @@ class Rollie_Comment_Walker extends Walker_Comment {
 											'add_below'  => 'div-comment',
 											'depth'      => $depth,
 											'max_depth'  => $args['max_depth'],
-											'before'     => '   <li class="  reply-link list-inline-item  chip">',
-											'after'      => '</li>',
+											'before'     => '<span class="reply-link list-inline-item chip">',
+											'after'      => '</span>',
 										)
 									)
 								);
 							do_action( 'cld_like_dislike_output', '', $comment );
 							?>
-							
-
-
-						</ul>
-					</div>
-					
+					</div>	
 				</div>
-				
-				
-				
-				
-				<div class="card-block rollie_card_block warning-color">
-						<?php if ( '0' == $comment->comment_approved ) : ?>
-					<p class=" comment-awaiting-moderation label label-info text-muted small"><?php _e('Your comment is awaiting moderation')?></p>
-					<?php endif; ?>				
-				</div>
-
+			</div>	
+		</div>
+		<div class="card-block rollie_card_block warning-color">
+				<?php if ( '0' == $comment->comment_approved ) : ?>
+			<p class=" comment-awaiting-moderation label label-info text-muted small"><?php esc_html_e( 'Your comment is awaiting moderation' ); ?></p>
+			<?php endif; ?>				
+		</div>
 		<?php
 	}
 }

@@ -1,10 +1,9 @@
 <?php
 class Rollie_Walker_Cat_Swap extends Walker_Nav_Menu {
 	private $rollie_current_cat_incr = 0;
-
 	private $rollie_current_cat;
 	private $rollie_has_cat_var = false;
-		// public $categories;
+
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 			$t = '';
@@ -81,7 +80,7 @@ class Rollie_Walker_Cat_Swap extends Walker_Nav_Menu {
 		}
 		$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
-	if ( ! ( $this->rollie_has_cat_var ) ) {
+		if ( ! ( $this->rollie_has_cat_var ) ) {
 					$categories = get_the_category();
 
 			if ( ! empty( $categories[0]->cat_name ) ) {
@@ -93,14 +92,14 @@ class Rollie_Walker_Cat_Swap extends Walker_Nav_Menu {
 
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
-		if ( !empty($this->rollie_current_cat) ) {
+		if ( ! empty( $this->rollie_current_cat ) ) {
 
 			if ( $item->title == $this->rollie_current_cat ) {
 
 					$classes[] = 'rollie_current_cat_' . $this->rollie_current_cat_incr;
 					$classes[] = 'rollie_current_cat';
 					$classes[] = $this->rollie_current_cat;
-	
+
 			}
 		}
 			$classes[] = 'menu-item-' . $item->ID;
@@ -196,13 +195,11 @@ class Rollie_Walker_Cat_Swap extends Walker_Nav_Menu {
 		 */
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
-		$item_output          = $args->before;
+		$item_output = $args->before;
 
-		
-						
-		$attributes .=' class=" '.rollie_embl_navbar().'" '; 
-		$item_output         .= '<a' . $attributes . '>';
-		$item_output         .= $args->link_before . $title . $args->link_after;		
+		$attributes  .= ' class=" ' . rollie_embl_navbar() . '" ';
+		$item_output .= '<a' . $attributes . '>';
+		$item_output .= $args->link_before . $title . $args->link_after;
 
 		$item_output .= '</a>';
 		$item_output .= $args->after;
