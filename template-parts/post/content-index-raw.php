@@ -1,4 +1,4 @@
-<article id="<?php echo 'post-' . get_the_ID(); ?>"  class=" p-0 rollie_posts_shadow rollie_post row">
+<article id="<?php echo 'post-' . get_the_ID(); ?>"  class=" p-0 rollie_posts_shadow rollie_post_wrapper row">
 	<div class=" rollie_meta_c_modern  col-12 ">		
 		<a href='<?php echo get_page_link(); ?>'>						
 			<h2 class=" rollie_title_text_color  rollie_first_post_title rollie_f_subtitles"><?php the_title(); ?> </h2>				
@@ -21,5 +21,3 @@
 		</div>		
 	</div>
 </article>
-
-

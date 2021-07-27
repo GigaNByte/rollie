@@ -230,11 +230,11 @@
 	function rollie_post_foreground( $rollie_current_style ) {
 			$html = '';
 		if ( get_post_format() == 'video' ) {
-			$html .= "<div class='rollie_embed  rollie_post_thumbnail  rollie_post_thumbnail_height_m  embed-responsive embed-responsive-16by9'>";
+			$html .= "<div class='rollie_embed rollie_post_thumbnail rollie_post_thumbnail_height_m  embed-responsive embed-responsive-16by9'>";
 			$html .= rollie_get_embedded_media( array( 'video', 'iframe' ) );
 			$html .= '</div>';
 		} elseif ( get_post_format() == 'audio' ) {
-			$html .= "<div class='rollie_embed  rollie_post_thumbnail  rollie_post_thumbnail_height_m '>";
+			$html .= "<div class='rollie_embed rollie_post_thumbnail rollie_post_thumbnail_height_m '>";
 			$html .= rollie_get_embedded_media( array( 'audio', 'iframe' ) );
 			$html .= '</div>';
 		} elseif ( get_post_format() == 'gallery' && get_post_gallery() ) {
@@ -268,7 +268,7 @@
 					$html .= '</div>';
 			} else {
 
-				$html .= "<div class='rollie_gallery_post_format '>";
+				$html .= "<div class='rollie_gallery_post_format'>";
 				$html .= "<div class='swiper-container rollie_gallery_1_swiper'>";
 				$html .= "<div class='swiper-wrapper'>";
 
@@ -294,7 +294,7 @@
 			$html = apply_filters( 'rollie_post_foreground_filter', $html );
 
 		if ( ! empty( $html ) ) {
-			$html = "<a href='" . get_page_link() . "'>" . $html . '</a>';
+			$html = '<a class="display-contents" href="' . get_page_link() . '">' . $html . '</a>';
 		}
 		if ( class_exists( 'A3_Lazy_Load' ) ) {
 			return apply_filters( 'a3_lazy_load_html', $html, null );

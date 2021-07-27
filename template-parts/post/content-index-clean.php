@@ -1,5 +1,5 @@
-<article class="rollie_posts_shadow rollie_post row <?php echo $rollie_post_format_class ?> " id="<?php echo 'post-' . get_the_ID(); ?>">
-	<div class=" <?php echo $rollie_article_wrapper; ?>" >		
+<article class="rollie_posts_shadow row <?php echo $rollie_post_format_class ?> " id="<?php echo 'post-' . get_the_ID(); ?>">
+	<div class="rollie_post_wrapper <?php echo $rollie_article_wrapper; ?>" >		
 		<?php echo rollie_post_foreground($rollie_current_style);?>
 		<div class=" <?php echo $rollie_post_wraper; ?> m-0" >		
 				<a class='<?php echo $rollie_link_disabled ?>' href='<?php echo get_page_link(); ?> '>
