@@ -1104,7 +1104,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_footer_collapse',
 			array(
-				'label'   => __( 'Collapsing Footer Style', 'rollie' ),
+				'label'   => __( 'Collapsing Footer Animation', 'rollie' ),
 				'section' => 'rollie_footer_section',
 			)
 		)

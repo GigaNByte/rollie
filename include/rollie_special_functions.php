@@ -125,7 +125,7 @@
 					'container_class' => 'collapse navbar-collapse ' . $rollie_side_active_c,
 					'menu_id'         => false,
 					'items_wrap'      => '<div id="%1$s" class="%2$s">%3$s</div>',
-					'menu_class'      => 'navbar-nav rollie_top_navbar_b_color rollie_wrap ' . $rollie_navbar_align,
+					'menu_class'      => 'navbar-nav rollie_wrap ' . $rollie_navbar_align,
 					'walker'          => new Rollie_Walker_Nav_Top_Toggle(),
 					'depth'           => '6',
 				)
@@ -423,7 +423,7 @@
 		return $output;
 	}
 
-	function rollie_excerpt($show_if_field_empty = true) {
+	function rollie_excerpt( $show_if_field_empty = true ) {
 		if ( class_exists( 'Woocommerce' ) && is_woocommerce() ) {
 			do_action( 'woocommerce_archive_description' );
 		} elseif ( is_category() && function_exists( 'get_field' ) ) {
@@ -433,7 +433,7 @@
 			echo esc_html( $rollie_author->description );
 		} elseif ( function_exists( 'get_field' ) ) {
 			echo esc_html( get_field( 'rollie_excerpt' ) );
-		} elseif($show_if_field_empty) {
+		} elseif ( $show_if_field_empty ) {
 			the_excerpt();
 		}
 
