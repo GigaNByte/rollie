@@ -18,7 +18,7 @@ function rollie_customizer_css() {
 	$rollie_main_theme_color = new Rollie_Gradient( 'rollie_main_theme_color', '#ffffff', '.rollie_main_color,.rollie_grid_item', array( 'background' ) );
 
 	$rollie_inline_style      .= $rollie_main_theme_color->css_snippet();
-	$rollie_second_theme_color = new Rollie_Gradient( 'rollie_second_theme_color', '#212121', '.rollie_second_color ,.rollie_footer.footer,.shop_table > thead ,.rollie_woo_order_table_banner, .rollie_top_menu_icons > button[aria-expanded="true"]', array( 'background' ) );
+	$rollie_second_theme_color = new Rollie_Gradient( 'rollie_second_theme_color', '#212121', '.rollie_second_color ,.shop_table > thead ,.rollie_woo_order_table_banner, .rollie_top_menu_icons > button[aria-expanded="true"]', array( 'background' ) );
 
 	$rollie_inline_style .= $rollie_second_theme_color->css_snippet();
 	list($rollie_second_color_r, $rollie_second_color_g, $rollie_second_color_b) = sscanf( $rollie_second_theme_color->rgb, '#%02x%02x%02x' );

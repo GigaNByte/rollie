@@ -12,16 +12,14 @@ require get_template_directory() . '/include/rollie_posts_pages_bootstrap_class_
 get_header();?>
 
 <?php
-if ( have_posts() ) :
+if ( ! have_posts() ) {
+	require locate_template( 'template-parts/page/content-page.php' );
+} else {
 	while ( have_posts() ) :
 		the_post();
 		require locate_template( 'template-parts/page/content-page.php' );
 	endwhile;
-endif;
-?>
-
-
-<?php
+}
 
 if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
 		echo "<aside class='rollie_sidebar_right " . esc_attr( $rollie_sidebar_col ) . " '>";

@@ -13,7 +13,7 @@ function rollie_breadcrumb() {
 	if ( ! is_front_page() && ! $is_woo_page ) {
 
 		// Start the breadcrumb with a link to your homepage.
-		echo '<nav class="p-3 pl-5 text-left  rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb col-12">';
+		echo '<nav class="rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb ">';
 		echo '<a c href="' . esc_attr( get_option( 'home' ) ) . '">' . esc_html( bloginfo( 'name' ) ) . '</a>' . esc_html( $separator );
 
 		// Check if the current page is a category, an archive or a single page. If so show the category or archive name.

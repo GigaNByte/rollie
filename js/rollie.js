@@ -466,19 +466,17 @@ jQuery(function ($) {
 
 
 	//Padding bottom and transition calc for footer
-	if ($('rollie_footer_collapse').length) {
-		$('.rollie_content_container_padding_bottom').css("padding-bottom", $('#rollie_footer').outerHeight() + 30 + "px");
-		$('#rollie_footer').removeClass("rollie_padding_footer_measure");
-
-
+	if ($('.rollie_footer_collapse').length) {
+		$('.rollie_content_container_padding_bottom').css("padding-bottom", $('#rollie_footer > .rollie_footer_collapse').outerHeight() + 30 + "px");
+		$('#rollie_footer > .rollie_footer_collapse').removeClass("rollie_padding_footer_measure");
 		//footer animation
 		$(window).scroll(
 			function () {
 				if ($(window).scrollTop() + $(window).height() > $(document).height() - 30) {
-					$('#rollie_footer').css('visibility', 'visible');
-					$('#rollie_footer').addClass("show");
+					$('#rollie_footer > .rollie_footer_collapse').css('visibility', 'visible');
+					$('#rollie_footer > .rollie_footer_collapse').addClass("show");
 				} else {
-					$('#rollie_footer').removeClass("show");
+					$('#rollie_footer > .rollie_footer_collapse').removeClass("show");
 				}
 
 			}

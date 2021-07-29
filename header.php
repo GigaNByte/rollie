@@ -89,7 +89,9 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 			if ( empty( $rollie_image_id ) ) {
 				$rollie_image_id = get_theme_mod( 'rollie_header' . rollie_page_template_sufix() );
 			}
-
+			if ( is_404() ) {
+				$rollie_image_id = get_theme_mod( 'rollie_header' . '_sp' );
+			}
 			if ( ! empty( $rollie_image_id ) ) {
 				$img_alt = get_post_meta( $rollie_image_id, '_wp_attachment_image_alt', true );
 				echo rollie_header_image_responsive( $rollie_image_id, $img_alt, 'rollie_header_image', array( 'rollie_xs', 'rollie_s', 'rollie_m', 'rollie_l' ) ); // ignore wpcs.

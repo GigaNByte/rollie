@@ -14,12 +14,12 @@ if ( is_home() ) {
 	rewind_posts();
 }
 
-if ( have_posts() ) :
+if ( have_posts() ) {
 	while ( have_posts() ) :
 		the_post();
 		include locate_template( 'template-parts/post/content-index.php' );
 	endwhile;
-endif;
+}
 
 ?>
 </main>

@@ -15,17 +15,17 @@ if ( get_theme_mod( 'rollie_footer_collapse', true ) ) {
 	echo '</div>';
 
 }
-?>
+$rollie_fotter_collapse = '';
+if ( get_theme_mod( 'rollie_footer_collapse', true ) ) {
+	$rollie_fotter_collapse = 'rollie_footer_collapse rollie_padding_footer_measure';
+}
 
+?>
 <footer id='rollie_footer' class='rollie_menus_shadow rollie_f_footer_sub rollie_f_navs rollie_subtitle_text_color'>
-	<div class="rollie_footer rollie_second_color 
-	<?php
-	if ( get_theme_mod( 'rollie_footer_collapse', true ) ) {
-		echo 'rollie_footer_collapse rollie_padding_footer_measure';
-	}
-	?>
-	">
-		<?Php
+		<div class='<?php echo esc_attr( $rollie_fotter_collapse ); ?> rollie_second_color'>
+		<?php
+		// #rollie_footer div is neccesary to not mess up wp-footer WordPress widget and animation
+
 		if ( has_nav_menu( 'rollie_footer_menu' ) ) {
 			?>
 			<nav class="navbar navbar-expand-sm p-4 justify-content-center ">

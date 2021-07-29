@@ -87,7 +87,7 @@ if ( $rollie_current_design == 4 ) {
 	$rollie_current_design_transparent = true;
 }
 if ( $rollie_current_design == 1 ) {
-	$rollie_post_wraper     = $rollie_post_display_style_classes[ $rollie_current_style ]['second_div_col_classic'] . 'p-3 rollie_post_classic_title_bg_color  ';
+	$rollie_post_wraper     = $rollie_post_display_style_classes[ $rollie_current_style ]['second_div_col_classic'] . 'p-3 rollie_post_classic_title_bg_color ';
 	$rollie_article_wrapper = 'rollie_post_thumbnail_height_m';
 } elseif ( $rollie_current_design == 2 ) {
 	$rollie_post_wraper     = 'col-12 p-3 rollie_modern rollie_post_classic_title_bg_color  position-absolute';
@@ -135,7 +135,7 @@ if ( $rollie_current_design_transparent ) {
 if ( $rollie_post_page_raw_enable ) {
 	require locate_template( 'template-parts/post/content-index-raw.php' );
 } else {
-	if ( has_post_format( 'status' ) || has_post_format( 'image' ) ) {
+	if ( has_post_format( 'status' ) || has_post_format( 'image' ) || $rollie_current_design == 2 ) {
 		require locate_template( 'template-parts/post/content-index-modern.php' );
 
 	} else {

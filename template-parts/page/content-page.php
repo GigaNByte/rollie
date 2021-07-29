@@ -4,13 +4,9 @@
 
 <?php
 if ( get_theme_mod( 'rollie_footer_collapse', true ) ) {
-	?>
-	<div class="rollie_content_container_padding_bottom"><!-- tag will be closed in footer.php more details about this container in footer.php-->
-<?php } ?>
-
-	<div class="rollie_flex_height_stretch row m-0">
-
-<?php
+	echo '<div class="rollie_content_container_padding_bottom">';// tag will be closed in footer.php more details about this container in footer.php
+}
+	echo '<div class="rollie_flex_height_stretch row m-0">';
 
 $rollie_is_active_sidebar_left  = $rollie_allow_sidebar_l && $rollie_allow_sidebars;
 $rollie_is_active_sidebar_right = $rollie_allow_sidebar_r && $rollie_allow_sidebars;
@@ -37,17 +33,19 @@ if ( class_exists( 'WooCommerce' ) && is_account_page() ) {
 } else {
 	$disable_paddings = '';
 }
-
 ?>
 
 <main  id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_f_main rollie_main_theme_text_color <?php echo esc_attr( $rollie_main_col ); ?> '>
 	<?php rollie_breadcrumb(); ?>	
 	<article id="<?php echo 'page-content-' . get_the_ID(); ?>"  class="<?php echo esc_attr( $disable_paddings ); ?> rollie_text_content_align rollie_single_page_content">
-	<?php
-		require locate_template( '/template-parts/special/content-singlemeta.php' );
-		the_content();
-		get_template_part( 'template-parts/special/content', 'pagination_single' );
-		comments_template();
-	?>
+		<?php
+		if ( ! is_404() ) {
+			require locate_template( '/template-parts/special/content-singlemeta.php' );
+			the_content();
+			get_template_part( 'template-parts/special/content', 'pagination_single' );
+			comments_template();
+		}
+
+		?>
 	</article>					 
 </main>

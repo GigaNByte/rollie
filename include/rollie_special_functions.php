@@ -353,7 +353,7 @@
 		} elseif ( is_tax() ) {
 			$tax = get_taxonomy( get_queried_object()->taxonomy );
 			echo esc_html( $tax->labels->singular_name );
-		} elseif ( $post->post_parent && get_the_title( $post->post_parent ) ) {
+		} elseif ( ! empty( $post->post_parent ) && get_the_title( $post->post_parent ) ) {
 			echo esc_html( get_the_title( $post->post_parent ) );
 		} else {
 			echo esc_html( get_bloginfo( 'name' ) );
@@ -405,8 +405,10 @@
 			echo post_type_archive_title( '', false );
 		} elseif ( is_tax() ) {
 			echo single_term_title( '', false );
+		} elseif ( is_404() ) {
+			esc_html_e( '404 Page Not Found', 'rollie' );
 		} else {
-			the_title( '', '' );
+			the_title();
 		}
 	}
 
@@ -421,20 +423,17 @@
 		return $output;
 	}
 
-	function rollie_excerpt() {
+	function rollie_excerpt($show_if_field_empty = true) {
 		if ( class_exists( 'Woocommerce' ) && is_woocommerce() ) {
 			do_action( 'woocommerce_archive_description' );
 		} elseif ( is_category() && function_exists( 'get_field' ) ) {
-			global $wp_query;
-			$cat_id = get_queried_object_id();
-			// TODO: better use wp_kses!
-			echo esc_html( get_field( 'category_excerpt', $wp_query->get_queried_object_id() ) );
+			echo esc_html( get_field( 'category_excerpt', get_queried_object_id() ) );
 		} elseif ( is_author() ) {
 			$rollie_author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 			echo esc_html( $rollie_author->description );
 		} elseif ( function_exists( 'get_field' ) ) {
 			echo esc_html( get_field( 'rollie_excerpt' ) );
-		} else {
+		} elseif($show_if_field_empty) {
 			the_excerpt();
 		}
 
