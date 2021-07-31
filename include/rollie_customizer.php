@@ -529,10 +529,10 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 			)
 		);
 	$wp_customize->add_setting(
-		'rollie_post_page_default_style' . $rollie_sufix,
+		'rollie_default_max_posts_on_row' . $rollie_sufix,
 		array(
 			'sanitize_callback' => 'rollie_sanitize_radio',
-			'default'           => 3,
+			'default'           => 1,
 
 		)
 	);
@@ -540,15 +540,15 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 		$wp_customize->add_control(
 			new Rollie_Icon_Customize_Control(
 				$wp_customize,
-				'rollie_post_page_default_style' . $rollie_sufix,
+				'rollie_default_max_posts_on_row' . $rollie_sufix,
 				array(
 					'label'       => __( 'Default Style for rest of the posts', 'Rollie' ),
 					'section'     => 'rollie_post_page' . $rollie_sufix,
 					'type'        => 'radio',
 					'choices'     => array(
-						1 => 'fa-bars-split' . __( 'One column on row', 'rollie' ),
-						2 => 'fa-th-large-split' . __( 'Two columns on row', 'rollie' ),
-						3 => 'fa-th' . __( 'Three column on row ', 'rollie' ),
+						0 => 'fa-bars-split' . __( 'One column on row', 'rollie' ),
+						1 => 'fa-th-large-split' . __( 'Two columns on row', 'rollie' ),
+						2 => 'fa-th' . __( 'Three column on row ', 'rollie' ),
 					),
 					'input_attrs' => array(
 						'rollie_multiple_switch_cc' => 'rollie_grid_type' . $rollie_sufix . '-1',
@@ -599,7 +599,7 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 			'rollie_post_page_row_design_0' . $rollie_sufix,
 			array(
 				'sanitize_callback' => 'rollie_sanitize_select',
-				'default'           => 1,
+				'default'           => 'classic',
 
 			)
 		);
@@ -611,11 +611,12 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 				'section' => 'rollie_post_page' . $rollie_sufix,
 				'type'    => 'select',
 				'choices' => array(
-					1 => __( 'Classic', 'rollie' ),
-					4 => __( 'Classic Transparent (Reverses Text Colors)', 'rollie' ),
-					2 => __( 'Modern', 'rollie' ),
-					5 => __( 'Modern Transparent (Reverses Text Colors)', 'rollie' ),
-					3 => __( 'Clean', 'rollie' ),
+					'classic'             => __( 'Classic', 'rollie' ),
+					'classic_transparent' => __( 'Classic Transparent (Reverses Text Colors)', 'rollie' ),
+					'classic_clean'       => __( 'Classic Clean', 'rollie' ),
+					'modern'              => __( 'Modern', 'rollie' ),
+					'modern_transparent'  => __( 'Modern Transparent (Reverses Text Colors)', 'rollie' ),
+					'clean'               => __( 'Clean', 'rollie' ),
 				),
 
 			)
@@ -637,11 +638,12 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 				'section' => 'rollie_post_page' . $rollie_sufix,
 				'type'    => 'select',
 				'choices' => array(
-					1 => __( 'Classic', 'rollie' ),
-					4 => __( 'Classic Transparent (Reverses Text Colors)', 'rollie' ),
-					2 => __( 'Modern', 'rollie' ),
-					5 => __( 'Modern Transparent (Reverses Text Colors)', 'rollie' ),
-					3 => __( 'Clean', 'rollie' ),
+					'classic'             => __( 'Classic', 'rollie' ),
+					'classic_transparent' => __( 'Classic Transparent (Reverses Text Colors)', 'rollie' ),
+					'classic_clean'       => __( 'Classic Clean', 'rollie' ),
+					'modern'              => __( 'Modern', 'rollie' ),
+					'modern_transparent'  => __( 'Modern Transparent (Reverses Text Colors)', 'rollie' ),
+					'clean'               => __( 'Clean', 'rollie' ),
 				),
 			)
 		);
@@ -655,48 +657,49 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 			)
 		);
 
-		$wp_customize->add_control(
-			'rollie_post_page_row_design_2' . $rollie_sufix,
+	$wp_customize->add_control(
+		'rollie_post_page_row_design_2' . $rollie_sufix,
+		array(
+			'label'   => __( 'Design of posts displayed as three in one row', 'Rollie' ),
+			'section' => 'rollie_post_page' . $rollie_sufix,
+			'type'    => 'select',
+			'choices' => array(
+				'classic'             => __( 'Classic', 'rollie' ),
+				'classic_transparent' => __( 'Classic Transparent (Reverses Text Colors)', 'rollie' ),
+				'classic_clean'       => __( 'Classic Clean', 'rollie' ),
+				'modern'              => __( 'Modern', 'rollie' ),
+				'modern_transparent'  => __( 'Modern Transparent (Reverses Text Colors)', 'rollie' ),
+				'clean'               => __( 'Clean', 'rollie' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'rollie_post_page_raw_enable' . $rollie_sufix,
+		array(
+			'default'           => false,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_Control(
+			$wp_customize,
+			'rollie_post_page_raw_enable' . $rollie_sufix,
 			array(
-				'label'   => __( 'Design of posts displayed as three in one row', 'Rollie' ),
-				'section' => 'rollie_post_page' . $rollie_sufix,
-				'type'    => 'select',
-				'choices' => array(
-					1 => __( 'Classic', 'rollie' ),
-					4 => __( 'Classic Transparent (Reverses Text Colors)', 'rollie' ),
-					2 => __( 'Modern ', 'rollie' ),
-					5 => __( 'Modern Transparent (Reverses Text Colors)', 'rollie' ),
-					3 => __( 'Clean', 'rollie' ),
-				),
+				'label'       => __( 'Enable raw style for all posts', 'rollie' ),
+				'section'     => 'rollie_post_page' . $rollie_sufix,
+				'input_attrs' => array(),
 			)
-		);
-
-						$wp_customize->add_setting(
-							'rollie_post_page_raw_enable' . $rollie_sufix,
-							array(
-								'default'           => false,
-								'sanitize_callback' => 'rollie_sanitize_checkbox',
-							)
-						);
-
-		$wp_customize->add_control(
-			new Rollie_Toggle_Switch_Custom_Control(
-				$wp_customize,
-				'rollie_post_page_raw_enable' . $rollie_sufix,
-				array(
-					'label'       => __( 'Enable raw style for all posts', 'rollie' ),
-					'section'     => 'rollie_post_page' . $rollie_sufix,
-					'input_attrs' => array(),
-				)
-			)
-		);
-						$wp_customize->add_setting(
-							'rollie_aspect_ratio_clean' . $rollie_sufix,
-							array(
-								'default'           => false,
-								'sanitize_callback' => 'rollie_sanitize_checkbox',
-							)
-						);
+		)
+	);
+	$wp_customize->add_setting(
+		'rollie_aspect_ratio_clean' . $rollie_sufix,
+		array(
+			'default'           => false,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
 
 	$wp_customize->add_control(
 		new Rollie_Toggle_Switch_Custom_Control(
@@ -2874,41 +2877,6 @@ function rollie_customizer_register( $wp_customize ) {
 					)
 				)
 			);
-
-		$wp_customize->add_setting(
-			'rollie_tags_icon',
-			array(
-				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
-			)
-		);
-
-		$wp_customize->add_control(
-			'rollie_tags_icon',
-			array(
-				'label'       => esc_html__( 'Type different Font Awesome class for tag icon ', 'Rollie' ),
-				'section'     => 'rollie_tags',
-				'type'        => 'text',
-				'placeholder' => __( 'fa-tags', 'Rollie' ),
-			)
-		);
-
-		$wp_customize->add_setting(
-			'rollie_tag_char',
-			array(
-				'sanitize_callback' => 'wp_filter_nohtml_kses', // removes all HTML from content
-
-			)
-		);
-
-		$wp_customize->add_control(
-			'rollie_tag_char',
-			array(
-				'label'       => esc_html__( 'Type character which will be displaying  before every tag name ', 'Rollie' ),
-				'section'     => 'rollie_tags',
-				'type'        => 'text',
-				'placeholder' => __( '#', 'Rollie' ),
-			)
-		);
 
 	$wp_customize->add_section(
 		'rollie_borders_section',

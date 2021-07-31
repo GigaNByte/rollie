@@ -39,7 +39,7 @@ function rollie_customizer_css() {
 	$rollie_title_bg_theme_color = new Rollie_Gradient( 'rollie_title_bg_theme_color', '#e3e6e8', '.rollie_title_bg_color', array( 'background' ) );
 
 	$rollie_inline_style         .= $rollie_title_bg_theme_color->css_snippet();
-	$rollie_post_classic_title_bg = new Rollie_Gradient( 'rollie_post_classic_title_bg_theme_color', '#ffffff', '.rollie_post_classic_title_bg_color', array( 'background' ) );
+	$rollie_post_classic_title_bg = new Rollie_Gradient( 'rollie_post_classic_title_bg_theme_color', '#ffffff', '.rollie_post_title_bg_color', array( 'background' ) );
 
 	$rollie_inline_style .= $rollie_post_classic_title_bg->css_snippet();
 

@@ -5,14 +5,15 @@ if ( comments_open() ) {
 	<?php } else { ?>
 		<a class="col" href="'<?php echo get_comments_link(); ?>'">	 
 	<?php } ?>
-
 			<span class='m-auto rollie_fourth_text_color'><?php esc_html__( 'Comments' ); ?></span>
-		<?php	rollie_comments_counter(); ?>
+		<?php
+		rollie_comments_counter();
+		if ( has_post_format( array( 'status', 'aside' ) ) ) {
+			?>
 				
-		<?php if ( has_post_format( array( 'status', 'aside' ) ) ) { ?>		
-				</div>	
+			</div>	
 		<?php } else { ?>
-				</a>
+			</a>
 			<?php
 		}
 }

@@ -41,7 +41,6 @@ if ( post_password_required() ) {
 		}
 	}
 
-
 	$fields = array(
 		'author' =>
 		'<div class="form-group"><label for="author">' . __( 'Name' ) . '</label> <span class="required">*</span> <input id="author" name="author" type="text" class="form-control rollie_form_control" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required" /></div>',

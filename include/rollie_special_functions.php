@@ -227,7 +227,7 @@
 
 	}
 
-	function rollie_post_foreground( $rollie_current_style ) {
+	function rollie_post_foreground( $rollie_max_posts_on_current_row ) {
 			$html = '';
 		if ( get_post_format() == 'video' ) {
 			$html .= "<div class='rollie_embed rollie_post_thumbnail rollie_post_thumbnail_height_m  embed-responsive embed-responsive-16by9'>";
@@ -288,7 +288,7 @@
 
 			}
 		} elseif ( has_post_thumbnail() ) {
-			$rollie_header_limit = ( $rollie_current_style ) ? 'rollie_m_thumb' : 'rollie_l_thumb';
+			$rollie_header_limit = ( 0 != $rollie_max_posts_on_current_row ) ? 'rollie_m_thumb' : 'rollie_l_thumb';
 			$html               .= rollie_header_image_responsive( attachment_url_to_postid( rollie_thumbnail_url() ), rollie_thumbnail_alt(), 'rollie_post_thumbnail', array( 'rollie_xs_thumb', 'rollie_s_thumb', 'rollie_m_thumb', 'rollie_l_thumb' ), $rollie_header_limit );
 		}
 			$html = apply_filters( 'rollie_post_foreground_filter', $html );

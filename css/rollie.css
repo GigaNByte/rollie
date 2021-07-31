@@ -810,13 +810,13 @@ width: 100%;
 }
 
 /*MODERN-2*/
-.rollie_modern  {
+.rollie_clean  {
 	bottom: 0px;
 	left: 0px;
 
 }
 
-.rollie_modern + img ,.rollie_classic+img{
+.rollie_clean + img ,.rollie_classic+img{
 	position: absolute;
 }
 
@@ -916,17 +916,7 @@ margin-top:1rem;
 	max-height: 30vh;
 	height:30vh;
 }
-.rollie_force_p_0
-{
-	padding:0 !important;
-	letter-spacing: 0.05rem;
-	font-size:small;
-}
-.rollie_modern_absolute_icon
-{
-	position:absolute;
-	z-index:1;
-}
+
 .rollie_embed >iframe
 {
 

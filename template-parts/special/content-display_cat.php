@@ -11,8 +11,8 @@ foreach ( $rollie_current_cat as $linia ) {
 	} elseif ( $rollie_current_count > 3 ) {
 		break;
 	} else {
-		$rollie_cat_id[ $rollie_index_c ] = [ $rollie_current_count ]->name;
-		$rollie_cat[ $rollie_index_c ]    = [ $rollie_current_count ]->cat_ID;
+		$rollie_cat_id[ $rollie_index_c ] = array( $rollie_current_count )->name;
+		$rollie_cat[ $rollie_index_c ]    = array( $rollie_current_count )->cat_ID;
 		$rollie_index_c++;
 
 	}
@@ -20,7 +20,7 @@ foreach ( $rollie_current_cat as $linia ) {
 
 }
 
-if ( $rollie_cat[0] && get_theme_mod( 'rollie_display_cat' . $rollie_template ) ) {
+if ( $rollie_cat[0] && get_theme_mod( 'rollie_display_cat' . $rollie_template_sufix ) ) {
 	?>
 																									
 								<div class=" p-1 rollie_first_post_categories rollie_main_theme_text_color text-center "> 
