@@ -398,7 +398,6 @@ jQuery(document).ready(function ($) {
 
 		// Get the Google Fonts control object
 		var bodyfontcontrol = _wpCustomizeSettings.controls[customizerControlName];
-		console.log(bodyfontcontrol)
 		// Find the index of the selected font
 		var indexes = $.map(bodyfontcontrol.rollie_fontslist, function (obj, index) {
 			if (obj.family === selectedFont) {

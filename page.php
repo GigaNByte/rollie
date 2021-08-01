@@ -8,7 +8,7 @@
  * @since 1.0
  * @version 1.0
  */
-require get_template_directory() . '/include/rollie_posts_pages_bootstrap_class_variables.php';
+require get_template_directory() . '/include/rollie_index_layout_vars.php';
 get_header();?>
 
 <?php
@@ -24,7 +24,7 @@ if ( ! have_posts() ) {
 if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
 		echo "<aside class='rollie_sidebar_right " . esc_attr( $rollie_sidebar_col ) . " '>";
 		dynamic_sidebar( 'rollie_sidebar_right' );
-		echo '</aside>';
+		echo ' < / aside > ';
 }
 	rollie_pagination();
 	get_sidebar();

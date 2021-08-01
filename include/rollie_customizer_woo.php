@@ -2,14 +2,14 @@
 $wp_customize->add_panel(
 	'rollie_woo_l_panel',
 	array(
-		'title'    => __( 'Rollie Woocommerce Layouts' ),
+		'title'    => esc_html__( 'Rollie Woocommerce Layouts', 'rollie' ),
 		'priority' => 19,
 	)
 );
 $wp_customize->add_section(
 	'rollie_img_thumbnail',
 	array(
-		'title'    => __( 'Product Image Sizes', 'Rollie' ),
+		'title'    => esc_html__( 'Product Image Sizes', 'rollie' ),
 		'priority' => 20,
 		'panel'    => 'rollie_img_panel',
 	)
@@ -18,7 +18,7 @@ $wp_customize->add_section(
 $wp_customize->add_section(
 	'rollie_woo_l_my_account_section',
 	array(
-		'title'    => esc_html__( 'WooCommerce My Account', 'Rollie' ),
+		'title'    => esc_html__( 'WooCommerce My Account', 'rollie' ),
 		'panel'    => 'rollie_woo_l_panel',
 		'priority' => 20,
 	)
@@ -26,21 +26,22 @@ $wp_customize->add_section(
 $wp_customize->add_section(
 	'rollie_woo_l_shop_section',
 	array(
-		'title'    => esc_html__( 'WooCommerce Shop Page', 'Rollie' ),
+		'title'    => esc_html__( 'WooCommerce Shop Page', 'rollie' ),
 		'panel'    => 'rollie_woo_l_panel',
 		'priority' => 20,
 	)
 );
 
-$wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
+$wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
 			'rollie_woo_l_shop_vanilla_settings_label',
 			array(
-				'label'       => __( 'Shop Page Layout Settings', 'rollie' ),
+				'label'       => esc_html__( 'Shop Page Layout Settings', 'rollie' ),
 				'section'     => 'rollie_woo_l_shop_section',
 				'priority'    => 1,
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 7,
 					'expanded'                        => false,
@@ -48,15 +49,16 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			)
 		)
 	);
-	$wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_desc_1', );
+	$wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_desc_1', , array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Notice_Control(
 			$wp_customize,
 			'rollie_woo_l_shop_vanilla_settings_desc_1',
 			array(
-				'description' => 'Woocommerce Products Grid settings are in Rollie Post Grids & Post Meta Panel',
+				'description' => esc_html__( 'Woocommerce Products Grid settings are in Rollie Post Grids & Post Meta Panel', 'rollie' ),
 				'section'     => 'rollie_woo_l_shop_section',
 				'priority'    => 1,
+
 			)
 		)
 	);
@@ -65,19 +67,20 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_section(
 		'rollie_woo_l_single_section',
 		array(
-			'title'    => esc_html__( 'WooCommerce Single Product Page', 'Rollie' ),
+			'title'    => esc_html__( 'WooCommerce Single Product Page', 'rollie' ),
 			'panel'    => 'rollie_woo_l_panel',
 			'priority' => 20,
 		)
 	);
-	$wp_customize->add_setting( 'rollie_woo_l_single_label' );
+	$wp_customize->add_setting( 'rollie_woo_l_single_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
 			'rollie_woo_l_single_label',
 			array(
-				'label'       => __( 'Single Product Page Settings', 'rollie' ),
+				'label'       => esc_html__( 'Single Product Page Settings', 'rollie' ),
 				'section'     => 'rollie_woo_l_single_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 3,
 					'expanded'                        => true,
@@ -99,7 +102,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			$wp_customize,
 			'rollie_woo_l_single_img_max_h',
 			array(
-				'label'       => esc_html__( 'Rollie Single Product Image Max Height (px)' ),
+				'label'       => esc_html__( 'Rollie Single Product Image Max Height (px)', 'rollie' ),
 				'section'     => 'rollie_woo_l_single_section',
 				'input_attrs' => array(
 					'min'  => 50,
@@ -124,7 +127,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			$wp_customize,
 			'rollie_woo_l_single_w',
 			array(
-				'label'       => esc_html__( 'Rollie Single Product Gallery Width' ),
+				'label'       => esc_html__( 'Rollie Single Product Gallery Width', 'rollie' ),
 				'section'     => 'rollie_woo_l_single_section',
 				'input_attrs' => array(
 					'min'  => 4,
@@ -149,7 +152,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			$wp_customize,
 			'rollie_woo_l_single_w_md',
 			array(
-				'label'       => esc_html__( 'Rollie Single Product Gallery Width for Smaller Devices' ),
+				'label'       => esc_html__( 'Rollie Single Product Gallery Width for Smaller Devices', 'rollie' ),
 				'section'     => 'rollie_woo_l_single_section',
 				'input_attrs' => array(
 					'min'  => 4,
@@ -179,7 +182,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_control(
 		'rollie_woo_l_shop_columns_md', // rollie_one_on_row_design_php_0
 		array(
-			'label'       => esc_html__( 'Products per row on smaller devices', 'Rollie' ),
+			'label'       => esc_html__( 'Products per row on smaller devices', 'rollie' ),
 			'section'     => 'rollie_woo_l_shop_section',
 			'type'        => 'number',
 			'input_attrs' => array(
@@ -189,7 +192,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_woo_l_shop_impr_img_label' );
+	$wp_customize->add_setting( 'rollie_woo_l_shop_impr_img_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -197,6 +200,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			array(
 				'label'       => __( 'Rollie Improved Product Images', 'rollie' ),
 				'section'     => 'rollie_woo_l_shop_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 2,
 					'expanded'                        => false,
@@ -240,7 +244,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			$wp_customize,
 			'rollie_woo_l_shop_img_max_h',
 			array(
-				'label'       => esc_html__( 'Rollie Improved Product Image Max Height (px)' ),
+				'label'       => esc_html__( 'Rollie Improved Product Image Max Height (px)', 'rollie' ),
 				'section'     => 'rollie_woo_l_shop_section',
 				'input_attrs' => array(
 					'min'  => 50,
@@ -306,7 +310,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_control(
 		'rollie_woo_l_shop_display_attr_max', // rollie_one_on_row_design_php_0
 		array(
-			'label'       => esc_html__( 'Maximum Number of Displayed Attributes', 'Rollie' ),
+			'label'       => esc_html__( 'Maximum Number of Displayed Attributes', 'rollie' ),
 			'section'     => 'rollie_woo_c&d_panel',
 			'type'        => 'number',
 			'input_attrs' => array(
@@ -316,7 +320,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_woo_l_my_account_nav_label' );
+	$wp_customize->add_setting( 'rollie_woo_l_my_account_nav_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -324,6 +328,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			array(
 				'label'       => __( 'My Account Page Settings', 'rollie' ),
 				'section'     => 'rollie_woo_l_my_account_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 1,
 					'expanded'                        => true,
@@ -344,7 +349,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_control(
 		'rollie_woo_l_my_account_nav',
 		array(
-			'label'   => esc_html__( 'Design of My Account navigation', 'Rollie' ),
+			'label'   => esc_html__( 'Design of My Account navigation', 'rollie' ),
 			'section' => 'rollie_woo_l_my_account_section',
 			'type'    => 'select',
 			'choices' => array(
@@ -358,7 +363,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_panel(
 		'rollie_woo_c&d_panel',
 		array(
-			'title'    => __( 'Rollie Woocommerce Colors & Design' ),
+			'title'    => __( 'Rollie Woocommerce Colors & Design', 'rollie' ),
 			'priority' => 19,
 		)
 	);
@@ -366,7 +371,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_section(
 		'rollie_woo_c&d_notifications_section',
 		array(
-			'title'    => esc_html__( 'WooCommerce Notifications', 'Rollie' ),
+			'title'    => esc_html__( 'WooCommerce Notifications', 'rollie' ),
 			'panel'    => 'rollie_woo_c&d_panel',
 			'priority' => 20,
 		)
@@ -374,12 +379,12 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_section(
 		'rollie_woo_c&d_shop_section',
 		array(
-			'title'    => esc_html__( 'WooCommerce Shop Page', 'Rollie' ),
+			'title'    => esc_html__( 'WooCommerce Shop Page', 'rollie' ),
 			'panel'    => 'rollie_woo_c&d_panel',
 			'priority' => 20,
 		)
 	);
-	$wp_customize->add_setting( 'rollie_woo_c&d_shop_label' );
+	$wp_customize->add_setting( 'rollie_woo_c&d_shop_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -387,6 +392,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			array(
 				'label'       => __( '', 'rollie' ),
 				'section'     => 'rollie_woo_c&d_notifications_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 4,
 					'expanded'                        => true,
@@ -439,7 +445,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_woo_notices_design_label' );
+	$wp_customize->add_setting( 'rollie_woo_notices_design_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -447,6 +453,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			array(
 				'label'       => __( 'Notices Design', 'rollie' ),
 				'section'     => 'rollie_woo_c&d_notifications_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 4,
 
@@ -467,7 +474,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_control(
 		'rollie_woo_notice_border',
 		array(
-			'label'   => esc_html__( 'Design of Notice Border', 'Rollie' ),
+			'label'   => esc_html__( 'Design of Notice Border', 'rollie' ),
 			'section' => 'rollie_woo_c&d_notifications_section',
 			'type'    => 'select',
 			'choices' => array(
@@ -496,7 +503,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			$wp_customize,
 			'rollie_woo_notice_radius',
 			array(
-				'label'       => esc_html__( 'Notice Border Radius ' ),
+				'label'       => esc_html__( 'Notice Border Radius', 'rollie' ),
 				'section'     => 'rollie_woo_c&d_notifications_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -547,7 +554,7 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_woo_notices_text_label' );
+	$wp_customize->add_setting( 'rollie_woo_notices_text_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -555,9 +562,10 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			array(
 				'label'       => __( 'Notices Text Colors', 'rollie' ),
 				'section'     => 'rollie_woo_c&d_notifications_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 4,
-
+					'sanitize_callback'               => 'rollie_sanitize_checkbox',
 				),
 			)
 		)
@@ -565,8 +573,9 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 	$wp_customize->add_setting(
 		'rollie_woo_notice_text_color',
 		array(
-			'default'   => '#212529',
-			'transport' => 'refresh',
+			'default'           => '#212529',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 	$wp_customize->add_control(
@@ -574,9 +583,8 @@ $wp_customize->add_setting( 'rollie_woo_l_shop_vanilla_settings_label' );
 			$wp_customize,
 			'rollie_woo_notice_text_color',
 			array(
-				'label'             => __( 'Notice Text Color', 'Rollie' ),
-				'section'           => 'rollie_woo_c&d_notifications_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => __( 'Notice Text Color', 'rollie' ),
+				'section' => 'rollie_woo_c&d_notifications_section',
 			)
 		)
 	);

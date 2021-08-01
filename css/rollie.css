@@ -28,6 +28,34 @@ p
 {
 	width:25%;
 }
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+.screen-reader-text:focus {
+	background-color: #eee;
+	clip: auto !important;
+	clip-path: none;
+	color: #444;
+	display: block;
+	font-size: 1em;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
 
 dfn,
 cite,
@@ -216,7 +244,7 @@ overflow:hidden;
 
 .rollie_navbar
 {
-	justify-content: center;
+	justify-content: left;
 	z-index:10;
 	white-space:normal;
 	flex-flow: wrap;
@@ -241,12 +269,12 @@ overflow:hidden;
 	position: absolute;
 }
 #rollie_fixed_menu_left_container{
-	z-index: 9;
+	z-index: 8;
 	min-height: 100vh;
 }
 
 #rollie_fixed_full_menu_container{
-		z-index: 9;
+	z-index: 9;
 }
 .rollie_collapse_side{
 	width:0px;
@@ -1006,7 +1034,7 @@ margin-top:1rem;
 
 #rollie_navbar_c   
 {
-	z-index: 2;
+	z-index: 9;
 	top: 0;
 	left: 0;
 	width: 100%;

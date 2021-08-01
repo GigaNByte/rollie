@@ -1,6 +1,6 @@
 <?php
 get_header();
-require_once get_template_directory() . '/include/rollie_posts_pages_bootstrap_class_variables.php';
+require_once get_template_directory() . '/include/rollie_index_layout_vars.php';
 require locate_template( 'template-parts/post/content-post-page.php' );
 
 if ( have_posts() ) :
@@ -17,6 +17,7 @@ if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
 	dynamic_sidebar( 'rollie_sidebar_right' );
 	echo '</aside>';
 }
+
 	rollie_pagination();
 	get_sidebar();
 

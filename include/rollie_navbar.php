@@ -40,7 +40,6 @@ if ( has_nav_menu( 'rollie_top_menu' ) ) {
 	?>
 
 <nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs <?php echo esc_attr( $rollie_menu_top_position ); ?>'> 			
-
 	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo esc_attr( $rollie_navbar_transparent . $rollie_navbar_always_collapse ); ?>" >
 		<?php
 

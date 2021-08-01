@@ -333,21 +333,21 @@
 		if ( class_exists( 'get_field' ) && get_field( 'rollie_alternate_subtitle', get_the_ID() ) ) {
 			echo esc_html( get_field( 'rollie_alternate_subtitle', get_the_ID() ) );
 		} elseif ( is_search() ) {
-			esc_html_e( 'Search' );
+			esc_html_e( 'Search', 'rollie' );
 		} elseif ( is_category() ) {
-			esc_html_e( 'Category' );
+			esc_html_e( 'Category', 'rollie' );
 		} elseif ( is_tag() ) {
-			esc_html_e( 'Tag' );
+			esc_html_e( 'Tag', 'rollie' );
 		} elseif ( is_author() ) {
-			esc_html_e( 'Author' );
+			esc_html_e( 'Author', 'rollie' );
 		} elseif ( is_year() ) {
-			esc_html_e( 'Year' );
+			esc_html_e( 'Year', 'rollie' );
 		} elseif ( is_month() ) {
-			esc_html_e( 'Month' );
+			esc_html_e( 'Month', 'rollie' );
 		} elseif ( is_day() ) {
-			esc_html_e( 'Day' );
+			esc_html_e( 'Day', 'rollie' );
 		} elseif ( is_tax( 'post_format' ) ) {
-			esc_html_e( 'Posts' );
+			esc_html_e( 'Posts', 'rollie' );
 		} elseif ( is_post_type_archive() ) {
 			echo post_type_archive_title( '', false );
 		} elseif ( is_tax() ) {
@@ -378,11 +378,11 @@
 			$rollie_author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 			echo esc_html( $rollie_author->nickname );
 		} elseif ( is_year() ) {
-			echo get_the_date( _x( 'Y', 'yearly archives date format' ) );
+			echo get_the_date( _x( 'Y', 'yearly archives date format', 'rollie' ) );
 		} elseif ( is_month() ) {
-			echo get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+			echo get_the_date( _x( 'F Y', 'monthly archives date format', 'rollie' ) );
 		} elseif ( is_day() ) {
-			echo get_the_date( _x( 'F j, Y', 'daily archives date format' ) );
+			echo get_the_date( _x( 'F j, Y', 'daily archives date format', 'rollie' ) );
 		} elseif ( is_tax( 'post_format' ) ) {
 			if ( is_tax( 'post_format', 'post-format-aside' ) ) {
 				esc_html_e( 'Asides', 'rollie' );
@@ -519,25 +519,25 @@
 		$rollie_subtitle = '';
 
 		if ( is_category() ) {
-			$rollie_title    = __( 'Category' );
+			$rollie_title    = __( 'Category', 'rollie' );
 			$rollie_subtitle = single_cat_title( '', false );
 		} elseif ( is_tag() ) {
-			$rollie_title    = __( 'Tag' );
+			$rollie_title    = __( 'Tag', 'rollie' );
 			$rollie_subtitle = single_tag_title( '', false );
 		} elseif ( is_author() ) {
-			$rollie_title    = __( 'Author' );
+			$rollie_title    = __( 'Author', 'rollie' );
 			$rollie_subtitle = get_the_author();
 		} elseif ( is_year() ) {
-			$rollie_title    = __( 'Year' );
-			$rollie_subtitle = get_the_date( _x( 'Y', 'yearly archives date format' ) );
+			$rollie_title    = __( 'Year', 'rollie' );
+			$rollie_subtitle = get_the_date( _x( 'Y', 'yearly archives date format', 'rollie' ) );
 		} elseif ( is_month() ) {
-			$rollie_title    = __( 'Month' );
-			$rollie_subtitle = get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+			$rollie_title    = __( 'Month', 'rollie' );
+			$rollie_subtitle = get_the_date( _x( 'F Y', 'monthly archives date format', 'rollie' ) );
 		} elseif ( is_day() ) {
-			$rollie_title    = __( 'Day' );
-			$rollie_subtitle = get_the_date( _x( 'F j, Y', 'daily archives date format' ) );
+			$rollie_title    = __( 'Day', 'rollie' );
+			$rollie_subtitle = get_the_date( _x( 'F j, Y', 'daily archives date format', 'rollie' ) );
 		} elseif ( is_tax( 'post_format' ) ) {
-			$rollie_title = __( 'Posts' );
+			$rollie_title = __( 'Posts', 'rollie' );
 			if ( is_tax( 'post_format', 'post-format-aside' ) ) {
 				$rollie_subtitle = __( 'Asides', 'rollie' );
 			} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
@@ -556,16 +556,16 @@
 				$rollie_subtitle = __( 'Audio', 'rollie' );
 			}
 		} elseif ( is_post_type_archive() ) {
-			$rollie_title    = __( 'Archives' );
+			$rollie_title    = __( 'Archives', 'rollie' );
 			$rollie_subtitle = post_type_archive_title( '', false );
 		} elseif ( is_tax() ) {
 			$tax = get_taxonomy( get_queried_object()->taxonomy );
 			// Taxonomy singular name.
-			$rollie_title = sprintf( __( '% 1$s' ), $tax->labels->singular_name );
+			$rollie_title = sprintf( __( '% 1$s', 'rollie' ), $tax->labels->singular_name );
 			// Current taxonomy term.
-			$rollie_subtitle = sprintf( __( '% 1$s' ), single_term_title( '', false ) );
+			$rollie_subtitle = sprintf( __( '% 1$s', 'rollie' ), single_term_title( '', false ) );
 		} else {
-			$rollie_title = __( 'Archives' );
+			$rollie_title = __( 'Archives', 'rollie' );
 		}
 
 		if ( ! empty( $rollie_title ) ) {

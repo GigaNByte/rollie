@@ -1,5 +1,5 @@
 <?php
-require_once get_template_directory() . '/include/rollie_posts_pages_bootstrap_class_variables.php';
+require_once get_template_directory() . '/include/rollie_index_layout_vars.php';
  get_header();
 
 if ( is_home() ) {
@@ -17,7 +17,7 @@ if ( is_home() ) {
 if ( have_posts() ) {
 	while ( have_posts() ) :
 		the_post();
-		include locate_template( 'template-parts/post/content-index.php' );
+		require locate_template( 'template-parts/post/content-index.php' );
 	endwhile;
 }
 
@@ -32,6 +32,8 @@ if ( have_posts() ) {
 		echo '</aside>';
 	}
 	rollie_pagination();
+
+
 	get_sidebar();
 
 	?>

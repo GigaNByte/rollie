@@ -26,7 +26,7 @@ class Rollie_Image_Size {
 				'priority'    => 20,
 			)
 		);
-		$wp_customize->add_setting( $this->customizer_section_title . '_label' );
+		$wp_customize->add_setting( $this->customizer_section_title . '_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -34,6 +34,7 @@ class Rollie_Image_Size {
 				array(
 					'label'       => esc_html( $this->customizer_section_title ) . ' ' . __( 'Settings', 'rollie' ),
 					'section'     => $this->customizer_section,
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 1 + count( $this->img_sizes_data ) * 3,
 						'expanded'                        => true,
@@ -238,7 +239,7 @@ class Rollie_Font {
 			)
 		);
 
-		$wp_customize->add_setting( $this->font_set_name . '_label1' );
+		$wp_customize->add_setting( $this->font_set_name . '_label1', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -246,6 +247,7 @@ class Rollie_Font {
 				array(
 					'label'       => esc_html__( 'Font Family: ', 'rollie' ) . esc_html__( esc_html( $this->customizer_section_title ), 'rollie' ),
 					'section'     => $this->customizer_section,
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 5,
 						'expanded'                        => true,
@@ -254,7 +256,7 @@ class Rollie_Font {
 			)
 		);
 
-		$wp_customize->add_setting( $this->font_set_name . '_i' );
+		$wp_customize->add_setting( $this->font_set_name . '_i' , array( 'sanitize_callback' => 'rollie_sanitize_no_input' ));
 		$font_set_class_str = implode( ', ', $this->font_set_class );
 		$wp_customize->add_control(
 			new Rollie_Notice_Control(
@@ -319,7 +321,7 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_obj',
 				array(
-					'description' => esc_html__( 'Select Google Fonts Family' ),
+					'description' => esc_html__( 'Select Google Fonts Family', 'rollie' ),
 					'section'     => $this->customizer_section,
 					'input_attrs' => array(
 						'font_count'                => 'all',
@@ -369,7 +371,7 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_alt_weight',
 				array(
-					'label'       => esc_html__( 'Font Weight for custom font' ),
+					'label'       => esc_html__( 'Font Weight for custom font', 'rollie' ),
 					'section'     => $this->customizer_section,
 					'input_attrs' => array(
 						'min'                       => 100,
@@ -392,7 +394,7 @@ class Rollie_Font {
 			$rollie_count_elements += 2;
 		}
 
-		$wp_customize->add_setting( $this->font_set_name . '_label' );
+		$wp_customize->add_setting( $this->font_set_name . '_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -400,6 +402,7 @@ class Rollie_Font {
 				array(
 					'label'       => __( 'Font Size & Align', 'rollie' ),
 					'section'     => $this->customizer_section,
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => $rollie_count_elements,
 						'expanded'                        => true,
@@ -426,10 +429,10 @@ class Rollie_Font {
 						'section' => $this->customizer_section,
 						'type'    => 'radio',
 						'choices' => array(
-							1 => esc_html__( 'fa-align-left Align left ', 'rollie' ),
-							2 => esc_html__( 'fa-align-center Center ', 'rollie' ),
-							3 => esc_html__( 'fa-align-justify Justify ', 'rollie' ),
-							4 => esc_html__( 'fa-align-right Align right  ', 'rollie' ),
+							1 => esc_html( 'fa-align-left ' . __( 'Align left', 'rollie' ) ),
+							2 => esc_html( 'fa-align-center ' . __( 'Center', 'rollie' ) ),
+							3 => esc_html( 'fa-align-justify ' . __( 'Justify', 'rollie' ) ),
+							4 => esc_html( 'fa-align-right ' . __( 'Align right', 'rollie' ) ),
 						),
 					)
 				)
@@ -449,7 +452,7 @@ class Rollie_Font {
 					$wp_customize,
 					$this->font_set_name . '_U',
 					array(
-						'label'   => __( 'Uppercase text' ),
+						'label'   => esc_html__( 'Uppercase text' . 'rollie' ),
 						'section' => $this->customizer_section,
 					)
 				)
@@ -469,9 +472,9 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_max',
 				array(
-					'label'       => esc_html__( ' Maximum font size (px) ' ),
+					'label'       => esc_html__( 'Maximum font size (px)', 'rollie' ),
 					'section'     => $this->customizer_section,
-					'description' => esc_html__( 'Should be bigger than min font size otherwise sets default' ),
+					'description' => esc_html__( 'Should be bigger than min font size otherwise sets default', 'rollie' ),
 					'input_attrs' => array(
 						'min'  => 1,
 						'max'  => 100,
@@ -494,8 +497,8 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_min',
 				array(
-					'label'       => esc_html__( 'Minimum font size (px)' ),
-					'description' => esc_html__( 'Should be less than max font size otherwise sets default' ),
+					'label'       => esc_html__( 'Minimum font size (px)', 'rollie' ),
+					'description' => esc_html__( 'Should be less than max font size otherwise sets default', 'rollie' ),
 					'section'     => $this->customizer_section,
 					'input_attrs' => array(
 						'min'  => 1,
@@ -559,7 +562,7 @@ class Rollie_Font {
 						$this->font_set_name . '_' . $value . '_max',
 						array(
 							'label'       => esc_html( __( 'Maximum font size for', 'rollie' ) . $value . __( 'headings (px)', 'rollie' ) ),
-							'description' => esc_html__( 'Should be more than min font size otherwise sets default' ),
+							'description' => esc_html__( 'Should be more than min font size otherwise sets default', 'rollie' ),
 							'section'     => $this->customizer_section,
 							'input_attrs' => array(
 								'min'  => 1,
@@ -585,8 +588,7 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_ls',
 				array(
-					'label'       => esc_html__( 'Letter spacing  (px)' ),
-
+					'label'       => esc_html__( 'Letter spacing (px)', 'rollie' ),
 					'section'     => $this->customizer_section,
 					'input_attrs' => array(
 						'min'  => 0,
@@ -610,7 +612,7 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_lh',
 				array(
-					'label'       => esc_html__( ' Line height (em)' ),
+					'label'       => esc_html__( 'Line height (em)', 'rollie' ),
 					'section'     => $this->customizer_section,
 					'input_attrs' => array(
 						'min'  => 0.5,
@@ -1125,7 +1127,7 @@ class Rollie_Border {
 			$this->customizer_section = $this->border_set_name . '_section';
 		}
 		if ( ! $this->panel_flag || $this->expand_label ) {
-			$wp_customize->add_setting( $this->border_set_name . '_collapse' );
+			$wp_customize->add_setting( $this->border_set_name . '_collapse', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 			$wp_customize->add_control(
 				new Rollie_Customizer_Collapse_Label_Control(
 					$wp_customize,
@@ -1134,6 +1136,7 @@ class Rollie_Border {
 						'label'       => $this->customizer_section_title,
 						'section'     => $this->customizer_section,
 						'priority'    => 30,
+
 						'input_attrs' => array(
 							'rollie_collapse_elements_number' => 2,
 							'expanded' => $this->expand_label,
@@ -1155,7 +1158,7 @@ class Rollie_Border {
 				$wp_customize,
 				$this->border_set_name . '_w',
 				array(
-					'label'       => __( 'Border width:', 'Rollie' ),
+					'label'       => __( 'Border width:', 'rollie' ),
 					'description' => $this->customizer_section_description,
 					'section'     => $this->customizer_section,
 					'priority'    => 30,
@@ -1177,7 +1180,7 @@ class Rollie_Border {
 				$wp_customize,
 				$this->border_set_name . '_rad',
 				array(
-					'label'       => esc_html__( 'Border Radius:', 'Rollie' ),
+					'label'       => esc_html__( 'Border Radius:', 'rollie' ),
 					'section'     => $this->customizer_section,
 					'priority'    => 30,
 					'input_attrs' => array(

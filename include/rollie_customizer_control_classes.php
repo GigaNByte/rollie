@@ -1,10 +1,6 @@
 <?php
 	/**
 	 * TinyMCE Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
 	 */
 class Rollie_TinyMCE_Custom_Control extends WP_Customize_Control {
 	/**
@@ -30,17 +26,13 @@ class Rollie_TinyMCE_Custom_Control extends WP_Customize_Control {
 				<?php if ( ! empty( $this->description ) ) { ?>
 				<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
-				<textarea id="<?php echo esc_attr( $this->id ); ?>" class="customize-control-tinymce-editor" <?php $this->link(); ?>><?php echo esc_attr( $this->value() ); ?></textarea>
+				<textarea id="<?php echo esc_attr( $this->id ); ?>" class="customize-control-tinymce-editor" <?php $this->link(); ?>><?php echo esc_html( $this->value() ); ?></textarea>
 			</div>
 		<?php
 	}
 }
 	/**
 	 * Googe Font Select Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
 	 */
 
 
@@ -376,10 +368,6 @@ class Rollie_Slider_Custom_Control extends WP_Customize_Control {
 }
 	/**
 	 * Simple Notice Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
 	 */
 class Rollie_Notice_Control extends WP_Customize_Control {
 	/**
@@ -422,10 +410,6 @@ class Rollie_Notice_Control extends WP_Customize_Control {
 }
 	/**
 	 * Toggle Switch Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
 	 */
 class Rollie_Toggle_Switch_Custom_Control extends WP_Customize_Control {
 	/**

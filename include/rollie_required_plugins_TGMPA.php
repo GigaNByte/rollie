@@ -137,8 +137,8 @@ function rollie_register_required_plugins() {
 		),
 
 		array(
-			'name'     => 'Polylang',
-			'slug'     => 'polylang',
+			'name'     => 'Classic Editor',
+			'slug'     => 'classic-editor',
 			'required' => false,
 		),
 

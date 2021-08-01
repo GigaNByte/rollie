@@ -22,7 +22,7 @@ if ( is_single() ) {
 	if ( get_theme_mod( 'rollie_display_author' . $rollie_template, true ) ) {
 		?>
 			<div class= 'rollie_author col-auto'>
-				<?php echo esc_html( __( 'Author' ) . ': ' ); ?>
+				<?php echo esc_html( __( 'Author', 'rollie' ) . ': ' ); ?>
 				<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) ); ?>">
 				<?php the_author(); ?>	
 				</a>
@@ -30,7 +30,9 @@ if ( is_single() ) {
 		<?php
 	}
 	if ( has_category() ) {
-		echo "<div class = 'rollie_categories col-auto'>" . esc_html__( 'Categories' ) . ': ' . the_category( ', ' ) . '</div>';
+		echo "<div class = 'rollie_categories col-auto'>" . esc_html__( 'Categories', 'rollie' ) . ': ';
+		get_the_category( ', ' );
+		echo '</div>';
 	};
 	?>
 </div>

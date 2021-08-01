@@ -1,4 +1,5 @@
 <?php
+
 @ini_set( 'upload_max_size', '10M' );
 @ini_set( 'post_max_size', '10M' );
 set_time_limit( 300 );
@@ -125,7 +126,6 @@ function rollie_theme_support() {
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'custom-header' );
 	add_theme_support( 'custom-background' );
-	add_theme_support( 'menus' );
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support(
@@ -234,9 +234,9 @@ function rollie_custom_setup() {
 }
 
 function rollie_customizer_stylesheet() {
-	wp_register_style( 'select2.min.css', get_template_directory_uri() . '/css/select2.min.css', array(), '4.0.6', 'all' );
-	wp_enqueue_style( 'select2.min.css' );
+	wp_enqueue_style( 'select2.min.css', get_template_directory_uri() . '/css/select2.min.css', array(), '4.0.6', 'all' );
 	wp_enqueue_style( 'rollie_customizer', trailingslashit( get_template_directory_uri() ) . 'css/rollie_customizer.css', array(), '1.0', 'all' );
+	wp_enqueue_style( 'font_awesome', trailingslashit( get_template_directory_uri() ) . 'css/fontawesome.min.css', array(), '5.3', 'all' );
 }
 
 function rollie_customizer_scripts() {

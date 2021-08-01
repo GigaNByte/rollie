@@ -14,7 +14,7 @@ function rollie_breadcrumb() {
 
 		// Start the breadcrumb with a link to your homepage.
 		echo '<nav class="rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb ">';
-		echo '<a c href="' . esc_attr( get_option( 'home' ) ) . '">' . esc_html( bloginfo( 'name' ) ) . '</a>' . esc_html( $separator );
+		echo '<a c href="' . esc_url( home_url() ) . '">' . esc_html( bloginfo( 'name' ) ) . '</a>' . esc_html( $separator );
 
 		// Check if the current page is a category, an archive or a single page. If so show the category or archive name.
 		if ( is_category() || is_single() ) {

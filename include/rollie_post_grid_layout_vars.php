@@ -7,7 +7,7 @@ if ( get_theme_mod( 'rollie_post_margin_auto' . $rollie_template_sufix, true ) )
 }
 $rollie_post_display_style_classes                      = array();
 $rollie_post_display_style_classes [0]['first_div_col'] = '  col-12 ' . $rollie_m_a;
-$rollie_post_display_style_classes [1]['first_div_col'] = '  col-12 col-md-6 ' . $rollie_m_a;
+$rollie_post_display_style_classes [1]['first_div_col'] = '  col-12 col-lg-8 ' . $rollie_m_a;
 
 if ( $rollie_allow_sidebar_r && $rollie_allow_sidebar_l && $rollie_allow_sidebars ) {
 	$rollie_post_display_style_classes [2]['first_div_col'] = ' col-6 col-lg-4 p-2 p-lg-auto ' . $rollie_m_a;

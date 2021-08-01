@@ -8,7 +8,7 @@ if ( ! empty( $rollie_post_foreground ) ) {
 	$rollie_center_no_img = 'd-flex justify-content-center';
 }
 ?>
-<article class="rollie_posts_shadow rollie_classic  <?php echo esc_attr( $rollie_post_format_class ); ?> " id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>">		
+<article id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>" <?php post_class( 'rollie_posts_shadow rollie_classic ' . esc_attr( $rollie_post_format_class ) ); ?>  >		
 	<div class="position-relative <?php echo esc_attr( $rollie_center_no_img ); ?>">
 		<?php echo $rollie_post_foreground; ?>
 		<div class="rollie_post_container <?php echo esc_attr( $rollie_post_wraper . $rollie_absolute ); ?> ">

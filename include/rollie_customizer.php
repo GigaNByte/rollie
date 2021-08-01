@@ -1,13 +1,14 @@
 <?php
 
 function rollie_meta_control( $wp_customize, $rollie_sufix, $rollie_section_prefix ) {
-		$wp_customize->add_setting( 'rollie_meta_label' . $rollie_sufix );
+		$wp_customize->add_setting( 'rollie_meta_label' . $rollie_sufix, array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
 				'rollie_meta_label' . $rollie_sufix,
 				array(
 					'label'       => __( 'Metainfos', 'rollie' ),
+
 					'section'     => $rollie_section_prefix . $rollie_sufix,
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 5,
@@ -120,13 +121,14 @@ function rollie_meta_control( $wp_customize, $rollie_sufix, $rollie_section_pref
 }
 
 function rollie_header_control( $wp_customize, $rollie_sufix, $rollie_section_prefix ) {
-	$wp_customize->add_setting( 'rollie_header' . $rollie_sufix );
+	$wp_customize->add_setting( 'rollie_header' . $rollie_sufix, array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
 				'rollie_header' . $rollie_sufix,
 				array(
 					'label'       => __( 'Header Image', 'rollie' ),
+
 					'section'     => $rollie_section_prefix . $rollie_sufix,
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 6,
@@ -148,7 +150,7 @@ function rollie_header_control( $wp_customize, $rollie_sufix, $rollie_section_pr
 				$wp_customize,
 				'rollie_alt_thumbnail' . $rollie_sufix,
 				array(
-					'label'   => __( 'Alternate Post Thumbnail', 'Rollie' ),
+					'label'   => __( 'Alternate Post Thumbnail', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 
 				)
@@ -259,7 +261,7 @@ function rollie_header_control( $wp_customize, $rollie_sufix, $rollie_section_pr
 				$wp_customize,
 				'rollie_header_h_align' . $rollie_sufix,
 				array(
-					'label'   => esc_html__( 'Title Container Horizontal Align', 'Rollie' ),
+					'label'   => esc_html__( 'Title Container Horizontal Align', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 					'type'    => 'radio',
 					'choices' => array(
@@ -284,7 +286,7 @@ function rollie_header_control( $wp_customize, $rollie_sufix, $rollie_section_pr
 				$wp_customize,
 				'rollie_header_v_align' . $rollie_sufix,
 				array(
-					'label'   => esc_html__( 'Title Container Vertical Align', 'Rollie' ),
+					'label'   => esc_html__( 'Title Container Vertical Align', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 					'type'    => 'radio',
 					'choices' => array(
@@ -332,13 +334,14 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 
 	rollie_header_control( $wp_customize, $rollie_sufix, 'rollie_post_page' );
 
-			$wp_customize->add_setting( 'rollie_grid_label' . $rollie_sufix );
+			$wp_customize->add_setting( 'rollie_grid_label' . $rollie_sufix, array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
 				'rollie_grid_label' . $rollie_sufix,
 				array(
 					'label'       => __( 'Post Grid', 'rollie' ),
+
 					'section'     => 'rollie_post_page' . $rollie_sufix,
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 11,
@@ -498,7 +501,7 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 		$wp_customize->add_control(
 			'rollie_post_page_one_on_row' . $rollie_sufix,
 			array(
-				'label'       => __( 'Number of post displayed in full size column ', 'Rollie' ),
+				'label'       => __( 'Number of post displayed in full size column ', 'rollie' ),
 				'section'     => 'rollie_post_page' . $rollie_sufix,
 				'type'        => 'number',
 				'input_attrs' => array(
@@ -519,7 +522,7 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 		$wp_customize->add_control(
 			'rollie_post_page_two_on_row' . $rollie_sufix,
 			array(
-				'label'       => __( 'Number of posts displayed in two columns ', 'Rollie' ),
+				'label'       => __( 'Number of posts displayed in two columns ', 'rollie' ),
 				'section'     => 'rollie_post_page' . $rollie_sufix,
 				'type'        => 'number',
 				'input_attrs' => array(
@@ -542,7 +545,7 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 				$wp_customize,
 				'rollie_default_max_posts_on_row' . $rollie_sufix,
 				array(
-					'label'       => __( 'Default Style for rest of the posts', 'Rollie' ),
+					'label'       => __( 'Default Style for rest of the posts', 'rollie' ),
 					'section'     => 'rollie_post_page' . $rollie_sufix,
 					'type'        => 'radio',
 					'choices'     => array(
@@ -580,13 +583,14 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 			)
 		);
 
-	$wp_customize->add_setting( 'rollie_design_label' . $rollie_sufix );
+	$wp_customize->add_setting( 'rollie_design_label' . $rollie_sufix, array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
 				'rollie_design_label' . $rollie_sufix,
 				array(
 					'label'       => __( 'Post Design', 'rollie' ),
+
 					'section'     => 'rollie_post_page' . $rollie_sufix,
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 5,
@@ -634,7 +638,7 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 		$wp_customize->add_control(
 			'rollie_post_page_row_design_1' . $rollie_sufix,
 			array(
-				'label'   => __( 'Design of posts displayed as two in one row', 'Rollie' ),
+				'label'   => __( 'Design of posts displayed as two in one row', 'rollie' ),
 				'section' => 'rollie_post_page' . $rollie_sufix,
 				'type'    => 'select',
 				'choices' => array(
@@ -660,7 +664,7 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 	$wp_customize->add_control(
 		'rollie_post_page_row_design_2' . $rollie_sufix,
 		array(
-			'label'   => __( 'Design of posts displayed as three in one row', 'Rollie' ),
+			'label'   => __( 'Design of posts displayed as three in one row', 'rollie' ),
 			'section' => 'rollie_post_page' . $rollie_sufix,
 			'type'    => 'select',
 			'choices' => array(
@@ -723,13 +727,14 @@ function rollie_add_post_page_control( $wp_customize, $rollie_panel_name, $rolli
 */
 function rollie_add_gradient_control( $wp_customize, $section_name, $setting_name, $title, $default ) {
 
-	$wp_customize->add_setting( $setting_name . '_label' );
+	$wp_customize->add_setting( $setting_name . '_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
 				$setting_name . '_label',
 				array(
 					'label'       => __( $title, 'rollie' ),
+
 					'section'     => $section_name,
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 9,
@@ -807,7 +812,7 @@ function rollie_add_gradient_control( $wp_customize, $section_name, $setting_nam
 			$wp_customize,
 			$setting_name . '_stop_gr_1',
 			array(
-				'label'       => __( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ', 'rollie' ),
 				'section'     => $section_name,
 				'input_attrs' => array(
 					'min'                       => 0,
@@ -860,7 +865,7 @@ function rollie_add_gradient_control( $wp_customize, $section_name, $setting_nam
 			$wp_customize,
 			$setting_name . '_stop_gr_2',
 			array(
-				'label'       => __( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ', 'rollie' ),
 				'section'     => $section_name,
 				'input_attrs' => array(
 					'min'                       => 0,
@@ -911,7 +916,7 @@ function rollie_add_gradient_control( $wp_customize, $section_name, $setting_nam
 			$wp_customize,
 			$setting_name . '_stop_gr_3',
 			array(
-				'label'       => __( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ', 'rollie' ),
 				'section'     => $section_name,
 				'input_attrs' => array(
 					'min'                       => 0,
@@ -964,7 +969,7 @@ function rollie_add_gradient_control( $wp_customize, $section_name, $setting_nam
 			$wp_customize,
 			$setting_name,
 			array(
-				'label'        => __( 'Single Color', 'Rollie' ),
+				'label'        => __( 'Single Color', 'rollie' ),
 				'section'      => $section_name,
 
 				'show_opacity' => true,
@@ -984,21 +989,21 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_panel(
 			'rollie_navs_panel',
 			array(
-				'title'    => __( 'Rollie Menus & Navbars ' ),
+				'title'    => __( 'Rollie Menus & Navbars', 'rollie' ),
 				'priority' => 18,
 			)
 		);
 	$wp_customize->add_panel(
 		'rollie_color_design_panel',
 		array(
-			'title'    => __( 'Rollie Color & Design' ),
+			'title'    => __( 'Rollie Color & Design', 'rollie' ),
 			'priority' => 18,
 		)
 	);
 	$wp_customize->add_panel(
 		'rollie_color_gradient',
 		array(
-			'title'    => __( 'Rollie Color & Design' ),
+			'title'    => __( 'Rollie Color & Design', 'rollie' ),
 			'priority' => 18,
 			'panel'    => 'rollie_color_design_panel',
 		)
@@ -1006,28 +1011,28 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_panel(
 			'rollie_font_panel',
 			array(
-				'title'    => __( 'Rollie font options' ),
+				'title'    => __( 'Rollie font options', 'rollie' ),
 				'priority' => 18,
 			)
 		);
 		$wp_customize->add_panel(
 			'rollie_layout_panel',
 			array(
-				'title'    => __( 'Rollie Sidebars Layout' ),
+				'title'    => __( 'Rollie Sidebars Layout', 'rollie' ),
 				'priority' => 18,
 			)
 		);
 	$wp_customize->add_panel(
 		'rollie_grid_meta_panel',
 		array(
-			'title'    => __( 'Rollie Post Grids & Post Meta' ),
+			'title'    => __( 'Rollie Post Grids & Post Meta', 'rollie' ),
 			'priority' => 18,
 		)
 	);
 	$wp_customize->add_panel(
 		'rollie_img_panel',
 		array(
-			'title'    => __( 'Rollie Image Sizes ' ),
+			'title'    => __( 'Rollie Image Sizes ', 'rollie' ),
 			'priority' => 18,
 		)
 	);
@@ -1036,7 +1041,7 @@ function rollie_customizer_register( $wp_customize ) {
 	rollie_add_page_control( $wp_customize, 'rollie_grid_meta_panel', __( 'Single Post Page', 'rollie' ), 'spp' );
 	rollie_add_post_page_control( $wp_customize, 'rollie_grid_meta_panel', __( 'Blog Page', 'rollie' ), 'pp' );
 	if ( class_exists( 'WooCommerce' ) ) {
-		$rollie_ctar_str = __( 'Archive Blog, Category pages, Product Categories' );
+		$rollie_ctar_str = __( 'Archive Blog, Category pages, Product Categories', 'rollie' );
 	} else {
 		$rollie_ctar_str = __( 'Archive Blog and Category pages', 'rollie' );
 	}
@@ -1049,7 +1054,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_panel(
 		'rollie_sidebars',
 		array(
-			'title'    => __( 'Rollie Sidebars' ),
+			'title'    => __( 'Rollie Sidebars', 'rollie' ),
 			'priority' => 19,
 		)
 	);
@@ -1057,14 +1062,14 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_panel(
 		'rollie_misc_panel',
 		array(
-			'title'    => __( 'Rollie Miscellaneous settings' ),
+			'title'    => __( 'Rollie Miscellaneous settings', 'rollie' ),
 			'priority' => 19,
 		)
 	);
 		$wp_customize->add_panel(
 			'rollie_post_formats_panel',
 			array(
-				'title'    => __( 'Rollie Post Formats' ),
+				'title'    => __( 'Rollie Post Formats', 'rollie' ),
 				'priority' => 18,
 			)
 		);
@@ -1072,19 +1077,20 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_footer_section',
 		array(
-			'title'    => __( 'Footer settings', 'Rollie' ),
+			'title'    => __( 'Footer settings', 'rollie' ),
 			'priority' => 5,
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_footer_label' );
+	$wp_customize->add_setting( 'rollie_footer_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
 			'rollie_footer_label',
 			array(
 				'label'       => __( 'Footer Settings', 'rollie' ),
+
 				'section'     => 'rollie_footer_section',
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 2,
@@ -1141,7 +1147,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_menu_top_section',
 		array(
-			'title'    => __( 'Navbar settings', 'Rollie' ),
+			'title'    => __( 'Navbar settings', 'rollie' ),
 			'priority' => 20,
 		)
 	);
@@ -1154,13 +1160,14 @@ function rollie_customizer_register( $wp_customize ) {
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
-	$wp_customize->add_setting( 'rollie_pagination_section_label' );
+	$wp_customize->add_setting( 'rollie_pagination_section_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
 			'rollie_pagination_section_label',
 			array(
 				'label'       => esc_html__( 'Pagination Settings', 'rollie' ),
+
 				'section'     => 'rollie_pagination_section',
 				'input_attrs' =>
 				array(
@@ -1201,7 +1208,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_pagination_display_name',
 			array(
-				'label'   => __( 'Display next and previous post or page title in pagination', 'Rollie' ),
+				'label'   => __( 'Display next and previous post or page title in pagination', 'rollie' ),
 				'section' => 'rollie_pagination_section',
 			)
 		)
@@ -1219,7 +1226,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_pagination_page_enable',
 			array(
-				'label'   => __( 'Enable pagination on single pages', 'Rollie' ),
+				'label'   => __( 'Enable pagination on single pages', 'rollie' ),
 				'section' => 'rollie_pagination_section',
 			)
 		)
@@ -1227,18 +1234,19 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_sidebar_section',
 		array(
-			'title'    => __( 'Sidebars Global Settings', 'Rollie' ),
+			'title'    => __( 'Sidebars Global Settings', 'rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_layout_panel',
 		)
 	);
-	$wp_customize->add_setting( 'rollie_sidebar_section_label' );
+	$wp_customize->add_setting( 'rollie_sidebar_section_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
 			'rollie_sidebar_section_label',
 			array(
 				'label'       => __( 'Sidebars Global Settings', 'rollie' ),
+
 				'section'     => 'rollie_sidebar_section',
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 1,
@@ -1260,7 +1268,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_disable_sidebar_mobile',
 			array(
-				'label'   => __( 'Disable sidebars on small screens ', 'Rollie' ),
+				'label'   => __( 'Disable sidebars on small screens ', 'rollie' ),
 				'section' => 'rollie_sidebar_section',
 
 			)
@@ -1270,7 +1278,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_post_pages_l_section',
 		array(
-			'title'    => __( 'Post Pages Sidebars Layout', 'Rollie' ),
+			'title'    => __( 'Post Pages Sidebars Layout', 'rollie' ),
 			'panel'    => 'rollie_layout_panel',
 			'priority' => 20,
 		)
@@ -1279,13 +1287,13 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_single_page_l_section',
 		array(
-			'title'    => __( 'Single Pages Sidebars Layout', 'Rollie' ),
+			'title'    => __( 'Single Pages Sidebars Layout', 'rollie' ),
 			'panel'    => 'rollie_layout_panel',
 			'priority' => 20,
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_post_pages_l_label' );
+	$wp_customize->add_setting( 'rollie_post_pages_l_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -1293,6 +1301,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => __( 'Post Pages Sidebars Layout', 'rollie' ),
 				'section'     => 'rollie_post_pages_l_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 4,
 					'expanded'                        => true,
@@ -1389,7 +1398,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_posts_page_l_padding',
 			array(
-				'label'       => __( 'Padding Between Main Container and sidebars (%)' ),
+				'label'       => esc_html__( 'Padding Between Main Container and sidebars (%)', 'rollie' ),
 				'section'     => 'rollie_post_pages_l_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1419,7 +1428,7 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-		$wp_customize->add_setting( 'rollie_single_page_l_label' );
+		$wp_customize->add_setting( 'rollie_single_page_l_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -1427,6 +1436,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => __( 'Single Pages Sidebars Layout', 'rollie' ),
 					'section'     => 'rollie_single_page_l_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 4,
 						'expanded'                        => true,
@@ -1522,7 +1532,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_single_page_l_padding',
 			array(
-				'label'       => __( 'Padding in Main Content' ),
+				'label'       => __( 'Padding in Main Content', 'rollie' ),
 				'section'     => 'rollie_single_page_l_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1550,7 +1560,7 @@ function rollie_customizer_register( $wp_customize ) {
 			'priority' => 30,
 		)
 	);
-	$wp_customize->add_setting( 'rollie_embl_titles_label' );
+	$wp_customize->add_setting( 'rollie_embl_titles_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -1558,6 +1568,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => esc_html__( 'Page Titles', 'rollie' ),
 					'section'     => 'rollie_embl_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 2,
 					),
@@ -1602,7 +1613,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_embl_titles_width',
 			array(
-				'label'       => esc_html__( 'Detail Thickness (px)' ),
+				'label'       => esc_html__( 'Detail Thickness (px)', 'rollie' ),
 				'section'     => 'rollie_embl_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1612,7 +1623,7 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-						$wp_customize->add_setting( 'rollie_embl_subtitles_label' );
+		$wp_customize->add_setting( 'rollie_embl_subtitles_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -1620,6 +1631,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => esc_html__( 'Subtitles', 'rollie' ),
 					'section'     => 'rollie_embl_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 2,
 					),
@@ -1638,7 +1650,7 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			'rollie_embl_subtitles',
 			array(
-				'label'   => esc_html__( 'Design of Embellishments', 'Rollie' ),
+				'label'   => esc_html__( 'Design of Embellishments', 'rollie' ),
 				'section' => 'rollie_embl_section',
 				'type'    => 'select',
 				'choices' => array(
@@ -1663,7 +1675,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_embl_subtitles_width',
 			array(
-				'label'       => esc_html__( 'Detail Thickness (px)' ),
+				'label'       => esc_html__( 'Detail Thickness (px)', 'rollie' ),
 				'section'     => 'rollie_embl_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1673,7 +1685,7 @@ function rollie_customizer_register( $wp_customize ) {
 			)
 		)
 	);
-			$wp_customize->add_setting( 'rollie_embl_navbar_label' );
+			$wp_customize->add_setting( 'rollie_embl_navbar_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -1681,6 +1693,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => esc_html__( 'Navbar', 'rollie' ),
 					'section'     => 'rollie_embl_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 2,
 					),
@@ -1699,7 +1712,7 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			'rollie_embl_navbar',
 			array(
-				'label'   => esc_html__( 'Navbar Embellishments', 'Rollie' ),
+				'label'   => esc_html__( 'Navbar Embellishments', 'rollie' ),
 				'section' => 'rollie_embl_section',
 				'type'    => 'select',
 				'choices' => array(
@@ -1724,7 +1737,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_embl_navbar_width',
 			array(
-				'label'       => esc_html__( 'Detail Thickness (px)' ),
+				'label'       => esc_html__( 'Detail Thickness (px)', 'rollie' ),
 				'section'     => 'rollie_embl_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1735,7 +1748,7 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
-				$wp_customize->add_setting( 'rollie_embl_footer_label' );
+				$wp_customize->add_setting( 'rollie_embl_footer_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -1743,6 +1756,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => esc_html__( 'Footer', 'rollie' ),
 					'section'     => 'rollie_embl_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 2,
 					),
@@ -1761,7 +1775,7 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			'rollie_embl_footer',
 			array(
-				'label'   => esc_html__( 'Design of  Embellishments', 'Rollie' ),
+				'label'   => esc_html__( 'Design of  Embellishments', 'rollie' ),
 				'section' => 'rollie_embl_section',
 				'type'    => 'select',
 				'choices' => array(
@@ -1785,7 +1799,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_embl_footer_width',
 			array(
-				'label'       => esc_html__( 'Detail Thickness (px)' ),
+				'label'       => esc_html__( 'Detail Thickness (px)', 'rollie' ),
 				'section'     => 'rollie_embl_section',
 				'input_attrs' => array(
 					'min'  => 0,
@@ -1798,13 +1812,13 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_font_breakpoints',
 		array(
-			'title'    => __( 'Advanced Font Responsiveness Settings', 'Rollie' ),
+			'title'    => __( 'Advanced Font Responsiveness Settings', 'rollie' ),
 			'panel'    => 'rollie_font_panel',
 			'priority' => 1,
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_font_vw_label' );
+	$wp_customize->add_setting( 'rollie_font_vw_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -1812,6 +1826,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => esc_html__( 'Font Responsiveness Breakpoints', 'rollie' ),
 				'section'     => 'rollie_font_breakpoints',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 2,
 					'expanded'                        => true,
@@ -1892,7 +1907,7 @@ function rollie_customizer_register( $wp_customize ) {
 
 		// widget end#ffffff
 
-		$wp_customize->add_setting( 'rollie_title_bg_theme_color_label' );
+		$wp_customize->add_setting( 'rollie_title_bg_theme_color_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -1900,6 +1915,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => esc_html__( 'Page Title Background Color ', 'rollie' ),
 					'section'     => 'rollie_theme_colors_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 9,
 					),
@@ -1976,7 +1992,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_title_bg_theme_color_stop_gr_1',
 			array(
-				'label'       => __( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ', 'rollie' ),
 				'section'     => 'rollie_theme_colors_section',
 				'input_attrs' => array(
 					'min'                       => 0,
@@ -2029,7 +2045,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_title_bg_theme_color_stop_gr_2',
 			array(
-				'label'       => __( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ', 'rollie' ),
 				'section'     => 'rollie_theme_colors_section',
 				'input_attrs' => array(
 					'min'                       => 0,
@@ -2080,7 +2096,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_title_bg_theme_color_stop_gr_3',
 			array(
-				'label'       => __( 'Color Stop (%) ' ),
+				'label'       => __( 'Color Stop (%) ', 'rollie' ),
 				'section'     => 'rollie_theme_colors_section',
 				'input_attrs' => array(
 					'min'                       => 0,
@@ -2134,7 +2150,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_title_bg_theme_color',
 			array(
-				'label'        => __( 'Page Title Background Color', 'Rollie' ),
+				'label'        => __( 'Page Title Background Color', 'rollie' ),
 				'section'      => 'rollie_theme_colors_section',
 
 				'show_opacity' => true,
@@ -2146,14 +2162,15 @@ function rollie_customizer_register( $wp_customize ) {
 		)
 	);
 
-		$wp_customize->add_setting( 'rollie_shadow' );
+		$wp_customize->add_setting( 'rollie_shadow_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
-				'rollie_shadow',
+				'rollie_shadow_label',
 				array(
 					'label'       => esc_html__( 'Box Shadows', 'rollie' ),
 					'section'     => 'rollie_theme_colors_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 5,
 					),
@@ -2176,7 +2193,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_shadow_theme_color',
 			array(
-				'label'        => __( 'Shadow Color', 'Rollie' ),
+				'label'        => __( 'Shadow Color', 'rollie' ),
 				'section'      => 'rollie_theme_colors_section',
 				'show_opacity' => true,
 				'input_attrs'  => array(
@@ -2200,7 +2217,7 @@ function rollie_customizer_register( $wp_customize ) {
 					$wp_customize,
 					'rollie_shadow_posts',
 					array(
-						'label'   => esc_html__( 'Shadow on Posts and Products ', 'Rollie' ),
+						'label'   => esc_html__( 'Shadow on Posts and Products ', 'rollie' ),
 						'section' => 'rollie_theme_colors_section',
 
 					)
@@ -2219,7 +2236,7 @@ function rollie_customizer_register( $wp_customize ) {
 					$wp_customize,
 					'rollie_shadow_menus',
 					array(
-						'label'   => esc_html__( 'Shadow on menus and navbars', 'Rollie' ),
+						'label'   => esc_html__( 'Shadow on menus and navbars', 'rollie' ),
 						'section' => 'rollie_theme_colors_section',
 
 					)
@@ -2238,7 +2255,7 @@ function rollie_customizer_register( $wp_customize ) {
 						$wp_customize,
 						'rollie_shadow_images',
 						array(
-							'label'   => esc_html__( 'Shadow on images ', 'Rollie' ),
+							'label'   => esc_html__( 'Shadow on images ', 'rollie' ),
 							'section' => 'rollie_theme_colors_section',
 
 						)
@@ -2258,7 +2275,7 @@ function rollie_customizer_register( $wp_customize ) {
 							$wp_customize,
 							'rollie_shadow_button_h',
 							array(
-								'label'   => esc_html__( 'Shadow on Buttons at hover', 'Rollie' ),
+								'label'   => esc_html__( 'Shadow on Buttons at hover', 'rollie' ),
 								'section' => 'rollie_theme_colors_section',
 							)
 						)
@@ -2267,12 +2284,12 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_theme_colors_text_section',
 		array(
-			'title'    => __( 'Theme Text Colors', 'Rollie' ),
+			'title'    => __( 'Theme Text Colors', 'rollie' ),
 			'panel'    => 'rollie_color_design_panel',
 			'priority' => 30,
 		)
 	);
-	$wp_customize->add_setting( 'rollie_theme_colors_text_label' );
+	$wp_customize->add_setting( 'rollie_theme_colors_text_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -2292,9 +2309,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_title_text_color',
 		array(
-			'default'   => '#212121',
-			'transport' => 'refresh',
-
+			'default'           => '#212121',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2303,10 +2320,9 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_title_text_color',
 			array(
-				'label'             => __( 'Text color for titles ', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'settings'          => 'rollie_title_text_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'    => __( 'Text color for titles ', 'rollie' ),
+				'section'  => 'rollie_theme_colors_text_section',
+				'settings' => 'rollie_title_text_color',
 			)
 		)
 	);
@@ -2314,8 +2330,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_main_theme_text_color',
 		array(
-			'default'   => '#212529',
-			'transport' => 'refresh',
+			'default'           => '#212529',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 	$wp_customize->add_control(
@@ -2323,10 +2340,9 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_main_theme_text_color',
 			array(
-				'label'             => __( 'Main Theme Text Color', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'settings'          => 'rollie_main_theme_text_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'    => esc_html__( 'Main Theme Text Color', 'rollie' ),
+				'section'  => 'rollie_theme_colors_text_section',
+				'settings' => 'rollie_main_theme_text_color',
 			)
 		)
 	);
@@ -2334,9 +2350,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_second_text_color',
 		array(
-			'default'   => '#ffffff',
-			'transport' => 'refresh',
-
+			'default'           => '#ffffff',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2345,11 +2361,10 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_second_text_color',
 			array(
-				'label'             => __( 'Second text color  ', 'Rollie' ),
-				'description'       => __( ' Text color on second or third theme color as background ' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'settings'          => 'rollie_second_text_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'       => esc_html__( 'Second text color  ', 'rollie' ),
+				'description' => esc_html__( 'Text color on second or third theme color as background ', 'rollie' ),
+				'section'     => 'rollie_theme_colors_text_section',
+				'settings'    => 'rollie_second_text_color',
 			)
 		)
 	);
@@ -2357,8 +2372,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_subtitle_text_color',
 		array(
-			'default'   => '#818181',
-			'transport' => 'refresh',
+			'default'           => '#818181',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2367,11 +2383,11 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_subtitle_text_color',
 			array(
-				'label'             => __( 'Third text color', 'Rollie' ),
-				'description'       => __( 'Post and page excerpts, metainfo bars, footer subitems color ' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'settings'          => 'rollie_subtitle_text_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'       => esc_html__( 'Third text color', 'rollie' ),
+				'description' => esc_html__( 'Post and page excerpts, metainfo bars, footer subitems color ', 'rollie' ),
+				'section'     => 'rollie_theme_colors_text_section',
+				'settings'    => 'rollie_subtitle_text_color',
+
 			)
 		)
 	);
@@ -2379,8 +2395,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_fourth_text_color',
 		array(
-			'default'   => '#228050',
-			'transport' => 'refresh',
+			'default'           => '#228050',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2389,10 +2406,9 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_fourth_text_color',
 			array(
-				'label'             => __( 'Fourth text color', 'Rollie' ),
-				'description'       => __( ' Links color on page content or article' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'       => esc_html__( 'Fourth text color', 'rollie' ),
+				'description' => esc_html__( ' Links color on page content or article', 'rollie' ),
+				'section'     => 'rollie_theme_colors_text_section',
 			)
 		)
 	);
@@ -2400,8 +2416,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_category_title_text_color',
 		array(
-			'default'   => '#a37e2c',
-			'transport' => 'refresh',
+			'default'           => '#a37e2c',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2410,11 +2427,10 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_category_title_text_color',
 			array(
-				'label'             => __( 'Fifth Text Color', 'Rollie' ),
-				'description'       => __( 'Category titles, links at hover,fancy line color' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'settings'          => 'rollie_category_title_text_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'       => esc_html__( 'Fifth Text Color', 'rollie' ),
+				'description' => esc_html__( 'Category titles, links at hover, Fancy Line color', 'rollie' ),
+				'section'     => 'rollie_theme_colors_text_section',
+				'settings'    => 'rollie_category_title_text_color',
 			)
 		)
 	);
@@ -2422,9 +2438,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_muted_color',
 		array(
-			'default'   => '#282828',
-			'transport' => 'refresh',
-
+			'default'           => '#282828',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2433,9 +2449,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_muted_color',
 			array(
-				'label'             => __( 'Muted Color ', 'Rollie' ),
-				'section'           => 'rollie_theme_colors_text_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => esc_html__( 'Muted Color ', 'rollie' ),
+				'section' => 'rollie_theme_colors_text_section',
 			)
 		)
 	);
@@ -2445,13 +2460,13 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_navbar_section',
 		array(
-			'title'    => __( 'Navbar Colors & Settings', 'Rollie' ),
+			'title'    => esc_html__( 'Navbar Colors & Settings', 'rollie' ),
 			'priority' => 9,
 			'panel'    => 'rollie_misc_panel',
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_navbar_colors_label' );
+	$wp_customize->add_setting( 'rollie_navbar_colors_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -2459,6 +2474,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => esc_html__( 'Navbar Text Colors', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
+
 				'input_attrs' =>
 				array(
 					'rollie_collapse_elements_number' => 2,
@@ -2470,8 +2486,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_navbar_text_color',
 		array(
-			'default'   => '#212121',
-			'transport' => 'refresh',
+			'default'           => '#212121',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2480,10 +2497,9 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_text_color',
 			array(
-				'label'             => __( 'Navbar Text Color', 'Rollie' ),
-				'section'           => 'rollie_navbar_section',
-				'settings'          => 'rollie_navbar_text_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'    => esc_html__( 'Navbar Text Color', 'rollie' ),
+				'section'  => 'rollie_navbar_section',
+				'settings' => 'rollie_navbar_text_color',
 			)
 		)
 	);
@@ -2491,8 +2507,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_navbar_text_hover_color',
 		array(
-			'default'   => '#a37e2c',
-			'transport' => 'refresh',
+			'default'           => '#a37e2c',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -2501,15 +2518,15 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_text_hover_color',
 			array(
-				'label'             => __( 'Navbar Text Hover Color', 'Rollie' ),
-				'section'           => 'rollie_navbar_section',
-				'settings'          => 'rollie_navbar_text_hover_color',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'    => esc_html__( 'Navbar Text Hover Color', 'rollie' ),
+				'section'  => 'rollie_navbar_section',
+				'settings' => 'rollie_navbar_text_hover_color',
+
 			)
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_menu_top_position_label' );
+	$wp_customize->add_setting( 'rollie_menu_top_position_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -2517,6 +2534,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => esc_html__( 'Navbar Design And Position', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 6,
 				),
@@ -2538,7 +2556,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_menu_top_item_align',
 			array(
-				'label'   => esc_html__( 'Navbar items align', 'Rollie' ),
+				'label'   => esc_html__( 'Navbar items align', 'rollie' ),
 				'section' => 'rollie_navbar_section',
 				'type'    => 'radio',
 				'choices' => array(
@@ -2562,7 +2580,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_fixed',
 			array(
-				'label'   => esc_html__( 'Fixed navbar', 'Rollie' ),
+				'label'   => esc_html__( 'Fixed navbar', 'rollie' ),
 				'section' => 'rollie_navbar_section',
 			)
 		)
@@ -2581,7 +2599,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_absolute',
 			array(
-				'label'   => __( 'Navbar positioned absolute', 'rollie' ),
+				'label'   => esc_html__( 'Navbar positioned absolute', 'rollie' ),
 				'section' => 'rollie_navbar_section',
 			)
 		)
@@ -2597,7 +2615,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'rollie_menu_top_logo_positon',
 		array(
-			'label'   => esc_html__( 'Navbar Logo Position', 'Rollie' ),
+			'label'   => esc_html__( 'Navbar Logo Position', 'rollie' ),
 			'section' => 'rollie_navbar_section',
 			'type'    => 'select',
 			'choices' => array(
@@ -2619,7 +2637,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'rollie_navbar_design',
 		array(
-			'label'   => esc_html__( 'Navbar collapse design', 'Rollie' ),
+			'label'   => esc_html__( 'Navbar collapse design', 'rollie' ),
 			'section' => 'rollie_navbar_section',
 			'type'    => 'select',
 			'choices' => array(
@@ -2643,8 +2661,8 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_control(
 			'rollie_nav_top_icons_colapsed_content',
 			array(
-				'label'       => esc_html__( 'Icons menu collapse design', 'Rollie' ),
-				'description' => esc_html__( 'This options applies changes to collapsible Woocommerce Cart and MyAccount widgets', 'Rollie' ),
+				'label'       => esc_html__( 'Icons menu collapse design', 'rollie' ),
+				'description' => esc_html__( 'This options applies changes to collapsible Woocommerce Cart and MyAccount widgets', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
 				'type'        => 'select',
 				'choices'     => array(
@@ -2656,7 +2674,7 @@ function rollie_customizer_register( $wp_customize ) {
 		);
 	}
 
-	$wp_customize->add_setting( 'rollie_navbar_a_settings_label' );
+	$wp_customize->add_setting( 'rollie_navbar_a_settings_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -2664,6 +2682,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => esc_html__( 'Navbar Additional Settings', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
+
 				'input_attrs' =>
 				array(
 					'rollie_collapse_elements_number' => 5,
@@ -2706,7 +2725,7 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_overlay',
 			array(
-				'label'   => esc_html__( 'Enable overlay when Navbar drops', 'Rollie' ),
+				'label'   => esc_html__( 'Enable overlay when Navbar drops', 'rollie' ),
 				'section' => 'rollie_navbar_section',
 
 			)
@@ -2726,8 +2745,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_transparent',
 			array(
-				'label'       => __( 'Apply Transparency when Navbar is on top of the page', 'Rollie' ),
-				'description' => __( 'Works better with fixed Navbar', 'Rollie' ),
+				'label'       => __( 'Apply Transparency when Navbar is on top of the page', 'rollie' ),
+				'description' => __( 'Works better with fixed Navbar', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
 			)
 		)
@@ -2746,8 +2765,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_always_collapse',
 			array(
-				'label'       => esc_html__( 'Show always Collapsed Navigation', 'Rollie' ),
-				'description' => esc_html__( 'By default Rollie Theme calculates and applies Collapsed Navigation on specified device sizes', 'Rollie' ),
+				'label'       => esc_html__( 'Show always Collapsed Navigation', 'rollie' ),
+				'description' => esc_html__( 'By default Rollie Theme calculates and applies Collapsed Navigation on specified device sizes', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
 			)
 		)
@@ -2765,14 +2784,14 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_search_form',
 			array(
-				'label'   => esc_html__( 'Enable search form ', 'Rollie' ),
+				'label'   => esc_html__( 'Enable search form ', 'rollie' ),
 				'section' => 'rollie_navbar_section',
 
 			)
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_navbar_logos_label' );
+	$wp_customize->add_setting( 'rollie_navbar_logos_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -2780,6 +2799,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => esc_html__( 'Navbar Logos', 'rollie' ),
 				'section'     => 'rollie_navbar_section',
+
 				'priority'    => 2,
 				'input_attrs' =>
 				array(
@@ -2832,7 +2852,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_tags',
 		array(
-			'title'    => __( 'Comment and tags bar', 'Rollie' ),
+			'title'    => __( 'Comment and tags bar', 'rollie' ),
 			'priority' => 40,
 			'panel'    => 'rollie_misc_panel',
 
@@ -2852,7 +2872,7 @@ function rollie_customizer_register( $wp_customize ) {
 					$wp_customize,
 					'rollie_tags_display_icon',
 					array(
-						'label'   => esc_html__( 'Display tag icon', 'Rollie' ),
+						'label'   => esc_html__( 'Display tag icon', 'rollie' ),
 						'section' => 'rollie_tags',
 
 					)
@@ -2871,7 +2891,7 @@ function rollie_customizer_register( $wp_customize ) {
 					$wp_customize,
 					'rollie_tags_display_post_format',
 					array(
-						'label'   => esc_html__( 'Display post format as tag link', 'Rollie' ),
+						'label'   => esc_html__( 'Display post format as tag link', 'rollie' ),
 						'section' => 'rollie_tags',
 
 					)
@@ -2881,7 +2901,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_borders_section',
 		array(
-			'title'    => esc_html__( 'Page Sections Borders ', 'Rollie' ),
+			'title'    => esc_html__( 'Page Sections Borders ', 'rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)
@@ -2890,7 +2910,7 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_buttons_section',
 		array(
-			'title'    => esc_html__( 'Buttons', 'Rollie' ),
+			'title'    => esc_html__( 'Buttons', 'rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)
@@ -2899,12 +2919,12 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_icons_section',
 		array(
-			'title'    => esc_html__( 'Icons', 'Rollie' ),
+			'title'    => esc_html__( 'Icons', 'rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
-		$wp_customize->add_setting( 'rollie_icons_label' );
+		$wp_customize->add_setting( 'rollie_icons_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -2912,6 +2932,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => __( 'Icons Colors', 'rollie' ),
 					'section'     => 'rollie_icons_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 3,
 						'expanded'                        => true,
@@ -2922,8 +2943,9 @@ function rollie_customizer_register( $wp_customize ) {
 		$wp_customize->add_setting(
 			'rollie_icon_color_first',
 			array(
-				'default'   => '#212121',
-				'transport' => 'refresh',
+				'default'           => '#212121',
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'rollie_sanitize_hex_color',
 			)
 		);
 
@@ -2932,9 +2954,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_icon_color_first',
 			array(
-				'label'             => __( 'Icon first color', 'Rollie' ),
-				'section'           => 'rollie_icons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => __( 'Icon first color', 'rollie' ),
+				'section' => 'rollie_icons_section',
 			)
 		)
 	);
@@ -2942,8 +2963,9 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize->add_setting(
 				'rollie_icon_color_first_shadow',
 				array(
-					'default'   => '#a37e2c',
-					'transport' => 'refresh',
+					'default'           => '#a37e2c',
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'rollie_sanitize_hex_color',
 				)
 			);
 	$wp_customize->add_control(
@@ -2951,28 +2973,27 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_icon_color_first_shadow',
 			array(
-				'label'             => __( 'Icon first shadow color', 'Rollie' ),
-				'section'           => 'rollie_icons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => __( 'Icon first shadow color', 'rollie' ),
+				'section' => 'rollie_icons_section',
 			)
 		)
 	);
-								$wp_customize->add_setting(
-									'rollie_icon_color_first_h',
-									array(
-										'default'   => '#ffffff',
-										'transport' => 'refresh',
-									)
-								);
+	$wp_customize->add_setting(
+		'rollie_icon_color_first_h',
+		array(
+			'default'           => '#ffffff',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
+		)
+	);
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
 			$wp_customize,
 			'rollie_icon_color_first_h',
 			array(
-				'label'             => __( 'Icon first color when hover', 'Rollie' ),
-				'section'           => 'rollie_icons_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => __( 'Icon first color when hover', 'rollie' ),
+				'section' => 'rollie_icons_section',
 			)
 		)
 	);
@@ -2980,12 +3001,12 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_forms_inputs_section',
 		array(
-			'title'    => esc_html__( 'Forms', 'Rollie' ),
+			'title'    => esc_html__( 'Forms', 'rollie' ),
 			'priority' => 20,
 			'panel'    => 'rollie_color_design_panel',
 		)
 	);
-		$wp_customize->add_setting( 'rollie_forms_inputs_color_label' );
+		$wp_customize->add_setting( 'rollie_forms_inputs_color_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
 			new Rollie_Customizer_Collapse_Label_Control(
 				$wp_customize,
@@ -2993,6 +3014,7 @@ function rollie_customizer_register( $wp_customize ) {
 				array(
 					'label'       => __( 'Form Colors', 'rollie' ),
 					'section'     => 'rollie_forms_inputs_section',
+
 					'input_attrs' => array(
 						'rollie_collapse_elements_number' => 3,
 						'expanded'                        => true,
@@ -3024,8 +3046,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_form_input_text_color',
 		array(
-			'default'   => '#212529',
-			'transport' => 'refresh',
+			'default'           => '#212529',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -3034,9 +3057,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_form_input_text_color',
 			array(
-				'label'             => __( 'Forms text color', 'Rollie' ),
-				'section'           => 'rollie_forms_inputs_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => __( 'Forms text color', 'rollie' ),
+				'section' => 'rollie_forms_inputs_section',
 			)
 		)
 	);
@@ -3044,8 +3066,9 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'rollie_form_input_border_color',
 		array(
-			'default'   => '#a37e2c',
-			'transport' => 'refresh',
+			'default'           => '#a37e2c',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'rollie_sanitize_hex_color',
 		)
 	);
 
@@ -3054,9 +3077,8 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_form_input_border_color',
 			array(
-				'label'             => __( 'Form shadow and border color', 'Rollie' ),
-				'section'           => 'rollie_forms_inputs_section',
-				'sanitize_callback' => 'rollie_sanitize_hex_color',
+				'label'   => __( 'Form shadow and border color', 'rollie' ),
+				'section' => 'rollie_forms_inputs_section',
 			)
 		)
 	);
@@ -3064,13 +3086,13 @@ function rollie_customizer_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'rollie_post_format_gallery',
 		array(
-			'title'    => __( 'Gallery Post Format', 'Rollie' ),
+			'title'    => __( 'Gallery Post Format', 'rollie' ),
 			'priority' => 5,
 			'panel'    => 'rollie_post_formats_panel',
 		)
 	);
 
-	$wp_customize->add_setting( 'rollie_post_format_gallery_label' );
+	$wp_customize->add_setting( 'rollie_post_format_gallery_label', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 	$wp_customize->add_control(
 		new Rollie_Customizer_Collapse_Label_Control(
 			$wp_customize,
@@ -3078,6 +3100,7 @@ function rollie_customizer_register( $wp_customize ) {
 			array(
 				'label'       => __( 'Metainfos', 'rollie' ),
 				'section'     => 'rollie_post_format_gallery',
+
 				'input_attrs' => array(
 					'rollie_collapse_elements_number' => 1,
 					'expanded'                        => true,

@@ -598,7 +598,7 @@ function rollie_woo_order_custom_column( $order ) {
 				<?php $rollie_o_date = $order->get_date_created()->date_i18n( 'Y-m-d' ); ?>
 				<div class="col-12 d-flex">
 					<div class='col-8 text-left'><?php esc_html_e( 'Order Date', 'woocommerce' ) . ': ' . $rollie_o_date; ?></div>
-					<div class='col-4 text-right'><?php esc_html( __( 'id' ) . ': #' . $order->get_order_number() ); ?></div>
+					<div class='col-4 text-right'><?php esc_html( __( 'id', 'woocommerce' ) . ': #' . $order->get_order_number() ); ?></div>
 				</div>
 			</div>
 		</a>
@@ -1178,7 +1178,7 @@ function rollie_get_bacs_account_details_html( $echo = true ) {
 
 	?>
 		<div class="woocommerce-bacs-bank-details m-2">
-			<h2 class="wc-bacs-bank-details-heading"><?php esc_html__( 'Our bank details' ); ?></h2>
+			<h2 class="wc-bacs-bank-details-heading"><?php esc_html__( 'Our bank details', 'woocommerce' ); ?></h2>
 			<div class=' rollie_table rollie_woo_border_custom_column_rad rollie_darker_main_color'>
 			<?php
 
@@ -1194,11 +1194,11 @@ function rollie_get_bacs_account_details_html( $echo = true ) {
 					?>
 					<h3 class="wc-bacs-bank-details-account-name"><?php echo esc_html( $account_name ); ?>:</h3>
 					<ul class="wc-bacs-bank-details order_details bacs_details">
-						<li class="bank_name"><?php esc_html__( 'Bank' ); ?>: <strong><?php echo esc_html( $bank_name ); ?></strong></li>
-						<li class="account_number"><?php esc_html__( 'Account number' ); ?>: <strong><?php echo esc_html( $account_number ); ?></strong></li>
+						<li class="bank_name"><?php esc_html__( 'Bank', 'woocommerce' ); ?>: <strong><?php echo esc_html( $bank_name ); ?></strong></li>
+						<li class="account_number"><?php esc_html__( 'Account number', 'woocommerce' ); ?>: <strong><?php echo esc_html( $account_number ); ?></strong></li>
 						<li class="sort_code"><?php echo esc_html( $sort_code_label ); ?>: <strong><?php echo esc_html( $sort_code ); ?></strong></li>
-						<li class="iban"><?php esc_html__( 'IBAN' ); ?>: <strong><?php echo esc_html( $iban_code ); ?></strong></li>
-						<li class="bic"><?php esc_html__( 'BIC' ); ?>: <strong><?php echo esc_html( $bic_code ); ?></strong></li>
+						<li class="iban"><?php esc_html__( 'IBAN', 'woocommerce' ); ?>: <strong><?php echo esc_html( $iban_code ); ?></strong></li>
+						<li class="bic"><?php esc_html__( 'BIC', 'woocommerce' ); ?>: <strong><?php echo esc_html( $bic_code ); ?></strong></li>
 					</ul>
 					<?php
 				endforeach;

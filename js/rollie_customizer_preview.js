@@ -97,7 +97,6 @@ function rollieUniversalControl(rollie_color_obj) {
       var rollie_standard_color = setting.get();
       rollie_color_obj.css_value = rollie_standard_color;
       for (index = 0; index < rollie_color_obj.css_property.length; index++) {
-        console.log(rollie_color_obj.css_class)
         $(rollie_color_obj.css_class).css(rollie_color_obj.css_property[index], rollie_standard_color);
       }
     });

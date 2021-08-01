@@ -1,16 +1,4 @@
-<?php
-$rollie_post_foreground = rollie_post_foreground( $rollie_max_posts_on_current_row );
-$rollie_absolute        = '';
-$rollie_center_no_img   = '';
-if ( ! empty( $rollie_post_foreground ) ) {
-	if ( $rollie_current_design != 'classic_clean' ) {
-		$rollie_absolute = ' position-absolute';
-	}
-} else {
-	$rollie_center_no_img = 'd-flex justify-content-center';
-}
-?>
-<article class="rollie_posts_shadow rollie_classic  <?php echo esc_attr( $rollie_post_format_class ); ?> " id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>">		
+<article <?php post_class( 'rollie_posts_shadow rollie_classic ' . esc_attr( $rollie_post_format_class ) ); ?>  id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>">		
 	<div class="position-relative <?php echo esc_attr( $rollie_center_no_img ); ?>">
 		<?php echo $rollie_post_foreground; ?>
 		<div class="rollie_post_container <?php echo esc_attr( $rollie_post_wraper . $rollie_absolute ); ?> ">

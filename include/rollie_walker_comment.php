@@ -34,17 +34,17 @@ class Rollie_Comment_Walker extends Walker_Comment {
 							<a class="hidden-xs-down mr-1" href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 								<div class='d-inline-block  small font-weight-light  rollie_subtitle_text_color'>
 									<time datetime="<?php comment_time( 'c' ); ?>">
-									<?php echo esc_html( printf( _x( '%s ago', '%s = human-readable time difference', 'rollie' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ) ); ?>
+									<?php echo esc_html( printf( _x( '%s ago', 'rollie' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ) ); ?>
 									</time>
 								</div>	
 							</a>
 							<?php
-							edit_comment_link( '<i class=" fas fa-edit rollie_icon_first rollie_icon_comment"></i> ' . __( 'Edit' ), '<span class="edit-link list-inline-item chip">', '</span>' );
+							edit_comment_link( '<i class=" fas fa-edit rollie_icon_first rollie_icon_comment"></i> ' . __( 'Edit', 'rollie' ), '<span class="edit-link list-inline-item chip">', '</span>' );
 								comment_reply_link(
 									array_merge(
 										$args,
 										array(
-											'reply_text' => '<i class=" fas rollie_icon_first rollie_icon_comment fa-reply-all"></i> ' . __( 'Reply' ),
+											'reply_text' => '<i class=" fas rollie_icon_first rollie_icon_comment fa-reply-all"></i> ' . __( 'Reply', 'rollie' ),
 											'add_below'  => 'div-comment',
 											'depth'      => $depth,
 											'max_depth'  => $args['max_depth'],
@@ -61,7 +61,7 @@ class Rollie_Comment_Walker extends Walker_Comment {
 		</div>
 		<div class="card-block rollie_card_block warning-color">
 				<?php if ( '0' == $comment->comment_approved ) : ?>
-			<p class=" comment-awaiting-moderation label label-info text-muted small"><?php esc_html_e( 'Your comment is awaiting moderation' ); ?></p>
+			<p class=" comment-awaiting-moderation label label-info text-muted small"><?php esc_html_e( 'Your comment is awaiting moderation', 'rollie' ); ?></p>
 			<?php endif; ?>				
 		</div>
 		<?php

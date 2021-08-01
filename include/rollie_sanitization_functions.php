@@ -104,6 +104,15 @@ function rollie_sanitize_select( $input, $setting ) {
 }
 
 /**
+ * Non Input Controls sanitization (For security and coding requirments)
+ *
+ * @param  int   int value
+ * @return int   Sanitized value
+ */
+function rollie_sanitize_no_input( $input ) {
+	return true;
+}
+/**
  * Checkbox sanitization
  *
  * @param  int   int value

@@ -30,7 +30,7 @@ if ( post_password_required() ) {
 						</a>
 						<h5 class="media-heading "><?php echo esc_html( $rollie_reply->comment_author ); ?></h5>
 					</div> 
-					<section> class="rollie_comment_content">
+					<section class="rollie_comment_content">
 						<p class="font-italic">
 							<?php echo esc_html( $rollie_reply->comment_content ); ?>
 						</p>
@@ -43,13 +43,13 @@ if ( post_password_required() ) {
 
 	$fields = array(
 		'author' =>
-		'<div class="form-group"><label for="author">' . __( 'Name' ) . '</label> <span class="required">*</span> <input id="author" name="author" type="text" class="form-control rollie_form_control" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required" /></div>',
+		'<div class="form-group"><label for="author">' . __( 'Name', 'rollie' ) . '</label> <span class="required">*</span> <input id="author" name="author" type="text" class="form-control rollie_form_control" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required" /></div>',
 
 		'email'  =>
-		'<div class="form-group"><label for="email">' . __( 'Email' ) . '</label> <span class="required">*</span><input id="email" name="email" class="form-control rollie_form_control" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" required="required" /></div>',
+		'<div class="form-group"><label for="email">' . __( 'Email', 'rollie' ) . '</label> <span class="required">*</span><input id="email" name="email" class="form-control rollie_form_control" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" required="required" /></div>',
 
 		'url'    =>
-		'<div class="form-group  last-field"><label for="url">' . __( 'Website' ) . '</label><input id="url" name="url" class="form-control rollie_form_control" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" /></div>',
+		'<div class="form-group  last-field"><label for="url">' . __( 'Website', 'rollie' ) . '</label><input id="url" name="url" class="form-control rollie_form_control" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" /></div>',
 	);
 
 	$args = array(
@@ -58,12 +58,12 @@ if ( post_password_required() ) {
 		'comment_field'        =>
 		'<div class="rollie_f_main "> <span class="required"></span><textarea id="comment" placeholder="' . __( 'Share your thoughts', 'rollie' ) . '  " class="form-control rollie_form_control rollie_form_input" name="comment" rows="1" required="required"></textarea></p></div>',
 		'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
-		'title_reply'          => "<h3 class='comment-title col-12" . rollie_embl_subtitles() . "'>" . __( 'Reply' ) . '</h3>',
+		'title_reply'          => "<h3 class='comment-title col-12" . rollie_embl_subtitles() . "'>" . __( 'Reply', 'rollie' ) . '</h3>',
 		'logged_in_as'         => '<p class="logged-in-as m-1  ">' . sprintf( __( 'Logged in as', 'rollie' ) . ' <a href="%1$s " class=""> &#160;%2$s </a>.&#160; <a  class="rollie_text_color_3 " href="%3$s" title="Log out of this account">' . __( 'Logout', 'rollie' ) . '</a>', admin_url( 'profile.php' ), ' ' . $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '</p>',
 		'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title rollie_f_main">',
 		'title_reply_after'    => '</h3>',
 		'comment_notes_before' => '<p class="comment-notes">' .
-			__( 'Your email address will not be published' ) . ( $req ? __( 'Required fields are marked *' ) : '' ) .
+			esc_html__( 'Your email address will not be published', 'rollie' ) . ( $req ? esc_html__( 'Required fields are marked *', 'rollie' ) : '' ) .
 			'</p>',
 	);
 
@@ -79,7 +79,7 @@ if ( post_password_required() ) {
 			<?php
 			$args = array(
 				'walker'      => new Rollie_Comment_Walker(),
-				'reply_text'  => __( 'Reply' ),
+				'reply_text'  => __( 'Reply', 'rollie' ),
 				'style'       => 'div',
 				'short_ping'  => true,
 				'avatar_size' => '32',

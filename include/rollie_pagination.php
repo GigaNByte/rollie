@@ -145,3 +145,38 @@ function rollie_comment_pagination( $pages = '', $range = 2 ) {
 		echo '</div>';
 	}
 }
+ /**
+  * Creates wp_link_pages pagination
+  */
+
+function rollie_link_pages() {
+
+	$args = array(
+		'before'           => '<div class="row col-12 justify-content-center"><nav class="m-2 rollie_pagination pagination d-flex  rollie_f_b_f" role="navigation"><div class="rollie_pagination_item page-item disabled"><span class="rollie_subtitle_text_color page-link">' . esc_html( __( 'Page:', 'rollie' ) ) . '</span></div>',
+		'after'            => '</nav></div>',
+		'link_before'      => '',
+		'link_after'       => '',
+		'aria_current'     => 'page',
+		'next_or_number'   => 'number',
+		'separator'        => ' ',
+		'nextpagelink'     => __( 'Next page', 'rollie' ),
+		'previouspagelink' => __( 'Previous page', 'rollie' ),
+		'pagelink'         => '%',
+		'echo'             => 1,
+	);
+	wp_link_pages( $args );
+}
+  // define the wp_link_pages_link callback to add pagination classes before links
+function filter_wp_link_pages_link( $link, $i ) {
+	global $page;
+	$rollie_class = '';
+	if ( $page == $i ) {
+		$rollie_class = 'rollie_pagination_active active';
+	}
+	// make filter magic happen here...
+	$before = '<div class="rollie_pagination_item page-item ' . esc_attr( $rollie_class ) . '"><span class="rollie_subtitle_text_color page-link">';
+	$after  = '</span></div>';
+	return $before . $link . $after;
+};
+// add the filter
+add_filter( 'wp_link_pages_link', 'filter_wp_link_pages_link', 10, 2 );

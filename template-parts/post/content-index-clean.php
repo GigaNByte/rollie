@@ -1,4 +1,4 @@
-<article id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>" class="rollie_posts_shadow row rollie_clean <?php echo esc_attr( $rollie_post_format_class ); ?>">
+<article id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>" <?php post_class( 'rollie_posts_shadow row rollie_clean ' . esc_attr( $rollie_post_format_class ) ); ?>>
 	<div class="rollie_post_wrapper <?php echo $rollie_article_wrapper; ?>" >
 		<div class="<?php echo $rollie_post_wraper; ?> m-0" >
 				<div class="rollie_post_metadata rollie_subtitle_text_color p-0 m-0 row"> 

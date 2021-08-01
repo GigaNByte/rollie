@@ -1,5 +1,5 @@
 <?php
-require_once get_template_directory() . '/include/rollie_posts_pages_bootstrap_class_variables.php';
+require_once get_template_directory() . '/include/rollie_index_layout_vars.php';
 get_header();
 require locate_template( 'template-parts/post/content-post-page.php' );
 

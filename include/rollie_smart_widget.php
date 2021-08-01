@@ -48,7 +48,7 @@
 					<?php esc_html_e( 'Smart Banner Type:', 'rollie' ); ?>
 			</label> 
 			<select id="<?php echo esc_attr( $this->get_field_id( 'rollie_query' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'rollie_query' ) ); ?>" class="widefat" style="width:100%;">
-				<option <?php selected( $instance['rollie_query'], 'categories' ); ?> value="categories"><?php esc_html_e( 'Categories' ); ?></option>
+				<option <?php selected( $instance['rollie_query'], 'categories' ); ?> value="categories"><?php esc_html_e( 'Categories', 'rollie' ); ?></option>
 					<?php	if ( class_exists( 'WooCommerce' ) ) { ?>
 				<option <?php selected( $instance['rollie_query'], 'woo_categories' ); ?> value="woo_categories"><?php esc_html_e( 'Woocommerce Product Categories', 'rollie' ); ?></option>
 				<?php } ?>
@@ -89,7 +89,7 @@
 							);
 						}
 						?>
-							<option <?php selected( $instance['rollie_img_size'], $_size ); ?> value="<?php esc_attr_e( $_size ); ?>"><?php echo esc_html( $_size . '( ' . $_size_w . ' ' . $_size_h . ' )' ); ?></option>
+							<option <?php selected( $instance['rollie_img_size'], $_size ); ?> value="<?php esc_attr( $_size ); ?>"><?php echo esc_html( $_size . '( ' . $_size_w . ' ' . $_size_h . ' )' ); ?></option>
 						<?php
 					}
 					?>
