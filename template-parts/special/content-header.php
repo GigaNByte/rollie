@@ -81,13 +81,9 @@ if ( get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 1 ) ==
 				
 			<div class="<?php echo $rollie_bb_ex; ?>  rollie_f_excerpt rollie_flex_center_v rollie_subtitle_text_color">
 				<?php
-				if ( get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 1 ) == 3 || get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 1 ) == 4 ) {
-					echo "<div class='rollie_w_0'>";
-				}
+
 					rollie_excerpt( false );
-				if ( get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 1 ) == 3 || get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 1 ) == 4 ) {
-					echo '</div>';
-				}
+
 				?>
 					
 			</div>

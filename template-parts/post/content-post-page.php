@@ -1,13 +1,5 @@
 <?php
-
-
-
 require get_template_directory() . '/include/rollie_index_layout_vars.php';
-
-
-	// $page_for_posts_id = get_option( 'page_for_posts' );
-
-	// if ( $page_for_posts_id ) {
 get_template_part( 'template-parts/special/content-header' );
 ?>
 </div><!-- closing page head from header.php-->	
@@ -41,19 +33,21 @@ get_template_part( 'template-parts/special/content-header' );
 		?>
 		<main id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_main_post_content rollie_f_main rollie_main_theme_text_color <?php echo $rollie_main_col; ?> '>
 			<?php	rollie_breadcrumb(); ?>
-			<article <?php post_class( $rollie_entry_offset_lg ); ?>> 
-				<div class="row">
-					<div class="col-10 offset-1 col-lg-8 offset-lg-2  ">
-						
-						<?php
-						if ( is_category() ) {
-							echo category_description();
-						} elseif ( is_home() ) {
-							the_content();
-						}
-						?>
-						
-						
+			<?php if ( is_category() || is_home() ) { ?>
+				<article <?php post_class( $rollie_entry_offset_lg ); ?>> 
+					<div class="row">
+						<div class="col-10 offset-1 col-lg-8 offset-lg-2  ">
+							
+							<?php
+							if ( is_category() ) {
+								echo category_description();
+							} elseif ( is_home() ) {
+								the_content();
+							}
+							?>
+							
+							
+						</div>
 					</div>
-				</div>
-			</article>
+				</article>
+			<?php } ?>
