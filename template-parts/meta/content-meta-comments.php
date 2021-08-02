@@ -1,5 +1,5 @@
 <?php
-if ( comments_open() ) {
+if ( comments_open() && get_theme_mod( 'rollie_display_author_avatar' . $rollie_template_sufix ) ) {
 	if ( has_post_format( array( 'status', 'aside' ) ) ) { ?>
 		<div class='rollie_show_post_trigger' rollie_post_id='<?php the_ID(); ?>'>
 	<?php } else { ?>

@@ -55,7 +55,7 @@ function rollie_meta_control( $wp_customize, $rollie_sufix, $rollie_section_pref
 				$wp_customize,
 				'rollie_display_date' . $rollie_sufix,
 				array(
-					'label'   => __( 'Display date', 'rollie' ),
+					'label'   => __( 'Display Date', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 
 				)
@@ -74,7 +74,7 @@ function rollie_meta_control( $wp_customize, $rollie_sufix, $rollie_section_pref
 				$wp_customize,
 				'rollie_display_author_avatar' . $rollie_sufix,
 				array(
-					'label'   => __( 'Display author avatar', 'rollie' ),
+					'label'   => __( 'Display Author Avatar', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 
 				)
@@ -93,12 +93,41 @@ function rollie_meta_control( $wp_customize, $rollie_sufix, $rollie_section_pref
 				$wp_customize,
 				'rollie_display_author' . $rollie_sufix,
 				array(
-					'label'   => __( 'Display author', 'rollie' ),
+					'label'   => __( 'Display Author', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 
 				)
 			)
 		);
+	$wp_customize->add_setting(
+		'rollie_display_comments' . $rollie_sufix,
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rollie_sanitize_checkbox',
+		)
+	);
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_Control(
+			$wp_customize,
+			'rollie_display_cat' . $rollie_sufix,
+			array(
+				'label'   => __( 'Display Comments Link', 'rollie' ),
+				'section' => $rollie_section_prefix . $rollie_sufix,
+
+			)
+		)
+	);
+	$wp_customize->add_control(
+		new Rollie_Toggle_Switch_Custom_Control(
+			$wp_customize,
+			'rollie_display_comments' . $rollie_sufix,
+			array(
+				'label'   => __( 'Display Categories', 'rollie' ),
+				'section' => $rollie_section_prefix . $rollie_sufix,
+
+			)
+		)
+	);
 	$wp_customize->add_setting(
 		'rollie_display_cat' . $rollie_sufix,
 		array(
@@ -106,20 +135,7 @@ function rollie_meta_control( $wp_customize, $rollie_sufix, $rollie_section_pref
 			'sanitize_callback' => 'rollie_sanitize_checkbox',
 		)
 	);
-
-	$wp_customize->add_control(
-		new Rollie_Toggle_Switch_Custom_Control(
-			$wp_customize,
-			'rollie_display_cat' . $rollie_sufix,
-			array(
-				'label'   => __( 'Display categories', 'rollie' ),
-				'section' => $rollie_section_prefix . $rollie_sufix,
-
-			)
-		)
-	);
 }
-
 function rollie_header_control( $wp_customize, $rollie_sufix, $rollie_section_prefix ) {
 	$wp_customize->add_setting( 'rollie_header' . $rollie_sufix, array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$wp_customize->add_control(
@@ -150,7 +166,7 @@ function rollie_header_control( $wp_customize, $rollie_sufix, $rollie_section_pr
 				$wp_customize,
 				'rollie_alt_thumbnail' . $rollie_sufix,
 				array(
-					'label'   => __( 'Alternate Post Thumbnail', 'rollie' ),
+					'label'   => __( 'Alternate Thumbnail', 'rollie' ),
 					'section' => $rollie_section_prefix . $rollie_sufix,
 
 				)
@@ -2784,8 +2800,9 @@ function rollie_customizer_register( $wp_customize ) {
 			$wp_customize,
 			'rollie_navbar_search_form',
 			array(
-				'label'   => esc_html__( 'Enable search form ', 'rollie' ),
-				'section' => 'rollie_navbar_section',
+				'label'       => esc_html__( 'Enable search form icon', 'rollie' ),
+				'description' => esc_html__( 'To enable icon Rollie Navbar: Icon Navigation Menu must be active', 'rollie' ),
+				'section'     => 'rollie_navbar_section',
 
 			)
 		)

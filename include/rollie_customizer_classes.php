@@ -256,7 +256,7 @@ class Rollie_Font {
 			)
 		);
 
-		$wp_customize->add_setting( $this->font_set_name . '_i' , array( 'sanitize_callback' => 'rollie_sanitize_no_input' ));
+		$wp_customize->add_setting( $this->font_set_name . '_i', array( 'sanitize_callback' => 'rollie_sanitize_no_input' ) );
 		$font_set_class_str = implode( ', ', $this->font_set_class );
 		$wp_customize->add_control(
 			new Rollie_Notice_Control(
@@ -452,7 +452,7 @@ class Rollie_Font {
 					$wp_customize,
 					$this->font_set_name . '_U',
 					array(
-						'label'   => esc_html__( 'Uppercase text' . 'rollie' ),
+						'label'   => esc_html__( 'Uppercase text' , 'rollie' ),
 						'section' => $this->customizer_section,
 					)
 				)
@@ -535,7 +535,7 @@ class Rollie_Font {
 						$wp_customize,
 						$this->font_set_name . '_' . $value . '_min',
 						array(
-							'label'       => esc_html( __( 'Minimum font size for', 'rollie' ) . $value . __( 'headings (px)', 'rollie' ) ),
+							'label'       => esc_html( __( 'Minimum font size for', 'rollie' ) . ' ' . $value . ' ' . __( 'headings (px)', 'rollie' ) ),
 							'description' => esc_html__( 'Should be less than max font size otherwise sets default', 'rollie' ),
 							'section'     => $this->customizer_section,
 							'input_attrs' => array(
@@ -561,7 +561,7 @@ class Rollie_Font {
 						$wp_customize,
 						$this->font_set_name . '_' . $value . '_max',
 						array(
-							'label'       => esc_html( __( 'Maximum font size for', 'rollie' ) . $value . __( 'headings (px)', 'rollie' ) ),
+							'label'       => esc_html( __( 'Maximum font size for', 'rollie' ) . ' ' . $value . ' ' . __( 'headings (px)', 'rollie' ) ),
 							'description' => esc_html__( 'Should be more than min font size otherwise sets default', 'rollie' ),
 							'section'     => $this->customizer_section,
 							'input_attrs' => array(

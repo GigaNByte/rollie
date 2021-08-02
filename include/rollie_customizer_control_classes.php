@@ -133,7 +133,15 @@ class Rollie_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 							$font_list_str = '<option value="' . $this->font_list[ $this->font_list_index ]->family . '" ' . selected( $this->font_values->font, $this->font_list[ $this->font_list_index ]->family, false ) . '>' . $this->font_list[ $this->font_list_index ]->family . ' (default)</option>' . $font_list_str;
 						}
 						// Display our list of font options.
-						echo wp_kses( $font_list_str, array( 'option' => array() ) );
+						echo wp_kses(
+							$font_list_str,
+							array(
+								'option' => array(
+									'selected' => array(),
+									'value'    => array(),
+								),
+							)
+						);
 						?>
 					</select>	
 			</div>
