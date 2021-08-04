@@ -1,0 +1,44 @@
+{
+    "key": "group_5c08e865557a8",
+    "title": "Quote author",
+    "fields": [
+        {
+            "key": "field_5c08e87e5f518",
+            "label": "Quote author",
+            "name": "rollie_quote_author",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_format",
+                "operator": "==",
+                "value": "quote"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1628001491,
+    "local_file": "G:XAMPP2021_1htdocs\/wp-content\/themes\/rollie_2\/acf-json\/group_5c08e865557a8.json"
+}

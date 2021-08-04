@@ -446,6 +446,7 @@ input:checked {
 }
 .rollie_multiple_switch_group_hidden_js {
   margin: 0px;
+  padding: 0px;
   height: 0px;
   visibility: hidden;
 }

@@ -34,7 +34,7 @@ class Rollie_Comment_Walker extends Walker_Comment {
 							<a class="hidden-xs-down mr-1" href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 								<div class='d-inline-block  small font-weight-light  rollie_subtitle_text_color'>
 									<time datetime="<?php comment_time( 'c' ); ?>">
-									<?php echo esc_html( printf( _x( '%s ago', 'rollie' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ) ); ?>
+									<?php echo esc_html( printf( _x( '%s ago', '%s = human-readable time difference', 'rollie' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) ) ); ?>
 									</time>
 								</div>	
 							</a>

@@ -232,10 +232,10 @@ class Rollie_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 			<input type="hidden" class="google-fonts-category rollie_font_category"
 				value="<?php echo esc_attr( $this->font_values->category ); ?>"
 				rollie-reset-value="<?php echo esc_attr( $this->font_values->category ); ?>">
-			<span> <?php esc_html__( 'Reset to previous settings', 'rollie' ); ?> </span>
+			<span> <?php esc_html_e( 'Reset to previous settings', 'rollie' ); ?> </span>
 			<span default="<?php echo esc_attr( $this->value() ); ?>"
 				object_name="<?php echo esc_attr( $this->input_attrs['object_name'] ); ?>"
-				class=" rollie_font_reset dashicons dashicons-image-rotate"></span>
+				class="rollie_font_reset dashicons dashicons-image-rotate"></span>
 			<?php
 		}
 	}
@@ -313,7 +313,7 @@ class Rollie_Icon_Customize_Control extends WP_Customize_Control {
 						<img class="rollie_dash rollie_icon_customize_control_img"
 							src="<?php echo esc_url( get_template_directory_uri() . '/images/' . esc_html( $rollie_split[0] ) . '.png' ); ?>"></img>
 						<?php } else { ?>
-						<i class="rollie_dash fab fa-2x <?php echo ( esc_html( preg_replace( '/[ ,]+/', ' ', trim( $rollie_split[0] ) ) ) ); ?> "></i>
+						<i class="rollie_dash fas fa-2x <?php echo ( esc_html( preg_replace( '/[ ,]+/', ' ', trim( $rollie_split[0] ) ) ) ); ?> "></i>
 						<?php } ?>
 					</label>
 					<input type="radio" name="<?php echo esc_attr( $this->id ); ?>"

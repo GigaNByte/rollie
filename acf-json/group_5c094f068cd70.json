@@ -1,0 +1,44 @@
+{
+    "key": "group_5c094f068cd70",
+    "title": "Link post format",
+    "fields": [
+        {
+            "key": "field_5c094f3782654",
+            "label": "External Link",
+            "name": "rollie_external_link",
+            "type": "text",
+            "instructions": "Paste here external link. If website user clicks post thumbnail or title user will  be redirected to this link.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_format",
+                "operator": "==",
+                "value": "link"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1628001491,
+    "local_file": "G:XAMPP2021_1htdocs\/wp-content\/themes\/rollie_2\/acf-json\/group_5c094f068cd70.json"
+}

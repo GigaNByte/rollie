@@ -36,10 +36,7 @@ jQuery(document).ready(function ($) {
 			if ($(this).find('.rollie_ruler_link').hasClass('dashicons-admin-links')) {
 				$(this).find('.rollie_ruler_link').removeClass('dashicons-admin-links');
 				$(this).find('.rollie_ruler_link').addClass('dashicons-editor-unlink');
-
-
 			} else {
-
 				$(this).parent().find('.rollie_css_ruler_item').val($(this).parent().find('.rollie_css_ruler_item').first().val());
 				$(this).parent().find('.rollie_css_ruler_item').text($(this).parent().find('.rollie_css_ruler_item').first().val());
 
@@ -232,8 +229,10 @@ jQuery(document).ready(function ($) {
 
 	rollie_add_panel_icon('panel-rollie_grid_meta_panel', 'dashicons-layout');
 	rollie_add_panel_icon('panel-rollie_font_panel', 'dashicons-editor-textcolor');
+	rollie_add_panel_icon('panel-rollie_img_panel', 'dashicons-format-image');
 	rollie_add_panel_icon('panel-rollie_misc_panel', 'dashicons-admin-settings');
 	rollie_add_panel_icon('panel-rollie_color_design_panel', 'dashicons-admin-customizer');
+	rollie_add_panel_icon('panel-rollie_layout_panel', 'dashicons-schedule');
 	rollie_add_panel_icon('panel-rollie_post_formats_panel', 'dashicons-format-status');
 	rollie_add_panel_icon('section-rollie_sidebar_section', 'dashicons-exerpt-view');
 	rollie_add_panel_icon('section-rollie_comments_section', 'dashicons-admin-comments');

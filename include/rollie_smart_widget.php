@@ -174,15 +174,8 @@
 						if ( empty( $rollie_alt_thumbnail ) ) {
 							$rollie_alt_thumbnail = get_the_title();
 						}
-
-						$rollie_thumbnail_url = get_the_post_thumbnail_url();
-
-						if ( function_exists( 'get_field' ) && get_field( 'rollie_excerpt' ) ) {
-							$rollie_smart_content = get_field( 'rollie_excerpt' );
-						} else {
-							$rollie_smart_content = get_the_excerpt();
-						}
-
+						$rollie_thumbnail_url       = get_the_post_thumbnail_url();
+						$rollie_smart_content       = get_the_excerpt();
 						$rollie_smart_content_title = get_the_title();
 						$rollie_smart_main_title    = get_the_title( $post->post_parent );
 

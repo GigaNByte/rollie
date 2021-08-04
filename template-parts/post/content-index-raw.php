@@ -11,11 +11,7 @@
 		<div class="rollie_main_theme_text_color rollie_post_excerpt rollie_f_excerpt  <?php echo $rollie_post_display_style_classes [ $rollie_max_posts_on_current_row ]['post_excerpt_div_col_modern']; ?> ">	
 			<p>
 			<?php
-			if ( get_field( 'rollie_excerpt' ) ) {
-				echo get_field( 'rollie_excerpt' );
-			} else {
 				the_excerpt();
-			}
 			?>
 			</p>	
 		</div>		

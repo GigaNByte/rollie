@@ -238,11 +238,11 @@
 		$html                = '';
 		$rollie_thumbnail_id = rollie_thumbnail_id();
 		if ( get_post_format() == 'video' ) {
-			$html .= "<div class='rollie_embed rollie_post_thumbnail rollie_post_thumbnail_height_m  embed-responsive embed-responsive-16by9'>";
+			$html .= '<div class="rollie_embed rollie_post_thumbnail embed-responsive embed-responsive-16by9 ' . esc_attr( 'rollie_thumbnail_min_max_size' . rollie_page_template_sufix() ) . '">';
 			$html .= rollie_get_embedded_media( array( 'video', 'iframe' ) );
 			$html .= '</div>';
 		} elseif ( get_post_format() == 'audio' ) {
-			$html .= "<div class='rollie_embed rollie_post_thumbnail rollie_post_thumbnail_height_m '>";
+			$html .= '<div class="rollie_embed rollie_post_thumbnail">';
 			$html .= rollie_get_embedded_media( array( 'audio', 'iframe' ) );
 			$html .= '</div>';
 		} elseif ( get_post_format() == 'gallery' && get_post_gallery() ) {
@@ -250,11 +250,11 @@
 			$rollie_gallery_ids = $rollie_gallery['ids'];
 			$rollie_parts       = explode( ',', $rollie_gallery_ids );
 			if ( get_theme_mod( 'rollie_post_format_gallery_slider', true ) ) {
-				$html .= "<div class='rollie_gallery_post_format rollie_post_thumbnail_height_m row'>";
+				$html .= '<div class="rollie_gallery_post_format row ' . esc_attr( 'rollie_thumbnail_min_max_size' . rollie_page_template_sufix() ) . '">';
 				$html .= "<div class='col-6 h-50'>";
 				if ( isset( $rollie_parts[0] ) ) {
 					$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[0], 'full' );
-					$html             .= "<img class='h-100 rollie_post_thumbnail' src='" . $rollie_attachment[0] . "' alt='" . get_the_title( $rollie_parts[0] ) . "'/>";
+					$html             .= '<img class="w-100 rollie_thumbnail" src="' . $rollie_attachment[0] . '" alt="' . get_the_title( $rollie_parts[0] ) . '"/>';
 				}
 
 					$html .= '</div>';
@@ -262,7 +262,7 @@
 
 				if ( isset( $rollie_parts[1] ) ) {
 					$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[1], 'full' );
-					$html             .= "<img class='h-100 rollie_post_thumbnail' src='" . $rollie_attachment[0] . "' alt='" . get_the_title( $rollie_parts[1] ) . "'/>";
+					$html             .= '<img class="w-100 rollie_thumbnail" src="' . $rollie_attachment[0] . '" alt="' . get_the_title( $rollie_parts[1] ) . '"/>';
 				}
 
 					$html .= '</div>';
@@ -270,7 +270,8 @@
 
 				if ( isset( $rollie_parts[2] ) ) {
 					$rollie_attachment = wp_get_attachment_image_src( $rollie_parts[2], 'full' );
-					$html             .= "<img class='h-100 rollie_post_thumbnail' src='" . $rollie_attachment[0] . "' alt='" . get_the_title( $rollie_parts[2] ) . "'/>";
+					$html             .= '<img class="w-100 rollie_thumbnail" src="' . $rollie_attachment[0] . '" alt="' . get_the_title( $rollie_parts[2] ) . '"/>';
+
 				}
 					$html .= '</div>';
 					$html .= '</div>';
@@ -297,7 +298,7 @@
 			}
 		} elseif ( ! empty( $rollie_thumbnail_id ) ) {
 			$rollie_header_limit = ( 0 != $rollie_max_posts_on_current_row ) ? 'rollie_m_thumb' : 'rollie_l_thumb';
-			$html               .= rollie_header_image_responsive( $rollie_thumbnail_id, rollie_thumbnail_alt( $rollie_thumbnail_id ), 'rollie_post_thumbnail', array( 'rollie_xs_thumb', 'rollie_s_thumb', 'rollie_m_thumb', 'rollie_l_thumb' ), $rollie_header_limit );
+			$html               .= rollie_header_image_responsive( $rollie_thumbnail_id, rollie_thumbnail_alt( $rollie_thumbnail_id ), 'rollie_post_thumbnail rollie_thumbnail_min_max_size' . rollie_page_template_sufix(), array( 'rollie_xs_thumb', 'rollie_s_thumb', 'rollie_m_thumb', 'rollie_l_thumb' ), $rollie_header_limit );
 		}
 			$html = apply_filters( 'rollie_post_foreground_filter', $html );
 
@@ -334,7 +335,13 @@
 		} else {
 			return array( '_ctar', '_sp', '_spp', '_se', '_pp' );
 		}
-
+	}
+	function rollie_post_page_template_sufix_array() {
+		if ( class_exists( 'Woocommerce' ) ) {
+			return array( '_ctar', '_se', '_pp', '_woo' );
+		} else {
+			return array( '_ctar', '_se', '_pp' );
+		}
 	}
 	function rollie_subtitle() {
 		global $post;
@@ -439,9 +446,7 @@
 		} elseif ( is_author() ) {
 			$rollie_author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 			echo esc_html( $rollie_author->description );
-		} elseif ( function_exists( 'get_field' ) ) {
-			echo esc_html( get_field( 'rollie_excerpt' ) );
-		} elseif ( $show_if_field_empty ) {
+		} elseif ( $show_if_field_empty || has_excerpt() ) {
 			the_excerpt();
 		}
 

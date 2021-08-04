@@ -147,6 +147,11 @@ function rollie_register_required_plugins() {
 			'slug'     => 'one-click-demo-import',
 			'required' => true,
 		),
+		array(
+			'name'     => 'Regenerate Thumbnails',
+			'slug'     => 'regenerate-thumbnails',
+			'required' => true,
+		),
 
 	);
 

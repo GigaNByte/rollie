@@ -37,7 +37,6 @@ get_template_part( 'template-parts/special/content-header' );
 				<article <?php post_class( $rollie_entry_offset_lg ); ?>> 
 					<div class="row">
 						<div class="col-10 offset-1 col-lg-8 offset-lg-2  ">
-							
 							<?php
 							if ( is_category() ) {
 								echo category_description();
@@ -45,8 +44,6 @@ get_template_part( 'template-parts/special/content-header' );
 								the_content();
 							}
 							?>
-							
-							
 						</div>
 					</div>
 				</article>

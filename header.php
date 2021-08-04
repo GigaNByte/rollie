@@ -56,24 +56,30 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 		}
 	}
 
-	?>
+	$rollie_header_image_min_max_h = 'position-absolute';
+	if ( 'clean' != get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 'classic' ) ) {
+		echo '<div class="rollie_header_container row p-0 ">';
+	} else {
+		$rollie_header_image_min_max_h = 'rollie_header_image_min_max_h' . rollie_page_template_sufix();
+	}
 
-	<div class="rollie_header_container row p-0 ">
-		
-		<?php
-		if ( function_exists( 'get_field' ) && esc_url_raw( get_field( 'rollie_header_video_src' ) ) ) {
-			// url is sanitased in shortocde funct
-			echo do_shortcode( '[rollie_header_video src="' . get_field( 'rollie_header_video_src' ) . '"]' );
+	if ( function_exists( 'get_field' ) && esc_url_raw( get_field( 'rollie_header_video_src' ) ) ) {
+		// url is sanitased in shortocde funct
+		echo do_shortcode( '[rollie_header_video src="' . get_field( 'rollie_header_video_src' ) . '"]' );
 
-		} elseif ( function_exists( 'get_field' ) && get_field( 'rollie_header_shortcode_src' ) ) {
+	} elseif ( function_exists( 'get_field' ) && get_field( 'rollie_header_shortcode_src' ) ) {
 
-			echo do_shortcode( wp_kses( get_field( 'rollie_header_shortcode_src' ), rollie_sanitize_shortcode() ) );
+		echo do_shortcode( wp_kses( get_field( 'rollie_header_shortcode_src' ), rollie_sanitize_shortcode() ) );
 
-		} else {
-			// Header Thumbnail image
-			$rollie_thumbnail_id = rollie_thumbnail_id();
-			if ( ! empty( $rollie_thumbnail_id ) ) {
-				echo rollie_header_image_responsive( $rollie_thumbnail_id, rollie_thumbnail_alt( $rollie_thumbnail_id ), 'rollie_header_image', array( 'rollie_xs', 'rollie_s', 'rollie_m', 'rollie_l' ) ); // ignore wpcs.
-			}
+	} else {
+		// Header Thumbnail image
+		$rollie_thumbnail_id = rollie_thumbnail_id();
+		if ( ! empty( $rollie_thumbnail_id ) ) {
+			echo rollie_header_image_responsive( $rollie_thumbnail_id, rollie_thumbnail_alt( $rollie_thumbnail_id ), 'rollie_header_image ' . $rollie_header_image_min_max_h, array( 'rollie_xs', 'rollie_s', 'rollie_m', 'rollie_l' ) ); // ignore wpcs.
 		}
-		?>
+	}
+
+	if ( 'clean' == get_theme_mod( 'rollie_header_style' . rollie_page_template_sufix(), 'classic' ) ) {
+		echo '<div class="rollie_header_container row p-0 ">';
+	}
+	?>

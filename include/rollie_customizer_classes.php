@@ -126,7 +126,6 @@ class Rollie_Image_Size {
 	}
 	public function add_image_sizes() {
 		foreach ( $this->img_sizes_data  as $key => $size ) {
-
 			add_image_size( $size['size_name'], get_theme_mod( $this->img_set_name . '_w_' . $key, $size['w'] ), get_theme_mod( $this->img_set_name . '_h_' . $key, $size['h'] ), get_theme_mod( $this->img_set_name . '_crop_' . $key, $size['crop'] ) );
 		}
 	}
@@ -452,7 +451,7 @@ class Rollie_Font {
 					$wp_customize,
 					$this->font_set_name . '_U',
 					array(
-						'label'   => esc_html__( 'Uppercase text' , 'rollie' ),
+						'label'   => esc_html__( 'Uppercase text', 'rollie' ),
 						'section' => $this->customizer_section,
 					)
 				)

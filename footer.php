@@ -13,7 +13,6 @@
 */
 if ( get_theme_mod( 'rollie_footer_collapse', true ) ) {
 	echo '</div>';
-
 }
 $rollie_fotter_collapse = '';
 if ( get_theme_mod( 'rollie_footer_collapse', true ) ) {

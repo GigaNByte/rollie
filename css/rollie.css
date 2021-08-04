@@ -216,7 +216,6 @@ img{
 .rollie_header_image
 {
 	height: 100%;
-	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -567,7 +566,7 @@ max-height: 0px;
 .rollie_footer_nav_link:hover,.rollie_footer_nav_link
 {
 
-	white-space: pre-line;
+	white-space: nowrap;
 }
 .rollie_footer_caption
 {
@@ -802,12 +801,13 @@ width: 100%;
 .rollie_classic .rollie_post_container {
 	bottom:0;
 	right: 0;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: none;
 	max-height: 100%;
 	-ms-overflow-style: none; 
 	scrollbar-width: none;  
 }
-.rollie_classic::-webkit-scrollbar {
+.rollie_classic ::-webkit-scrollbar {
 	display: none;
   }
   

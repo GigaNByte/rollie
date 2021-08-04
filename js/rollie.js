@@ -9,13 +9,12 @@ function rgba2rgb(color) {
 	}
 }
 
-
-
 function rollie_nav_handler(container, search_form, collapsing_container) {
 	jQuery(function ($) {
 
 		if ($('.rollie_header_container').find(container).length) {
 			var rollie_header_container_initial_h = $('.rollie_header_wrapper').height();
+			//makes sure 
 			$('.rollie_header_wrapper').css('min-height', $('.rollie_header_wrapper').height() - $(container).height());
 		}
 		var rollie_collapse_side_navbar = false;
@@ -67,8 +66,6 @@ function rollie_nav_handler(container, search_form, collapsing_container) {
 		} else {
 			var rollie_navbar_color = $('.rollie_navbar_color').css('backgroundColor');
 		}
-
-
 
 		//on swipe
 		//swipe support	
@@ -174,9 +171,6 @@ function rollie_nav_handler(container, search_form, collapsing_container) {
 					if (!rollie_collapse_side_navbar) {
 						$('.rollie_navbar_color').css('background', rgba2rgb(rollie_navbar_color));
 					}
-
-
-
 				});
 
 			function rollie_nav_collapse_show() {
