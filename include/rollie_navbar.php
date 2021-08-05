@@ -8,6 +8,7 @@
  */
 
 if ( has_nav_menu( 'rollie_top_menu' ) ) {
+	$rollie_navbar_design     = 'rollie_navbar_design_' . get_theme_mod( 'rollie_navbar_design', 'full' ) . ' ';
 	$rollie_menu_top_position = '';
 	if ( get_theme_mod( 'rollie_navbar_overlay', true ) ) {
 		echo "<div class='overlay rollie_overlay rollie_collapse_side_overlay'></div>";
@@ -21,8 +22,9 @@ if ( has_nav_menu( 'rollie_top_menu' ) ) {
 	if ( empty( $rollie_menu_top_position ) ) {
 		$rollie_menu_top_position = 'rollie_navbar_relative';
 	}
+
 	$rollie_fixed_full_fixed_fix = false;
-	if ( ( 'fixed_full' == get_theme_mod( 'rollie_navbar_design', 'full' ) && get_theme_mod( 'rollie_navbar_fixed', true ) ) || ( 'fixed_full' == get_theme_mod( 'rollie_nav_top_icons_colapsed_content', 'small' ) && 'fixed' == get_theme_mod( 'rollie_navbar_fixed', true ) ) ) {
+	if ( ( 'fixed_full' == get_theme_mod( 'rollie_navbar_design', 'full' ) || 'fixed_full' == get_theme_mod( 'rollie_nav_top_icons_colapsed_content', 'small' ) ) && 'fixed' == get_theme_mod( 'rollie_navbar_fixed', true ) ) {
 		$rollie_fixed_full_fixed_fix = true;
 		// $rollie_menu_top_position = 'position-sticky';
 		// echo "<div id='rollie_extra_fixed_wrapper' class=' w-100 h-100'>";
@@ -40,7 +42,7 @@ if ( has_nav_menu( 'rollie_top_menu' ) ) {
 	?>
 
 <nav id="rollie_navbar_c" class='rollie_menus_shadow  rollie_f_navs <?php echo esc_attr( $rollie_menu_top_position ); ?>'> 			
-	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo esc_attr( $rollie_navbar_transparent . $rollie_navbar_always_collapse ); ?>" >
+	<div id="rollie_navbar_top" class="navbar rollie_navbar rollie_navbar_color navbar-expand invisible <?php echo esc_attr( $rollie_navbar_design . $rollie_navbar_transparent . $rollie_navbar_always_collapse ); ?>" >
 		<?php
 
 		dynamic_sidebar( 'rollie_widgetarea_navbar' );
@@ -78,7 +80,7 @@ if ( has_nav_menu( 'rollie_top_menu' ) ) {
 		// example of using rollie_nav_top_icons_right action .
 		add_action( 'rollie_nav_top_icons_right', 'rollie_nav_top_search_button', 100 );
 		if ( has_nav_menu( 'rollie_top_menu_icons' ) ) {
-			echo "<nav class='rollie_top_menu_icons px-2 rollie_flex_text_center '>";
+			echo "<nav id='rollie_top_menu_icons'class='px-2 rollie_flex_text_center '>";
 			wp_nav_menu(
 				array(
 					'theme_location' => 'rollie_top_menu_icons',

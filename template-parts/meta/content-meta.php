@@ -22,7 +22,7 @@
 
 	</div>
 	<div class='m-auto rollie_subtitle_text_color d-flex flex-nowrap '>
-		<span class='px-2'>	
+		<span class='px-2 align-self-center'>	
 			<?php esc_html_e( 'Comments', 'rollie' ); ?>
 		</span>
 		<span class='px-2'>

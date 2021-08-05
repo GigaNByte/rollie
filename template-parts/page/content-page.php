@@ -36,7 +36,7 @@ if ( class_exists( 'WooCommerce' ) && is_account_page() ) {
 ?>
 
 <main  id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_f_main rollie_main_theme_text_color <?php echo esc_attr( $rollie_main_col ); ?> '>
-	<?php rollie_breadcrumb(); ?>	
+	<?php rollie_breadcrumb(); ?>		
 	<article id="<?php echo esc_attr( 'page-content-' . get_the_ID() ); ?>"  <?php post_class( esc_attr( $disable_paddings ) . ' rollie_text_content_align rollie_single_page_content' ); ?>>
 		<?php
 		if ( ! is_404() ) {

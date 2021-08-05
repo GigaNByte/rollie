@@ -1,6 +1,6 @@
 <?php
 require_once get_template_directory() . '/include/rollie_index_layout_vars.php';
- get_header();
+get_header();
 
 if ( is_home() ) {
 	global $post;
@@ -12,30 +12,25 @@ if ( is_home() ) {
 	}
 	require locate_template( 'template-parts/post/content-post-page.php' );
 	rewind_posts();
+} else {
+	require locate_template( 'template-parts/post/content-post-page.php' );
 }
+while ( have_posts() ) :
+	the_post();
+	require locate_template( 'template-parts/post/content-index.php' );
+endwhile;
 
-if ( have_posts() ) {
-	while ( have_posts() ) :
-		the_post();
-		require locate_template( 'template-parts/post/content-index.php' );
-	endwhile;
+echo '</main>';
+
+if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
+	$rollie_sidebar_col = 'col-' . get_theme_mod( 'rollie_posts_page_l_sidebar_size', 2 );
+	echo "<aside class='rollie_sidebar_right " . esc_attr( $rollie_sidebar_col ) . " '>";
+	dynamic_sidebar( 'rollie_sidebar_right' );
+	echo '</aside>';
 }
-
-?>
-</main>
-	<?php
-
-	if ( $rollie_allow_sidebar_r && $rollie_allow_sidebars ) {
-		$rollie_sidebar_col = 'col-' . get_theme_mod( 'rollie_posts_page_l_sidebar_size', 2 );
-		echo "<aside class='rollie_sidebar_right " . esc_attr( $rollie_sidebar_col ) . " '>";
-		dynamic_sidebar( 'rollie_sidebar_right' );
-		echo '</aside>';
-	}
 	rollie_pagination();
-
-
 	get_sidebar();
 
-	?>
+?>
 </div>
 <?php get_footer(); ?>

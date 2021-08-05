@@ -4,7 +4,6 @@ require_once get_template_directory() . '/include/rollie_post_grid_layout_vars.p
 $rollie_dont_change_style          = false;
 $rollie_last_post_dont_add_div     = false;
 $rollie_current_posts_row_no_limit = false;
-
 if ( $wp_query->current_post == 0 ) {
 	if ( $rollie_max_posts_one_on_row != 0 ) {
 		$rollie_max_posts_on_current_row = 0;
@@ -51,8 +50,19 @@ if ( ( has_post_format( 'status' ) || has_post_format( 'audio' ) || has_post_for
 }
 require get_template_directory() . '/include/rollie_post_grid_single_post_layout_vars.php';
 
+
+
+
+if ( $rollie_post_counter == 0 ) {
+	if ( 1 == get_theme_mod( 'rollie_grid_masonry_type' . $rollie_template_sufix, 1 ) ) {
+		echo '<div class="rollie_grid">';
+	} else {
+		echo '<div class="rollie_grid rollie_grid_masonry rollie_grid_masonry' . $rollie_template_sufix . '">';
+		echo '<div class="rollie_grid_masonry_size rollie_grid_masonry_size' . $rollie_template_sufix . '"></div>';
+	}
+}
 if ( $rollie_col_counter == 0 ) {
-	if ( 1 == get_theme_mod( 'rollie_grid_type' . $rollie_template_sufix, 1 ) ) {
+	if ( 1 == get_theme_mod( 'rollie_grid_masonry_type' . $rollie_template_sufix, 1 ) ) {
 		// not masonry
 		if ( $rollie_max_posts_on_current_row == 0 ) {
 			echo '<div class="row m-0">';
@@ -62,10 +72,6 @@ if ( $rollie_col_counter == 0 ) {
 		} else {
 			$rollie_extra_row_tag = false;
 		}
-	} else {
-		// masonry
-		echo '<div class="rollie_grid rollie_grid' . $rollie_template_sufix . '">';
-		echo '<div class="rollie_grid_size rollie_grid_size' . $rollie_template_sufix . '"></div>';
 	}
 }
 echo '<div class="' . $rollie_post_display_style_classes[ $rollie_max_posts_on_current_row ]['first_div_col'] . '">';
@@ -86,8 +92,9 @@ if ( $rollie_post_page_raw_enable ) {
 
 echo '</div>';
 $rollie_col_counter++;
+$rollie_post_counter++;
 
-if ( 1 == get_theme_mod( 'rollie_grid_type' . $rollie_template_sufix, 1 ) ) {
+if ( 1 == get_theme_mod( 'rollie_grid_masonry_type' . $rollie_template_sufix, 1 ) ) {
 	if ( $rollie_max_posts_on_current_row < $rollie_col_counter || $wp_query->current_post == $wp_query->query_vars['posts_per_page'] ) { // row ending
 		if ( $rollie_max_posts_on_current_row == 0 ) {
 			echo '</div>';

@@ -52,9 +52,8 @@
 
   display: table;
 }
-.rollie_dash {
-  font-family: FontAwesome;
-  font-style: inherit;
+.rollie_dash{
+  padding: 0.5rem;
   width: 100%;
 }
 .rollie_customizer_icon_single {

@@ -191,7 +191,7 @@
 
 							$rollie_thumbnail_url = get_field( 'rollie_cat_img', $category );
 
-							$rollie_smart_content = get_field( 'rollie_category_excerpt', $category );
+							$rollie_smart_content = category_description( $category );
 
 							$this->template( $rollie_class, $rollie_img_size, $rollie_center, get_term_link( $category ), $rollie_thumbnail_url, $category->name, $rollie_smart_content_display, $category->name, $rollie_smart_content, $category->name, '' );
 						}

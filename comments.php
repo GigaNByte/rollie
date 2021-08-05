@@ -43,13 +43,13 @@ if ( post_password_required() ) {
 
 	$fields = array(
 		'author' =>
-		'<div class="form-group"><label for="author">' . __( 'Name', 'rollie' ) . '</label> <span class="required">*</span> <input id="author" name="author" type="text" class="form-control rollie_form_control" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required" /></div>',
+		'<div class="form-group"><label for="author">' . __( 'Name', 'rollie' ) . '</label> <span class="required">*</span> <input id="author" name="author" type="text" class="form-control rollie_form_control rollie_form_input" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required" /></div>',
 
 		'email'  =>
-		'<div class="form-group"><label for="email">' . __( 'Email', 'rollie' ) . '</label> <span class="required">*</span><input id="email" name="email" class="form-control rollie_form_control" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" required="required" /></div>',
+		'<div class="form-group"><label for="email">' . __( 'Email', 'rollie' ) . '</label> <span class="required">*</span><input id="email" name="email" class="form-control rollie_form_control rollie_form_input" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" required="required" /></div>',
 
 		'url'    =>
-		'<div class="form-group  last-field"><label for="url">' . __( 'Website', 'rollie' ) . '</label><input id="url" name="url" class="form-control rollie_form_control" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" /></div>',
+		'<div class="form-group  last-field"><label for="url">' . __( 'Website', 'rollie' ) . '</label><input id="url" name="url" class="form-control rollie_form_control rollie_form_input" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" /></div>',
 	);
 
 	$args = array(
@@ -63,7 +63,7 @@ if ( post_password_required() ) {
 		'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title rollie_f_main">',
 		'title_reply_after'    => '</h3>',
 		'comment_notes_before' => '<p class="comment-notes">' .
-			esc_html__( 'Your email address will not be published', 'rollie' ) . ( $req ? esc_html__( 'Required fields are marked *', 'rollie' ) : '' ) .
+			esc_html__( 'Your email address will not be published', 'rollie' ) . ' ' . ( $req ? esc_html__( 'Required fields are marked *', 'rollie' ) : '' ) .
 			'</p>',
 	);
 

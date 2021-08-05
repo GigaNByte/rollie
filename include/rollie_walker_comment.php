@@ -17,7 +17,7 @@ class Rollie_Comment_Walker extends Walker_Comment {
 	protected function html5_comment( $comment, $depth, $args ) {
 		?>		
 		<div id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'has-children media' : ' media' ); ?>>
-			<div class="media-body card mt-3 rollie_comment rollie_darker_main_color " id="div-comment-<?php comment_ID(); ?>">
+			<div class="media-body card mt-3 rollie_comment rollie_darker_main_color rollie_second_text_color " id="div-comment-<?php comment_ID(); ?>">
 				<div class="card-header rollie_card_header hoverable ">
 					<div class="flex-center rollie_f_main">
 						<?php if ( 0 != $args['avatar_size'] ) : ?>

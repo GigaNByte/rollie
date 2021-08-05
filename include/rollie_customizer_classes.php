@@ -262,7 +262,7 @@ class Rollie_Font {
 				$wp_customize,
 				$this->font_set_name . '_i',
 				array(
-					'description' => ' <span>' . __( 'This styles are saved to css selectors:', 'rollie' ) . '<span class="rollie_info_c"><b><strong> ' . esc_html( $font_set_class_str ) . '</strong> </b></span></span></br> </br><strong> <span class="rollie_warn_c ">' . __( 'Important!', 'rollie' ) . ' </span>' . __( 'Using many different Fonts and weights in theme may slow down loading of your site!', 'rollie' ) . '</strong><br><a href="https://fonts.google.com/" target="_blank">' . __( 'More information about', 'rollie' ) . ' Google Fonts</a>',
+					'description' => ' <span>' . __( 'This styles are saved to css selectors:', 'rollie' ) . '<span class="rollie_info_c"><b><strong> ' . esc_html( $font_set_class_str ) . '</strong> </b></span></span></br> </br><strong> <span class="rollie_warn_c ">' . __( 'Important!', 'rollie' ) . ' </span>' . __( 'Using many different Fonts and weights in theme may slow down loading of your site!', 'rollie' ) . '</strong></br><a href="https://fonts.google.com/" target="_blank">' . __( 'More information about', 'rollie' ) . ' Google Fonts</a>',
 					'section'     => $this->customizer_section,
 				)
 			)

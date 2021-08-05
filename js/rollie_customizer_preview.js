@@ -106,7 +106,7 @@ function rollieUniversalControl(rollie_color_obj) {
 (function ($) {
   var customize = wp.customize;
   var rollie_gr_controls = [
-    new RollieCustomizerObj('rollie_main_theme_color', '.rollie_main_color,.rollie_grid_item', Array('background')),
+    new RollieCustomizerObj('rollie_main_theme_color', '.rollie_main_color,.rollie_grid_masonry_item', Array('background')),
     new RollieCustomizerObj('rollie_second_theme_color', '.rollie_second_color', Array('background')),
     new RollieCustomizerObj('rollie_third_theme_color', '.rollie_third_color', Array('background')),
     new RollieCustomizerObj('rollie_darker_main_theme_color', '.rollie_darker_main_color', Array('background')),

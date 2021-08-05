@@ -31,16 +31,15 @@ get_template_part( 'template-parts/special/content-header' );
 			$rollie_offset_var = 'col-12';
 		}
 		?>
+		
 		<main id="<?php echo 'page-' . get_the_ID(); ?>" class='rollie_main_post_content rollie_f_main rollie_main_theme_text_color <?php echo $rollie_main_col; ?> '>
-			<?php	rollie_breadcrumb(); ?>
-			<?php if ( is_category() || is_home() ) { ?>
+		<?php	rollie_breadcrumb(); ?>	
+		<?php if ( is_home() && get_the_content() ) { ?>
 				<article <?php post_class( $rollie_entry_offset_lg ); ?>> 
 					<div class="row">
 						<div class="col-10 offset-1 col-lg-8 offset-lg-2  ">
 							<?php
-							if ( is_category() ) {
-								echo category_description();
-							} elseif ( is_home() ) {
+							if ( is_home() ) {
 								the_content();
 							}
 							?>

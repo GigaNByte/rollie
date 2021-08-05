@@ -6,8 +6,8 @@ if ( comments_open() && get_theme_mod( 'rollie_display_author_avatar' . $rollie_
 	} else {
 		echo '<a class="col" href="' . esc_url( get_comments_link() ) . '">';
 	} ?>
-	
-		<span class='m-auto rollie_fourth_text_color p-3'>
+
+		<span class='m-auto rollie_fourth_text_color p-3 '>
 			<?php esc_html_e( 'Comments', 'rollie' ); ?>
 		</span>
 		<span class='px-2'>

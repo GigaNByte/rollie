@@ -1,3 +1,2 @@
 <?php
-
-	require locate_template( 'index.php' );
+	require_once locate_template( 'index.php' );

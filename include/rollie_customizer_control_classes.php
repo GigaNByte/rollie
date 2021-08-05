@@ -324,7 +324,6 @@ class Rollie_Icon_Customize_Control extends WP_Customize_Control {
 			</div>
 			<?php endforeach; ?>
 		</div>
-		<br>
 	</div>
 			<?php
 		} else {

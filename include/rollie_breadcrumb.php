@@ -3,6 +3,8 @@
 // http://www.thatweblook.co.uk/blog/tutorials/tutorial-wordpress-breadcrumb-function/
 
 function rollie_breadcrumb() {
+	global $post;
+	$parents     = get_post_ancestors( $post );
 	$separator   = ' > ';
 	$is_woo_page = false;
 	if ( class_exists( 'WooCommerce' ) ) {
@@ -10,50 +12,45 @@ function rollie_breadcrumb() {
 			$is_woo_page = true;
 		}
 	}
+
 	if ( ! is_front_page() && ! $is_woo_page ) {
 
 		// Start the breadcrumb with a link to your homepage.
-		echo '<nav class="rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb ">';
-		echo '<a c href="' . esc_url( home_url() ) . '">' . esc_html( bloginfo( 'name' ) ) . '</a>' . esc_html( $separator );
-
+		echo '<nav class="rollie_subtitle_text_color rollie_f_excerpt rollie_breadcrumb" aria-label="Breadcrumb">';
+		echo '<a href="' . esc_url( home_url() ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a>' . esc_html( $separator );
+		foreach ( $parents as $parent ) {
+			echo '<a href="' . esc_url( get_page_link( $parent ) ) . '">' . get_the_title( $parent ) . '</a>' . esc_html( $separator );
+		}
+		$breadcrumb_last_title = '';
 		// Check if the current page is a category, an archive or a single page. If so show the category or archive name.
-		if ( is_category() || is_single() ) {
-
-			the_category( ', ' );
-
-		} elseif ( is_archive() || is_single() ) {
+		if ( is_category() ) {
+			$breadcrumb_last_title = single_cat_title( '', false );
+		} elseif ( is_archive() ) {
 			if ( is_day() ) {
-				printf( esc_html( '%s' ), get_the_date() );
+				$breadcrumb_last_title = get_the_date();
 			} elseif ( is_month() ) {
-				printf( esc_html( '%s' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'rollie' ) ) );
+				$breadcrumb_last_title = get_the_date( _x( 'F Y', 'monthly archives date format', 'rollie' ) );
 			} elseif ( is_year() ) {
-				printf( esc_html( '%s' ), get_the_date( _x( 'Y', 'yearly archives date format', 'rollie' ) ) );
+				$breadcrumb_last_title = get_the_date( _x( 'Y', 'yearly archives date format', 'rollie' ) );
+			} elseif ( is_tag() ) {
+				$breadcrumb_last_title = __( 'Tag:' ) . ' ' . single_tag_title( '', false );
 			} else {
-				esc_html_e( 'Blog Archives', 'rollie' );
+				$breadcrumb_last_title = __( 'Blog Archives', 'rollie' );
 			}
-		}
-
-		// If the current page is a single post, show its title with the separator.
-		if ( is_single() ) {
-			the_title( '<span class="rollie_category_title_text_color">' . esc_html( $separator ), '</span>', true );
-		}
-
-		// If the current page is a static page, show its title.
-		if ( is_page() ) {
-			the_title( '<span class="rollie_category_title_text_color">', '</span>', true );
-		}
-
-		// if you have a static page assigned to be you posts list page. It will find the title of the static page and display it. i.e Home >> Blog.
-		if ( is_home() ) {
-
+		} elseif ( is_search() ) {
+			$breadcrumb_last_title = __( 'Search', 'rollie' );
+		} elseif ( is_page() || is_single() ) {
+			$breadcrumb_last_title = get_the_title();
+		} elseif ( is_home() ) {
 			$page_for_posts_id = get_option( 'page_for_posts' );
 			if ( $page_for_posts_id ) {
 				$r_post = get_post( $page_for_posts_id );
 				setup_postdata( $r_post );
-				the_title();
+				$breadcrumb_last_title = get_the_title();
 				rewind_posts();
 			}
 		}
+		echo '<span class="rollie_category_title_text_color" aria-current="' . esc_attr( $breadcrumb_last_title ) . '">' . esc_html( $breadcrumb_last_title ) . '</span>';
 		echo '</nav>';
 	}
 }

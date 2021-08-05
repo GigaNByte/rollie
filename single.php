@@ -1,2 +1,2 @@
 <?php
-require 'page.php';
+require_once locate_template('page.php');

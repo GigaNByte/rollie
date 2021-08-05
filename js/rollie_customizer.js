@@ -227,7 +227,7 @@ jQuery(document).ready(function ($) {
 		$("li[aria-owns='sub-accordion-" + rollie_panel_slug + "']>h3").prepend('<span class="dashicons ' + dashicon_classes + '"></span>');
 	}
 
-	rollie_add_panel_icon('panel-rollie_grid_meta_panel', 'dashicons-layout');
+	rollie_add_panel_icon('panel-rollie_grid_masonry_meta_panel', 'dashicons-layout');
 	rollie_add_panel_icon('panel-rollie_font_panel', 'dashicons-editor-textcolor');
 	rollie_add_panel_icon('panel-rollie_img_panel', 'dashicons-format-image');
 	rollie_add_panel_icon('panel-rollie_misc_panel', 'dashicons-admin-settings');

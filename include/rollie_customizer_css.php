@@ -15,10 +15,10 @@ function rollie_customizer_css() {
 	$rollie_inline_style = '';
 	rollie_fonts_customizer_css();
 
-	$rollie_main_theme_color = new Rollie_Gradient( 'rollie_main_theme_color', '#ffffff', '.rollie_main_color,.rollie_grid_item', array( 'background' ) );
+	$rollie_main_theme_color = new Rollie_Gradient( 'rollie_main_theme_color', '#ffffff', '.rollie_main_color,.rollie_grid_masonry_item', array( 'background' ) );
 
 	$rollie_inline_style      .= $rollie_main_theme_color->css_snippet();
-	$rollie_second_theme_color = new Rollie_Gradient( 'rollie_second_theme_color', '#212121', '.rollie_second_color ,.shop_table > thead ,.rollie_woo_order_table_banner, .rollie_top_menu_icons > button[aria-expanded="true"]', array( 'background' ) );
+	$rollie_second_theme_color = new Rollie_Gradient( 'rollie_second_theme_color', '#212121', '.rollie_second_color ,.shop_table > thead ,.rollie_woo_order_table_banner, #rollie_top_menu_icons> button[aria-expanded="true"]', array( 'background' ) );
 
 	$rollie_inline_style .= $rollie_second_theme_color->css_snippet();
 	list($rollie_second_color_r, $rollie_second_color_g, $rollie_second_color_b) = sscanf( $rollie_second_theme_color->rgb, '#%02x%02x%02x' );
@@ -119,7 +119,7 @@ function rollie_customizer_css() {
 	$rollie_inline_style .= '.rollie_pagination_active *,.page-item.active .page-link{ color: ' . $rollie_third_theme_color->rgb . ' ;  background-color: ' . $rollie_second_theme_color->rgb . '}';
 	$rollie_inline_style .= '.rollie_pagination_link:hover{ color: ' . $rollie_third_theme_color->rgb . ' ;  background :' . $rollie_darker_main_theme_color->rgb_gr_1 . ';	}';
 	$rollie_inline_style .= '.rollie_main_theme_text_color{ color: ' . $rollie_main_theme_text_color . ';}';
-	$rollie_inline_style .= '.rollie_second_text_color,.shop_table > thead,.rollie_woo_order_table_banner, #rollie_nav_user_info .rollie_login_form_site_icon_wrapper { color: ' . $rollie_second_text_color . ';}';
+	$rollie_inline_style .= '.rollie_darker_main_color a,.rollie_second_text_color,.shop_table > thead,.rollie_woo_order_table_banner, #rollie_nav_user_info .rollie_login_form_site_icon_wrapper { color: ' . $rollie_second_text_color . ';}';
 	$rollie_inline_style .= '.rollie_title_text_color{color: ' . $rollie_title_text_color . ';}';
 	$rollie_inline_style .= '.rollie_fourth_text_color,.rollie_my_acc_nav_side_c  a, article a { color: ' . $rollie_fourth_text_color . ' ;}';
 	$rollie_inline_style .= '.rollie_sort_orders_current,.rollie_my_acc_nav_side_c .is-active > a, .rollie_category_title_text_color,a:hover,.rollie_footer_dropdown_item:hover{ color: ' . $rollie_category_title_text_color . ';}';
@@ -132,7 +132,7 @@ function rollie_customizer_css() {
 
 	$rollie_inline_style .= '.rollie_icon_first,.cld-common-wrap,.fas,.far,.fal,.fab { color: ' . $rollie_icon_color_first . ';text-shadow: 0px 0px 3px  ' . $rollie_icon_color_first_shadow . ' ; }';
 	$rollie_inline_style .= ".rollie_icon_first:hover,.cld-common-wrap:hover,button[aria-expanded='true'] *,.fas:hover ,.fal:hover,.fab:hover,.far:hover,button:hover .fas,button:hover .far ,button:hover .fas,button:hover .fal,	.rollie_icon_first:active,.cld-common-wrap:active,.fas:active ,.fal:active,.fab:active,.far:active,button:active .fas,button:active .far ,button:active .fas,button:active .fal{ color: " . $rollie_icon_color_first_h . ' ; }';
-	$rollie_inline_style .= '.rollie_button ,.woocommerce button.button ,.woocommerce #respond input#submit, .woocommerce a.button,.rollie_top_menu_icons > button ,.woocommerce   .button,.rollie_button_alt,.woocommerce button.button.alt ,.woocommerce a.button.alt,.woocommerce .checkout-button {' . $rollie_border_data['buttons']->css_snippet() . '}';
+	$rollie_inline_style .= '.rollie_button ,.woocommerce button.button ,.woocommerce #respond input#submit, .woocommerce a.button,#rollie_top_menu_icons> button ,.woocommerce   .button,.rollie_button_alt,.woocommerce button.button.alt ,.woocommerce a.button.alt,.woocommerce .checkout-button {' . $rollie_border_data['buttons']->css_snippet() . '}';
 	$rollie_inline_style .= '.rollie_nav_link,.rollie_dropdown_item{color: ' . $rollie_navbar_text_color . ';}';
 	$rollie_inline_style .= '.rollie_nav_link:hover,.rollie_dropdown_item:hover { color: ' . $rollie_navbar_hover_text_color . '; }';
 	$rollie_inline_style .= '.rollie_chevron_menu { color: ' . $rollie_navbar_chevron . ' !important; }';
@@ -162,11 +162,11 @@ function rollie_customizer_css() {
 	foreach ( rollie_page_template_sufix_array() as  $sufix ) {
 			$rollie_inline_style .= '.rollie_header_image_min_h' . $sufix . '{ min-height:' . get_theme_mod( 'rollie_header_height' . $sufix, 60 ) . 'vh;}';
 			$rollie_inline_style .= '.rollie_header_image_min_max_h' . $sufix . '{ max-height:' . get_theme_mod( 'rollie_header_height' . $sufix, 60 ) . 'vh;min-height:' . get_theme_mod( 'rollie_header_height' . $sufix, 60 ) . 'vh;}';
-		if ( get_theme_mod( 'rollie_grid_type' . $sufix, 1 ) == 2 ) {
-			$rollie_inline_style .= '@media (min-width: 1280px) {.rollie_grid_size' . $sufix . '.rollie_grid_size ,.rollie_grid_size' . $sufix . '~ .rollie_grid_item { width: ' . get_theme_mod( 'rollie_post_page_masonry_size_lg' . $sufix, 33 ) . '%;}}';
-			$rollie_inline_style .= '@media (min-width: 768px) and (max-width: 1279.98px)  {.rollie_grid_size' . $sufix . '.rollie_grid_size ,.rollie_grid_size' . $sufix . '~ .rollie_grid_item { width: ' . get_theme_mod( 'rollie_post_page_masonry_size_sm' . $sufix, 33 ) . '%;}}';
-			$rollie_inline_style .= '@media (max-width: 767.98px) {.rollie_grid_size' . $sufix . '.rollie_grid_size  ,.rollie_grid_size' . $sufix . '~ .rollie_grid_item { width: ' . get_theme_mod( 'rollie_post_page_masonry_size_xs' . $sufix, 50 ) . '%;}}';
-			$rollie_inline_style .= '.rollie_grid_size' . $sufix . '.rollie_grid_item { padding: ' . get_theme_mod( 'rollie_post_page_masonry_gutter' . $sufix, 3 ) . 'px;}';
+		if ( get_theme_mod( 'rollie_grid_masonry_type' . $sufix, 1 ) == 2 ) {
+			$rollie_inline_style .= '@media (min-width: 1280px) {.rollie_grid_masonry_size' . $sufix . '.rollie_grid_masonry_size ,.rollie_grid_masonry_size' . $sufix . '~ .rollie_grid_masonry_item { width: ' . get_theme_mod( 'rollie_post_page_masonry_size_lg' . $sufix, 33 ) . '%;}}';
+			$rollie_inline_style .= '@media (min-width: 768px) and (max-width: 1279.98px)  {.rollie_grid_masonry_size' . $sufix . '.rollie_grid_masonry_size ,.rollie_grid_masonry_size' . $sufix . '~ .rollie_grid_masonry_item { width: ' . get_theme_mod( 'rollie_post_page_masonry_size_sm' . $sufix, 33 ) . '%;}}';
+			$rollie_inline_style .= '@media (max-width: 767.98px) {.rollie_grid_masonry_size' . $sufix . '.rollie_grid_masonry_size  ,.rollie_grid_masonry_size' . $sufix . '~ .rollie_grid_masonry_item { width: ' . get_theme_mod( 'rollie_post_page_masonry_size_xs' . $sufix, 50 ) . '%;}}';
+			$rollie_inline_style .= '.rollie_grid_masonry_size' . $sufix . '.rollie_grid_masonry_item { padding: ' . get_theme_mod( 'rollie_post_page_masonry_gutter' . $sufix, 3 ) . 'px;}';
 		}
 	}
 	wp_add_inline_style( 'rollie_stylesheet', $rollie_inline_style );

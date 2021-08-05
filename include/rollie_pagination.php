@@ -32,7 +32,7 @@ function rollie_pagination( $pages = '', $range = 2, $paged = false, $rollie_woo
 
 		echo '<div class="row col-12 justify-content-center rollie_footer_margin">';
 		echo '<nav class="m-2 rollie_pagination pagination d-flex  rollie_f_b_f" role="navigation">';
-		echo '<div class="rollie_pagination_item page-item  disabled   hidden-md-down d-none d-lg-block"><span class=" rollie_subtitle_text_color page-link">' . esc_html( __( 'Page', 'rollie' ) . ' ' . $paged . ' ' . __( 'of', 'rollie' ) . ' ' . $pages ) . '</span></div>';
+		echo '<div class="rollie_pagination_item page-item disabled hidden-sm-down d-none d-lg-block"><span class=" rollie_subtitle_text_color page-link">' . esc_html( __( 'Page', 'rollie' ) . ' ' . $paged . ' ' . __( 'of', 'rollie' ) . ' ' . $pages ) . '</span></div>';
 
 		if ( $paged > 2 && $paged > $range + 1 && $rollie_showitems < $pages ) {
 
@@ -118,7 +118,7 @@ function rollie_comment_pagination( $pages = '', $range = 2 ) {
 	if ( 1 != $pages ) {
 		echo '<div class="row justify-content-center">';
 		echo '<nav class="m-2 rollie_pagination pagination d-flex  rollie_f_b_f" role="navigation">';
-		echo '<div class="rollie_pagination_item page-item disabled   hidden-md-down d-none d-lg-block"><span class="rollie_subtitle_text_color page-link">' . esc_html( __( 'Page', 'rollie' ) . ' ' . $paged . ' ' . __( 'of', 'rollie' ) . ' ' . $pages ) . '</span></div>';
+		echo '<div class="rollie_pagination_item page-item disabled   hidden-sm-down d-none d-lg-block"><span class="rollie_subtitle_text_color page-link">' . esc_html( __( 'Page', 'rollie' ) . ' ' . $paged . ' ' . __( 'of', 'rollie' ) . ' ' . $pages ) . '</span></div>';
 
 		if ( $paged > 2 && $paged > $range + 1 && $rollie_showitems < $pages ) {
 			echo '<div class="rollie_pagination_item page-item"><a class=" rollie_pagination_link page-link" href="' . get_pagenum_link( 1 ) . '" aria-label="First Page">&laquo;<span class="hidden-sm-down d-none d-md-block">' . esc_html__( 'first', 'rollie' ) . '</span></a></div>';

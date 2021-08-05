@@ -131,13 +131,7 @@ function rollie_theme_support() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support(
 		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-		)
+		array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' )
 	);
 
 	function rollie_enqueue_comment_reply_script() {
@@ -244,7 +238,7 @@ function rollie_customizer_scripts() {
 	wp_enqueue_script( 'rollie_customizer', trailingslashit( get_template_directory_uri() ) . 'js/rollie_customizer.js', array( 'jquery', 'jquery-ui-core' ), '1.0', true );
 	wp_enqueue_script( 'skyrocket-select2-js', get_template_directory_uri() . '/js/select2.min.js', array( 'jquery' ), '4.0.6', true );
 	wp_enqueue_script( 'rollie_js', get_template_directory_uri() . '/js/rollie_gradient_bulider.js', array(), '1.00', true );
-	wp_enqueue_script( 'font_awesome', 'https://kit.fontawesome.com/77b0eac39a.js', array(), null );
+	wp_enqueue_script( 'font_awesome', get_template_directory_uri() . '/js/rollie_font_awesome.js', array(), null, '1.00' );
 }
 
 function rollie_new_excerpt_more( $more ) {
