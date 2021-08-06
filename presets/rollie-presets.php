@@ -20,7 +20,7 @@ function ocdi_before_content_import( $selected_import ) {
 	if ( 'Rollie Forestry Industry Demo' === $selected_import['import_file_name'] ) {
 		// before the content import starts
 		 // replaces urls in preset files
-		 /*
+		/*
 		$rollie_dat = file_get_contents( get_template_directory() . '/presets/rollie-forestry-2021-08-06.dat' );
 		$rollie_dat = str_replace( 'http://localhost/wp-content/themes', get_template_directory_uri() . '/presets/images/', $rollie_dat );
 		file_put_contents( trailingslashit( get_template_directory() ) . 'presets/rollie-forestry-2021-08-06.dat', $rollie_dat );
@@ -61,7 +61,7 @@ function ocdi_after_import_setup() {
 	// Assign front page and posts page (blog page).
 	$front_page_id = get_page_by_title( 'Rollie Forestry & Co.' );
 	$blog_page_id  = get_page_by_title( 'Forestry News' );
-	update_option( 'blogname', 'Rollie Forestry.' );
+	update_option( 'blogname', 'Rollie Forestry' );
 	update_option( 'blogdescription', '' );
 	update_option( 'show_on_front', 'page' );
 	update_option( 'page_on_front', $front_page_id->ID );
