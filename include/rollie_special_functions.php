@@ -178,12 +178,15 @@
 	}
 
 	function rollie_thumbnail_id( $post_id = '' ) {
+
 		if ( empty( $post_id ) && $post_id != 0 ) {
 			$post_id = get_queried_object_id();
 		}
+
 		$page_for_posts        = get_option( 'page_for_posts' );
 		$rollie_template_sufix = rollie_page_template_sufix();
 		if ( has_post_thumbnail( $post_id ) ) {
+			// double check why: after import some pages returns has_post_thumbnail as true but thumbnail doesnt exist
 			$rollie_thumbnail_id = get_post_thumbnail_id( $post_id );
 		} elseif ( is_category() && ( function_exists( 'get_field' ) && get_field( 'rollie_cat_img', get_queried_object() ) ) ) {
 			$rollie_thumbnail_id = attachment_url_to_postid( get_field( 'rollie_cat_img', get_queried_object() ) );

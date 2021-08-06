@@ -393,10 +393,6 @@ jQuery(function ($) {
 			rollie_grid.masonry('layout');
 		});
 	}
-	// swap titles in content-header
-	if ($('.rollie_parent_title').hasClass('rollie_below_js')) {
-		$('.rollie_parent_title').insertAfter($('.rollie_parent_title').next());
-	}
 	//Padding bottom and transition calc for footer
 	if ($('.rollie_footer_collapse').length) {
 		$('.rollie_content_container_padding_bottom').css("padding-bottom", $('#rollie_footer > .rollie_footer_collapse').outerHeight() + 30 + "px");

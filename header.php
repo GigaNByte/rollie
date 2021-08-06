@@ -63,11 +63,12 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 		$rollie_header_image_min_max_h = 'rollie_header_image_min_max_h' . rollie_page_template_sufix();
 	}
 
-	if ( function_exists( 'get_field' ) && esc_url_raw( get_field( 'rollie_header_video_src' ) ) ) {
+	if ( function_exists( 'get_field' ) && ! empty( esc_url_raw( get_field( 'rollie_header_video_src' ) ) ) ) {
+
 		// url is sanitased in shortocde funct
 		echo do_shortcode( '[rollie_header_video src="' . get_field( 'rollie_header_video_src' ) . '"]' );
 
-	} elseif ( function_exists( 'get_field' ) && get_field( 'rollie_header_shortcode_src' ) ) {
+	} elseif ( function_exists( 'get_field' ) && ! empty( get_field( 'rollie_header_shortcode_src' ) ) ) {
 
 		echo do_shortcode( wp_kses( get_field( 'rollie_header_shortcode_src' ), rollie_sanitize_shortcode() ) );
 

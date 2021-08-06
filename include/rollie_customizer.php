@@ -2614,7 +2614,7 @@ function rollie_customizer_register( $wp_customize ) {
 				'section'     => 'rollie_navbar_section',
 
 				'input_attrs' => array(
-					'rollie_collapse_elements_number' => 6,
+					'rollie_collapse_elements_number' => 5,
 				),
 			)
 		)

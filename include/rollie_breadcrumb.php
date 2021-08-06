@@ -33,7 +33,7 @@ function rollie_breadcrumb() {
 			} elseif ( is_year() ) {
 				$breadcrumb_last_title = get_the_date( _x( 'Y', 'yearly archives date format', 'rollie' ) );
 			} elseif ( is_tag() ) {
-				$breadcrumb_last_title = __( 'Tag:' ) . ' ' . single_tag_title( '', false );
+				$breadcrumb_last_title = __( 'Tag:', 'rollie' ) . ' ' . single_tag_title( '', false );
 			} else {
 				$breadcrumb_last_title = __( 'Blog Archives', 'rollie' );
 			}

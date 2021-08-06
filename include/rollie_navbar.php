@@ -75,7 +75,7 @@ if ( has_nav_menu( 'rollie_top_menu' ) ) {
 		}
 
 
-			rollie_top_menu_wp_nav_menu();
+		rollie_top_menu_wp_nav_menu();
 
 		// example of using rollie_nav_top_icons_right action .
 		add_action( 'rollie_nav_top_icons_right', 'rollie_nav_top_search_button', 100 );

@@ -75,8 +75,8 @@ if ( 'clean' != get_theme_mod( 'rollie_header_style' . rollie_page_template_sufi
 		}
 		?>
 		<div class="<?php echo esc_attr( rollie_embl_titles() . ' ' . $rollie_bb_h1 ); ?> rollie_f_headings rollie_title_text_color ">
-			<h2 class="rollie_parent_title rollie_below_js rollie_f_headings rollie_category_title_text_color "><?php rollie_subtitle(); ?></h2>
 			<h1> <?php rollie_title(); ?></h1>
+			<h2 class="rollie_parent_title rollie_f_headings rollie_category_title_text_color "><?php rollie_subtitle(); ?></h2>
 		</div>
 		<?php
 		if ( 1 != get_theme_mod( 'rollie_header_ex_style' . rollie_page_template_sufix() ) ) {
