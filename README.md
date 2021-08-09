@@ -2,8 +2,13 @@
 Highly customizable theme designed for interactive agencies. One theme for hundreds of designs. 
 Suited for hybrid usage approach (Rollie Theme + Premium WordPress Block Editors).
 <h2> Version:</h2>
-Version: 0.9
-This theme is currently under HEAVY development.
+
+* This theme is currently under HEAVY development.
+* Version: 0.9
+* Tested up to Wordpress 5.8
+* Tested and developed on PHP 8.0
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 <h2> Author:</h2>
 Karol Saj (https://github.com/GigaNByte, karol.saj0@gmail.com)
@@ -37,6 +42,8 @@ Karol Saj (https://github.com/GigaNByte, karol.saj0@gmail.com)
 * TGM Plugin Activation
 
 <h2>Quick Rollie Demo Page setup:</h2>
+Rollie theme includes Demo Page "Rollie Forestry". You can import demo using OCDI plugin included in theme recommendations. 
+Currently Demo import works only for localhost domain (under development)
 
 1. Go to: Appearance > Themes
 
