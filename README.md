@@ -1,4 +1,4 @@
-# Rollie WordPress Premium Theme. 
+# Rollie WordPress Theme. 
 Highly customizable theme designed for interactive agencies. One theme for hundreds of designs. 
 Suited for hybrid usage approach (Rollie Theme + Premium WordPress Block Editors).
 <h2> Version:</h2>
