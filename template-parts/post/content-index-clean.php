@@ -17,7 +17,7 @@
 				</div>		
 				<div class='row py-3'>
 					<div class='px-3'>
-						<?php require locate_template( 'template-parts/special/content-post_excerpt.php' ); ?>
+						<?php require locate_template( 'template-parts/meta/content-meta-excerpt.php' ); ?>
 					</div>
 				</div>
 			</a>

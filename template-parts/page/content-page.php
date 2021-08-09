@@ -40,10 +40,10 @@ if ( class_exists( 'WooCommerce' ) && is_account_page() ) {
 	<article id="<?php echo esc_attr( 'page-content-' . get_the_ID() ); ?>"  <?php post_class( esc_attr( $disable_paddings ) . ' rollie_text_content_align rollie_single_page_content' ); ?>>
 		<?php
 		if ( ! is_404() ) {
-			require locate_template( '/template-parts/special/content-singlemeta.php' );
+			require locate_template( '/template-parts/page/content-page-meta.php' );
 			the_content();
 			rollie_link_pages();
-			get_template_part( 'template-parts/special/content', 'pagination_single' );
+			get_template_part( 'template-parts/page', 'pagination-single' );
 			comments_template();
 		}
 

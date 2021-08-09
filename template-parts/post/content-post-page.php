@@ -1,5 +1,5 @@
 <?php
-require get_template_directory() . '/include/rollie_index_layout_vars.php';
+require get_template_directory() . '/include/layout-vars/rollie-layout-vars-index.php';
 get_template_part( 'template-parts/special/content-header' );
 ?>
 </div><!-- closing page head from header.php-->	

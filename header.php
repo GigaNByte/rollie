@@ -35,7 +35,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 
 	<?php
 	// navbar containers logic
-	require get_template_directory() . '/include/rollie_navbar.php';
+	require get_template_directory() . '/include/rollie-navbar.php';
 	if ( 'fixed_full' == get_theme_mod( 'rollie_navbar_design', 'full' ) || 'fixed' == get_theme_mod( 'rollie_navbar_design', 'full' ) || 'small' != get_theme_mod( 'rollie_nav_top_icons_colapsed_content', 'small' ) ) {
 		echo "<div id='rollie_main_container'class='h-100 d-flex flex-row '>";
 		if ( 'fixed_full' == get_theme_mod( 'rollie_navbar_design', 'full' ) || 'fixed' == get_theme_mod( 'rollie_navbar_design', 'full' ) ) {

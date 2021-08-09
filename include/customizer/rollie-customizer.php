@@ -1061,7 +1061,7 @@ function rollie_add_gradient_control( $wp_customize, $section_name, $setting_nam
 
 function rollie_customizer_register( $wp_customize ) {
 
-	require get_template_directory() . '/include/rollie_customizer_control_classes.php';
+	require get_template_directory() . '/include/customizer/rollie-customizer-control-classes.php';
 
 		$wp_customize->add_panel(
 			'rollie_navs_panel',
@@ -3215,7 +3215,7 @@ function rollie_customizer_register( $wp_customize ) {
 	}
 
 	if ( class_exists( 'WooCommerce' ) ) {
-		require get_template_directory() . '/include/rollie_customizer_woo.php';
+		require get_template_directory() . '/include/customizer/rollie-customizer-woo.php';
 	}
 
 }

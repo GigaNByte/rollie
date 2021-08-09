@@ -17,7 +17,7 @@ if ( ! empty( $rollie_post_foreground ) ) {
 			</div>		
 			<a class='<?php echo $rollie_link_disabled; ?>' href='<?php echo get_page_link(); ?> '>
 				<h2 class="rollie_title_text_color "><?php the_title(); ?> </h2>										
-				<?php require locate_template( 'template-parts/special/content-post_excerpt.php' ); ?>
+				<?php require locate_template( 'template-parts/meta/content-meta-excerpt.php' ); ?>
 			</a>
 			<?php require locate_template( 'template-parts/meta/content-meta.php' ); ?>
 		</div>

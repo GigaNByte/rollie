@@ -8,7 +8,7 @@
  * @since 1.0
  * @version 1.0
  */
-require get_template_directory() . '/include/rollie_index_layout_vars.php';
+require get_template_directory() . '/include/layout-vars/rollie-layout-vars-index.php';
 get_header();?>
 
 <?php

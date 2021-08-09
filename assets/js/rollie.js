@@ -428,37 +428,6 @@ jQuery(function ($) {
 			}
 		);
 	}
-	//swiper for swap cat navigation
-	if ($('div.rollie_cat_swap_swiper').length) {
-		var rolliecatswipper = new Swiper(
-			'.rollie_cat_swap_swiper',
-			{
-				direction: 'horizontal',
-				loop: true,
-				slidesPerView: 3,
-				centeredSlides: true,
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev',
-				},
-				breakpoints: {
-					700: {
-						slidesPerView: 1,
-					}
-				}
-			}
-		);
-		$('[class^="rollie_current_cat_"], [class*=" rollie_current_cat_"]').each(
-			function () {
-				var classname = this.className;
-				var classsparts = classname.split('rollie_current_cat_');
-				var result = classsparts[1];
-				result = result.split(" ")[0];
-				result = parseInt(result);
-				rolliecatswipper.slideToLoop(result);
-			});
-	}
-
 	//support for multi level dropdown
 	$(".dropdown-submenu").on('hover', function () {
 		$(this).siblings(".rollie_subdropdown").addClass("rollie_show_subdropdown");

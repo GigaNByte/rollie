@@ -12,10 +12,10 @@
       <change beforePath="$PROJECT_DIR$/comments.php" beforeDir="false" afterPath="$PROJECT_DIR$/comments.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/rollie_customizer_classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/rollie_customizer_classes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/rollie_customizer_css.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/rollie_customizer_css.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/rollie_woo_customizer_css.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/rollie_woo_customizer_css.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/rollie_customizer_preview.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/rollie_customizer_preview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/customizer/rollie-customizer-classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/customizer/rollie-customizer-classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/customizer/rollie-customizer-css.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/customizer/rollie-customizer-css.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/customizer/rollie-woo-customizer-css.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/customizer/rollie-woo-customizer-css.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/rollie_customizer_preview.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/rollie_customizer_preview.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presets/rollie-forestry-2019-02-18.dat" beforeDir="false" afterPath="$PROJECT_DIR$/presets/rollie-forestry-2019-02-18.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presets/rollie-forestry-2019-02-18.xml" beforeDir="false" afterPath="$PROJECT_DIR$/presets/rollie-forestry-2019-02-18.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presets/rollie-presets.php" beforeDir="false" afterPath="$PROJECT_DIR$/presets/rollie-presets.php" afterDir="false" />

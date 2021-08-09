@@ -257,9 +257,9 @@ class Rollie_Google_Font_Select_Custom_Control extends WP_Customize_Control {
 	 */
 	public function rollie_get_google_fonts( $max_displayed_fonts = 30 ) {
 		// Google Fonts json generated from https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=YOUR-API-KEY.
-		$font_file = trailingslashit( get_template_directory_uri() ) . 'include/rollie_google_fonts.json';
+		$font_file = trailingslashit( get_template_directory_uri() ) . 'include/customizer/rollie_google_fonts.json';
 		if ( 'popular' == $this->font_order_by ) {
-			$font_file = trailingslashit( get_template_directory_uri() ) . 'include/rollie_google_fonts.json';
+			$font_file = trailingslashit( get_template_directory_uri() ) . 'include/customizer/rollie_google_fonts.json';
 		}
 		$request = wp_remote_get( $font_file );
 		if ( is_wp_error( $request ) ) {
@@ -311,7 +311,7 @@ class Rollie_Icon_Customize_Control extends WP_Customize_Control {
 					<label for="<?php echo esc_attr( $this->id ); ?>" class='d-inline-block '>
 					<?php if ( isset( $this->input_attrs['icon_type'] ) && 'png' == $this->input_attrs['icon_type'] ) { ?>
 						<img class="rollie_dash rollie_icon_customize_control_img"
-							src="<?php echo esc_url( get_template_directory_uri() . '/images/' . esc_html( $rollie_split[0] ) . '.png' ); ?>"></img>
+							src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/' . esc_html( $rollie_split[0] ) . '.png' ); ?>"></img>
 						<?php } else { ?>
 						<i class="rollie_dash fas fa-2x <?php echo ( esc_html( preg_replace( '/[ ,]+/', ' ', trim( $rollie_split[0] ) ) ) ); ?> "></i>
 						<?php } ?>

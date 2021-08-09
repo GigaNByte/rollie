@@ -1,5 +1,5 @@
 <?php
-require_once get_template_directory() . '/include/rollie_post_grid_layout_vars.php';
+require_once get_template_directory() . '/include/layout-vars/rollie-layout-vars-post-grid.php';
 
 $rollie_dont_change_style          = false;
 $rollie_last_post_dont_add_div     = false;
@@ -48,7 +48,7 @@ if ( $rollie_current_design == 'classic_transparent' ) {
 if ( ( has_post_format( 'status' ) || has_post_format( 'audio' ) || has_post_format( 'image' ) || has_post_format( 'video' ) || has_post_format( 'gallery' ) ) && $rollie_current_design == 'classic' ) {
 	$rollie_current_design = 'classic_clean';
 }
-require get_template_directory() . '/include/rollie_post_grid_single_post_layout_vars.php';
+require get_template_directory() . '/include/layout-vars/rollie-layout-vars-post-grid-single-post.php';
 
 
 

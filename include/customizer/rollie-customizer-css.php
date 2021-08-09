@@ -151,7 +151,7 @@ function rollie_customizer_css() {
 	}
 
 	if ( class_exists( 'WooCommerce' ) ) {
-		require get_template_directory() . '/include/rollie_woo_customizer_css.php';
+		require get_template_directory() . '/include/customizer/rollie-woo-customizer-css.php';
 	}
 
 	$rollie_inline_style .= '.rollie_main_post_content{ padding-right:' . get_theme_mod( 'rollie_posts_page_l_padding', 3 ) . '%; padding-left:' . get_theme_mod( 'rollie_posts_page_l_padding', 3 ) . '%;}';
