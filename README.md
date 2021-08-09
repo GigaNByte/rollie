@@ -24,11 +24,11 @@ Karol Saj (https://github.com/GigaNByte, karol.saj0@gmail.com)
 * Theme is developed using a Wordpress Coding Standards and Envato Theme Requirements in mind
 
 <h2>Future Features:</h2>
-
 * Custom Icons (instead Font Awesome)
 * Detailed Documentation and commented code
 * More Demo Sites
 * full integration with Gutenberg, Elementor, WooCommerce
+* Css rewrite and reorganization of some css rules and styles (Sass)
 * Quick Design Feature: Choose between simplified (fewer options) and advanced version (more options) of Rollie Customizer options to improve experience. Currently, theme has many controls which could be confusing for new users.
 <h2>Recommended/Used Plugins:</h2>
 
