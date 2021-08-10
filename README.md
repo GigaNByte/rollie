@@ -24,6 +24,7 @@ Karol Saj (https://github.com/GigaNByte, karol.saj0@gmail.com)
 * Theme is developed using a Wordpress Coding Standards and Envato Theme Requirements in mind
 
 <h2>Future Features:</h2>
+
 * Custom Icons (instead Font Awesome)
 * Detailed Documentation and commented code
 * More Demo Sites
