@@ -40,6 +40,7 @@ Karol Saj (https://github.com/GigaNByte, karol.saj0@gmail.com)
 * Advanced Custom Fields
 
 <h2>Included Plugins:</h2>
+
 * TGM Plugin Activation
 
 <h2>Quick Rollie Demo Page setup:</h2>
